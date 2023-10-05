@@ -4,11 +4,13 @@ import PostTags from '@components/PostTags.astro';
 import TitleLink from './components/TitleLink.astro';
 import PostDates from './components/PostDates.astro';
 
-const { post, cardType='compact' } = Astro.props;
+const { post, cardType='compact', styles='' } = Astro.props;
 ---
 {
   post && cardType &&
-  <article class={`card ${cardType==="minimal" ? "surface1" : "surface3"}`}
+  <article
+    class={`card ${cardType==="minimal" ? "surface1" : "surface3"}`}
+    style={styles}
   >
 
     {

@@ -16,14 +16,15 @@ publishedPosts.sort(function(a, b) {
 publishedPosts.length = 5;
 ---
 <ul
-  class="card-container card-container--flex"
-  style="--_card-gap: 0.5rem;"
+  class="btns card-container card-container--flex"
+  style="--_card-gap: 0.25rem;"
 >
   {publishedPosts.map((post) => 
     <li>
       <PostPreviewCard
         post={post}
         cardType="minimal"
+        styles="border-radius:var(--radius-sm);"
       />
     </li>
   )}
