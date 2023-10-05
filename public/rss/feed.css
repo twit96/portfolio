@@ -1,0 +1,103 @@
+/* ---------- Variables ---------- */
+
+html {
+  --brand: hsl(16, 88%, 54%);
+  --surface0: #ffffff;
+  --surface1: hsl(16, 30%, 88%);
+  --surface3: hsl(16, 20%, 96%);
+  --link: hsl(16, 88%, 30%);
+  --text1: hsl(16, 88%, 10%);
+  --text2: hsl(16, 30%, 30%);
+}
+
+
+/* ---------- Presets ---------- */
+
+/* natural box layout model, allowing overrides */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+
+/* override and set custom defaults */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ---------- Defaults ---------- */
+
+body {
+  font-family: 'Nunito', sans-serif;
+  line-height: 1.6;
+  font-weight: 500;
+  background: var(--surface3);
+  color: var(--text1);
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+h1 {
+  font-size: 2.5rem;
+}
+
+
+hr {
+  --_color: var(--text2);
+  --_style: solid;
+  --_width: 0.0625rem;
+  border: calc(var(--_width) / 2) var(--_style) var(--_color);
+}
+
+a {
+  color: var(--link);
+  font-weight: 600;
+}
+@media (hover: hover) {
+  a:hover {
+    background-color: Canvas;
+    filter: brightness(0.85);
+  }
+}
+
+svg {
+  background: var(--brand);
+  border-radius: 0.25rem;
+  fill: #fff;
+  height: 0.85em;
+  padding: 0.125em;
+}
+
+
+/* ---------- Custom Classes ---------- */
+
+.btn {
+  --_btn-bg: var(--surface1);
+  border-radius: 0.25em;
+  padding: 0.5em 1em;
+  background: var(--_btn-bg);
+  color: var(--text1);
+  text-align: center;
+}
+.btn:hover { background: var(--_btn-bg); }
+
+.card {
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.content-section {
+  --_content-gap: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: var(--_content-gap);
+}
+
+.wrapper {
+  margin: auto;
+  max-width: 80ch;
+  padding: 1rem;
+}
