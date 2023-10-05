@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import RecentPosts from "@components/RecentPosts.astro";
+import FeaturedPosts from '@components/FeaturedPosts/index.astro';
 ---
 <BaseLayout>
 
@@ -11,11 +11,11 @@ import RecentPosts from "@components/RecentPosts.astro";
         This URL does not exist or was changed.
         Return to the
         <a href="/">homepage</a> or 
-        check out my most recent entries below.
+        check out my featured posts below.
       </p>
     </div>
   </section>
 
-  <RecentPosts />
-  
+  <FeaturedPosts />
+
 </BaseLayout>

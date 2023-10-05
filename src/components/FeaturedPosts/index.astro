@@ -1,0 +1,31 @@
+---
+import Featured from './components/Featured.astro';
+import Recents from './components/Recents.astro';
+---
+
+<section>
+
+  <div class="card content-section shadow-sm surface0 wrapper">
+    <h2>Featured Posts</h2>
+    <Featured />
+  </div>
+
+  <div class="content-section wrapper">
+    <h2>Recent Posts</h2>
+    <Recents />
+    <p>
+      View all posts on my
+      <a href="/blog/">Blog</a>
+      and
+      <a href="/projects/">Projects</a>
+      pages.
+    </p>
+  </div>
+
+</section>
+
+
+<style>
+  h2, p { text-align: center; }
+  p { margin: auto; }
+</style>
