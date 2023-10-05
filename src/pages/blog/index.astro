@@ -2,8 +2,11 @@
 import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
 import { getCollection } from 'astro:content';
 
-let posts = (await getCollection('posts')).filter(post => post.data.category==="blog");
-posts.sort(function(a, b) {
+let publishedBlogPosts = (await getCollection('posts')).filter(post => {
+  !post.data.draft &&
+  post.data.category==="blog"
+});
+publishedBlogPosts.sort(function(a, b) {
 	let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);
   let b_date = Date.parse(b.data.dateUpdated || b.data.datePublished);
   if (b_date > a_date) return 1;
@@ -14,6 +17,6 @@ posts.sort(function(a, b) {
 <PostCollectionLayout
 	title="Blog"
   description="Tyler Wittig's Blog Posts"
-	posts={posts}
+	posts={publishedBlogPosts}
 >
 </PostCollectionLayout>
