@@ -1,10 +1,9 @@
 ---
 /*
-Import theme.css, global.css, and fonts here
+Import global.css and fonts here
 so that they are included on all pages
 through the use of this component.
 */
-import '../styles/theme.css';
 import '../styles/global.css';
 import '@fontsource-variable/nunito';
 import '@fontsource/pacifico';
@@ -54,14 +53,15 @@ const page_title = title ? `${title} | ${author ? author : SITE_AUTHOR}` : SITE_
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
 <!-- Set User Preferences before page load to prevent flash. -->
+<link rel="stylesheet" href="/css/theme.css" />
 <script is:inline>
 	/**
 	 * Reset local storage if refactor has occured.
 	 */ 
 	function handleStorageChanges() {
-		const lrs = "202309261559";  // Last Refactored Storage Date
+		const lrs = "202310051426";  // Last Refactored Storage Date
 		let stored_lrs = localStorage.getItem("lrs");
-		if (!stored_lrs || stored_lrs < lrs) {
+		if (stored_lrs!==lrs) {
 			localStorage.clear();
 			localStorage.setItem("lrs", lrs);
 		}
@@ -84,9 +84,12 @@ const page_title = title ? `${title} | ${author ? author : SITE_AUTHOR}` : SITE_
 
 		// html data attributes
 		Object.keys(defaults).forEach(k => {
-			const stored_key = localStorage.getItem(k);
-			const key_default = defaults[k];
-			if (stored_key !== key_default) html.dataset[k] = stored_key;
+			let stored_key = localStorage.getItem(k);
+			if (!stored_key) {
+				localStorage.setItem(k, defaults[k]);
+				stored_key = defaults[k];
+			}
+			html.dataset[k] = stored_key;
 		});
 
 		// meta theme color
