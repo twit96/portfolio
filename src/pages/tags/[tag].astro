@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
 
 export async function getStaticPaths() {
@@ -15,26 +15,35 @@ export async function getStaticPaths() {
   });
   const uniqueTags = [...new Set(publishedPosts.map((post) => post.data.tags).flat())];
 
+  // Generate Paths for All Unique Tags
   const allTagInfo = await getCollection('tagInfo');
-
-  const tagPaths = [];
-  uniqueTags.forEach(tag => {
-    tagPaths.push({
-      params: { tag: tag }
-    });
+  const tagPaths = uniqueTags.map(tp => {
+    const tagInfo = allTagInfo.filter(ti => { return ti.slug===tp })[0];  // 0th index since return is array
+    return {
+      params: { tag: tp },
+      props: tagInfo
+    }
   });
   return tagPaths;
 }
 
 
-const tag = Astro.params.tag;
+const tag = Astro.params.tag || "";
+const tagInfo = Astro.props;
 
-// Get Posts Corresponding to the Tag
+
+// Get Tag Info if it Exists
+const { Content } = (Object.keys(tagInfo).length > 0) 
+  ? await tagInfo.render()  // render tag info if it exists
+  : { Content: null };      // default to null value when no tag info exists
+
+
+// Get All Published Posts Corresponding to the Tag
 const publishedPosts = (await getCollection('posts')).filter(post => (
   !post.data.draft &&
-  post.data.tags && 
-  post.data.tags.includes(tag)
+  post.data.tags && post.data.tags.includes(tag)
 ));
+// Sort Posts by Date Descending
 publishedPosts.sort(function(a, b) {
   let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);
   let b_date = Date.parse(b.data.dateUpdated || b.data.datePublished);
@@ -43,13 +52,19 @@ publishedPosts.sort(function(a, b) {
   return 0;
 });
 ---
+
 <PostCollectionLayout
 	title={`#${tag}`}
   description="Tyler Wittig's Blog Posts"
 	posts={publishedPosts}
 >
+{
+  Content &&
+  <div class="collection-info">
+    <Content />
+  </div>
+}
 </PostCollectionLayout>
-
 
 
 <style>
