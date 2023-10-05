@@ -113,7 +113,7 @@ main { flex: 1; }
   display: grid;
   grid-template-columns: repeat( auto-fill, minmax( min(var(--_card-size), 100%), 1fr) );
 }
-/* .card-container--list { display: grid; } */
+.card-container--list { display: grid; }
 .card-container--flex {
   display: flex;
   flex-wrap: wrap;
