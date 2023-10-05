@@ -1,0 +1,48 @@
+---
+/*
+Used as the parent (wrapper) element for Post sections.
+Use the "content" slot for PostSectionContent components.
+Use the "sidebar" slot for PostSectionSidebar components.
+Use the "sub-section" slot to nest another PostSectionLayout. 
+*/
+---
+
+<section>
+  <div class="curr-section">
+    <div class="content-wrap">
+      <slot name="content" />
+    </div>
+    <div class="sidebar-wrap">
+      <slot name="sidebar" />
+    </div>
+  </div>
+  <div class="sub-section">
+    <slot name="sub-section" />
+  </div>
+</section>
+
+<style>
+  .curr-section { padding-block: 1rem; }
+
+  /* Desktop Layout */
+  @media (min-width: 120ch) {
+    .curr-section {
+      --sidebar-column-width: 35ch;
+      align-items: flex-start;
+      display: flex;
+      flex-direction: row;
+    }
+    .content-wrap { width: calc(100% - var(--sidebar-column-width)); }
+    .sidebar-wrap {
+      max-width: 100%;
+      position: sticky;
+      top: 4.75rem;
+      width: var(--sidebar-column-width);
+    }
+  }
+
+  .sub-section section {
+    border-left: 0.125rem solid var(--surface3);
+    padding-left: 1rem;
+  }
+</style>

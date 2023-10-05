@@ -1,0 +1,175 @@
+/* ---------- Config ---------- */
+
+
+/* Root Color Config */
+html {
+  --red-h:    356; --red-s:    100%; --red-l:    41%;
+  --pink-h:   329; --pink-s:   75%;  --pink-l:   56%;
+  --purple-h: 272; --purple-s: 61%;  --purple-l: 34%;
+  --blue-h:   211; --blue-s:   70%;  --blue-l:   34%;
+  --green-h:  145; --green-s:  89%;  --green-l:  21%;
+  --yellow-h: 48;  --yellow-s: 93%;  --yellow-l: 53%;
+  --orange-h: 16;  --orange-s: 88%;  --orange-l: 54%;
+}
+[data-color="red"]    { --h: var(--red-h);    --s: var(--red-s);    --l: var(--red-l);    }
+[data-color="pink"]   { --h: var(--pink-h);   --s: var(--pink-s);   --l: var(--pink-l);   }
+[data-color="purple"] { --h: var(--purple-h); --s: var(--purple-s); --l: var(--purple-l); }
+[data-color="blue"]   { --h: var(--blue-h);   --s: var(--blue-s);   --l: var(--blue-l);   }
+[data-color="green"]  { --h: var(--green-h);  --s: var(--green-s);  --l: var(--green-l);  }
+[data-color="yellow"] { --h: var(--yellow-h); --s: var(--yellow-s); --l: var(--yellow-l); }
+[data-color="orange"] { --h: var(--orange-h); --s: var(--orange-s); --l: var(--orange-l); }
+
+
+/* Color Palette Config */
+html {
+
+  --brand-hue: var(--h);
+  --brand-saturation: var(--s);
+
+  /* Surface Hue Presets */
+  --monochromatic-s1-hue: var(--brand-hue);
+  --monochromatic-s2-hue: var(--brand-hue);
+  --monochromatic-s3-hue: var(--brand-hue);
+  --monochromatic-s4-hue: var(--brand-hue);
+
+  --analogous-s1-hue: var(--brand-hue);
+  --analogous-s2-hue: calc(var(--brand-hue) + 330);
+  --analogous-s3-hue: var(--brand-hue);
+  --analogous-s4-hue: calc(var(--brand-hue) + 30);
+
+  --complementary-s1-hue: var(--brand-hue);
+  --complementary-s2-hue: calc(var(--brand-hue) + 180);
+  --complementary-s3-hue: var(--brand-hue);
+  --complementary-s4-hue: calc(var(--brand-hue) + 180);
+
+  --triadic-s1-hue: var(--brand-hue);
+  --triadic-s2-hue: calc(var(--brand-hue) + 120);
+  --triadic-s3-hue: var(--brand-hue);
+  --triadic-s4-hue: calc(var(--brand-hue) + 240);
+
+  --split-complementary-s1-hue: var(--brand-hue);
+  --split-complementary-s2-hue: calc(var(--brand-hue) + 40);
+  --split-complementary-s3-hue: calc(var(--brand-hue) + 180);
+  --split-complementary-s4-hue: calc(var(--brand-hue) + 220);
+
+  --tetradic-s1-hue: var(--brand-hue);
+  --tetradic-s2-hue: calc(var(--brand-hue) + 280);
+  --tetradic-s3-hue: calc(var(--brand-hue) + 180);
+  --tetradic-s4-hue: calc(var(--brand-hue) + 100);
+
+  /* Surface Saturation/Lightness Presets */
+  --light-s1-saturation: 30%; --light-s1-lightness: 88%;
+  --light-s2-saturation: 40%; --light-s2-lightness: 88%;
+  --light-s3-saturation: 20%; --light-s3-lightness: 96%;
+  --light-s4-saturation: 40%; --light-s4-lightness: 81%;
+
+  --dark-s1-saturation: 20%;  --dark-s1-lightness: 15%;
+  --dark-s2-saturation: 20%;  --dark-s2-lightness: 25%;
+  --dark-s3-saturation: 10%;  --dark-s3-lightness: 20%;
+  --dark-s4-saturation: 20%;  --dark-s4-lightness: 30%;
+
+  /* Text Color Presets */
+  --light-text1: hsl(var(--brand-hue) var(--brand-saturation) 10%);
+  --light-text2: hsl(var(--brand-hue) 30% 30%);
+  --light-link: hsl(var(--brand-hue) var(--brand-saturation) 30%);
+
+  --dark-text1: hsl(var(--brand-hue) 15% 85%);
+  --dark-text2: hsl(var(--brand-hue) 5% 65%);
+  --dark-link: hsl(var(--brand-hue) 15% 50%);
+
+  /* Shadow Presets */
+  --light-surface-shadow: var(--brand-hue) 10% 20%;
+  --light-shadow-strength: .02;
+
+  --dark-surface-shadow: var(--brand-hue) 50% 3%;
+  --dark-shadow-strength: .4;
+}
+
+
+/* Light/Dark Mode Config */
+[data-mode="light"] {
+  color-scheme: light;
+  --brand-lightness: var(--l);
+
+  --text1: var(--light-text1);
+  --text2: var(--light-text2);
+  --link: var(--light-link);
+
+  --s1-saturation: var(--light-s1-saturation);
+  --s1-lightness: var(--light-s1-lightness);
+  --s2-saturation: var(--light-s2-saturation);
+  --s2-lightness: var(--light-s2-lightness);
+  --s3-saturation: var(--light-s3-saturation);
+  --s3-lightness: var(--light-s3-lightness);
+  --s4-saturation: var(--light-s4-saturation);
+  --s4-lightness: var(--light-s4-lightness);
+
+  --surface-shadow: var(--light-surface-shadow);
+  --shadow-strength: var(--light-shadow-strength);
+}
+
+[data-mode="dark"] {
+  color-scheme: dark;
+  --brand-lightness: calc(var(--l) / 1.5);
+
+  --text1: var(--dark-text1);
+  --text2: var(--dark-text2);
+  --link: var(--dark-link);
+
+  --s1-saturation: var(--dark-s1-saturation);
+  --s1-lightness: var(--dark-s1-lightness);
+  --s2-saturation: var(--dark-s2-saturation);
+  --s2-lightness: var(--dark-s2-lightness);
+  --s3-saturation: var(--dark-s3-saturation);
+  --s3-lightness: var(--dark-s3-lightness);
+  --s4-saturation: var(--dark-s4-saturation);
+  --s4-lightness: var(--dark-s4-lightness);
+
+  --surface-shadow: var(--dark-surface-shadow);
+  --shadow-strength: var(--dark-shadow-strength);
+}
+[data-mode="dark"] img { filter: var(--dark-mode-filter); }
+
+
+
+/* ---------- Resulting HSL Values ---------- */
+html {
+  --brand: hsl(var(--brand-hue) var(--brand-saturation) var(--brand-lightness));
+}
+/* Schemes Set Surfaces */
+[data-scheme="monochromatic"] {
+  --surface1: hsl(var(--monochromatic-s1-hue) var(--s1-saturation) var(--s1-lightness));
+  --surface2: hsl(var(--monochromatic-s2-hue) var(--s2-saturation) var(--s2-lightness));
+  --surface3: hsl(var(--monochromatic-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface4: hsl(var(--monochromatic-s4-hue) var(--s4-saturation) var(--s4-lightness));
+}
+[data-scheme="analogous"] {
+  --surface1: hsl(var(--analogous-s1-hue) var(--s1-saturation) var(--s1-lightness));
+  --surface2: hsl(var(--analogous-s2-hue) var(--s2-saturation) var(--s2-lightness));
+  --surface3: hsl(var(--analogous-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface4: hsl(var(--analogous-s4-hue) var(--s4-saturation) var(--s4-lightness));
+}
+[data-scheme="complementary"] {
+  --surface1: hsl(var(--complementary-s1-hue) var(--s1-saturation) var(--s1-lightness));
+  --surface2: hsl(var(--complementary-s2-hue) var(--s2-saturation) var(--s2-lightness));
+  --surface3: hsl(var(--complementary-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface4: hsl(var(--complementary-s4-hue) var(--s4-saturation) var(--s4-lightness));
+}
+[data-scheme="triadic"] {
+  --surface1: hsl(var(--triadic-s1-hue) var(--s1-saturation) var(--s1-lightness));
+  --surface2: hsl(var(--triadic-s2-hue) var(--s2-saturation) var(--s2-lightness));
+  --surface3: hsl(var(--triadic-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface4: hsl(var(--triadic-s4-hue) var(--s4-saturation) var(--s4-lightness));
+}
+[data-scheme="split-complementary"] {
+  --surface1: hsl(var(--split-complementary-s1-hue) var(--s1-saturation) var(--s1-lightness));
+  --surface2: hsl(var(--split-complementary-s2-hue) var(--s2-saturation) var(--s2-lightness));
+  --surface3: hsl(var(--split-complementary-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface4: hsl(var(--split-complementary-s4-hue) var(--s4-saturation) var(--s4-lightness));
+}
+[data-scheme="tetradic"] {
+  --surface1: hsl(var(--tetradic-s1-hue) var(--s1-saturation) var(--s1-lightness));
+  --surface2: hsl(var(--tetradic-s2-hue) var(--s2-saturation) var(--s2-lightness));
+  --surface3: hsl(var(--tetradic-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface4: hsl(var(--tetradic-s4-hue) var(--s4-saturation) var(--s4-lightness));
+}

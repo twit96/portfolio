@@ -1,0 +1,33 @@
+---
+const {title} = Astro.props;
+---
+<div class="code-block-area card surface1">
+  {
+    title &&
+    <b>{title}</b>
+  }
+  <div class="code-block-wrap card surface3"><slot /></div>
+</div>
+
+<style>
+  .code-block-area.card { padding: 0.5em; }
+  b { padding-inline: 0.5em; }
+  .code-block-wrap.card {
+    display: block;
+    font-family: monospace;
+    line-height: 1.5em;
+    overflow-x: auto;
+    white-space: pre;
+    scrollbar-color: var(--text2) var(--surface3);
+    scrollbar-width: thin;
+  }
+  .code-block-wrap::-webkit-scrollbar { height: 0.75rem; }
+  .code-block-wrap::-webkit-scrollbar-track { margin-inline: var(--radius-lg); }
+  .code-block-wrap::-webkit-scrollbar-thumb {
+    background: var(--text2);
+    border-radius: 0.75rem;
+  }
+  @media (hover: hover) {
+    .code-block-wrap::-webkit-scrollbar-thumb:hover { background: var(--brand); }
+  }
+</style>

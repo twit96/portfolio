@@ -1,0 +1,23 @@
+---
+import { getEntries } from 'astro:content';
+import PostPreviewCard from '@components/PostPreviewCard/index.astro';
+
+const slugs = Astro.props.slugs;
+const relatedPosts = await getEntries(slugs);
+---
+<div class="content-section">
+  <h2>Related Posts</h2>
+  <ul class="card-container card-container--grid">
+    {
+      relatedPosts &&
+      relatedPosts.map(post => 
+        <li>
+          <PostPreviewCard
+            post={post}
+            cardType="minimal"
+          />
+        </li>
+      )
+    }
+  </ul>
+</div>

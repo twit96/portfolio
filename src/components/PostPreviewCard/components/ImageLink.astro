@@ -1,0 +1,35 @@
+---
+const { image, title, href } = Astro.props;
+---
+
+{
+    image && title && href && (
+    <a 
+      aria-label={title}
+      href={href}
+      title={`Read more about "${title}"`}
+    >
+      <img 
+        alt={title}
+        src={image} 
+      >
+    </a>
+  )
+}
+
+
+<style>
+  a {
+    aspect-ratio: 2 / 1;
+    border-radius: var(--radius-lg);
+    display: block;
+    position: relative;
+  }
+  img {
+    height: 100%;
+    inset: 0;
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
+  }
+</style>

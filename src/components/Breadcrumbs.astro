@@ -1,0 +1,68 @@
+---
+const url = Astro.url.pathname.split('/');
+const links = [{ text: 'home', href: '/' }];  // init with home link
+
+// add page links
+url.forEach((link) => {
+  if (
+    link !== '' &&         // string is not empty
+    !(/^\d+$/.test(link))  // string is not only digits (yyyy/mm/dd)
+  ) {
+
+    // Build Link href
+    let href = '/';  // init
+    // add url pieces
+    let i = 0;
+    let l = url[i];
+    while (l!==link) {
+      i++;
+      l = url[i];
+      href += l + '/';
+    }
+    
+    // Build link object
+    links.push({ text: link, href: href, });
+
+  }
+});
+
+links.pop();  // remove current page from array
+---
+
+{
+  links &&
+  links.length > 1 &&
+  <div class="wrapper" >
+    <nav 
+      aria-label="Breadcrumb Links" 
+      class="card surface1"
+      id="breadcrumbs"
+    >
+      <ul>
+        {links.map(({text, ...attrs}) =>
+        <li>
+          <a {...attrs}>
+            {text}
+          </a>
+        </li>
+      )}
+      </ul>
+    </nav>
+  </div>
+}
+
+
+<style>
+  .wrapper { padding-bottom: 0; }
+  ul {
+    flex-wrap: wrap;
+    list-style: none;
+  }
+  ul,
+  li {
+    display: flex;
+    gap: 1ch;
+  }
+  li::after { content: '/'; }
+  a { text-transform: capitalize; }
+</style>

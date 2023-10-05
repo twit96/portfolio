@@ -1,0 +1,21 @@
+---
+const {image, caption} = Astro.props;
+---
+<figure class="card surface1">
+  {
+    image && image.url && image.alt &&
+    <img src={image.url} alt={image.alt}>
+  }
+  {
+    caption &&
+    <figcaption>{caption}</figcaption>
+  }
+</figure>
+
+<style>
+  figure.card {
+    padding: 0.5em;
+    text-align: center;
+  }
+  figcaption { padding-inline: 0.5em; }
+</style>

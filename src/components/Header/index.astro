@@ -1,0 +1,191 @@
+---
+import SiteLogo from './components/SiteLogo.astro';
+import Preferences from './components/Preferences.astro';
+import NavigationLinks from '@components/NavigationLinks.astro';
+---
+<header class="surface3">
+  <div class="wrapper">
+    
+    <div>
+      <SiteLogo />
+      <div class="btns">
+
+        <a 
+          aria-label="Search all Entries"
+          class="btn search-link surface1" 
+          href="/search/" 
+          title="Search all Entries"
+        >
+          <svg
+            height="1.25rem" 
+            viewBox="0 0 512 512"
+            width="1.25rem" 
+            xmlns="http://www.w3.org/2000/svg" 
+          ><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+        </a>
+
+        <Preferences />
+        
+        <button
+          aria-label="Toggle Site Navigation Visibility"
+          class="btn hamburger surface1"
+          title="Toggle Site Navigation"
+        >
+          <svg
+            height="1.5rem" 
+            viewBox="0 0 512 512"
+            width="1.5rem" 
+            xmlns="http://www.w3.org/2000/svg" 
+          ><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM64 256c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
+          <svg
+            height="1.5rem" 
+            viewBox="0 0 384 512"
+            width="1.5rem" 
+            xmlns="http://www.w3.org/2000/svg" 
+          ><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+        </button>
+      </div>
+    </div>
+    
+    <nav aria-label="Site Navigation">
+      <NavigationLinks />
+    </nav>
+
+  </div>
+</header>
+
+<button 
+  aria-label="Close Navigation Menu"
+  class="modal-bg"
+  id="mobile-nav-bg"
+  title="Close Navigation Menu"
+></button>
+
+
+<style>
+  a { font-size: 0.75rem; }
+  
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  header .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-block: 0.5rem;
+  }
+
+  header .wrapper > div {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+
+  .search-link,
+  .hamburger {
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+    line-height: 0;
+    display: flex;
+    place-items: center;
+  }
+  .search-link svg { --size: 1.25rem; }
+  .hamburger svg { --size: 1.5rem; }
+  .search-link svg,
+  .hamburger svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: var(--size);
+    width: var(--size);
+    fill: var(--text1);
+  }
+  .hamburger svg { display: none; }
+  header:not(.active) .hamburger :first-child { display: block; }
+  header.active .hamburger :last-child { display: block; }
+
+  header:not(.active) nav { display: none; } 
+
+  #mobile-nav-bg { z-index: 99; }
+
+  @media (min-width: 80ch) {
+    header .wrapper {
+      align-items: center;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    header .hamburger { display: none; }
+    header:not(.active) nav { display: inherit; } 
+    #mobile-nav-bg { display: none; }
+  }
+</style>
+
+
+<script>
+
+  function configHeader() {
+    const header = document.querySelector('header');
+    if (!header) return false;
+    
+    // fire a function no more than once in a set number of milliseconds
+    const throttle = (func, delay) => {
+      let inProgress = false;
+      return (...args) => {
+        if (inProgress) {
+          return;
+        }
+        inProgress = true;
+        setTimeout(() => {
+          func(...args);
+          inProgress = false;
+        }, delay);
+      }
+    };
+
+    // add header shadow when user scrolls down and remove it when they scroll back to the top
+    window.addEventListener('scroll', throttle(() => {
+      
+      const header_trigger_height = 0;
+      const scroll_pos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+
+      // get state
+      const past_trigger = scroll_pos > header_trigger_height;
+      const has_shadow = header.classList.contains("shadow-sm");
+
+      // update state
+      if (past_trigger !== has_shadow) {
+        // past trigger and no shadow or before trigger and has shadow 
+        header.classList.toggle('shadow-sm');
+      }
+
+    }, 100), false);
+
+  }
+  configHeader();
+  
+
+  function toggleMobileNav() {
+    const header = document.querySelector('header');
+    const mobile_nav_bg = document.getElementById('mobile-nav-bg');
+    if (!header || !mobile_nav_bg) return false;
+    header.classList.toggle('active');
+    mobile_nav_bg.classList.toggle('active');
+  }
+
+  
+  function configMobileNav() {
+    const header_menu_btn = document.querySelector('header .hamburger');
+    const mobile_nav_bg = document.getElementById('mobile-nav-bg');
+    if (!header_menu_btn || !mobile_nav_bg) return false;
+    header_menu_btn.addEventListener("click", toggleMobileNav);
+    mobile_nav_bg.addEventListener("click", toggleMobileNav);
+  }
+  configMobileNav();
+  
+</script>

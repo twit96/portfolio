@@ -1,0 +1,42 @@
+---
+const { tags, noWrap=false } = Astro.props;
+---
+{
+  tags &&
+  <ul class={`tags${noWrap ? " no-wrap custom-scrollbar" : ""}`}>
+    {tags.map((tag) => 
+      tag &&
+      <li>
+        <a 
+          class="tag btn surface4" 
+          href={`/tags/${tag}`}
+          title={`View all entries tagged with #${tag}`}
+        >#{tag}</a>
+      </li>
+    )}
+  </ul>
+}
+
+<style>
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+    gap: 0.5rem;
+    list-style: none;
+  }
+  .tag {
+    padding: 0.125rem 0.5rem;
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+  }
+
+  .tags.no-wrap {
+    --_bar-size: 0.35rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.35rem;
+  }
+  .tags.no-wrap .tag { white-space: nowrap; }
+</style>

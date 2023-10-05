@@ -1,0 +1,476 @@
+<details id="preferences-menu">
+
+  <summary>
+    <span style="display: none;">Theme Preferences</span>
+
+      <div 
+        class="svg-wrap btn surface1"
+        title="Theme Preferences" 
+      >
+        <svg
+          height="1.5rem"
+          stroke-width="0" 
+          viewBox="0 0 24 24" 
+          width="1.5rem"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M20 14c-.092.064-2 2.083-2 3.5c0 1.494.949 2.448 2 2.5c.906.044 2-.891 2-2.5c0-1.5-1.908-3.436-2-3.5zM9.586 20c.378.378.88.586 1.414.586s1.036-.208 1.414-.586l7-7l-.707-.707L11 4.586L8.707 2.293L7.293 3.707L9.586 6L4 11.586c-.378.378-.586.88-.586 1.414s.208 1.036.586 1.414L9.586 20zM11 7.414L16.586 13H5.414L11 7.414z"/>
+        </svg>
+        <svg
+          height="1.5rem"
+          viewBox="0 0 384 512"
+          width="1.5rem"
+          xmlns="http://www.w3.org/2000/svg" 
+        ><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+      </div>
+
+  </summary>
+
+  <div class="modal card custom-scrollbar surface3 shadow-sm">
+
+    <form id="mode-form">
+      <fieldset class="fieldset--row">
+        <div><legend>Dark Theme</legend></div>
+        <label class="dark-toggle">
+          <span style="display:none;">Toggle Dark Theme</span>
+          <input type="checkbox" name="mode" id="dark-toggle-input" />
+          <span class="slider"></span>
+        </label>
+      </fieldset>
+    </form>
+
+    <hr class="preferences-hr" />
+    
+    <form id="color-form" name="colorForm">
+      <fieldset class="fieldset--column">
+        <legend>Theme Color</legend>
+        <div class="custom-scrollbar inputs--row">
+          <div class="inputs--row__wrap">
+            {
+              [
+                "red", 
+                "pink", 
+                "purple", 
+                "blue", 
+                "green", 
+                "yellow", 
+                "orange"
+              ].map((color) => (
+                <label class="btn surface0 preference-input">
+                  <input 
+                    type="radio" 
+                    name="color" 
+                    value={color} 
+                    title={color}
+                  />
+                  <div 
+                    class="preview"
+                    style={`background: hsl( var(--${color}-h) var(--${color}-s) var(--${color}-l) )`}
+                  >
+                    <span class="check"></span>
+                  </div>
+                  
+                  <span class="option-name">{color}</span>
+                </label>
+              ))
+            }
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
+    <hr class="preferences-hr" />
+
+    <form id="scheme-form" name="schemeForm">
+      <fieldset class="fieldset--column">
+        <legend>Color Scheme</legend>
+        <div class="inputs--grid">
+          {
+            [
+              "analogous", 
+              "complementary", 
+              "monochromatic", 
+              "split-complementary", 
+              "tetradic",
+              "triadic"
+            ].map((scheme) => (
+              <label class="btn surface0 preference-input">
+                <input 
+                  type="radio" 
+                  name="scheme" 
+                  value={scheme} 
+                  title={scheme}
+                />
+                <div
+                  class="preview preview--scheme"
+                  data-scheme={scheme}
+                >
+                  <span class="surface1"></span>
+                  <span class="surface2"></span>
+                  <span class="surface3"></span>
+                  <span class="surface4"></span>
+                  
+                  <span class="check"></span>
+                </div>
+                
+                <span class="option-name">{scheme}</span>
+              </label>
+            ))
+          }
+        </div>
+      </fieldset>
+    </form>
+
+  </div>
+
+</details>
+
+<button 
+  aria-label="Close Preferences Menu"
+  class="modal-bg"
+  id="preferences-bg"
+  title="Close Preferences Menu"
+></button>
+
+
+<script is:inline>
+
+  // Background Element can close menu
+  const preferencesMenu = document.getElementById("preferences-menu");
+  const preferencesBg = document.getElementById("preferences-bg");
+  preferencesMenu.addEventListener("toggle", function() {
+    preferencesBg.classList.toggle("active");
+  });
+  preferencesBg.onclick = () => { preferencesMenu.removeAttribute("open"); } 
+
+
+  function updateMetaThemeColor() {
+    const theme_color = getComputedStyle(document.documentElement).getPropertyValue("--surface3");
+    const meta_theme_color = document.querySelector("meta[name=\"theme-color\"]");
+    meta_theme_color.setAttribute("content", theme_color);
+  }
+
+
+  // Dark Mode Toggle
+  let dark_toggle_input = document.getElementById("dark-toggle-input");
+
+  function toggleDark() {
+    let html = document.documentElement;
+    const new_mode = (html.dataset.mode === "light") ? "dark" : "light";
+    html.dataset.mode = new_mode;
+    localStorage.setItem("mode", new_mode);
+    updateMetaThemeColor();
+  }
+  dark_toggle_input.onclick = toggleDark;
+
+  function configModeInput() {
+    let val = localStorage.getItem("mode");
+    // Config Local Storage
+    if (!val) localStorage.setItem("mode", "light");
+    // Config Input
+    if (val === "dark") dark_toggle_input.checked = true;
+  }
+  configModeInput();
+
+
+  // Root Color Inputs
+  let color_radios = document.colorForm.color;
+
+  function changeColor(newColor) {
+    // Add New Color
+    document.documentElement.dataset.color = newColor;
+    // Update Cookies
+    localStorage.setItem("color", newColor);
+    // Update Meta Theme Color
+    updateMetaThemeColor();
+  }
+  for (let i=0; i<color_radios.length; i++) {
+    color_radios[i].addEventListener("click", function() {
+      changeColor(color_radios[i].value)
+    });
+  }
+
+  function configColorInputs() {
+    const default_color = "blue";
+    let val = localStorage.getItem("color");
+    // Config Local Storage
+    if (!val) {
+      localStorage.setItem("color", default_color);
+      val = localStorage.getItem("color");
+    }
+    // Configure Color Radio Buttons
+    for (const radio of color_radios) {
+      if (val === radio.value) radio.checked = true;
+    } 
+  }
+  configColorInputs();
+
+
+  // Color Scheme Inputs
+  let scheme_radios = document.schemeForm.scheme;
+
+  function changeScheme(newScheme) {
+    // Add New Scheme
+    document.documentElement.dataset.scheme = newScheme;
+    // Update Cookies
+    localStorage.setItem("scheme", newScheme);
+    // Update Meta Theme Color
+    updateMetaThemeColor();
+  }
+  for (let i=0; i<scheme_radios.length; i++) {
+    scheme_radios[i].addEventListener("click", function() {
+      changeScheme(scheme_radios[i].value)
+    });
+  }
+
+  function configSchemeInputs() {
+    const default_scheme = "analogous";
+    let val = localStorage.getItem("scheme");
+    // Configure Local Storage
+    if (!val) {
+      localStorage.setItem("scheme", default_scheme);
+      val = localStorage.getItem("scheme");
+    }
+    // Configure Scheme Radio Buttons
+    for (const radio of scheme_radios) {
+      if (val === radio.value) radio.checked = true;
+    } 
+  }
+  configSchemeInputs();
+
+</script>
+
+
+<style>
+
+  /* ---------- General Layout ---------- */
+
+  /* Open/Close Button */
+  summary {
+    line-height: 0;
+    list-style: none;
+  }
+
+  .svg-wrap {
+    padding: 0.5em;
+    position: relative;
+    z-index: 11;
+  }
+  @media (hover: hover) {
+    .svg-wrap:hover { filter: var(--hover-filter); }
+  }
+  .svg-wrap svg {
+    --size: 1.5rem;
+    fill: var(--text1);
+    height: var(--size);
+    stroke: var(--text1);
+    width: var(--size);
+  }
+  .svg-wrap > :last-child { display: none; }
+  details[open] .svg-wrap > :first-child { display: none; }
+  details[open] .svg-wrap > :last-child { display: initial; }
+
+  
+
+  /* Content Modal */
+  .modal {
+    --_track-margin: var(--radius-lg);  /* custom-scrollbar class variable */
+    display: grid;
+    gap: 1em;
+    left: 50%;
+    max-height: calc(100vh - 7rem);  /* fallback for svh on next line */
+    max-height: calc(100svh - 7rem);
+    max-width: 25em;
+    overflow: auto;
+    position: fixed;
+    top: 4em;
+    transform: translateX(-50%);
+    width: calc(100vw - 4rem);
+    z-index: 11;
+  }
+
+
+
+  /* ---------- Common Styles ---------- */
+
+  /* Form Areas */
+  form { overflow-x: auto; }
+  
+
+  /* decorative lines */
+ .preferences-hr {
+  --_color: var(--surface1);
+ }
+
+  /* Form Input Areas */
+  fieldset {
+    --_gap: 0.5rem;
+    border: 0;
+    min-width: 0;
+  }
+  .fieldset--row {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--_gap);
+    justify-content: space-between;
+  }
+  .fieldset--column legend { margin-bottom: var(--_gap); }
+
+  /* Input Area "Titles" */
+  legend {
+    line-height: 1;
+    font-weight: bold;
+  }
+
+  /* Input Groups */
+  .inputs--row { overflow-x: auto; }
+  .inputs--row__wrap {
+    display: flex;
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .inputs--grid {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat( auto-fill, minmax( min(8rem, 100%), 1fr) );
+  }
+  .preference-input {
+    border-radius: var(--radius-lg);
+    display: grid;
+    gap: 0.375rem;
+    padding: 0.75rem;
+    place-items: center;
+    position: relative;
+  }
+
+  /* input (hidden) */
+  .preference-input input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    z-index: 1;
+  }
+  @media (hover: hover) {
+    .preference-input:hover .preview { filter: var(--hover-filter); }
+  }
+
+  /* Preview Circle (for colors and color schemes) */
+  .preview {
+    --_size: 3rem;
+    border-radius: 50%;
+    height: var(--_size);
+    overflow: hidden;
+    position: relative;
+    width: var(--_size);
+  }
+
+  /* Check Mark (for currently chosen color and color scheme) */
+  .check {
+    background: var(--brand);
+    border-radius: 50%;
+    display: none;
+    inset: 0.75rem;
+    position: absolute;
+    z-index: 1;
+  }
+  input:checked ~ .preview .check { display: block; }
+
+
+  /* Form Option Labels */
+  .option-name {
+    color: var(--text1);
+    font-size: 0.85rem;
+    line-height: 1em;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+
+
+  /* ---------- Form Areas ---------- */
+
+  /* --- Dark Mode Toggle Area Specifics --- */
+
+  /* toggle wrap */
+  .dark-toggle {
+    --toggle-width: 3.75rem;  /* used by slider dot to calculate its "active" state transform value */
+    height: 2rem;
+    position: relative;
+    width: var(--toggle-width);
+  }
+  @media (hover: hover) {
+    .dark-toggle:hover { filter: var(--hover-filter); }
+  }
+
+  /* input (hidden) */
+  .dark-toggle input {
+    inset: 0;
+    opacity: 0;
+    position: absolute;
+  }
+
+  /* slider */
+  .dark-toggle .slider {
+    background: var(--link);
+    border-radius: 2em;
+    filter: grayscale(1);
+    inset: 0;
+    position: absolute;
+  }
+  .dark-toggle input:checked ~ .slider { filter: none; }
+
+  /* slider dot */
+  .dark-toggle .slider::after {
+    --_size: 1.5rem;
+    --_margin: 0.25rem;
+    background: var(--surface1);
+    border-radius: 50%;
+    content: '';
+    height: var(--_size);
+    left: var(--_margin);
+    position: absolute;
+    top: var(--_margin);
+    transition: 0.2s transform ease;
+    width: var(--_size);
+  }
+  .dark-toggle input:checked ~ .slider::after {
+    transform: translateX(
+      calc(
+        var(--toggle-width) 
+        - ( 2 * var(--_margin) ) 
+        - var(--_size)
+      )
+    );
+  }
+
+
+
+  /* --- Root Color Picker Area Specifics --- */
+
+
+
+  /* --- Color Scheme Picker Area Specifics --- */
+
+  /* circular scheme colors preview */
+  .preview--scheme {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* check */
+  .check::after {
+    position: absolute;
+    inset: 0.5rem 0.35rem;
+    content: "";
+    border-left: 0.2rem solid #fff;
+    border-bottom: 0.2rem solid #fff;
+    transform: rotate(-45deg);
+  }
+
+
+
+  /* ---------- Background Button Element ---------- */
+  #preferences-bg { z-index: 10; }
+  
+</style>

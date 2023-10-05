@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import PostPreviewCard from '@components/PostPreviewCard/index.astro';
+
+// Remove Drafts
+let publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft);
+// Sort by Date Descending
+publishedPosts.sort(function(a, b) {
+	let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);
+  let b_date = Date.parse(b.data.dateUpdated || b.data.datePublished);
+  if (b_date > a_date) return 1;
+  if (a_date > b_date) return -1;
+  return 0;
+});
+// Truncate Output to Length 3
+publishedPosts.length = 5;
+---
+
+<section id="recents">
+    <div class="content-section wrapper">
+      <h2>Recent Posts</h2>
+      <div class="recent-flex">
+        <ul
+          class="card-container card-container--flex"
+          style="--_card-gap: 0.5rem;"
+        >
+            {publishedPosts.map((post) => 
+              <li>
+                <PostPreviewCard
+                  post={post}
+                  cardType="minimal"
+                />
+              </li>
+            )}
+          </ul>
+        <a class="btn surfaceLink" href="/archive/">View All Posts</a>
+      </div>
+    </div>
+</section>
+
+<style>
+  h2, a { text-align: center; }
+  .recent-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .card-container {
+    flex-basis: 100ch;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+  a {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 10ch;
+    display: grid;
+    place-content: center;
+  }
+</style>

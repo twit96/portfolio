@@ -1,0 +1,99 @@
+---
+/*
+Import theme.css, global.css, and fonts here
+so that they are included on all pages
+through the use of this component.
+*/
+import '../styles/theme.css';
+import '../styles/global.css';
+import '@fontsource-variable/nunito';
+import '@fontsource/pacifico';
+
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE, SITE_AUTHOR } from '@consts';
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const {
+	title = SITE_TITLE,
+	description = SITE_DESCRIPTION,
+	image = SITE_IMAGE,
+	author = SITE_AUTHOR
+} = Astro.props;
+
+const page_title = title ? `${title} | ${author ? author : SITE_AUTHOR}` : SITE_TITLE;
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" href="/img/favicon.png" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Primary Meta Tags -->
+<title>{page_title}</title>
+<meta name="title" content={page_title} />
+<meta name="description" content={description} />
+<meta name="author" content={author}>
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={page_title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(image, Astro.url)} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={page_title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- Set User Preferences before page load to prevent flash. -->
+<script is:inline>
+	/**
+	 * Reset local storage if refactor has occured.
+	 */ 
+	function handleStorageChanges() {
+		const lrs = "202309261559";  // Last Refactored Storage Date
+		let stored_lrs = localStorage.getItem("lrs");
+		if (!stored_lrs || stored_lrs < lrs) {
+			localStorage.clear();
+			localStorage.setItem("lrs", lrs);
+		}
+	}
+	handleStorageChanges();
+
+
+	/**
+	 * Set user preferences.
+	 */ 
+	function rushUserPreferences() {
+		
+		const defaults = {
+			mode: "light",
+			color: "blue",
+			scheme: "analogous"
+		};
+
+		let html = document.documentElement;
+
+		// html data attributes
+		Object.keys(defaults).forEach(k => {
+			const stored_key = localStorage.getItem(k);
+			const key_default = defaults[k];
+			if (stored_key !== key_default) html.dataset[k] = stored_key;
+		});
+
+		// meta theme color
+		const theme_color = getComputedStyle(html).getPropertyValue("--surface3");
+		const meta_theme_color = document.querySelector("meta[name=\"theme-color\"]");
+		meta_theme_color.setAttribute("content", theme_color);
+	}
+	rushUserPreferences();
+
+</script>

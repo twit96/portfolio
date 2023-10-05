@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
+
+export async function getStaticPaths() {
+
+  // Get All Unique Post Tags
+  const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft);
+  publishedPosts.sort(function(a, b) {
+    let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);
+    let b_date = Date.parse(b.data.dateUpdated || b.data.datePublished);
+    if (b_date > a_date) return 1;
+    if (a_date > b_date) return -1;
+    return 0;
+  });
+  const uniqueTags = [...new Set(publishedPosts.map((post) => post.data.tags).flat())];
+
+  const allTagInfo = await getCollection('tagInfo');
+
+  const tagPaths = [];
+  uniqueTags.forEach(tag => {
+    tagPaths.push({
+      params: { tag: tag }
+    });
+  });
+  return tagPaths;
+}
+
+
+const tag = Astro.params.tag;
+
+// Get Posts Corresponding to the Tag
+const publishedPosts = (await getCollection('posts')).filter(post => (
+  !post.data.draft &&
+  post.data.tags && 
+  post.data.tags.includes(tag)
+));
+publishedPosts.sort(function(a, b) {
+  let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);
+  let b_date = Date.parse(b.data.dateUpdated || b.data.datePublished);
+  if (b_date > a_date) return 1;
+  if (a_date > b_date) return -1;
+  return 0;
+});
+---
+<PostCollectionLayout
+	title={`#${tag}`}
+  description="Tyler Wittig's Blog Posts"
+	posts={publishedPosts}
+>
+</PostCollectionLayout>
+
+
+
+<style>
+  .collection-info { margin-bottom: 2rem; }
+</style>

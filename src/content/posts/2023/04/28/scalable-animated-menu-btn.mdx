@@ -1,0 +1,904 @@
+---
+blurb: "CSS Animation Tutorial"
+category: "blog"
+datePublished: "2023-04-28"
+description: "Using CSS variables, we can make a responsive, animated menu toggle button with a seamless animation between its two states."
+heroImage: "/blog/2023/04/28/scalable-animated-menu-btn/title-card.png"
+links: [
+  { text: "Skip the article and view the Codepen", href: "https://codepen.io/twit96/pen/poxPzyQ", },
+]
+relatedPosts:
+- portfolio-2022
+slug: 2023/04/28/scalable-animated-menu-btn
+tags:
+- tutorial
+- ui
+- animation
+- css
+- javascript
+title: "A Scalable, Animated Menu Button"
+---
+
+import PostSection from '@components/PostSection/index.astro';
+import PostSectionContent from '@components/PostSection/components/PostSectionContent.astro';
+import PostSectionSidebar from '@components/PostSection/components/PostSectionSidebar.astro';
+
+import CodeInline from "@components/CodeInline.astro";
+import CodeBlock from "@components/CodeBlock.astro";
+
+
+<PostSection>
+  <PostSectionContent slot="content">
+
+    ## Preface
+    
+    A navigation menu button is a great place to add a unique animation that sets your website apart. 
+    Many websites simply toggle between the hamburger icon and the x icon without any animation, 
+    and many others apply simple animations that don't have much character - and these are all okay - 
+    but what about a menu button that will catch users' eyes? 
+    A menu button that users will intentionally click again to watch the animation another time? 
+    Today, let's learn how to build the animated hamburger button that I created for my 2021-2022 portfolio website. 
+    A button with some oomph.
+    
+    <video width="514" height="514" controls>
+      <source src="/blog/2023/04/28/scalable-animated-menu-btn/6.mp4" type="video/mp4" />
+      Download the 
+      <a href="/blog/2023/04/28/scalable-animated-menu-btn/6.mp4">MP4</a>
+    </video>
+
+    Many good animated menu buttons use SVG, but this one relies on simple, 
+    vanilla HTML and CSS. Let's get started.
+
+    ## Planning the Element
+    
+    Before we jump into code, let us think about what our button element needs. 
+    The button will be the parent, and it will have 3 “bars” as child elements to make up the hamburger icon. 
+    However, the x icon only needs two bar elements. Thus, we should keep in mind that during the animation, 
+    we will want to hide the 3rd bar when transitioning to the x, and show it again when transitioning to the hamburger. 
+    
+  </PostSectionContent>
+
+  <PostSection slot="sub-section">
+    <PostSectionContent slot="content">
+
+      ### HTML Foundations
+      
+      Our initial element's HTML markup will look something like this:
+      
+      <CodeBlock title="HTML">
+```html
+<button id="menu-btn">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+```
+      </CodeBlock>
+      
+      We will start with a button, and nest 3 spans within it. Since an HTML button is an inline element, 
+      we should not nest block-level elements inside of it, such as <CodeInline>``</CodeInline> or 
+      <CodeInline>`<div>`</CodeInline> tags. 
+      Furthermore, our button's bars are purely decorative and do not have any semantic meaning within our HTML, 
+      so a span tag is a good choice for them as opposed to other inline elements, 
+      such as <CodeInline>`<i>`</CodeInline> or <CodeInline>`<em>`</CodeInline> tags. 
+      We will also give our button an ID attribute, which allows us to select the element in our CSS 
+      and style it without affecting other buttons on the webpage. 
+      
+      Congratulations! You have completed the HTML for this entire tutorial. It wasn't easy, but we got there in the end.
+      
+    </PostSectionContent>
+    <PostSectionSidebar slot="sidebar">
+      
+      If you know that you will use more than one of these menu buttons on each page, 
+      you should swap the ID attribute with a class attribute instead. 
+      Each ID attribute should only appear once per HTML page, whereas a class name can appear as many times as you would like. 
+    
+      Using a class would slightly change the JavaScript, as you would need to iterate over each element to add functionality to it, 
+      but the logic would be nearly the same. Nonetheless, we will leave it as an ID for the sake of this tutorial.
+      
+    </PostSectionSidebar>
+  </PostSection>
+
+  <PostSection slot="sub-section">
+    <PostSectionContent slot="content">
+
+      ### CSS Foundations
+      
+      Next, let us lay the foundations of our CSS. Before we write any code, 
+      let us simply think of our hamburger button as a square grid with whatever side length is most useful to us. 
+      There are no wrong side lengths here, but there are worse side lengths than others. 
+      Think lazily here, and find the side length that will be most easy to work with. 
+      My intuition tells me we should use 100px by 100px for now, that way we can think of things in terms of 0% to 100%. 
+      Don't worry that we have chosen a fixed pixel value here; 
+      we will make this fixed size into a responsive size once we have our element completed. 
+      Also, note that although we are thinking in terms of 0% to 100% for our 100px by 100px grid, 
+      we will <b>NOT</b> be setting the menu button's width and height with CSS percentage values. 
+    
+      First, let us start with some boilerplate code. 
+      We will not worry about the x layout until we have established the hamburger layout. 
+      Thus, our code will begin as follows:
+      
+      <CodeBlock title="CSS">
+```CSS
+/* Menu Button */
+#menu-btn {
+  height: 100px;           /* set size */
+  width: 100px;
+  display: flex;           /* arrange spans (bars) in a column layout */
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  padding: 0;
+}
+
+/* bars */
+#menu-btn span {
+  height: 15px;         /* set an arbitrary height */
+  width: 100%;          /* set them to be 100% width of the menu button */
+  background: #000000;  /* arbitrarily color span black */
+}
+```
+      </CodeBlock>
+      
+      After setting the width and height of the menu button, we set <CodeInline>`display: flex;`</CodeInline> 
+      and <CodeInline>`flex-direction: column;`</CodeInline> on our button to arrange the spans in a column. 
+      We set <CodeInline>`justify-content: center;`</CodeInline> to center the spans in the container 
+      (vertically, since this is a column layout), and <CodeInline>`gap: 15px;`</CodeInline> to add space between our bars 
+      (I chose the same value here as the height of the bars). 
+      We also set <CodeInline>`padding: 0;`</CodeInline> on our menu button and <CodeInline>`width: 100%;`</CodeInline> 
+      on our bars so the bars will extend all the way to the edge of the button. 
+      This provides the foundation of our hamburger layout, 
+      and you should be left with an icon that looks something like this:
+      
+      <img src="/blog/2023/04/28/scalable-animated-menu-btn/1.png" alt="Initial Button Layout" />
+
+    </PostSectionContent>
+    <PostSectionSidebar slot="sidebar">
+      
+      You can tweak the height and gap values from this step to your liking, 
+      but will need to keep in mind the changes you made when setting up the CSS animations in the next step.
+      
+    </PostSectionSidebar>
+  </PostSection>
+
+</PostSection>
+
+<PostSection>
+  <PostSectionContent slot="content">
+
+    ## Applying Animations
+    
+    Now, we must think of how we will lay out the x icon bars. Again before we touch any code, 
+    think about what needs to be done. We will be animating all three spans (bars) to achieve this new layout. 
+    Thus, our top and bottom bars will have to move towards the center (since our x will be centered, 
+    all bars will cross in the perfect center of the menu button). 
+    We also know that we will only need two bars for the x. Thus, we will do something to conceal the third bar. 
+    Lastly, we know that we will need to rotate two bars so that they will be perpendicular to one another 
+    (with an angle of 90 degrees of rotation between them). 
+    A couple of simple choices would be to rotate only one bar by 90deg 
+    (which would give us a plus “+” shape that we could rotate to an x), or one bar by 45deg and another by -45deg. 
+    However, for the sake of this menu button's animation, we will instead choose to rotate one bar by -45deg and 
+    another by -135deg.
+    
+  </PostSectionContent>
+
+  <PostSection slot="sub-section">
+    <PostSectionContent slot="content">
+
+      ### Toggle the Element's State
+      
+      With the animation in mind, let us also think of how we will trigger it. 
+      An obvious solution is to toggle a class name when the user clicks the button. We will start with this approach, 
+      but we will later find out why there is a better solution. 
+      Changing to this solution later on will not change very much in our code, so don't worry about this just yet. 
+      Therefore, we will add a function in our JavaScript that toggles the menu button's “active” class, 
+      and set the onclick event for the menu button element to that function, and so we will have the following code:
+      
+      <CodeBlock title="JavaScript">
+```JavaScript
+function toggleMenuBtn() {
+  menu_btn.classList.toggle("active");
+}
+
+let menu_btn = document.getElementById("menu-btn");
+menu_btn.onclick = toggleMenuBtn;
+```
+      </CodeBlock>
+      
+      We defined a function to toggle the menu button, 
+      then selected the menu button element in the HTML using <CodeInline>`document.getElementById`</CodeInline>, 
+      then assigned the function we created to the element's <CodeInline>`onclick`</CodeInline> event. 
+      Nothing should have changed in your icon yet, but we are about to hop back into our CSS and change that.
+      
+    </PostSectionContent>
+  </PostSection>
+
+  <PostSection slot="sub-section">
+    <PostSectionContent slot="content">
+
+      ### Animating to X
+      
+      Before we hit the code, think back to what we decided about the animation. 
+      Our outer bars will need to translate to the center, then we will rotate one bar -45 degrees, 
+      another bar -135 degrees, and conceal the 3rd bar. 
+      We could transition the translations and rotations all at the same time, but the end result will look messy. 
+      Thus, we will decide to use CSS keyframe animations to first translate the bars and then rotate the bars, 
+      which will give us the effect of a "two-step" animation. We will add the following code to our CSS:
+      
+      <CodeBlock title="CSS">
+```CSS
+#menu-btn span {
+  ...
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+/* to x animation */
+#menu-btn.active span:nth-child(1) { animation-name: to-x-top; }
+#menu-btn.active span:nth-child(2) { animation-name: to-x-mid; }
+#menu-btn.active span:nth-child(3) { animation-name: to-x-btm; }
+
+@keyframes to-x-top {
+  0% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(30px) rotate(0); }
+  100% { transform: translateY(30px) rotate(-45deg); }
+}
+
+@keyframes to-x-mid {
+  50% { transform: rotate(0); }
+  100% { transform: rotate(-45deg); }
+}
+
+@keyframes to-x-btm {
+  0% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-30px) rotate(0); }
+  100% { transform: translateY(-30px) rotate(-135deg); }
+}
+```
+      </CodeBlock>
+      
+      First, we set an arbitrary animation duration for our bars. 
+      We then set <CodeInline>`animation-fill-mode: forwards;`</CodeInline>, 
+      which tells the browser to keep the animation at its end state upon completion. 
+      By default, the element would snap back to its original state after the animation completed, 
+      and thus we override it for the sake of our menu button. We then set an animation timing function, 
+      which adjusts the rate at which elements progress through animations. 
+      The default value is <CodeInline>`linear`</CodeInline>, 
+      where elements progress through the animation at a constant rate. 
+      We set <CodeInline>`ease-in-out`</CodeInline> so that the animation starts slowly and ends slowly, speeding up in the middle. 
+      This gives the animation a more natural feel. Feel free to tinker with this value to see how it affects the animation. 
+    
+      Next, we selected each of our spans using the <CodeInline>`:nth-child`</CodeInline> selector, and set an animation on each of them. 
+    
+      Lastly, we defined our animations as follows:
+      
+    </PostSectionContent>
+    <PostSectionSidebar slot="sidebar">
+      
+        Read more about CSS Animations here 
+        <a 
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations"
+          target="_blank"
+          rel="noopener noreferrer"
+        >here</a>.
+      
+      
+        Read more about the CSS animation timing function property here  
+        <a 
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function"
+          target="_blank"
+          rel="noopener noreferrer"
+        >here</a>.
+      
+    </PostSectionSidebar>
+
+    <PostSection slot="sub-section">
+      <PostSectionContent slot="content">
+
+        #### <CodeInline>`@keyframes to-x-top`</CodeInline>
+        
+        The to-x-top animation starts with no translation and no rotation. At the animation's halfway mark, 
+        the bar has translated downwards by 30px 
+        (equal to the 15px bar height plus the 15px gap between it and the next bar) and still has no rotation. 
+        At the animation's end, the bar is still translated downwards by 30px and has rotated by -45deg. 
+        
+      </PostSectionContent>
+    </PostSection>
+
+    <PostSection slot="sub-section">
+      <PostSectionContent slot="content">
+
+        #### <CodeInline>`@keyframes to-x-mid`</CodeInline>
+        
+        The to-x-mid animation differs from to-x-top and to-x-btm because we only need to animate the middle bar's rotation. 
+        This animation starts with no rotation. At the animation's halfway mark, the bar still has no rotation. 
+        At the animation's end, the bar is rotated by -45deg. By rotating it the same as our top bar, 
+        we effectively conceal it by “combining” it with the top bar. 
+        Note that we don't need to specify the 0% mark on this animation, since the animation is unchanging from 0% to 50%. 
+        
+      </PostSectionContent>
+    </PostSection>
+
+    <PostSection slot="sub-section">
+      <PostSectionContent slot="content">
+
+        #### <CodeInline>`@keyframes to-x-btm`</CodeInline>
+        
+        The to-x-btm animation mirrors the to-x-top animation. It starts with no translation and no rotation. 
+        At the animation's halfway mark, the bar has translated upwards by 30px 
+        (equal to the 15px bar height plus the 15px gap between it and the next bar) and still has no rotation. 
+        At the animation's end, the bar is still translated upwards by 30px and has rotated by -135deg. 
+        
+      </PostSectionContent>
+    </PostSection>
+
+  </PostSection>
+
+  <PostSection slot="sub-section">
+    <PostSectionContent slot="content">
+
+      ### X Animation Check-Up
+      
+      At this point, your button should look something like this:
+      
+      <video width="516" height="516" controls>
+        <source src="/blog/2023/04/28/scalable-animated-menu-btn/2.mp4" type="video/mp4" />
+        Download the 
+        <a href="/blog/2023/04/28/scalable-animated-menu-btn/2.mp4">MP4</a>
+      </video>
+
+    </PostSectionContent>
+  </PostSection>
+
+  <PostSection slot="sub-section">
+    <PostSectionContent slot="content">
+
+      ### Animating to Hamburger
+      
+      Now, we will define the animations back to our hamburger layout from our x layout. 
+      We have done the hardest work with our last set of animations, and now we only need to “undo” the animations. 
+      Thus, we will add the following code to our CSS: 
+      
+      <CodeBlock title="CSS">
+```CSS
+/* to hamburger animation */
+#menu-btn span:nth-child(1) { animation-name: to-hamburger-top; }
+#menu-btn span:nth-child(2) { animation-name: to-hamburger-mid; }
+#menu-btn span:nth-child(3) { animation-name: to-hamburger-btm; }
+
+@keyframes to-hamburger-top {
+  0% { transform: translateY(30px) rotate(-45deg); }
+  50% { transform: translateY(30px) rotate(0); }
+  100% { transform: translateY(0) rotate(0); }
+}
+
+@keyframes to-hamburger-mid {
+  0% { transform: rotate(-45deg); }
+  50% { transform: rotate(0); }
+}
+
+@keyframes to-hamburger-btm {
+  0% { transform: translateY(-30px) rotate(-135deg); }
+  50% { transform: translateY(-30px) rotate(0); }
+  100% { transform: translateY(0) rotate(0); }
+}
+```
+      </CodeBlock>
+      
+      We again select each of our spans using the <CodeInline>`:nth-child`</CodeInline> selector and give them their own animation. 
+      Then we define our animations as follows:
+      
+    </PostSectionContent>
+
+    <PostSection slot="sub-section">
+      <PostSectionContent slot="content">
+
+        #### <CodeInline>`@keyframes to-hamburger-top`</CodeInline>
+        
+        The to-hamburger-top animation starts with a 30px downward translation and -45deg of rotation, 
+        to align with the end of the to-x-top animation. At the animation's halfway mark, 
+        the bar is still translated downwards by 30px and is rotated back to 0deg of rotation. At the animation's end, 
+        the bar is translated back upwards to 0px of translation and stays with 0deg of rotation. 
+        
+      </PostSectionContent>
+    </PostSection>
+
+    <PostSection slot="sub-section">
+      <PostSectionContent slot="content">
+      
+        #### <CodeInline>`@keyframes to-hamburger-mid`</CodeInline>
+        
+        The to-hamburger-mid animation differs from to-hamburger-top and to-hamburger-btm because we only need to animate 
+        the middle bar's rotation. This animation starts with -45deg of rotation, to align with the end of the to-x-mid 
+        animation. At the animation's halfway mark, the bar is rotated back to 0deg of rotation, which aligns with the 
+        top bar animation. At the animation's end, the bar stays rotated by 0deg. Note that we don't need to specify the 
+        100% mark on this animation, since the animation is unchanging from 50% to 100%. 
+        
+      </PostSectionContent>
+    </PostSection>
+
+    <PostSection slot="sub-section">
+      <PostSectionContent slot="content">
+
+        #### <CodeInline>`@keyframes to-hamburger-btm`</CodeInline>
+        
+        The to-hamburger-btm animation mirrors the to-hamburger-top animation. 
+        It starts with a 30px upward translation and -135deg of rotation, to align with the end of the to-x-btm animation. 
+        At the animation's halfway mark, the bar is still translated upwards by 30px and rotated back to 0deg of rotation. 
+        At the animation's end, the bar is still translated back downwards by 30px and stays with 0deg of rotation. 
+        
+      </PostSectionContent>
+    </PostSection>
+
+  </PostSection>
+
+  <PostSection slot="sub-section">
+    <PostSectionContent slot="content">
+
+      ### Hamburger Animation Check-Up
+      
+      At this point, your button should look something like this:
+      
+      <video width="1920" height="1080" controls>
+        <source src="/blog/2023/04/28/scalable-animated-menu-btn/3.mp4" type="video/mp4" />
+        Download the 
+        <a href="/blog/2023/04/28/scalable-animated-menu-btn/3.mp4">MP4</a>
+      </video>
+
+    </PostSectionContent>
+  </PostSection>
+
+</PostSection>
+
+<PostSection>
+  <PostSectionContent slot="content">
+
+    ## Making it Responsive
+    
+    Keep in mind our two button states:
+    
+    <img src="/blog/2023/04/28/scalable-animated-menu-btn/4.png" alt="Both States Illustration" width="428" height="248" />
+    
+    The bars are 15px tall with 15px between them in the hamburger layout. 
+    It doesn't matter where exactly the bars fall inside of the 100px by 100px grid for either layout, 
+    only that they are centered within it. 
+    To achieve the x layout, the outer bars translate on top of the middle bar, 
+    then two bars rotate -45deg and one bar rotates -135deg, giving us the x layout. 
+  
+    Now that we have our basic layout at 100px by 100px, we want to make it so that the button can be any size. 
+    We will use CSS variables to achieve this. 
+    Since we were lazy and set our menu button's width and height to 100px by 100px, 
+    this task will prove to be relatively simple. 
+    
+  </PostSectionContent>
+
+  <PostSection slot="sub-section">
+    <PostSectionContent slot="content">
+
+      ### Element Sizing
+      
+      In our menu button's CSS, we will define <CodeInline>`--btn-size: 100px;`</CodeInline>. 
+      We will use this variable on the button's width and height as follows:
+      
+      <CodeBlock title="CSS">
+```CSS
+#menu-btn {
+  --btn-size: 100px; 
+  height: var(--btn-size);
+  width: var(--btn-size);
+  ...
+}
+```
+      </CodeBlock>
+      
+      Next, we will set the gap between bars and the height of the bars based on this <CodeInline>`--btn-size`</CodeInline> value, 
+      using the CSS <CodeInline>`calc()`</CodeInline> function to do the math for us, as follows:
+      
+      <CodeBlock title="CSS">
+```CSS
+/* Menu Button */
+#menu-btn {
+  ...
+  gap: calc(var(--btn-size) * 0.15);
+  ...
+}
+
+/* bars */
+#menu-btn span {
+  ...
+  height: calc(var(--btn-size) * 0.15);
+  ...
+}
+```
+      </CodeBlock>
+      
+      Now you can see why using 100px by 100px makes this job easier. 
+      The units that we already set will simply be divided by 10 and multiplied by our <CodeInline>`--btn-size`</CodeInline> variable. 
+      Before we continue, let us create two other variables - <CodeInline>--bar-height</CodeInline> and <CodeInline>`--bar-spacing`</CodeInline> - 
+      to replace the values that we just set. This makes the code more explicit, 
+      since rather than using <CodeInline>`calc(var(--btn-size) * 0.15)`</CodeInline> throughout the element selectors and their 
+      animation definitions, these values will be named after their purpose. 
+      It also means that if you were to slightly tweak these values, 
+      you wouldn't need to update them in several different places, and could just update the one variable's value. 
+      However, do note that these two variables are not intended to be changed 
+      (whereas the <CodeInline>`--btn-size`</CodeInline> variables IS meant to be changed), 
+      and so major tweaks to <CodeInline>`--bar-height`</CodeInline> or <CodeInline>`--bar-spacing`</CodeInline> might cause unexpected behavior. 
+      These two values are only intended to respond to changes in the <CodeInline>`--btn-size`</CodeInline> variable. 
+      With that tangent out of the way, we will make the following changes to our CSS: 
+      
+      <CodeBlock title="CSS">
+```CSS
+/* Menu Button */
+#menu-btn {
+  ...
+  --bar-spacing: calc(var(--btn-size) * 0.15);
+  gap: var(--bar-spacing);
+  ...
+}
+
+/* bars */
+#menu-btn span {
+  --bar-height: calc(var(--btn-size) * 0.15);
+  height: var(--bar-height);
+  ...
+}
+```
+      </CodeBlock>
+    </PostSectionContent>
+  </PostSection>
+
+  <PostSection slot="sub-section">
+    <PostSectionContent slot="content">
+
+      ### Animation Values
+      
+      Now, we will update our animations to use the <CodeInline>`--bar-height`</CodeInline> 
+      and <CodeInline>`--bar-spacing`</CodeInline> values, as follows:
+      
+      <CodeBlock title="CSS">
+```CSS
+...
+        
+/* to x animation */
+...
+@keyframes to-x-top {
+  0% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(calc(var(--bar-height) + var(--bar-spacing))) rotate(0); }
+  100% { transform: translateY(calc(var(--bar-height) + var(--bar-spacing))) rotate(-45deg); }
+}
+
+@keyframes to-x-mid {
+  50% { transform: rotate(0); }
+  100% { transform: rotate(-45deg); }
+}
+
+@keyframes to-x-btm {
+  0% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(calc(-1 * (var(--bar-height) + var(--bar-spacing)))) rotate(0); }
+  100% { transform: translateY(calc(-1 * (var(--bar-height) + var(--bar-spacing)))) rotate(-135deg); }
+}
+
+...
+
+/* to hamburger animation */
+...
+@keyframes to-hamburger-top {
+  0% { transform: translateY(calc(var(--bar-height) + var(--bar-spacing))) rotate(-45deg); }
+  50% { transform: translateY(calc(var(--bar-height) + var(--bar-spacing))) rotate(0); }
+  100% { transform: translateY(0) rotate(0); }
+}
+
+@keyframes to-hamburger-mid {
+  0% { transform: rotate(-45deg); }
+  50% { transform: rotate(0); }
+}
+
+@keyframes to-hamburger-btm {
+  0% { transform: translateY(calc(-1 * (var(--bar-height) + var(--bar-spacing)))) rotate(-135deg); }
+  50% { transform: translateY(calc(-1 * (var(--bar-height) + var(--bar-spacing)))) rotate(0); }
+  100% { transform: translateY(0) rotate(0); }
+}
+```
+      </CodeBlock>
+      
+      Let's explain what we have changed here. 
+      First, remember that the top and bottom bars were translated 30px in a vertical direction, 
+      since the bar was 15px tall and the gap between bars was 15px. 
+      We would add these two values together to get 30px. Thus, in our vertical translations, 
+      we are replacing 30px with <CodeInline>`calc( var(--bar-height) + var(--bar-spacing) )`</CodeInline>. Furthermore, 
+      since the bottom bar is mirroring the top bar, we are multiplying this number by -1. Thus, 
+      the bottom bar's -30px is replaced with <CodeInline>`calc(-1 *  (var(--bar-height) + var(--bar-spacing)) )`</CodeInline>. 
+    
+    
+      At this point, you should be able to set the <CodeInline>`--btn-size`</CodeInline> variable to any value that you want, 
+      and the button and its animation will scale accordingly. 
+      Note that the button looks best when given a size of at least 20px, 
+      but the sky's the limit for how large you can make it! 
+      
+      <video width="1294" height="772" controls>
+        <source src="/blog/2023/04/28/scalable-animated-menu-btn/5.mp4" type="video/mp4" />
+        Download the 
+        <a href="/blog/2023/04/28/scalable-animated-menu-btn/5.mp4">MP4</a>
+      </video>
+
+    </PostSectionContent>
+  </PostSection>
+
+</PostSection>
+
+<PostSection>
+  <PostSectionContent slot="content">
+
+    ## Polishing the Element
+    
+    Now, let's polish the way the element looks.
+    
+  </PostSectionContent>
+
+  <PostSection slot="sub-section">
+    <PostSectionContent slot="content">
+
+      ### Button Styles
+      
+      First, we will unset some of the button's default CSS styles. 
+      By default, HTML buttons are given a border and a background. 
+      We will unset these styles by adding the following:
+      
+      <CodeBlock title="CSS">
+```CSS
+#menu-btn {
+  ...
+  border: 0;
+  background: 0;
+}
+```
+    </CodeBlock>
+    </PostSectionContent>
+  </PostSection>
+
+  <PostSection slot="sub-section">
+    <PostSectionContent slot="content">
+
+      ### Bar Styles
+      
+      Next, we will tweak our bars.
+      
+    </PostSectionContent>
+
+    <PostSection slot="sub-section">
+      <PostSectionContent slot="content">
+
+        #### Border Radius
+        
+        Let us add <CodeInline>`border-radius: var(--bar-height);`</CodeInline> to them, 
+        so that the border-radius will scale with the rest of our menu button element, 
+        as follows:
+        
+        <CodeBlock title="CSS">
+```CSS
+#menu-btn span {
+  ...
+  border-radius: var(--bar-height);
+}
+```
+        </CodeBlock>
+      </PostSectionContent>
+    </PostSection>
+
+    <PostSection slot="sub-section">
+      <PostSectionContent slot="content">
+
+        #### Bar Color
+        
+        Now, we will pull the background color of our bars into its own variable called <CodeInline>`--bar-color`</CodeInline>, 
+        which we will place in the menu button selector next to <CodeInline>`--btn-size`</CodeInline>.
+        
+        <CodeBlock title="CSS">
+```CSS
+#menu-btn {
+  --bar-color: #000000;
+  ...
+}
+
+#menu-btn span {
+  ...
+  background: var(--bar-color);
+  ...
+}
+```
+        </CodeBlock>
+      </PostSectionContent>
+    </PostSection>
+
+    <PostSection slot="sub-section">
+      <PostSectionContent slot="content">
+
+        #### Animation Speed
+        
+        We can also pull the animation speed out into its own variable, 
+        placing it next to the other variables that are intended to be changed, as follows: 
+        
+        <CodeBlock title="CSS">
+```CSS
+#menu-btn {
+  ...
+  --animation-duration: 0.6s;
+}
+
+#menu-btn span {
+...
+  animation-duration: var(--animation-duration);
+}
+```
+        </CodeBlock>
+      </PostSectionContent>
+    </PostSection>
+
+  </PostSection>
+
+  <PostSection slot="sub-section">
+    <PostSectionContent slot="content">
+    
+      ### Add More Oomph
+      
+      This looks nice, but it just isn't <i>it</i>. 
+      Let's also rotate the entire menu button by 90deg during the first half of the bars' animation. 
+      Make the following changes to the CSS:
+      
+      <CodeBlock title="CSS">
+```CSS
+#menu-btn {
+  --animation-timing-function: ease-in-out;
+  ...
+  transition: 
+    calc(var(--animation-duration) / 2) 
+    transform 
+    var(--animation-timing-function);
+}
+
+#menu-btn.active { transform: rotate(-90deg);  }
+
+...
+
+.nav-toggle span {
+  ...
+  animation-timing-function: var(--animation-timing-function);
+  ...
+}
+```
+      </CodeBlock>
+      
+      Here, we are specifying that the menu button's transform property's transition will take half 
+      the duration of the bars' animation. We also created the <CodeInline>`--animation-timing-function`</CodeInline> 
+      variable and have both the button and the bars use that variable. Furthermore, 
+      we specify that when the menu button has the active class, it will rotate by 90deg. 
+    
+      At this point, we have this:
+      
+      <video width="514" height="514" controls>
+        <source src="/blog/2023/04/28/scalable-animated-menu-btn/6.mp4" type="video/mp4" />
+        Download the 
+        <a href="/blog/2023/04/28/scalable-animated-menu-btn/6.mp4">MP4</a>
+      </video>
+
+    </PostSectionContent>
+  </PostSection>
+
+  <PostSection slot="sub-section">
+    <PostSectionContent slot="content">
+
+      ### Preventing Animation on Page Load
+      
+      Remember earlier when we decided we would trigger our animation by toggling a class name on our button? 
+      You may have noticed an issue with this. Namely, every time the page loads, our “to-hamburger” animations fire. 
+      This is unintended behavior, as we only want our animations to fire when the user clicks the button. 
+      We will use HTML data attributes to fix this issue. 
+      Data attributes are custom attributes you can add to an HTML element, 
+      identified by the name pattern <CodeInline>`data-*`</CodeInline>. In our case, 
+      instead of toggling the “active” class as we have been doing, 
+      we will toggle a data attribute that we create, called <CodeInline>`data-state`</CodeInline>. 
+      The state will be set to “x” when the user triggers the button to its x layout, 
+      and then will be set to “hamburger” when the user triggers the button to its hamburger layout. 
+      Our button will only animate when the <CodeInline>`data-state`</CodeInline> is set, 
+      and the <CodeInline>`data-state`</CodeInline> will not be set when the page loads. 
+    
+      First, let us tweak our JavaScript so we have the following:
+      
+      <CodeBlock title="JavaScript">
+```JavaScript
+function toggleMenuBtn() {
+  let state = menu_btn.dataset.state;
+  menu_btn.dataset.state = 
+    (!state || state === "hamburger") ? "x" : "hamburger";
+}
+
+let menu_btn = document.getElementById("menu-btn"); 
+menu_btn.onclick = toggleMenuBtn;
+```
+      </CodeBlock>
+      
+      Now, we need to replace all instances of <CodeInline>`.active`</CodeInline> in our CSS 
+      with <CodeInline>`[data-state="x"]`</CodeInline>, as follows:
+      
+      <CodeBlock title="CSS">
+```CSS
+#menu-btn[data-state="x"] span:nth-child(1) { animation-name: to-x-top; }
+#menu-btn[data-state="x"] span:nth-child(2) { animation-name: to-x-mid; }
+#menu-btn[data-state="x"] span:nth-child(3) { animation-name: to-x-btm; }
+```
+      </CodeBlock>
+      
+      Similarly, we need to add <CodeInline>`[data-state="hamburger"]`</CodeInline> 
+      for our hamburger animations, as follows:
+      
+      <CodeBlock title="CSS">
+```CSS
+#menu-btn[data-state="hamburger"] span:nth-child(1) { animation-name: to-hamburger-top; }
+#menu-btn[data-state="hamburger"] span:nth-child(2) { animation-name: to-hamburger-mid; }
+#menu-btn[data-state="hamburger"] span:nth-child(3) { animation-name: to-hamburger-btm; }
+```
+      </CodeBlock>
+      
+      Now, when we first load the page, our menu button does not animate, but when the user clicks the button, 
+      it toggles the animation between the two states as intended!
+      
+    </PostSectionContent>
+    <PostSectionSidebar slot="sidebar">
+      
+      Read more about HTML data attributes 
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes"
+        target="_blank"
+        rel="noopener noreferrer"
+      >here</a>.
+      
+    </PostSectionSidebar>
+  </PostSection>
+
+  <PostSection slot="sub-section">
+    <PostSectionContent slot="content">
+
+      ### Final Polish
+      
+      Now, we can simply organize the CSS a bit to make it more readable if we or someone else needs to 
+      come back to it and tweak something. For our code, we will alphabetize our selectors' CSS properties, 
+      grouping the variables at the top of each selector and adding comments that indicate which variables 
+      are tweakable.
+      
+    </PostSectionContent>
+    <PostSectionSidebar slot="sidebar">
+      
+      You are not required to alphabetize your selectors' CSS properties. 
+      This is largely a matter of opinion as to what is easiest to maintain.
+      
+    </PostSectionSidebar>
+  </PostSection>
+
+</PostSection>
+
+<PostSection>
+  <PostSectionContent slot="content">
+
+    ## Congratulations!
+    
+    Our responsive and animated menu button - made with vanilla HTML, CSS, and 
+    JavaScript - is complete! 
+    
+    <video width="514" height="514" controls>
+      <source src="/blog/2023/04/28/scalable-animated-menu-btn/6.mp4" type="video/mp4" />
+      Download the 
+      <a href="/blog/2023/04/28/scalable-animated-menu-btn/6.mp4">MP4</a>
+    </video>
+    
+    <div class="card surface2">
+      View all of the code in the codepen
+      <a
+        href="https://codepen.io/twit96/pen/poxPzyQ"
+        target="_blank"
+        rel="noopener noreferrer"
+      >here</a>.
+    </div>
+    
+  </PostSectionContent>
+</PostSection>

@@ -1,0 +1,129 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft);
+
+const allTags = publishedPosts.map((post) => post.data.tags).flat().sort();
+const numTags = [...new Set(allTags)].length;
+
+let tagsByFirstCharWithCounts = {};
+
+allTags.forEach((tag) => {
+  if (
+    tag &&                      // exclude null/undefined
+    typeof tag !== 'object' &&  // exclude objects
+    !Array.isArray(tag)         // exclude arrays
+  ) {
+
+    tag = String(tag).trim();  // cast to string, remove whitespace
+    if (tag.length > 0) {      // ignore tag if empty string
+
+      let firstChar = tag[0].toUpperCase();  // uppercase first char
+
+      // create hash for each unique firstChar
+      if (!(firstChar in tagsByFirstCharWithCounts)) {
+        tagsByFirstCharWithCounts[firstChar] = {};
+      }
+
+      // update counts for each tag
+      !(tag in tagsByFirstCharWithCounts[firstChar])
+        ? tagsByFirstCharWithCounts[firstChar][tag] = 1  // initialize tag count
+        :  tagsByFirstCharWithCounts[firstChar][tag]++;  // increment tag count
+
+    }
+    
+  }
+});
+---
+
+<BaseLayout
+  title="Tags"
+  description="Tyler Wittig's Post Tags"
+>
+  <section>
+    
+    <div class="wrapper">
+      <h1>Tags</h1>
+      <p>{numTags} Tags</p>
+    </div>
+
+    <div class="card surface0 shadow-sm wrapper">
+      <ul class="letter-boxes">
+        {
+          Object.keys(tagsByFirstCharWithCounts).sort().map(letter =>
+            <li class="letter-box card surface3">
+
+              <h2 class="letter surface2">
+                <span>{letter}</span>
+              </h2>
+
+              <ul class="btns">
+                {
+                  Object.keys(tagsByFirstCharWithCounts[letter]).sort().map((tag) =>
+                    <li>
+                      <a 
+                        class="btn custom-scrollbar surface4" 
+                        href={`/tags/${tag}`}
+                        title={`View all entries tagged with #${tag}`}
+                      >
+                        #{tag}
+                        <span class="diminished">
+                          ({tagsByFirstCharWithCounts[letter][tag]})
+                        </span>
+                      </a>
+                    </li>
+                  )
+                }
+              </ul>
+              
+            </li>
+          )
+        }
+      </ul>
+    </div>
+
+  </section>
+</BaseLayout>
+
+<style>
+  ul {
+    list-style: none;
+    width: 100%;
+  }
+
+  .letter-boxes {
+    display: grid;
+    grid-template-columns: repeat( auto-fill, minmax( min(18rem, 100%), 1fr) );
+    gap: 1rem;
+  }
+
+  .letter-box {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .letter {
+    position: relative;
+    width: 3rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+  }
+  .letter span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .btns { flex-direction: column; }
+  .btns li { max-width: 100%; }
+  .btn {
+    --_bar-size: 0.25rem;
+    overflow: auto;
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+  }
+</style>

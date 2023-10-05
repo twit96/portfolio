@@ -1,0 +1,19 @@
+<aside class="card surface2">
+  <slot />
+</aside>
+
+<style>
+  aside {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  /* Adjust for PostSectionLayout Large Screen Breakpoint */
+  @media (min-width: 120ch) {
+    aside {
+      margin-top: 0;
+      margin-left: 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,249 @@
+/* ---------- Variables ---------- */
+html {
+  /* Constants */
+  --page-width: 70rem;
+  --hover-filter: brightness(0.85);
+  --dark-mode-filter: brightness(0.75);
+  --radius-sm: 0.25rem;
+  --radius-lg: 1.25rem;
+}
+
+
+
+/* ---------- Presets ---------- */
+
+/* natural box layout model, allowing overrides */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+
+/* override and set custom defaults */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/* ---------- Defaults ---------- */
+a {
+  color: var(--link);
+  font-weight: 600;
+}
+@media (hover: hover) {
+  a:not(.btn):hover { background-color: Canvas; }
+  a:hover,
+  button:hover { filter: var(--hover-filter); }
+}
+
+body {
+  font-family: 'Nunito Variable', sans-serif;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+button { border-color: transparent; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+h1 {
+  font-size: 2.5rem;
+  padding-bottom: 0.25rem;
+}
+
+hr {
+  --_style: solid;
+  --_width: 0.0625rem;
+  border: calc(var(--_width) / 2) var(--_style) var(--_color);
+}
+
+img, video {
+  border-radius: var(--radius-lg);
+  max-width: 100%;
+  height: auto;
+}
+
+ol, ul { list-style-position: inside; }
+
+p { max-width: 80ch; }
+
+
+
+/* ---------- Page Layout ---------- */
+body {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  min-height: 100vh;
+}
+main { flex: 1; }
+
+
+
+/* ---------- Reused Classes ---------- */
+.btns {
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.125rem;
+  list-style: none;
+  overflow: hidden;
+}
+.btn {
+  border-radius: var(--radius-sm);
+  padding: 0.5em 1em;
+}
+
+
+.card {
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+}
+
+.card-container {
+  --_card-size: 18rem;
+  --_card-gap: 1rem;
+  gap: var(--_card-gap);
+  list-style: none;
+}
+.card-container--grid {
+  display: grid;
+  grid-template-columns: repeat( auto-fill, minmax( min(var(--_card-size), 100%), 1fr) );
+}
+/* .card-container--list { display: grid; } */
+.card-container--flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.card-container--flex > * {
+  flex-basis: var(--_card-size);
+  flex-grow: 1;
+  min-width: 0;
+}
+/* .card-container--flex > *:nth-of-type(6n) {
+  flex-basis: calc(var(--_card-size) * 2);
+} */
+
+
+.content-section {
+  --_content-gap: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: var(--_content-gap);
+}
+
+
+.cursive {
+  font-family: 'Pacifico', sans-serif;
+  font-weight: 400;
+}
+
+
+.custom-scrollbar {
+  --_bar-size: 0.5rem;
+  --_bar-size-firefox: thin;
+  --_track-radius: var(--_bar-size);
+  --_thumb-radius: var(--_bar-size);
+  --_track-color: transparent;
+  --_track-margin: 0;
+  --_thumb-color: var(--text2);
+  --_thumb-hover-color: var(--link);
+  scrollbar-color: var(--_thumb-color) var(--_track-color);
+  scrollbar-width: var(--_bar-size-firefox);
+}
+.custom-scrollbar::-webkit-scrollbar {
+  height: var(--_bar-size);
+  width: var(--_bar-size);
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--_track-color);
+  border-radius: var(--_track-radius);
+  margin: var(--_track-margin);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--_thumb-color);
+  border-radius: var(--_thumb-radius);
+}
+@media (hover: hover) {
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--_thumb-hover-color); }
+}
+
+
+.diminished { opacity: 0.75; }
+
+
+.modal-bg {
+  --_modal-bg-filter: brightness(0.15);
+  background: var(--brand);
+  display: none;
+  filter: var(--_modal-bg-filter);
+  inset: 0;
+  min-height: 100vh;  /* fallback for lvh on next line */
+  min-height: 100lvh;
+  min-width: 100vw;  /* fallback for lvw on next line */
+  min-width: 100lvw;
+  opacity: 0.75;
+  position: fixed;
+}
+@media (hover:hover) {
+  /* unset button hover effect */
+  .modal-bg:hover { filter: var(--_modal-bg-filter); }
+}
+.modal-bg.active { display: block; }
+
+
+.shadow-sm {
+  box-shadow:
+    0 0 2.8px 2.2px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .03)),
+    0 0 6.7px 5.3px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .01));
+}
+.shadow-lg {
+  box-shadow:
+    0 2.8px 2.2px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .03)),
+    0 6.7px 5.3px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .01)),
+    0 12.5px 10px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .02)),
+    0 22.3px 17.9px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .02)),
+    0 41.8px 33.4px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .03)),
+    0 100px 80px hsl(var(--surface-shadow) / var(--shadow-strength));
+}
+
+
+.surface0 {
+  background-color: Canvas;
+  color: CanvasText;
+}
+.surface1 {
+  background-color: var(--surface1);
+  color: var(--text2);
+}
+.surface1 a { color: var(--text2); }
+.surface2 {
+  background-color: var(--surface2);
+  color: var(--text2);
+}
+.surface2 a { color: var(--text2); }
+.surface3 {
+  background-color: var(--surface3);
+  color: var(--text1);
+}
+.surface3 a { color: var(--text1); }
+.surface4 {
+  background-color: var(--surface4);
+  color: var(--text1);
+}
+.surface4 a { color: var(--text1); }
+
+.surfaceLink {
+  background-color: var(--link);
+  color: Canvas !important;
+}
+
+
+.wrapper {
+  margin: auto;
+  max-width: var(--page-width);
+  padding: 1rem;
+}

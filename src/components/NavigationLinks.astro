@@ -1,0 +1,43 @@
+---
+// define main navigation links
+let links = [
+  { 'text': "Home", 'href': "/", },
+  { 'text': "Blog", 'href': "/blog/", },
+  { 'text': "Projects", 'href': "/projects/", },
+  { 'text': "Tags" , 'href': "/tags/", },
+];
+// add accessibility attributes
+links.forEach((link) => {
+  link['aria-current'] = Astro.url.pathname===link.href ? "page" : "false";
+  link['title'] = `Visit the ${link.text} page`;
+});
+---
+
+<ul class="btns">
+  {links.map(({text, ...attrs}) =>
+    <li>
+      <a {...attrs} class="btn surface1">
+        {text}
+      </a>
+    </li>
+  )}
+</ul>
+
+<style>
+  .btns {
+    flex-direction: column;
+    width: 100%;
+  }
+  a {
+    text-decoration: none;
+    text-align: center;
+    display: block;
+  }
+  a[aria-current="page"] { text-decoration: underline; }
+  svg { fill: var(--text1); }
+  a[aria-current="page"] svg { fill: var(--text2); }
+
+  @media (min-width: 80ch) {
+    .btns { flex-direction: row; }
+  }
+</style>
