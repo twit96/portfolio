@@ -2,10 +2,10 @@
 import { getCollection } from 'astro:content';
 import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
 
-let publishedProjects = (await getCollection('posts')).filter(post => {
+let publishedProjects = (await getCollection('posts')).filter(post => (
   !post.data.draft &&
   post.data.category==="projects"
-});
+));
 publishedProjects.sort(function(a, b) {
 	let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);
   let b_date = Date.parse(b.data.dateUpdated || b.data.datePublished);
