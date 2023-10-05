@@ -1,0 +1,58 @@
+.heading {
+  display: grid;
+  gap: 1em;
+}
+.bar {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+.bar svg { fill: var(--text2); }
+.bar input {
+  flex: 1;
+  border: 0;
+  outline-color: var(--text2);
+}
+.results {
+  display: grid;
+  gap: 1em;
+}
+
+.result {
+  display: grid;
+  gap: 1em;
+}
+.resultScore b {
+  font-size: 0.9em;
+  padding: 0.25em 0.75em;
+  border-radius: var(--radius-lg);
+}
+.resultInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+}
+.resultInfo em {
+  display: block;
+  line-height: 1.3em;
+}
+.resultInfo p {
+  display: flex;
+  gap: 0.5ch;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 45rem) {
+  .result {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+      'title title score'
+      'info description description';
+  }
+  .resultScore { grid-area: score; }
+  .resultTitle { grid-area: title; }
+  .resultInfo { grid-area: info; }
+  .resultDescription { grid-area: description; }
+
+  .resultScore { text-align: right; }
+}
