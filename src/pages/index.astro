@@ -5,52 +5,53 @@ import FeaturedPosts from '@components/FeaturedPosts/index.astro';
 import HomepageImage from '@components/HomepageImage.astro';
 ---
 <BaseLayout>
+  <div class="content-section">
 
-  <section id="intro">
-    <div class="wrapper">
+    <section id="intro">
+      <div class="wrapper">
 
-      <HomepageImage />
-      
-      <div class="content-section">
-        <h1 class="cursive">Tyler Wittig</h1>
-        <p>
-          Hello! My name is Tyler and I am a full-stack developer.
-          This is my website. It is on the web.  
-        </p>
-        <div id="intro-socials-wrap">
-          <SocialLinks />
+        <HomepageImage />
+        
+        <div class="content-section">
+          <h1 class="cursive">Tyler Wittig</h1>
+          <p>
+            Hello! My name is Tyler and I am a full-stack developer.
+            This is my website. It is on the web.  
+          </p>
+          <div id="intro-socials-wrap">
+            <SocialLinks />
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <FeaturedPosts />
+
+    {/* About */}
+    <section>
+      <div class="wrapper">
+        <div class="card content-section surface2">
+          <h2>About</h2>
+          <p>
+            This website is built with
+            <a href="https://astro.build/">Astro</a>
+            (and a sprinkle of
+            <a href="https://react.dev/">React</a>).
+            Its CSS styles are inspired by Google's
+            <a href="https://m3.material.io/">Material Design</a> system.
+            You can
+            <a href="/projects/portfolio-2023">read more details about my portfolio website here</a>.
+          </p>
         </div>
       </div>
+    </section>
 
-    </div>
-  </section>
-
-  <FeaturedPosts />
-
-  {/* About */}
-  <section>
-    <div class="wrapper">
-      <div class="card content-section surface2">
-        <h2>About</h2>
-        <p>
-          This website is built with
-          <a href="https://astro.build/">Astro</a>
-          (and a sprinkle of
-          <a href="https://react.dev/">React</a>).
-          Its CSS styles are inspired by Google's
-          <a href="https://m3.material.io/">Material Design</a> system.
-          You can
-          <a href="/projects/portfolio-2023">read more details about my portfolio website here</a>.
-        </p>
-      </div>
-    </div>
-  </section>
-  
+  </div>
 </BaseLayout>
 
 
 <style>
-  #intro { margin-bottom: 1rem; }
   #intro .wrapper {
     align-items: center;
     display: flex;

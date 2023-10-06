@@ -46,7 +46,7 @@ button { border-color: transparent; }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.25;
   text-wrap: balance;
 }
 h1 {
@@ -219,22 +219,18 @@ main { flex: 1; }
   background-color: var(--surface1);
   color: var(--text2);
 }
-.surface1 a { color: var(--text2); }
 .surface2 {
   background-color: var(--surface2);
   color: var(--text2);
 }
-.surface2 a { color: var(--text2); }
 .surface3 {
   background-color: var(--surface3);
   color: var(--text1);
 }
-.surface3 a { color: var(--text1); }
 .surface4 {
   background-color: var(--surface4);
   color: var(--text1);
 }
-.surface4 a { color: var(--text1); }
 
 .surfaceLink {
   background-color: var(--link);

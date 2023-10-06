@@ -1,18 +1,22 @@
 ---
+import Squiggle from '@components/Squiggle.astro';
 import Featured from './components/Featured.astro';
 import Recents from './components/Recents.astro';
 ---
 
 <section>
-
   <div class="card content-section shadow-sm surface0 wrapper">
+
     <h2>Featured Posts</h2>
     <Featured />
-  </div>
 
-  <div class="content-section wrapper">
+    <Squiggle />
+    
     <h2>Recent Posts</h2>
     <Recents />
+
+    <Squiggle />
+
     <p>
       View all posts on my
       <a href="/blog/">Blog</a>
@@ -20,12 +24,13 @@ import Recents from './components/Recents.astro';
       <a href="/projects/">Projects</a>
       pages.
     </p>
-  </div>
 
+  </div>
 </section>
 
 
 <style>
   h2, p { text-align: center; }
+  h2 { color: var(--text2); }
   p { margin: auto; }
 </style>
