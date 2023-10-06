@@ -1,58 +1,40 @@
 ---
-import ImageLink from './components/ImageLink.astro';
-import PostTags from '@components/PostTags.astro';
-import TitleLink from './components/TitleLink.astro';
-import PostDates from './components/PostDates.astro';
+import CompactCardContent from "./CompactCardContent.astro";
+import MinimalCardContent from "./MinimalCardContent.astro";
 
 const { post, cardType='compact', styles='' } = Astro.props;
+
+const cardClass = cardType==="minimal" ? "surface1" : "surface3";
 ---
+
+
 {
   post && cardType &&
   <article
-    class={`card ${cardType==="minimal" ? "surface1" : "surface3"}`}
+    class={`card preview-card--${cardType} ${cardClass}`}
     style={styles}
   >
 
     {
-      cardType!=="minimal" &&
-      <ImageLink
-        image={post.data.heroImage}
-        title={post.data.title}
-        href={`/${post.data.category}/${post.slug}`}
-      />
-      <PostTags 
-        tags={post.data.tags}
-        noWrap={true} 
-      />
+      cardType==="minimal" &&
+      <MinimalCardContent post={post} />
     }
 
-    <TitleLink
-      title={post.data.title}
-      href={`/${post.data.category}/${post.slug}`}
-    />
-
-    <div class="preview-card-footer">
-      { post.data.blurb && <em>{post.data.blurb}</em> }
-      <PostDates
-        datePublished={post.data.datePublished}
-        dateUpdated={post.data.dateUpdated}
-      />
-    <div>
+    {
+      cardType==="compact" &&
+      <CompactCardContent post={post} />
+    }
 
   </article>
 }
+
 
 <style>
   article {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     height: 100%;
   }
-
-  .preview-card-footer {
-    margin-top: auto;
-    line-height: 1.3em;
-    display: grid;
-  }
+  article.preview-card--minimal { gap: 0.5rem; }
+  article.preview-card--compact { gap: 1rem; }
 </style>
