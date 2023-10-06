@@ -29,13 +29,11 @@ links.forEach((link) => {
     width: 100%;
   }
   a {
-    text-decoration: none;
-    text-align: center;
     display: block;
+    text-align: center;
+    text-decoration: none;
   }
   a[aria-current="page"] { text-decoration: underline; }
-  svg { fill: var(--text1); }
-  a[aria-current="page"] svg { fill: var(--text2); }
 
   @media (min-width: 80ch) {
     .btns { flex-direction: row; }
