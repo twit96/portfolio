@@ -213,7 +213,7 @@ main { flex: 1; }
 
 .surface0 {
   background-color: Canvas;
-  color: CanvasText;
+  color: var(--text1);
 }
 .surface1 {
   background-color: var(--surface1);
@@ -234,7 +234,7 @@ main { flex: 1; }
 
 .surfaceLink {
   background-color: var(--link);
-  color: Canvas !important;
+  color: Canvas;
 }
 
 
