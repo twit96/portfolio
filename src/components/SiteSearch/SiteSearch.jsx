@@ -49,7 +49,7 @@ function Search({ searchList }) {
             value={query} 
             onChange={handleOnSearch} 
             placeholder="Search posts" 
-            className="card surface3"
+            className="card surface0"
             size="1"
           />
         </div>
@@ -75,7 +75,9 @@ function Search({ searchList }) {
                     </div>
 
                     <h2 className={styles.resultTitle}>
-                      <a href={result.item.url}>{result.item.data.title}</a>
+                      <a href={`/${result.item.data.category}/${result.item.slug}`}>
+                        {result.item.data.title}
+                      </a>
                     </h2>
 
                     <div className={styles.resultInfo}>
