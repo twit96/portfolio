@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts');
+const publishedPosts = allPosts.filter(post => !post.data.draft);
+const allCategories = publishedPosts.map(post => post.data.category);
+const uniqueCategories = [...new Set(allCategories)];
+---
+
+<nav class="card content-section surface1">
+  <h2>Filter By Category</h2>
+  <ul class="chips">
+    {
+      uniqueCategories.map(category => (
+        <li>
+          <a
+            class="chip chip--lg btn surface3" 
+            href={`/archive/${category}/`}
+            title={`View all posts categorized by "${category}"`}
+          >&colon;{category}</a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+
+<style>
+  nav { margin-block: 0.5rem 1rem; }
+</style>

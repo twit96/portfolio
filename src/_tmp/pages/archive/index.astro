@@ -1,5 +1,6 @@
 ---
 import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
+import ArchiveCategories from '@components/ArchiveCategories.astro';
 import { getCollection } from 'astro:content';
 
 let posts = (await getCollection('posts')).filter(post => !post.data.draft);
@@ -15,4 +16,5 @@ posts.sort(function(a, b) {
 	title="Archive"
 	posts={posts}
 >
+  <ArchiveCategories />
 </PostCollectionLayout>
