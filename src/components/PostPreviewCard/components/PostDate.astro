@@ -4,7 +4,7 @@ const { datePublished, dateUpdated } = Astro.props;
 
 {
   (datePublished || dateUpdated) &&
-  <em class="diminished">
+  <em>
     {/* Prefer Updated Date, Fallback to Published Date */}
     { dateUpdated && <>Updated {dateUpdated}</> }
     { !dateUpdated && datePublished }

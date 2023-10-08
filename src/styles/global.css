@@ -172,9 +172,6 @@ main { flex: 1; }
 }
 
 
-.diminished { opacity: 0.75; }
-
-
 .modal-bg {
   --_modal-bg-filter: brightness(0.15);
   background: var(--brand);

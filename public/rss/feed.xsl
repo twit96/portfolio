@@ -124,7 +124,7 @@
                       <xsl:value-of select="title"/>
                     </a>
                   </h3>
-                  <em class="diminished">
+                  <em>
                     Published: <xsl:value-of select="pubDate" />
                   </em>
                 </article>

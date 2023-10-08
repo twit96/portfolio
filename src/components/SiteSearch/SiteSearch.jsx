@@ -85,12 +85,12 @@ function Search({ searchList }) {
                         {result.item.data.blurb}
                       </em>
                       <p>
-                        <em className="diminished">
+                        <em>
                           {result.item.data.datePublished}
                         </em>
                         {
                           result.item.data.dateUpdated && (
-                            <em className="diminished">
+                            <em>
                               (Updated {result.item.data.dateUpdated})
                             </em>
                           )
