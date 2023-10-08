@@ -1,6 +1,7 @@
 ---
 import TitleLink from './components/TitleLink.astro';
 import CardFooter from './components/CardFooter.astro';
+import PostBlurb from './components/PostBlurb.astro';
 import PostDate from './components/PostDate.astro';
 
 const { post } = Astro.props;
@@ -13,7 +14,7 @@ const { post } = Astro.props;
 />
 
 <CardFooter>
-  { post.data.blurb && <em>{post.data.blurb}</em> }
+  <PostBlurb blurb={post.data.blurb} />
 
   <PostDate
     datePublished={post.data.datePublished}
