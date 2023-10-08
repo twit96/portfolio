@@ -32,7 +32,7 @@ import PostSectionSidebar from "@components/PostSection/components/PostSectionSi
     ## Development Notes
     
     Ufolio.Space is built with a PHP framework called 
-    <a href="https://laravel.com/">Laravel</a>.
+    <a href="https://laravel.com/" rel="noopener noreferrer" target="_blank">Laravel</a>.
     Laravel is flexible in that it allows you to either create a "monolith" application 
     (in which the frontend and backend are all part of the same code base),
     or to create a REST API as a standalone backend codebase,
@@ -42,35 +42,17 @@ import PostSectionSidebar from "@components/PostSection/components/PostSectionSi
     I wanted to focus in on the Laravel framework with no distractions as I programmed.
     However, now that I am comfortable with Laravel, 
     I think it would be beneficial to split the backend from the frontend for Ufolio.Space to scale.
-    
-  </PostSectionContent>
-  <PostSectionSidebar slot="sidebar">
-    
-    Read more about the Laravel framework
-    <a href="https://laravel.com/">here</a>.
-    
-  </PostSectionSidebar>
-</PostSection>
-
-<PostSection>
-  <PostSectionContent slot="content">
 
     ## Planned Refactoring
     
     After doing a bit of research, I want to split Ufolio.Space into a Laravel REST API with a 
-    <a href="https://flutter.dev/">Flutter</a> frontend.
+    <a href="https://flutter.dev/" rel="noopener noreferrer" target="_blank">Flutter</a> frontend.
     Flutter is promising because it allows you to create a single frontend codebase,
     which can be deployed to the web, iOS, Android, MacOS, Linux, and Windows.
     If successful, splitting Ufolio.Space into a Laravel backend with a Flutter frontend 
     would create a versatile, cross-platform application. 
     
   </PostSectionContent>
-  <PostSectionSidebar slot="sidebar">
-    
-    Read more about the Flutter framework
-    <a href="https://flutter.dev/">here</a>.
-    
-  </PostSectionSidebar>
   
   <PostSection slot="sub-section">
     <PostSectionContent slot="content">
@@ -87,12 +69,13 @@ import PostSectionSidebar from "@components/PostSection/components/PostSectionSi
     
       I even programmed around this (now fixed) Android Google Chrome bug on
       <a href="https://gagcombos.info/" rel="noopener noreferrer" target="_blank">Gag Combos Info</a>,
-      in which you may notice that the &lt;body&gt; tag does not scroll, 
-      but instead there is a page-wide wrapper which scrolls, 
+      in which previously the &lt;body&gt; tag would not scroll, 
+      but instead there was a page-wide wrapper which scrolled, 
       preventing Android's "elastic overscroll" effect from triggering.
-      The Google Chrome issue has since been fixed on my Pixel 6 Pro, 
+      The Google Chrome issue has since been fixed on my Pixel 6 Pro
+      (and this workaround was remove from Gag Combos Info), 
       and therefore I feel at worst hopeful, if not entirely confident 
-      that the minor lag I experienced with the Flutter apps I tried to be isolated to my specific chipset,
+      that the minor lag I experienced on the Flutter apps I tried to be isolated to my specific chipset,
       with a promising future outlook. At best, Flutter is going to make Ufolio.Space my best project to date.
       
     </PostSectionContent>
