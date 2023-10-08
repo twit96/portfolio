@@ -25,7 +25,7 @@ export async function GET(context) {
 			title: post.data.title,
       pubDate: post.data.datePublished,
       description: post.data.description,
-      link: post.slug,
+      link: `${post.data.category}/${post.slug}`,
       customData: `<media:content
           type="image/${post.data.heroImage.split('.').pop()}"
           medium="image"
