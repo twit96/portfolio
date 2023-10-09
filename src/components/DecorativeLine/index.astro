@@ -1,0 +1,19 @@
+---
+{/* Router File to Decorative Line Variants. */}
+
+import SawtoothSVG from './components/SawtoothSVG.astro';
+import SineSVG from './components/SineSVG.astro';
+import SquareSVG from './components/SquareSVG.astro';
+import TriangleSVG from './components/TriangleSVG.astro';
+
+const {
+  stroke="var(--surface1)",
+  type="sine"
+} = Astro.props;
+---
+<div>
+  { type==="sawtooth" && <SawtoothSVG stroke={stroke} /> }
+  { type==="sine" && <SineSVG stroke={stroke} /> }
+  { type==="square" && <SquareSVG stroke={stroke} /> }
+  { type==="triangle" && <TriangleSVG stroke={stroke} /> }
+</div>
