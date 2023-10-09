@@ -11,8 +11,9 @@ const { image, title, href } = Astro.props;
     >
       <img 
         alt={title}
+        loading="lazy"
         src={image} 
-      >
+      />
     </a>
   )
 }
