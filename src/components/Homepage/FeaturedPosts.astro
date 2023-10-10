@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import PostPreviewCard from '@components/PostPreviewCard/index.astro';
+import DecorativeLine from '@components/DecorativeLine/index.astro';
 
 // Remove Drafts and Non-Featured Posts
 let featuredPosts = (await getCollection('posts')).filter(post => (
@@ -16,13 +17,27 @@ featuredPosts.sort(function(a, b) {
   return 0;
 });
 ---
-<ul class="card-container card-container--flex">
-  {featuredPosts.map((post) => 
-    <li>
-      <PostPreviewCard
-        post={post}
-        cardType="compact"
-      />
-    </li>
-  )}
-</ul>
+
+
+{
+  (featuredPosts && featuredPosts.length>0) &&
+  <div class="content-section">
+    <h2>Featured</h2>
+    <ul class="card-container card-container--flex">
+      {featuredPosts.map((post) => 
+        <li>
+          <PostPreviewCard
+            post={post}
+            cardType="compact"
+          />
+        </li>
+      )}
+    </ul>
+    <DecorativeLine />
+  </div>
+}
+
+
+<style>
+  h2 { text-align: center; }
+</style>

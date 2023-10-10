@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import DecorativeLine from '@components/DecorativeLine/index.astro';
 
 const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft);
 
@@ -30,8 +31,11 @@ tagCountArray.sort((t1, t2) => {
 if (tagCountArray.length > 5) tagCountArray.length = 5;
 ---
 
+
 {
-  tagCountArray &&
+  (tagCountArray && tagCountArray.length>0) &&
+  <DecorativeLine />
+  <h2>Top Tags</h2>
   <ul
     class="btns card-container card-container--list"
     style="--_card-gap: 0.25rem;--_card-size:15rem;"
@@ -49,9 +53,16 @@ if (tagCountArray.length > 5) tagCountArray.length = 5;
       ))
     }
   </ul>
+  <p>
+    <a href="/tags/">View all tags</a>
+  </p>
 }
 
+
 <style>
+  h2,
+  p { text-align: center; }
+  p { margin: auto; }
   .btn {
     display: block;
     text-decoration: none;

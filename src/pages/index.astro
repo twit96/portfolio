@@ -1,11 +1,10 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import SocialLinks from '@components/SocialLinks.astro';
-import HomepageImage from '@components/HomepageImage.astro';
-import FeaturedPosts from '@components/FeaturedPosts.astro';
-import DecorativeLine from '@components/DecorativeLine/index.astro';
+import HomepageImage from '@components/Homepage/HomepageImage.astro';
+import FeaturedPosts from '@components/Homepage/FeaturedPosts.astro';
 import RecentPosts from '@components/RecentPosts.astro';
-import TopTags from '@components/TopTags.astro';
+import TopTags from '@components/Homepage/TopTags.astro';
 ---
 <BaseLayout>
   <div class="content-section">
@@ -29,41 +28,23 @@ import TopTags from '@components/TopTags.astro';
       </div>
     </section>
 
+
+    {/* Posts and Tags */}
     <section id="content">
       <div class="card content-section shadow-sm surface0 wrapper">
 
-        <h2>Featured Posts</h2>
         <FeaturedPosts />
-
-        <DecorativeLine />
-
-        <h2>Recent Posts</h2>
         <RecentPosts />
-
-        <p>
-          View all posts on my
-          <a href="/projects/">Projects</a>
-          and
-          <a href="/blog/">Blog</a>
-          pages.
-        </p>
-
-        <DecorativeLine />
-
-        <h2>Top Tags</h2>
         <TopTags />
-        <p>
-          <a href="/tags/">View all tags</a>
-        </p>
 
       </div>
     </section>
 
 
-
     {/* About */}
     <section>
       <div class="wrapper">
+
         <div
           class="card content-section surface2"
           style="--_content-gap: 0.5rem;"
@@ -80,6 +61,7 @@ import TopTags from '@components/TopTags.astro';
             <a href="/projects/portfolio-2023">read more details about my portfolio website here</a>.
           </p>
         </div>
+        
       </div>
     </section>
 
@@ -100,7 +82,6 @@ import TopTags from '@components/TopTags.astro';
   #intro h1 {
     font-size: 4.5rem;
     line-height: 1.5em;
-    color: var(--text2);
   }
   #intro p {
     font-size: 1.5rem;
@@ -124,12 +105,4 @@ import TopTags from '@components/TopTags.astro';
       margin-left: 0;
     }
   }
-
-  #content h2,
-  #content p { text-align: center; }
-  #content h2 {
-    color: var(--text2);
-    font-size: 2rem;
-  }
-  #content p { margin: auto; }
 </style>

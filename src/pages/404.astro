@@ -5,20 +5,24 @@ import RecentPosts from '@components/RecentPosts.astro';
 <BaseLayout>
 
   <section>
-    <div class="content-section wrapper">
+    <div class="wrapper">
 
-      <div>
-        <h1>404 Error</h1>
-        <p>
-          This URL does not exist or was changed.
-          Return to the
-          <a href="/">homepage</a> or 
-          check out my recent posts below.
-        </p>
-      </div>
+      <h1>404 Error</h1>
+      <p>
+        This URL does not exist or was changed.
+        Return to the
+        <a href="/">homepage</a> or 
+        check out my recent posts below.
+      </p>
       
+    </div>
+  </section>
+
+  <section>
+    <div class="card shadow-sm surface0 wrapper">
+
       <RecentPosts />
-      
+
     </div>
   </section>
 

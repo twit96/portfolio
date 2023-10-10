@@ -15,17 +15,41 @@ publishedPosts.sort(function(a, b) {
 // Truncate Output to Length 3
 publishedPosts.length = 5;
 ---
-<ul
-  class="btns card-container card-container--list"
-  style="--_card-gap: 0.25rem;"
->
-  {publishedPosts.map((post) => 
-    <li>
-      <PostPreviewCard
-        post={post}
-        cardType="minimal"
-        styles="border-radius:var(--radius-sm);"
-      />
-    </li>
-  )}
-</ul>
+
+
+{
+  (publishedPosts && publishedPosts.length>0) &&
+  <div class="content-section">
+
+    <h2>Recent Posts</h2>
+    <ul
+      class="btns card-container card-container--list"
+      style="--_card-gap: 0.25rem;"
+    >
+      {publishedPosts.map((post) => 
+        <li>
+          <PostPreviewCard
+            post={post}
+            cardType="minimal"
+            styles="border-radius:var(--radius-sm);"
+          />
+        </li>
+      )}
+    </ul>
+    <p>
+      View all posts on my
+      <a href="/projects/">Projects</a>
+      and
+      <a href="/blog/">Blog</a>
+      pages.
+    </p>
+  
+  </div>
+}
+
+
+<style>
+  h2,
+  p { text-align: center; }
+  p { margin: auto; }
+</style>
