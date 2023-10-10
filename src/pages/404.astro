@@ -1,21 +1,25 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import FeaturedPosts from '@components/FeaturedPosts/index.astro';
+import RecentPosts from '@components/RecentPosts.astro';
 ---
 <BaseLayout>
 
   <section>
-    <div class="wrapper">
-      <h1>404 Error</h1>
-      <p>
-        This URL does not exist or was changed.
-        Return to the
-        <a href="/">homepage</a> or 
-        check out my featured posts below.
-      </p>
+    <div class="content-section wrapper">
+
+      <div>
+        <h1>404 Error</h1>
+        <p>
+          This URL does not exist or was changed.
+          Return to the
+          <a href="/">homepage</a> or 
+          check out my recent posts below.
+        </p>
+      </div>
+      
+      <RecentPosts />
+      
     </div>
   </section>
-
-  <FeaturedPosts />
 
 </BaseLayout>
