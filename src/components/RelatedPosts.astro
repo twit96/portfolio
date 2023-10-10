@@ -1,13 +1,17 @@
 ---
 import { getEntries } from 'astro:content';
 import PostPreviewCard from '@components/PostPreviewCard/index.astro';
+import DecorativeLine from '@components/DecorativeLine/index.astro';
 
 const slugs = Astro.props.slugs;
 const relatedPosts = await getEntries(slugs);
 ---
 <div class="content-section">
   <h2>Related Posts</h2>
-  <ul class="card-container card-container--grid">
+  <ul
+    class="btns card-container card-container--list"
+    style="--_card-gap: 0.25rem;"
+  >
     {
       relatedPosts &&
       relatedPosts.map(post => 
@@ -15,9 +19,15 @@ const relatedPosts = await getEntries(slugs);
           <PostPreviewCard
             post={post}
             cardType="minimal"
+            styles="border-radius:var(--radius-sm);"
           />
         </li>
       )
     }
   </ul>
+  <DecorativeLine />
 </div>
+
+<style>
+  h2 { text-align: center; }
+</style>
