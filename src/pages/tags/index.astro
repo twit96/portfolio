@@ -54,7 +54,7 @@ allTags.forEach((tag) => {
           Object.keys(tagsByFirstCharWithCounts).sort().map(letter =>
             <li class="letter-box card surface3">
 
-              <h2 class="letter surface2">
+              <h2 class="h2--reduce letter surface2">
                 <span>{letter}</span>
               </h2>
 
@@ -94,26 +94,26 @@ allTags.forEach((tag) => {
 
   .letter-boxes {
     display: grid;
-    grid-template-columns: repeat( auto-fill, minmax( min(18rem, 100%), 1fr) );
     gap: 1rem;
+    grid-template-columns: repeat( auto-fill, minmax( min(18rem, 100%), 1fr) );
   }
 
   .letter-box {
+    align-items: flex-start;
     display: flex;
     gap: 1rem;
-    align-items: flex-start;
   }
 
   .letter {
-    position: relative;
-    width: 3rem;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
+    position: relative;
+    width: 3rem;
   }
   .letter span {
+    left: 50%;
     position: absolute;
     top: 50%;
-    left: 50%;
     transform: translate(-50%, -50%);
   }
 
@@ -121,9 +121,9 @@ allTags.forEach((tag) => {
   .btns li { max-width: 100%; }
   .btn {
     --_bar-size: 0.25rem;
+    display: block;
     overflow: auto;
     text-decoration: none;
-    display: block;
     white-space: nowrap;
   }
 </style>

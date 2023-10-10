@@ -66,6 +66,9 @@ h4 { font-size: 1.25rem; }
 h5 { font-size: 1rem; }
 h6 { font-size: 0.9rem; }
 
+/* used in some instances to balance <h2> text size */
+h2.h2--reduce { font-size: 1.5rem; }
+
 /* Make a heading look like normal text */
 .heading--diminished {
   font-weight: 500;
