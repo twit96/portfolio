@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+
+const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft);
+
+// Get Counts for all Tags
+const allTags = publishedPosts.map((post) => post.data.tags).flat().sort();
+const tagCounts = {};
+allTags.forEach((tag) => {
+  if (tag) {
+    tag = String(tag).trim();  // cast to string, remove whitespace
+    if (tag.length > 0) {      // ignore tag if empty string
+      tag in tagCounts ? tagCounts[tag]++ : tagCounts[tag] = 0;  // update tag counts
+    }
+  }
+});
+// Sort Tags by Counts
+const tagCountArray = Object.keys(tagCounts).map(tag => {
+  return [tag, tagCounts[tag]];
+});
+tagCountArray.sort((t1, t2) => {
+  // sort by counts if they are not equal
+  if (t1[1] !== t2[1]) return t2[1] < t1[1] ? -1 : 1;
+  // sort by tag names if counts are equal
+  if (t1[0] !== t2[0]) return t1[0] < t2[0] ? -1 : 1;
+  // if counts and names are equal, do nothing
+  return 0;
+});
+// truncate to length 10
+if (tagCountArray.length > 5) tagCountArray.length = 5;
+---
+
+{
+  tagCountArray &&
+  <ul
+    class="btns card-container card-container--list"
+    style="--_card-gap: 0.25rem;--_card-size:15rem;"
+  >
+    {
+      tagCountArray.map(([tag, count]) => (
+        <li>
+          <a
+            class="btn surface4"
+            href={`/tags/${tag}`}
+          >
+            #{`${tag} (${count})`}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+}
+
+<style>
+  .btn {
+    display: block;
+    text-decoration: none;
+  }
+</style>
