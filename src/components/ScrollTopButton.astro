@@ -61,20 +61,22 @@
 
     // Manage Scroll Top Btn State
     window.addEventListener('scroll', throttle(() => {
+      if (scrollTopBtn) {
 
-      const scroll_top_trigger_height = document.documentElement.clientHeight * 0.75;
-      const scroll_pos = document.documentElement.scrollTop || document.body.scrollTop;
+        const scroll_top_trigger_height = document.documentElement.clientHeight * 0.75;
+        const scroll_pos = document.documentElement.scrollTop || document.body.scrollTop;
 
-      // get state
-      const past_trigger = scroll_pos > scroll_top_trigger_height;
-      const is_displayed = scrollTopBtn.dataset.state==="displayed";
+        // get state
+        const past_trigger = scroll_pos > scroll_top_trigger_height;
+        const is_displayed = scrollTopBtn.dataset.state==="displayed";
 
-      // update state
-      if (past_trigger !== is_displayed) {
-        // past trigger and not displayed or before trigger and is displayed
-        scrollTopBtn.dataset.state = is_displayed ? "" : "displayed";
+        // update state
+        if (past_trigger !== is_displayed) {
+          // past trigger and not displayed or before trigger and is displayed
+          scrollTopBtn.dataset.state = is_displayed ? "" : "displayed";
+        }
+
       }
-
     }, 100), false);
   }
   configScrollTopBtn();
