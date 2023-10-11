@@ -7,7 +7,7 @@ type Props = CollectionEntry<'posts'>['data'];
 const post = Astro.props;
 ---
 
-<BaseLayout {...Astro.props}>
+<BaseLayout hasBreadcrumbs="true" {...Astro.props}>
   
   <section
     class="card content-section surface0 shadow-sm wrapper"

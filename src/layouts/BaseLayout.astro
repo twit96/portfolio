@@ -18,7 +18,10 @@ import ScrollTopButton from '@components/ScrollTopButton.astro';
   <body class="surface3">
     <Header />
     <main>
-      <Breadcrumbs />
+      {
+        Astro.props.hasBreadcrumbs==="true" &&
+        <Breadcrumbs />
+      }
       <slot />
     </main>
     <Footer />
