@@ -7,6 +7,18 @@ import BaseLayout from '@layouts/BaseLayout.astro';
   title="Assets"
   description="Tyler Wittig's Site Assets"
 >
+  
+  <section id="note" class="content-section wrapper">
+    <h1>Assets</h1>
+    <p>
+      I use this page to create my website's default
+      <a href="https://ogp.me/">open graph</a>
+      image and my business card.
+      It is suuuuper high-tech,
+      as I literally just crop screenshots of the elements below to use them where needed.
+    </p>
+  </section>
+
 
   <svg height="0" width="0">
     <defs>
@@ -15,34 +27,10 @@ import BaseLayout from '@layouts/BaseLayout.astro';
       </clipPath>
     </defs>
   </svg>
-
-  <div class="wrapper">
-    <h1>Assets</h1>
-  </div>
-  
-  <section id="note">
-    <div class="card content-section surface2 wrapper">
-      <h2>Note</h2>
-      <p>
-        This page is used to create my website's default
-        <a href="https://ogp.me/">open graph</a>
-        image and business card image.
-        This open graph image is used to make sharing links to the pages of this website look fancy on social media. 
-      </p>
-      <p>
-        It is suuuuper high-tech, as I literally just screenshot the card above
-        and update the site card image file in my website's public image directory
-        when the website theme color or my profile image has changed.
-      </p>
-      <p>
-        Anyway, you aren't supposed to be here. You're welcome to stay and look at this beautiful site card,
-        but there is nothing else here. Check out my "Projects" page if you want to see some of my favorite work!
-      </p>
-    </div>
-  </section>
   
 
   <article id="og-image-wrap">
+    
     <div class="wrapper">
       <h2>Open Graph Image</h2>
     </div>
@@ -59,7 +47,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
       </div>
       <!-- image -->
       <div class="img-wrap">
-        <img width="750" height="750" src="/img/portrait/1300x1300.webp" alt="Portrait">
+        <img width="750" height="750" src="/img/portrait/original.jpg" alt="Portrait">
       </div>
     </section>
     <!-- Open Graph Image -->
@@ -158,10 +146,14 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 
 
 <style>
+
   #og-image-wrap,
   #bc-front-wrap,
   #bc-back-wrap { overflow-x: auto; }
 
+  #og-image-wrap h2,
+  #bc-front-wrap h2,
+  #bc-back-wrap h2 { text-align: center; }
   
   /* ---------- Open Graph Image ---------- */
   #og-image {
