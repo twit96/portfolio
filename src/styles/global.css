@@ -52,27 +52,28 @@ code {
 
 
 h1, h2, h3, h4, h5, h6 {
+  font-size: var(--_heading-fs);
   font-weight: 700;
   line-height: 1.25;
   text-wrap: balance;
 }
 h1 {
-  font-size: 2.5rem;
+  --_heading-fs: 2.5rem;
   padding-bottom: 0.25rem;
 }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.5rem; }
-h4 { font-size: 1.25rem; }
-h5 { font-size: 1rem; }
-h6 { font-size: 0.9rem; }
+h2 { --_heading-fs: 2rem; }
+h3 { --_heading-fs: 1.5rem; }
+h4 { --_heading-fs: 1.25rem; }
+h5 { --_heading-fs: 1rem; }
+h6 { --_heading-fs: 0.9rem; }
 
-/* used in some instances to balance <h2> text size */
-h2.h2--reduce { font-size: 1.5rem; }
+/* used in some instances to balance heading text size */
+.heading--reduce { font-size: calc(var(--_heading-fs) * 0.75); }
 
 /* Make a heading look like normal text */
 .heading--diminished {
+  --_heading-fs: 1rem;
   font-weight: 500;
-  font-size: 1rem;
   line-height: 1.6;
 }
 
