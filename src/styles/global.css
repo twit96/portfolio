@@ -258,11 +258,6 @@ main { flex: 1; }
   color: var(--text1);
 }
 
-.surfaceLink {
-  background-color: var(--link);
-  color: Canvas;
-}
-
 
 .wrapper {
   margin: auto;
