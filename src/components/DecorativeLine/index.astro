@@ -6,17 +6,14 @@ import SineLineSVG from './components/SineLineSVG.astro';
 import SquareLineSVG from './components/SquareLineSVG.astro';
 import TriangleLineSVG from './components/TriangleLineSVG.astro';
 
-const {
-  stroke="var(--surface1)",
-  variant="sine"
-} = Astro.props;
+const { variant="sine" } = Astro.props;
 ---
 <div>
   {/* Add a hidden hr for semantic meaning */}
   <hr style="height:0;width:0;" />
   {/* Display Line Variant */}
-  { variant==="sawtooth" && <SawtoothLineSVG stroke={stroke} /> }
-  { variant==="sine" && <SineLineSVG stroke={stroke} /> }
-  { variant==="square" && <SquareLineSVG stroke={stroke} /> }
-  { variant==="triangle" && <TriangleLineSVG stroke={stroke} /> }
+  { variant==="sawtooth" && <SawtoothLineSVG /> }
+  { variant==="sine" && <SineLineSVG /> }
+  { variant==="square" && <SquareLineSVG /> }
+  { variant==="triangle" && <TriangleLineSVG /> }
 </div>
