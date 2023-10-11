@@ -7,23 +7,30 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 >
 
   <section>
-    
-    <div class="content-section wrapper">
+
+    <div class="wrapper">
       <h1>The Backrooms</h1>
-      <div class="card content-section surface2">
+    </div>
+
+    <div class="card content-section surface0 wrapper">
+      <!-- Meaningless Card -->
+      <div
+        class="card content-section surface2"
+        style="--_content-gap:0.5rem;"
+      >
         <h2>Back already?</h2>
         <p>I thought you weren't supposed to be here until later this evening.</p>
       </div>
-    </div>
-
+      <!-- Links -->
       <div
-        class="card layout layout--list surface0 wrapper"
-        style="--_gap: 0.25em;"
+        class="btns layout layout--list"
+        style="--_gap: 0.125em;"
       >
         <a class="btn surface4" href="assets">Brand Asset Generation</a>
         <a class="btn surface4" href="drafts">Post Drafts</a>
       </div>
-
+    </div>
+    
   </section>
 
 </BaseLayout>
