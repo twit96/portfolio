@@ -11,7 +11,7 @@ allTags.forEach((tag) => {
   if (tag) {
     tag = String(tag).trim();  // cast to string, remove whitespace
     if (tag.length > 0) {      // ignore tag if empty string
-      tag in tagCounts ? tagCounts[tag]++ : tagCounts[tag] = 0;  // update tag counts
+      tag in tagCounts ? tagCounts[tag]++ : tagCounts[tag] = 1;  // update tag counts
     }
   }
 });
