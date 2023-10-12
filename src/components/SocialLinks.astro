@@ -69,18 +69,30 @@ const links = [
     }
   },
 ];
+
+const linksWithAttrs = links.map(function(link) {
+  let obj = {
+    text: link.text,
+    title: link.title,
+    svg: link.svg,
+    attrs: {
+      class: "btn surface1",
+      href: link.href,
+      title: link.title,
+    }
+  };
+  if (link.external) {
+    obj.attrs["rel"] = "noopener noreferrer";
+    obj.attrs["target"] = "_blank"
+  }
+  return obj;
+});
 ---
 
 <ul class="btns">
-  {links.map((link) => 
+  {linksWithAttrs.map((link) => 
     <li>
-      <a 
-        class="btn surface1" 
-        href={link.href}
-        rel={link.external ? "noopener noreferrer" : ""}
-        target={link.external ? "_blank" : ""}
-        title={link.title}
-      >
+      <a {...link.attrs}>
         <svg
           height="2em"
           viewBox={link.svg.viewBox}
