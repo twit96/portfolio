@@ -1,0 +1,83 @@
+---
+/*
+Include Reused SVG elements that require unique IDs in this file.
+BaseLayout includes this component above the Header on all pages.
+
+DecorativeLine Variants:
+  #sawtooth_line_pattern
+  #sine_line_pattern
+  #square_line_pattern
+  #triangle_line_pattern
+*/
+---
+<svg
+  aria-hidden="true"
+  fill="none"
+  height="0"
+  width="0"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+
+    <pattern
+      height="12"
+      id="sawtooth_line_pattern"
+      patternUnits="userSpaceOnUse"
+      width="24"
+    >
+      <g>
+        <path
+          d="M0 0.5L23.5 11.5V0"
+          stroke="var(--surface1)"
+          stroke-linecap="square"
+        ></path>
+      </g>
+    </pattern>
+
+    <pattern
+      height="8"
+      id="sine_line_pattern"
+      patternUnits="userSpaceOnUse"
+      width="32"
+    >
+      <g>
+        <path
+          d="M0 0.5C8 0.5 8 7.5 16 7.5C24 7.5 24 0.5 32 0.5"
+          stroke="var(--surface1)"
+          stroke-linecap="square"
+        ></path>
+      </g>
+    </pattern>
+
+    <pattern
+      height="12"
+      id="square_line_pattern"
+      patternUnits="userSpaceOnUse"
+      width="24"
+    >
+      <g>
+        <path
+          d="M0 0.5H11.5V11.5H23.5V0.5"
+          stroke="var(--surface1)"
+          stroke-linecap="square"
+        ></path>
+      </g>
+    </pattern>
+
+    <pattern
+      height="8"
+      id="triangle_line_pattern"
+      patternUnits="userSpaceOnUse"
+      width="24"
+    >
+      <g>
+        <path
+          d="M0 0.5L12 7.5L24 0.5"
+          stroke="var(--surface1)"
+          stroke-linecap="square"
+        ></path>
+      </g>
+    </pattern>
+
+  </defs>
+</svg>

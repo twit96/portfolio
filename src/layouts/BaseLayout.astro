@@ -1,5 +1,6 @@
 ---
 import Head from '@components/Head.astro';
+import SVGDefinitions from '@components/SVGDefinitions.astro';
 import Header from '@components/Header/index.astro';
 import Breadcrumbs from "@components/Breadcrumbs.astro";
 import Footer from '@components/Footer.astro';
@@ -16,6 +17,7 @@ import ScrollTopButton from '@components/ScrollTopButton.astro';
   <Head {...Astro.props} />
 
   <body class="surface3">
+    <SVGDefinitions />
     <Header />
     <main>
       {
