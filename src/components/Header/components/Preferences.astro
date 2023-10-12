@@ -3,26 +3,26 @@
   <summary>
     <span style="display: none;">Theme Preferences</span>
 
-      <div 
-        class="svg-wrap btn surface1"
-        title="Theme Preferences" 
+    <span 
+      class="svg-wrap btn surface1"
+      title="Theme Preferences" 
+    >
+      <svg
+        height="1.5rem"
+        stroke-width="0" 
+        viewBox="0 0 24 24" 
+        width="1.5rem"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <svg
-          height="1.5rem"
-          stroke-width="0" 
-          viewBox="0 0 24 24" 
-          width="1.5rem"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M20 14c-.092.064-2 2.083-2 3.5c0 1.494.949 2.448 2 2.5c.906.044 2-.891 2-2.5c0-1.5-1.908-3.436-2-3.5zM9.586 20c.378.378.88.586 1.414.586s1.036-.208 1.414-.586l7-7l-.707-.707L11 4.586L8.707 2.293L7.293 3.707L9.586 6L4 11.586c-.378.378-.586.88-.586 1.414s.208 1.036.586 1.414L9.586 20zM11 7.414L16.586 13H5.414L11 7.414z"/>
-        </svg>
-        <svg
-          height="1.5rem"
-          viewBox="0 0 384 512"
-          width="1.5rem"
-          xmlns="http://www.w3.org/2000/svg" 
-        ><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
-      </div>
+        <path d="M20 14c-.092.064-2 2.083-2 3.5c0 1.494.949 2.448 2 2.5c.906.044 2-.891 2-2.5c0-1.5-1.908-3.436-2-3.5zM9.586 20c.378.378.88.586 1.414.586s1.036-.208 1.414-.586l7-7l-.707-.707L11 4.586L8.707 2.293L7.293 3.707L9.586 6L4 11.586c-.378.378-.586.88-.586 1.414s.208 1.036.586 1.414L9.586 20zM11 7.414L16.586 13H5.414L11 7.414z"/>
+      </svg>
+      <svg
+        height="1.5rem"
+        viewBox="0 0 384 512"
+        width="1.5rem"
+        xmlns="http://www.w3.org/2000/svg" 
+      ><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+    </span>
 
   </summary>
 
@@ -30,7 +30,8 @@
 
     <form id="mode-form">
       <fieldset class="fieldset--row">
-        <div><legend>Dark Theme</legend></div>
+        <legend style="display: none;">Dark Theme</legend>
+        <b>Dark Theme</b>
         <label class="dark-toggle">
           <span style="display:none;">Toggle Dark Theme</span>
           <input type="checkbox" name="mode" id="dark-toggle-input" />
@@ -63,12 +64,12 @@
                     value={color} 
                     title={color}
                   />
-                  <div 
+                  <span 
                     class="preview"
                     style={`background: hsl( var(--${color}-h) var(--${color}-s) var(--${color}-l) )`}
                   >
                     <span class="check"></span>
-                  </div>
+                  </span>
                   
                   <span class="option-name">{color}</span>
                 </label>
@@ -101,7 +102,7 @@
                   value={scheme} 
                   title={scheme}
                 />
-                <div
+                <span
                   class="preview preview--scheme"
                   data-scheme={scheme}
                 >
@@ -111,7 +112,7 @@
                   <span class="surface4"></span>
                   
                   <span class="check"></span>
-                </div>
+                </span>
                 
                 <span class="option-name">{scheme}</span>
               </label>
@@ -252,6 +253,7 @@
   }
 
   .svg-wrap {
+    display: block;
     padding: 0.5em;
     position: relative;
     z-index: 11;
