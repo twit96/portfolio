@@ -79,6 +79,7 @@ h6 { --_heading-fs: 0.9rem; }
 
 
 hr {
+  --_color: var(--surface1);
   --_style: solid;
   --_width: 0.0625rem;
   border: calc(var(--_width) / 2) var(--_style) var(--_color);
