@@ -1,6 +1,6 @@
 <button
   aria-label="Scroll to Top"
-  class="surface4 shadow-sm"
+  class="shadow-sm"
   id="scroll-top"
   title="Scroll to Top"
 >
@@ -14,6 +14,7 @@
 
 <style>
   button {
+    background: var(--link);
     border-radius: 50%;
     bottom: 0.5rem;
     display: none;
@@ -25,7 +26,7 @@
   button[data-state="displayed"] { display: block; }
   svg {
     --size: 1.5rem;
-    fill: var(--text1);
+    fill: var(--surface3);
     height: var(--size);
     width: var(--size);
   }
