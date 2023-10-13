@@ -2,37 +2,121 @@
 import { getCollection } from 'astro:content';
 import DecorativeLine from '@components/DecorativeLine/index.astro';
 
-const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft);
 
-// Get Counts for all Tags
+// Get All Published Post Tags
+const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft);
 const allTags = publishedPosts.map((post) => post.data.tags).flat().sort();
+
+
+/*
+
+Get Counts for Each Tag:
+
+tagCounts = {
+  tag1: count1,
+  tag2: count2,
+  ...
+  tagN: countN
+}
+
+*/
 const tagCounts = {};
 allTags.forEach((tag) => {
   if (tag) {
-    tag = String(tag).trim();  // cast to string, remove whitespace
-    if (tag.length > 0) {      // ignore tag if empty string
-      tag in tagCounts ? tagCounts[tag]++ : tagCounts[tag] = 1;  // update tag counts
-    }
+    tag in tagCounts ? tagCounts[tag]++ : tagCounts[tag] = 1;
   }
 });
-// Sort Tags by Counts
-const tagCountArray = Object.keys(tagCounts).map(tag => {
-  return [tag, tagCounts[tag]];
+
+
+/*
+
+Group Tags by Count:
+
+tagsByCount = {
+  count1: [tag11, tag12, tag13],
+  count2: [tag21, tag22, tag23],
+  ...
+  countN: [tagN1, tagN2, tagN3]
+}
+
+*/
+const tagsByCount = {};
+Object.keys(tagCounts).forEach(tag => {
+  if (tag && tagCounts[tag]) {
+    const count = tagCounts[tag];
+    count in tagsByCount ? tagsByCount[count].push(tag) : tagsByCount[count] = [tag];
+  }
 });
-tagCountArray.sort((t1, t2) => {
-  // sort by counts if they are not equal
-  if (t1[1] !== t2[1]) return t2[1] < t1[1] ? -1 : 1;
-  // sort by tag names if counts are equal
-  if (t1[0] !== t2[0]) return t1[0] < t2[0] ? -1 : 1;
-  // if counts and names are equal, do nothing
+
+
+/*
+
+Sort Tag Lists by their corresponding Count:
+
+First we create an array from the tagsByCount object:
+
+tagsByCountArray = [
+  [count1: [tag11, tag12, tag13]],
+  [count2: [tag21, tag22, tag23]],
+  ...
+  [countN: [tagN1, tagN2, tagN3]]
+]
+
+Then we sort the array by its counts.
+
+*/
+let tagsByCountArray = Object.keys(tagsByCount).map(count => {
+  return [count, tagsByCount[count]];
+});
+tagsByCountArray.sort((t1, t2) => {
+  if (t1[1] !== t2[1]) return (parseInt(t1[1]) < parseInt(t2[1])) ? 1 : -1;
   return 0;
 });
-// truncate to length 10
-if (tagCountArray.length > 5) tagCountArray.length = 5;
+
+// Truncate Output Length to 5
+if (tagsByCountArray.length > 5) tagsByCountArray.length = 5;
 ---
 
 
 {
+  (tagsByCountArray && tagsByCountArray.length>0) &&
+  <DecorativeLine />
+  <h2>Top Tags</h2>
+  <ul
+    class="btns layout layout--list"
+    style="--_gap:0.125rem;"
+  >
+    {
+      tagsByCountArray.map(([count, tags]) => (
+        <li>
+          <ul
+            class="btns layout layout--list"
+            style="--_gap: 0.125rem;--_base-size:15rem;"
+          >
+            {
+              tags.map(tag => (
+                <li>
+                  <a
+                    class="btn surface4"
+                    href={`/tags/${tag}`}
+                  >
+                    #{tag} ({count})
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </li>
+      ))
+    }
+  </ul>
+  <p>
+    <a href="/tags/">View all tags</a>
+  </p>
+}
+
+
+<!-- {
   (tagCountArray && tagCountArray.length>0) &&
   <DecorativeLine />
   <h2>Top Tags</h2>
@@ -56,7 +140,7 @@ if (tagCountArray.length > 5) tagCountArray.length = 5;
   <p>
     <a href="/tags/">View all tags</a>
   </p>
-}
+} -->
 
 
 <style>
