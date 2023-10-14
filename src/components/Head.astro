@@ -13,7 +13,7 @@ import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE, SITE_AUTHOR } from '@consts';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const {
-	title = SITE_TITLE,
+	title,
 	description = SITE_DESCRIPTION,
 	image = SITE_IMAGE,
 	author = SITE_AUTHOR
