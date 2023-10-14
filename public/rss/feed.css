@@ -40,9 +40,6 @@ h1, h2, h3 {
   line-height: 1.1;
   text-wrap: balance;
 }
-h1 {
-  font-size: 2.5rem;
-}
 
 
 hr {
@@ -61,14 +58,6 @@ a {
     background-color: Canvas;
     filter: brightness(0.85);
   }
-}
-
-svg {
-  background: var(--brand);
-  border-radius: 0.25rem;
-  fill: #fff;
-  height: 0.85em;
-  padding: 0.125em;
 }
 
 
@@ -100,4 +89,24 @@ svg {
   margin: auto;
   max-width: 80ch;
   padding: 1rem;
+}
+
+
+/* ---------- Specific Overrides ---------- */
+h1 {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 2.5rem;
+  gap: 0.5ch;
+}
+svg.rss-icon {
+  --_size: 1em;
+  background: var(--brand);
+  border-radius: 0.25rem;
+  fill: #fff;
+  flex-shrink: 0;
+  height: var(--_size);
+  padding: 0.125em;
+  width: var(--_size);
 }

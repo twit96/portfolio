@@ -48,6 +48,7 @@
       </head>
       <body>
 
+
         <header>
           <div class="wrapper">
           
@@ -68,13 +69,46 @@
 
           </div>
         </header>
+
+
+        <div class="wrapper" style="padding-top:0;">
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="8"
+            width="100%"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <pattern
+              height="8"
+              id="sine_line_pattern"
+              patternUnits="userSpaceOnUse"
+              width="32"
+            >
+              <g>
+                <path
+                  d="M0 0.5C8 0.5 8 7.5 16 7.5C24 7.5 24 0.5 32 0.5"
+                  stroke="var(--surface1)"
+                  stroke-linecap="square"
+                ></path>
+              </g>
+            </pattern>
+            <rect
+              fill="url(#sine_line_pattern)"
+              height="100%"
+              width="100%"
+            ></rect>
+          </svg>
+        </div>
         
+
         <main>
 
           <section>
             <div class="content-section wrapper">
               <h1>
                 <svg
+                  class="rss-icon"
                   height="0.85em"
                   viewBox="0 0 448 512"
                   width="0.85em"
@@ -140,6 +174,7 @@
           </section>
 
         </main>
+        
         
       </body>
     </html>
