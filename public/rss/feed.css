@@ -64,7 +64,7 @@ a {
 /* ---------- Custom Classes ---------- */
 
 .btn {
-  --_btn-bg: var(--surface1);
+  --_btn-bg: var(--brand);
   border-radius: 0.25em;
   padding: 0.5em 1em;
   background: var(--_btn-bg);
@@ -96,7 +96,6 @@ a {
 h1 {
   align-items: center;
   display: flex;
-  flex-wrap: wrap;
   font-size: 2.5rem;
   gap: 0.5ch;
 }
