@@ -9,7 +9,7 @@
       lang="en"
     >
       <head>
-        <title><xsl:value-of select="/rss/channel/title"/>'s Web Feed</title>
+        <title><xsl:value-of select="/rss/channel/title"/></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
         <link rel="icon" href="/img/favicon.png"/>
@@ -119,9 +119,20 @@
                 </svg>
                 Web Feed Preview
               </h1>
+              
+            </div>
+          </section>
+
+          <section>
+
+            <div
+              class="card content-section wrapper"
+              style="background:var(--surface0);"
+            >
+
               <div
                 class="card content-section"
-                style="background: var(--surface0);"
+                style="background: var(--surface1);"
               >
                 <h2><xsl:value-of select="/rss/channel/title"/></h2>
                 <p><xsl:value-of select="/rss/channel/description"/></p>
@@ -132,37 +143,33 @@
                   Visit Website &#x2192;
                 </a>
               </div>
-            </div>
-          </section>
 
-          <section>
+              <h2 style="text-align:center;">Latest Posts</h2>
 
-            <div class="wrapper">
-              <h2>Latest Posts</h2>
-            </div>
+              <div
+                class="content-section"
+                style="--_content-gap:0.5rem;"
+              >
+                <xsl:for-each select="/rss/channel/item[5 &gt;= position()]">
+                  <article
+                    class="card"
+                    style="background:var(--surface3);"
+                  >
+                    <h3>
+                      <a>
+                        <xsl:attribute name="href">
+                          <xsl:value-of select="link"/>
+                        </xsl:attribute>
+                        <xsl:value-of select="title"/>
+                      </a>
+                    </h3>
+                    <em>
+                      Published: <xsl:value-of select="pubDate" />
+                    </em>
+                  </article>
+                </xsl:for-each>
+              </div>
 
-            <div
-              class="card content-section wrapper"
-              style="--_content-gap:0.5em; background:var(--surface0);"
-            >
-              <xsl:for-each select="/rss/channel/item[5 &gt;= position()]">
-                <article
-                  class="card"
-                  style="background:var(--surface3);"
-                >
-                  <h3>
-                    <a>
-                      <xsl:attribute name="href">
-                        <xsl:value-of select="link"/>
-                      </xsl:attribute>
-                      <xsl:value-of select="title"/>
-                    </a>
-                  </h3>
-                  <em>
-                    Published: <xsl:value-of select="pubDate" />
-                  </em>
-                </article>
-              </xsl:for-each>
             </div>
 
             <div class="content-section wrapper">
