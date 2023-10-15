@@ -48,11 +48,11 @@ allTags.forEach((tag) => {
       <h2 class="heading--diminished">{numTags} Tags</h2>
     </div>
 
-    <div class="wrapper">
+    <div class="card surface0 shadow-sm wrapper">
       <ul class="letter-boxes">
         {
           Object.keys(tagsByFirstCharWithCounts).sort().map(letter =>
-            <li class="letter-box card surface0">
+            <li class="letter-box card surface3">
 
               <h2 class="heading--reduce letter surface2">
                 <span>{letter}</span>

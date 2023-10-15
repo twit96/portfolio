@@ -58,13 +58,11 @@ html {
   --tetradic-s4-hue: calc(var(--brand-hue) + 100);
 
   /* Surface Saturation/Lightness Presets */
-  --light-s0-saturation: 50%; --light-s0-lightness: 99%;
   --light-s1-saturation: 30%; --light-s1-lightness: 88%;
   --light-s2-saturation: 40%; --light-s2-lightness: 88%;
   --light-s3-saturation: 20%; --light-s3-lightness: 96%;
   --light-s4-saturation: 40%; --light-s4-lightness: 81%;
 
-  --dark-s0-saturation: 5%; --dark-s0-lightness: 12%;
   --dark-s1-saturation: 20%;  --dark-s1-lightness: 15%;
   --dark-s2-saturation: 20%;  --dark-s2-lightness: 25%;
   --dark-s3-saturation: 10%;  --dark-s3-lightness: 20%;
@@ -97,18 +95,16 @@ html {
   --text2: var(--light-text2);
   --link: var(--light-link);
 
-  --s0-saturation: var(--light-s0-saturation);
-  --s0-lightness:  var(--light-s0-lightness);
   --s1-saturation: var(--light-s1-saturation);
-  --s1-lightness:  var(--light-s1-lightness);
+  --s1-lightness: var(--light-s1-lightness);
   --s2-saturation: var(--light-s2-saturation);
-  --s2-lightness:  var(--light-s2-lightness);
+  --s2-lightness: var(--light-s2-lightness);
   --s3-saturation: var(--light-s3-saturation);
-  --s3-lightness:  var(--light-s3-lightness);
+  --s3-lightness: var(--light-s3-lightness);
   --s4-saturation: var(--light-s4-saturation);
-  --s4-lightness:  var(--light-s4-lightness);
+  --s4-lightness: var(--light-s4-lightness);
 
-  --surface-shadow:  var(--light-surface-shadow);
+  --surface-shadow: var(--light-surface-shadow);
   --shadow-strength: var(--light-shadow-strength);
 }
 
@@ -118,20 +114,18 @@ html {
 
   --text1: var(--dark-text1);
   --text2: var(--dark-text2);
-  --link:  var(--dark-link);
+  --link: var(--dark-link);
 
-  --s0-saturation: var(--dark-s0-saturation);
-  --s0-lightness:  var(--dark-s0-lightness);
   --s1-saturation: var(--dark-s1-saturation);
-  --s1-lightness:  var(--dark-s1-lightness);
+  --s1-lightness: var(--dark-s1-lightness);
   --s2-saturation: var(--dark-s2-saturation);
-  --s2-lightness:  var(--dark-s2-lightness);
+  --s2-lightness: var(--dark-s2-lightness);
   --s3-saturation: var(--dark-s3-saturation);
-  --s3-lightness:  var(--dark-s3-lightness);
+  --s3-lightness: var(--dark-s3-lightness);
   --s4-saturation: var(--dark-s4-saturation);
-  --s4-lightness:  var(--dark-s4-lightness);
+  --s4-lightness: var(--dark-s4-lightness);
 
-  --surface-shadow:  var(--dark-surface-shadow);
+  --surface-shadow: var(--dark-surface-shadow);
   --shadow-strength: var(--dark-shadow-strength);
 }
 [data-mode="dark"] img { filter: var(--dark-mode-filter); }
@@ -141,7 +135,6 @@ html {
 /* ---------- Resulting HSL Values ---------- */
 html {
   --brand: hsl(var(--brand-hue) var(--brand-saturation) var(--brand-lightness));
-  --surface0: hsl(var(--brand-hue) var(--s0-saturation) var(--s0-lightness));
 }
 /* Schemes Set Surfaces */
 [data-scheme="monochromatic"] {

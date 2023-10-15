@@ -239,7 +239,7 @@ main { flex: 1; }
 
 
 .surface0 {
-  background-color: var(--surface0);
+  background-color: Canvas;
   color: var(--text1);
 }
 .surface1 {
