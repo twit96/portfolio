@@ -53,7 +53,7 @@
           <div class="wrapper">
           
             <nav>
-              <p class="card" style="background:var(--brand);">
+              <p class="card" style="background:var(--brand); color:var(--text1);">
                 <strong>This is a web feed,</strong> also known as an RSS feed. <strong>Subscribe</strong> by copying the URL from the address bar into your newsreader.
               </p>
               <p class="card">
@@ -125,18 +125,12 @@
 
           <section>
 
-            <div
-              class="card content-section wrapper"
-              style="background:var(--surface0);"
-            >
+            <div class="card content-section shadow-sm surface0 wrapper">
 
-              <div
-                class="card content-section"
-                style="background: var(--surface1);"
-              >
+              <div class="card content-section surface1">
                 <h2><xsl:value-of select="/rss/channel/title"/></h2>
                 <p><xsl:value-of select="/rss/channel/description"/></p>
-                <a style="width:fit-content;">
+                <a style="align-self:flex-start;">
                   <xsl:attribute name="href">
                     <xsl:value-of select="/rss/channel/link"/>
                   </xsl:attribute>
@@ -151,10 +145,7 @@
                 style="--_content-gap:0.5rem;"
               >
                 <xsl:for-each select="/rss/channel/item[5 &gt;= position()]">
-                  <article
-                    class="card"
-                    style="background:var(--surface3);"
-                  >
+                  <article class="card surface3">
                     <h3>
                       <a>
                         <xsl:attribute name="href">
