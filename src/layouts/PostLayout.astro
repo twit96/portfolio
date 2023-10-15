@@ -10,13 +10,13 @@ const post = Astro.props;
 <BaseLayout hasBreadcrumbs="true" {...Astro.props}>
   
   <section
-    class="card content-section surface0 shadow-sm wrapper"
+    class="content-section wrapper"
     id="post-wrap"
   >
 
       {/* Main Info */}
       <div
-        class="card content-section surface3"
+        class="content-section"
         id="post-info"
       >    
 
@@ -102,10 +102,7 @@ const post = Astro.props;
       {/* Post Tags */}
       {
         post.tags && 
-        <div
-          class="card content-section surface3"
-          style="--_content-gap:1rem;"
-        >
+        <div class="card content-section surface0">
           <h2 class="heading--reduce">Tags</h2>
           <PostTags tags={post.tags} />
         </div>
@@ -124,8 +121,6 @@ const post = Astro.props;
 </BaseLayout>
 
 <style>
-  #post-wrap { margin-top: 1rem; }
-
   #post-info {
     display: grid;
     grid-template-columns: repeat( auto-fill, minmax( min(40ch, 100%), 1fr) );

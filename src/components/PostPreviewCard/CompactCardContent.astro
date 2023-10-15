@@ -16,20 +16,31 @@ const { post } = Astro.props;
   href={`/${post.data.category}/${post.slug}`}
 />
 
-<PostTags 
-  tags={post.data.tags}
-  noWrap={true} 
-/>
-
-<TitleLink
-  title={post.data.title}
-  href={`/${post.data.category}/${post.slug}`}
-/>
-
-<CardFooter>
-  <PostBlurb blurb={post.data.blurb} />
-  <PostDate
-    datePublished={post.data.datePublished}
-    dateUpdated={post.data.dateUpdated}
+<div class="card content-section">
+  <PostTags 
+    tags={post.data.tags}
+    noWrap={true} 
   />
-</CardFooter>
+
+  <TitleLink
+    title={post.data.title}
+    href={`/${post.data.category}/${post.slug}`}
+  />
+
+  <CardFooter>
+    <PostBlurb blurb={post.data.blurb} />
+    <PostDate
+      datePublished={post.data.datePublished}
+      dateUpdated={post.data.dateUpdated}
+    />
+  </CardFooter>
+</div>
+
+
+<style>
+  div {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+</style>
