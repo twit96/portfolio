@@ -1,0 +1,89 @@
+---
+import PreferencesFieldset from "./PreferencesFieldset.astro";
+import PreferencesLegend from "./PreferencesLegend.astro";
+import PreferenceOption from "./PreferenceOption.astro";
+import PreferenceOptionTitle from  "./PreferenceOptionTitle.astro";
+---
+
+<form id="color-form" name="colorForm">
+  <PreferencesFieldset layout="column">
+    <PreferencesLegend>Theme Color</PreferencesLegend>
+    <div
+      class="custom-scrollbar layout layout--flex-scroll"
+      style="--_gap:0.5rem;"
+    >
+      <div class="layout--flex-scroll__inner">
+        {
+          [
+            "red", 
+            "pink", 
+            "purple", 
+            "blue", 
+            "green", 
+            "yellow", 
+            "orange"
+          ].map((color) => (
+            <PreferenceOption
+              name="color"
+              value={color}
+              title={color}
+            >
+              <span
+                slot="preview"
+                class="preview--color"
+                style={`background: hsl( var(--${color}-h) var(--${color}-s) var(--${color}-l) )`}
+              ></span>
+              <PreferenceOptionTitle slot="title">{color}</PreferenceOptionTitle>
+            </PreferenceOption>
+          ))
+        }
+      </div>
+    </div>
+  </PreferencesFieldset>
+</form>
+
+
+<style>
+  /* color scheme grid */
+  .preview--color {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: absolute;
+    inset: 0;
+  }
+</style>
+
+
+<script defer>
+  // Root Color Inputs
+  let color_radios = document.colorForm.color;
+
+  function changeColor(newColor) {
+    // Add New Color
+    document.documentElement.dataset.color = newColor;
+    // Update Cookies
+    localStorage.setItem("color", newColor);
+    // Update Meta Theme Color
+    updateMetaThemeColor();
+  }
+  for (let i=0; i<color_radios.length; i++) {
+    color_radios[i].addEventListener("click", function() {
+      changeColor(color_radios[i].value)
+    });
+  }
+
+  function configColorInputs() {
+    const default_color = "blue";
+    let val = localStorage.getItem("color");
+    // Config Local Storage
+    if (!val) {
+      localStorage.setItem("color", default_color);
+      val = localStorage.getItem("color");
+    }
+    // Configure Color Radio Buttons
+    for (const radio of color_radios) {
+      if (val === radio.value) radio.checked = true;
+    } 
+  }
+  configColorInputs();
+</script>

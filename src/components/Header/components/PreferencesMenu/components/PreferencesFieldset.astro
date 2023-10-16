@@ -1,0 +1,15 @@
+---
+const { ...attrs } = Astro.props;
+---
+
+<fieldset {...attrs}>
+  <slot />
+</fieldset>
+
+
+<style>
+  fieldset {
+    border: 0;
+    min-width: 0;
+  }
+</style>

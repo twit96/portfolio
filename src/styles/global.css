@@ -180,13 +180,16 @@ main { flex: 1; }
   gap: var(--_gap);
   list-style: none;
 }
+
 /* grid layout */
 .layout--grid {
   display: grid;
   grid-template-columns: repeat( auto-fill, minmax( min(var(--_base-size), 100%), 1fr) );
 }
+
 /* list layout */
 .layout--list { display: grid; }
+
 /* flex (fill) layout */
 .layout--flex-fill {
   display: flex;
@@ -200,6 +203,17 @@ main { flex: 1; }
 /* .layout--flex-fill > *:nth-of-type(6n) {
   flex-basis: calc(var(--_base-size) * 2);
 } */
+
+/*
+flex (wrap) layout
+(Note: forcing devs to use .custom-scrollbar CSS class with this class)
+*/
+.layout--flex-scroll.custom-scrollbar { overflow-x: auto; }
+.layout--flex-scroll__inner {
+  display: flex;
+  gap: var(--_gap);
+  padding-bottom: 0.5rem;
+}
 
 
 .modal-bg {

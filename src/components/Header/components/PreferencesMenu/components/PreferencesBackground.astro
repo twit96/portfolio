@@ -1,0 +1,22 @@
+<button 
+  aria-label="Close Preferences Menu"
+  class="modal-bg"
+  id="preferences-bg"
+  title="Close Preferences Menu"
+></button>
+
+
+<style>
+  #preferences-bg { z-index: 10; }
+</style>
+
+
+<script defer>
+  // Background Element can close menu
+  const preferencesMenu = document.getElementById("preferences-menu");
+  const preferencesBg = document.getElementById("preferences-bg");
+  preferencesMenu.addEventListener("toggle", function() {
+    preferencesBg.classList.toggle("active");
+  });
+  preferencesBg.onclick = () => { preferencesMenu.removeAttribute("open"); } 
+</script>

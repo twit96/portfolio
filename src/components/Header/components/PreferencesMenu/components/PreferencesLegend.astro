@@ -1,0 +1,14 @@
+---
+const { ...attrs } = Astro.props;
+---
+
+<legend {...attrs}><slot /></legend>
+
+
+<style>
+  legend {
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+</style>

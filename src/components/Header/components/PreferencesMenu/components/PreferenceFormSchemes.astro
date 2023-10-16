@@ -1,0 +1,91 @@
+---
+import PreferencesFieldset from "./PreferencesFieldset.astro";
+import PreferencesLegend from "./PreferencesLegend.astro";
+import PreferenceOption from "./PreferenceOption.astro";
+import PreferenceOptionTitle from  "./PreferenceOptionTitle.astro";
+---
+
+<form id="scheme-form" name="schemeForm">
+  <PreferencesFieldset layout="column">
+    <PreferencesLegend>Color Scheme</PreferencesLegend>
+    <div
+      class="layout layout--grid"
+      style="--_base-size:8rem; --_gap:0.5rem;"
+    >
+      {
+        [
+          "analogous", 
+          "complementary", 
+          "monochromatic", 
+          "split-complementary", 
+          "tetradic",
+          "triadic"
+        ].map((scheme) => (
+          <PreferenceOption
+            name="scheme"
+            value={scheme}
+            title={scheme}
+          >
+            <span
+              slot="preview"
+              class="preview--scheme"
+              data-scheme={scheme}
+            >
+              <span class="surface1"></span>
+              <span class="surface2"></span>
+              <span class="surface3"></span>
+              <span class="surface4"></span>
+            </span>
+            <PreferenceOptionTitle slot="title">{scheme}</PreferenceOptionTitle>
+          </PreferenceOption>
+        ))
+      }
+    </div>
+  </PreferencesFieldset>
+</form>
+
+
+<style>
+  /* color scheme grid */
+  .preview--scheme {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: absolute;
+    inset: 0;
+  }
+</style>
+
+
+<script defer>
+  // Color Scheme Inputs
+  let scheme_radios = document.schemeForm.scheme;
+
+  function changeScheme(newScheme) {
+    // Add New Scheme
+    document.documentElement.dataset.scheme = newScheme;
+    // Update Cookies
+    localStorage.setItem("scheme", newScheme);
+    // Update Meta Theme Color
+    updateMetaThemeColor();
+  }
+  for (let i=0; i<scheme_radios.length; i++) {
+    scheme_radios[i].addEventListener("click", function() {
+      changeScheme(scheme_radios[i].value)
+    });
+  }
+
+  function configSchemeInputs() {
+    const default_scheme = "analogous";
+    let val = localStorage.getItem("scheme");
+    // Configure Local Storage
+    if (!val) {
+      localStorage.setItem("scheme", default_scheme);
+      val = localStorage.getItem("scheme");
+    }
+    // Configure Scheme Radio Buttons
+    for (const radio of scheme_radios) {
+      if (val === radio.value) radio.checked = true;
+    } 
+  }
+  configSchemeInputs();
+</script>

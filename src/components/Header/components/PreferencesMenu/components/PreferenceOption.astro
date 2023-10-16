@@ -1,0 +1,82 @@
+---
+const { name, value, title } = Astro.props;
+---
+
+<label class="btn surface0">
+
+  <!-- Input (Hidden) -->
+  <input 
+    type="radio" 
+    name={name}
+    value={value} 
+    title={title}
+  />
+
+  <!-- Preview Circle -->
+  <span class="preview-wrap">
+    <slot name="preview" />
+    <span class="check"></span>
+  </span>
+
+  <!-- Title -->
+  <slot name="title" />
+
+</label>
+
+
+<style>
+
+  /* Option Wrap */
+  label {
+    border-radius: var(--radius-lg);
+    display: grid;
+    gap: 0.375rem;
+    padding: 0.75rem;
+    place-items: center;
+    position: relative;
+  }
+
+
+  /* Option Input (hidden) */
+  input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    z-index: 1;
+  }
+  @media (hover: hover) {
+    input:hover ~ .preview-wrap { filter: var(--hover-filter); }
+  }
+
+
+  /* Preview Circle */
+  .preview-wrap {
+    --_size: 3rem;
+    border-radius: 50%;
+    height: var(--_size);
+    overflow: hidden;
+    position: relative;
+    width: var(--_size);
+  }
+
+   /* Check Mark (indicates if currently selected) */
+   .check {
+    background: var(--brand);
+    border-radius: 50%;
+    display: none;
+    inset: 0.75rem;
+    position: absolute;
+    z-index: 1;
+  }
+  input:checked ~ .preview-wrap .check { display: block; }
+  /* check */
+  .check::after {
+    position: absolute;
+    inset: 0.5rem 0.35rem;
+    content: "";
+    border-left: 0.2rem solid #fff;
+    border-bottom: 0.2rem solid #fff;
+    transform: rotate(-45deg);
+  }
+
+</style>

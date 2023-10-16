@@ -1,0 +1,105 @@
+---
+import PreferencesFieldset from "./PreferencesFieldset.astro";
+---
+
+<form id="mode-form">
+  <PreferencesFieldset class="mode-fieldset">
+    <legend style="display: none;">Dark Theme</legend>
+    <b>Dark Theme</b>
+    <label class="dark-toggle">
+      <span style="display:none;">Toggle Dark Theme</span>
+      <input type="checkbox" name="mode" id="dark-toggle-input" />
+      <span class="slider"></span>
+    </label>
+  </PreferencesFieldset>
+</form>
+
+
+<style>
+  /* Form Wrapper */
+  .mode-fieldset {
+    --_gap: 0.5rem;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--_gap);
+    justify-content: space-between;
+  }
+
+
+  /* toggle wrap */
+  .dark-toggle {
+    --toggle-width: 3.75rem;  /* used by slider dot to calculate its "active" state transform value */
+    height: 2rem;
+    position: relative;
+    width: var(--toggle-width);
+  }
+  @media (hover: hover) {
+    .dark-toggle:hover { filter: var(--hover-filter); }
+  }
+
+  /* input (hidden) */
+  .dark-toggle input {
+    inset: 0;
+    opacity: 0;
+    position: absolute;
+  }
+
+  /* slider */
+  .dark-toggle .slider {
+    background: var(--link);
+    border-radius: 2em;
+    filter: grayscale(1);
+    inset: 0;
+    position: absolute;
+  }
+  .dark-toggle input:checked ~ .slider { filter: none; }
+
+  /* slider dot */
+  .dark-toggle .slider::after {
+    --_size: 1.5rem;
+    --_margin: 0.25rem;
+    background: var(--surface1);
+    border-radius: 50%;
+    content: '';
+    height: var(--_size);
+    left: var(--_margin);
+    position: absolute;
+    top: var(--_margin);
+    transition: 0.2s transform ease;
+    width: var(--_size);
+  }
+  .dark-toggle input:checked ~ .slider::after {
+    transform: translateX(
+      calc(
+        var(--toggle-width) 
+        - ( 2 * var(--_margin) ) 
+        - var(--_size)
+      )
+    );
+  }
+</style>
+
+
+<script defer>
+  // Dark Mode Toggle
+  let dark_toggle_input = document.getElementById("dark-toggle-input");
+
+  function toggleDark() {
+    let html = document.documentElement;
+    const new_mode = (html.dataset.mode === "light") ? "dark" : "light";
+    html.dataset.mode = new_mode;
+    localStorage.setItem("mode", new_mode);
+    updateMetaThemeColor();
+  }
+  dark_toggle_input.onclick = toggleDark;
+
+  function configModeInput() {
+    let val = localStorage.getItem("mode");
+    // Config Local Storage
+    if (!val) localStorage.setItem("mode", "light");
+    // Config Input
+    if (val === "dark") dark_toggle_input.checked = true;
+  }
+  configModeInput();
+</script>
