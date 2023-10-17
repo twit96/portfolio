@@ -1,0 +1,14 @@
+---
+// Child of BusinessCardWrap Component.
+const { ...attrs } = Astro.props;
+---
+
+<div {...attrs}><slot /></div>
+
+
+<style>
+  div {
+    inset: 0;
+    position: absolute;
+  }
+</style>

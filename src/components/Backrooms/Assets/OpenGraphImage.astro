@@ -1,0 +1,72 @@
+---
+import BackroomsArticle from "../Assets/BackroomsArticle.astro";
+import BackroomsArticleHeading from "../Assets/BackroomsArticleHeading.astro";
+---
+
+<BackroomsArticle>
+  <BackroomsArticleHeading>Open Graph Image</BackroomsArticleHeading>
+
+  <section class="surface0 wrapper">
+
+    <!-- name and title -->
+    <div class="content-section">
+      <h3 class="cursive">Tyler Wittig</h3>
+      <p>Full-Stack Developer</p>
+    </div>
+
+    <!-- image -->
+    <div class="img-wrap">
+      <img width="750" height="750" src="/img/portrait/original.jpg" alt="Portrait">
+    </div>
+
+  </section>
+
+</BackroomsArticle>
+
+
+<style>
+
+  /* Wrapper */
+   section {
+    align-items: center;
+    color: var(--text2);
+    display: flex;
+    gap: 5rem;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+    /* 
+    Force card to be the recommended og image aspect ratio and size. 
+    Google "og image aspect ratio" for more details.
+    */
+    /* aspect-ratio: 1.91 / 1; */
+    height: 630px;
+    width: 1200px;
+    min-height: 630px;
+    min-width: 1200px;
+  }
+
+  /* Name */
+  h3 {
+    font-size: 6rem;
+    line-height: 1.5em;
+  }
+
+  /* Title */
+  p {
+    font-size: 3rem;
+    line-height: 1.75em;
+    opacity: 0.6;
+  }
+
+  /* Image */
+  .img-wrap {
+    clip-path: url(#jagged_circle);
+    line-height: 0;
+  }
+  img {
+    max-width: 40ch;
+    width: 100%;
+  }
+
+</style>

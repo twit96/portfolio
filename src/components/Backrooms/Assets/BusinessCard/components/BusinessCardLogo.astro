@@ -1,0 +1,27 @@
+---
+const { size="1rem" } = Astro.props;
+---
+
+<div class="surface2" style={`--_height:${size};`}>
+  <h3 class="cursive">TW</h3>
+</div>
+
+
+<style>
+
+  /* Logo Wrap */
+  div {
+    height: var(--_height);
+    aspect-ratio: 1 / 1;
+    clip-path: url(#jagged_circle);
+    display: grid;
+    place-items: center;
+  }
+  
+  /* Logo Initials */
+  h3 {
+    font-size: calc(var(--_height) * 0.325);
+    line-height: 0.9;
+  }
+
+</style>

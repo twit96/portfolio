@@ -1,0 +1,24 @@
+---
+import BackroomsArticle from "../BackroomsArticle.astro";
+import BackroomsArticleHeading from "../BackroomsArticleHeading.astro";
+import BusinessCardWrap from "./components/BusinessCardWrap.astro";
+import BusinessCardLogo from "./components/BusinessCardLogo.astro";
+---
+
+<BackroomsArticle>
+  <BackroomsArticleHeading>Business Card Front</BackroomsArticleHeading>
+
+  <BusinessCardWrap class="bc-front">
+    <BusinessCardLogo size="480px" />
+  </BusinessCardWrap>
+
+</BackroomsArticle>
+
+
+<style>
+  .bc-front {
+    text-align: center;
+    display: grid;
+    place-items: center;
+  }
+</style>

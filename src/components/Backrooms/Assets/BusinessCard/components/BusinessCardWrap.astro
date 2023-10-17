@@ -1,0 +1,25 @@
+---
+import BusinessCardContent from "./BusinessCardContent.astro";
+const { ...attrs } = Astro.props;
+---
+<section class="surface0 wrapper">
+  <BusinessCardContent {...attrs}>
+    <slot />
+  </BusinessCardContent>
+</section>
+
+<style>
+  section {
+    --color: var(--text2);
+    /* 
+    Force card to be the recommended business card aspect ratio and size. 
+    3.5 x 2 Ratio, or 1050px x 600px.
+    */
+    /* aspect-ratio: 3.5 / 2; */
+    height: 600px;
+    width: 1050px;
+    min-height: 600px;
+    min-width: 1050px;
+    position: relative;
+  }
+</style>
