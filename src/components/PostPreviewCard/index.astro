@@ -4,14 +4,14 @@ import MinimalCardContent from "./MinimalCardContent.astro";
 
 const { post, cardType='compact', styles='' } = Astro.props;
 
-const cardClass = cardType==="minimal" ? "surface1" : "surface3";
+const bgClass = cardType==="minimal" ? "surface1" : "surface3";
 ---
 
 
 {
   post && cardType &&
   <article
-    class={`card preview-card--${cardType} ${cardClass}`}
+    class={`card ${bgClass}`}
     style={styles}
   >
 
@@ -30,11 +30,10 @@ const cardClass = cardType==="minimal" ? "surface1" : "surface3";
 
 
 <style>
-  article {
+  .card {
     display: flex;
     flex-direction: column;
     height: 100%;
+    padding: 0;
   }
-  article.preview-card--minimal { gap: 0.5rem; }
-  article.preview-card--compact { gap: 1rem; }
 </style>

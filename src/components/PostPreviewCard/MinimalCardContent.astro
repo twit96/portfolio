@@ -1,4 +1,5 @@
 ---
+import CardContentWrap from './components/CardContentWrap.astro';
 import TitleLink from './components/TitleLink.astro';
 import CardFooter from './components/CardFooter.astro';
 import PostBlurb from './components/PostBlurb.astro';
@@ -7,17 +8,20 @@ import PostDate from './components/PostDate.astro';
 const { post } = Astro.props;
 ---
 
+<CardContentWrap style="--_gap:0.5rem;">
 
-<TitleLink
-  title={post.data.title}
-  href={`/${post.data.category}/${post.slug}`}
-/>
-
-<CardFooter>
-  <PostBlurb blurb={post.data.blurb} />
-
-  <PostDate
-    datePublished={post.data.datePublished}
-    dateUpdated={post.data.dateUpdated}
+  <TitleLink
+    title={post.data.title}
+    href={`/${post.data.category}/${post.slug}`}
   />
-</CardFooter>
+
+  <CardFooter>
+    <PostBlurb blurb={post.data.blurb} />
+
+    <PostDate
+      datePublished={post.data.datePublished}
+      dateUpdated={post.data.dateUpdated}
+    />
+  </CardFooter>
+
+</CardContentWrap>
