@@ -1,5 +1,4 @@
 ---
-import CardContentWrap from './components/CardContentWrap.astro';
 import ImageLink from './components/ImageLink.astro';
 import PostTags from '@components/PostTags.astro';
 import TitleLink from './components/TitleLink.astro';
@@ -10,30 +9,27 @@ import PostDate from './components/PostDate.astro';
 const { post } = Astro.props;
 ---
 
+
 <ImageLink
   image={post.data.heroImage}
   title={post.data.title}
   href={`/${post.data.category}/${post.slug}`}
 />
 
-<CardContentWrap>
+<PostTags 
+  tags={post.data.tags}
+  noWrap={true} 
+/>
 
-  <PostTags 
-    tags={post.data.tags}
-    noWrap={true} 
+<TitleLink
+  title={post.data.title}
+  href={`/${post.data.category}/${post.slug}`}
+/>
+
+<CardFooter>
+  <PostBlurb blurb={post.data.blurb} />
+  <PostDate
+    datePublished={post.data.datePublished}
+    dateUpdated={post.data.dateUpdated}
   />
-
-  <TitleLink
-    title={post.data.title}
-    href={`/${post.data.category}/${post.slug}`}
-  />
-
-  <CardFooter>
-    <PostBlurb blurb={post.data.blurb} />
-    <PostDate
-      datePublished={post.data.datePublished}
-      dateUpdated={post.data.dateUpdated}
-    />
-  </CardFooter>
-
-</CardContentWrap>
+</CardFooter>
