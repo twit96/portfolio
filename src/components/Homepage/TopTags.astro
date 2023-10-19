@@ -116,33 +116,6 @@ if (tagsByCountArray.length > 5) tagsByCountArray.length = 5;
 }
 
 
-<!-- {
-  (tagCountArray && tagCountArray.length>0) &&
-  <DecorativeLine />
-  <h2>Top Tags</h2>
-  <ul
-    class="btns layout layout--list"
-    style="--_gap: 0.125rem;--_base-size:15rem;"
-  >
-    {
-      tagCountArray.map(([tag, count]) => (
-        <li>
-          <a
-            class="btn surface4"
-            href={`/tags/${tag}`}
-          >
-            #{`${tag} (${count})`}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-  <p>
-    <a href="/tags/">View all tags</a>
-  </p>
-} -->
-
-
 <style>
   h2,
   p { text-align: center; }
