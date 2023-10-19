@@ -49,7 +49,7 @@ allTags.forEach((tag) => {
     </div>
 
     <div class="card surface0 shadow-sm wrapper">
-      <ul class="letter-boxes">
+      <ul class="layout layout--grid">
         {
           Object.keys(tagsByFirstCharWithCounts).sort().map(letter =>
             <li class="letter-box card surface3">
@@ -92,12 +92,6 @@ allTags.forEach((tag) => {
     width: 100%;
   }
 
-  .letter-boxes {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat( auto-fill, minmax( min(18rem, 100%), 1fr) );
-  }
-
   .letter-box {
     align-items: flex-start;
     display: flex;
@@ -121,6 +115,7 @@ allTags.forEach((tag) => {
   .btns li { max-width: 100%; }
   .btn {
     --_bar-size: 0.25rem;
+    --_track-margin: var(--radius-lg);
     display: block;
     overflow: auto;
     text-decoration: none;
