@@ -1,0 +1,98 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const blurb = "Tyler Wittig, without a mustache.";
+const description = "I am a farm boy turned percussionist who studied mathematics in college and now designs websites. An obvious and natural progressison.";
+const heroImage = "/blog/drafts/the-less-professional-about-page/2019.jpg";
+const links = [
+    { text: "Listen to my Favorite Songs", href: "https://music.youtube.com/playlist?list=PLhC2DPeXuXXUhFfTeZQM0gz4VrT-q2mqU&feature=share", },
+    { text: "View my Favorite Project", href: "https://gagcombos.info/", },
+    { text: "Important Disclaimer", href: "https://www.youtube.com/watch?v=uHgt8giw1LY", },
+];
+const title = "About Me";
+
+---
+
+<BaseLayout
+  hasBreadcrumbs="true"
+  title={title}
+  description={description}
+>
+
+  <!-- Top Area -->
+  <section id="top-area">
+    <div class="layout layout--flex-fill wrapper">
+
+      <img src={heroImage} alt={blurb}>
+      
+      <div
+        class="content-section"
+        id="top-area-text"
+      >
+        <div>
+          <h1>About Me</h1>
+          <p>
+            Farmer &rsaquo; Percussionist &rsaquo; Mathematician &rsaquo; Web Developer 
+          </p>
+        </div>
+        <ul class="card surface2">
+          {
+            links.map(link => (
+              <li>
+                <a href={link.href}>{link.text}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+        
+    </div>
+  </section>
+
+
+  <section>
+    <div class="card content-section shadow-sm surface0 wrapper">
+      <h2>Heading</h2>
+      <p>
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+      </p>
+      <h2>Heading</h2>
+      <p>
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+      </p>
+      <h2>Heading</h2>
+      <p>
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+      </p>
+      <h2>Heading</h2>
+      <p>
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+      </p>
+      <h2>Heading</h2>
+      <p>
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+        Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+
+<style>
+  #top-area-text.content-section { justify-content: space-between; }
+</style>
