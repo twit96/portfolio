@@ -74,7 +74,7 @@ function Search({ searchList }) {
                       </b>
                     </div>
 
-                    <h2 className={styles.resultTitle}>
+                    <h2 className={`heading--reduce ${styles.resultTitle}`}>
                       <a href={`/${result.item.data.category}/${result.item.slug}`}>
                         {result.item.data.title}
                       </a>
