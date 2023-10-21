@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import MinimalPreviewCard from '@components/PostPreviewCard/MinimalPreviewCard.astro';
+import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
 import ExpandedPreviewCard from '@components/PostPreviewCard/ExpandedPreviewCard.astro';
 const { title, posts, layout='grid' } = Astro.props;
 ---
@@ -31,7 +31,7 @@ const { title, posts, layout='grid' } = Astro.props;
             <li>
               {
                 layout==="grid" &&
-                <MinimalPreviewCard post={post} />
+                <CompactPreviewCard post={post} />
               }
               {
                 layout==="list" &&
