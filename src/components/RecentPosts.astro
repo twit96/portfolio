@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import PostPreviewCard from '@components/PostPreviewCard/index.astro';
+import MinimalPreviewCard from '@components/PostPreviewCard/MinimalPreviewCard.astro';
 
 // Remove Drafts
 let publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft);
@@ -28,11 +28,7 @@ publishedPosts.length = 5;
     >
       {publishedPosts.map((post) => 
         <li>
-          <PostPreviewCard
-            post={post}
-            cardType="minimal"
-            styles="border-radius:var(--radius-sm);"
-          />
+          <MinimalPreviewCard post={post} />
         </li>
       )}
     </ul>

@@ -1,0 +1,63 @@
+---
+import CardWrap from './components/CardWrap.astro';
+import ImageLink from './components/ImageLink.astro';
+import PostTags from '@components/PostTags.astro';
+import TitleLink from './components/TitleLink.astro';
+import PostDescription from './components/PostDescription.astro';
+import CardFooter from './components/CardFooter.astro';
+import PostBlurb from './components/PostBlurb.astro';
+import PostDate from './components/PostDate.astro';
+
+const { post, reverse=false } = Astro.props;
+---
+
+<CardWrap classes="surface3">
+
+  <div
+    class="layout layout--flex-fill"
+    style={`--_base-size:24rem; ${reverse ? "flex-direction:row-reverse;" : ""}`}
+  >
+
+    <div class="left">
+      <ImageLink
+        image={post.data.heroImage}
+        title={post.data.title}
+        href={`/${post.data.category}/${post.slug}`}
+      />
+    </div>
+
+    <div class="content-section right">
+      <div class="tag-wrap">
+        <PostTags 
+          tags={post.data.tags}
+        />
+      </div>
+      <TitleLink
+        title={post.data.title}
+        href={`/${post.data.category}/${post.slug}`}
+      />
+      <PostDescription description={post.data.description} />
+      <CardFooter>
+        <div class="card surface2">
+          <PostBlurb blurb={post.data.blurb} />
+          <PostDate
+            datePublished={post.data.datePublished}
+            dateUpdated={post.data.dateUpdated}
+          />
+        </div>
+      </CardFooter>
+    </div>
+
+  </div>
+
+</CardWrap>
+
+
+<style>
+  .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .tag-wrap { display: grid; }  /* prevents tags from overflowing */
+</style>

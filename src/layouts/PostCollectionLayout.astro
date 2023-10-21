@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import PostPreviewCard from '@components/PostPreviewCard/index.astro';
-const { title, posts } = Astro.props;
+import MinimalPreviewCard from '@components/PostPreviewCard/MinimalPreviewCard.astro';
+import ExpandedPreviewCard from '@components/PostPreviewCard/ExpandedPreviewCard.astro';
+const { title, posts, layout='grid' } = Astro.props;
 ---
 <BaseLayout {...Astro.props}>
 
@@ -23,15 +24,22 @@ const { title, posts } = Astro.props;
     </div>
     <div class="wrapper card shadow-sm surface0">
 
-      <ul class="layout layout--grid">
+      <ul class={`layout layout--${layout}`}>
         {
           posts && posts.length > 0 
-          ? posts.map((post) => 
+          ? posts.map((post, i) => 
             <li>
-              <PostPreviewCard
-                post={post}
-                cardType="compact"
-              />
+              {
+                layout==="grid" &&
+                <MinimalPreviewCard post={post} />
+              }
+              {
+                layout==="list" &&
+                <ExpandedPreviewCard
+                  post={post}
+                  reverse={i%2!==0}
+                />
+              }
             </li>
           )
           : <li>
@@ -50,3 +58,10 @@ const { title, posts } = Astro.props;
   </section>
   
 </BaseLayout>
+
+
+<style>
+  li {
+    overflow: auto;
+  }
+</style>

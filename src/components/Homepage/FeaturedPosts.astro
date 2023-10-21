@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import PostPreviewCard from '@components/PostPreviewCard/index.astro';
+import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
 import DecorativeLine from '@components/DecorativeLine/index.astro';
 
 // Remove Drafts and Non-Featured Posts
@@ -26,10 +26,7 @@ featuredPosts.sort(function(a, b) {
     <ul class="layout layout--flex-fill">
       {featuredPosts.map((post) => 
         <li>
-          <PostPreviewCard
-            post={post}
-            cardType="compact"
-          />
+          <CompactPreviewCard post={post} />
         </li>
       )}
     </ul>

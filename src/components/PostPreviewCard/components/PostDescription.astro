@@ -1,0 +1,12 @@
+---
+const { description } = Astro.props;
+
+const maxChars = 120;
+let textToDisplay = (description.length > maxChars)
+  ? description.substring(0, (maxChars-3)) + "..."
+  : description;
+---
+{
+  textToDisplay &&
+  <p>{textToDisplay}</p>
+}

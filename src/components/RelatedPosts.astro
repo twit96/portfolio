@@ -1,6 +1,6 @@
 ---
 import { getEntries } from 'astro:content';
-import PostPreviewCard from '@components/PostPreviewCard/index.astro';
+import MinimalPreviewCard from './PostPreviewCard/MinimalPreviewCard.astro';
 import DecorativeLine from '@components/DecorativeLine/index.astro';
 
 const slugs = Astro.props.slugs;
@@ -16,11 +16,7 @@ const relatedPosts = await getEntries(slugs);
       relatedPosts &&
       relatedPosts.map(post => 
         <li>
-          <PostPreviewCard
-            post={post}
-            cardType="minimal"
-            styles="border-radius:var(--radius-sm);"
-          />
+          <MinimalPreviewCard post={post} />
         </li>
       )
     }

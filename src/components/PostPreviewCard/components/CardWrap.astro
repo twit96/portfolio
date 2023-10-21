@@ -1,0 +1,12 @@
+---
+const { classes, styles } = Astro.props;
+---
+<article
+  class={`card ${classes} layout layout--list`}
+  style={styles}
+><slot /></article>
+
+
+<style>
+  article { height: 100%; }
+</style>
