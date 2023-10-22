@@ -1,6 +1,8 @@
 ---
 import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
 import { getCollection } from 'astro:content';
+import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
+import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
 
 let publishedBlogPosts = (await getCollection('posts')).filter(post => (
   !post.data.draft &&
@@ -17,6 +19,24 @@ publishedBlogPosts.sort(function(a, b) {
 <PostCollectionLayout
 	title="Blog"
   description="Tyler Wittig's Blog Posts"
-	posts={publishedBlogPosts}
+	numPosts={publishedBlogPosts.length}
 >
+
+  <ul
+    slot="content"
+    class="layout layout--grid"
+  >
+    {
+      publishedBlogPosts && publishedBlogPosts.length > 0 
+      ? publishedBlogPosts.map((post) => 
+        <li>
+          <CompactPreviewCard post={post} />
+        </li>
+      )
+      : <li>
+          <NothingHereCard />
+        </li>
+    }
+  </ul>
+
 </PostCollectionLayout>

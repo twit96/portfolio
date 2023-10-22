@@ -1,6 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from "@layouts/BaseLayout.astro";
+import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
+import ExpandedPreviewCard from '@components/PostPreviewCard/ExpandedPreviewCard.astro';
+import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
+
 
 const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft);
 
@@ -37,61 +40,50 @@ allTags.forEach((tag) => {
 });
 ---
 
-<BaseLayout
+<PostCollectionLayout
   title="Tags"
   description="Tyler Wittig's Post Tags"
+  numPosts={numTags}
 >
-  <section>
-    
-    <div class="wrapper">
-      <h1>Tags</h1>
-      <h2 class="heading--diminished">{numTags} Tags</h2>
-    </div>
+  <ul
+    slot="content"
+    class="layout layout--grid"
+  >
+    {
+      Object.keys(tagsByFirstCharWithCounts).sort().map(letter =>
+        <li class="letter-box card surface3">
 
-    <div class="card surface0 shadow-sm wrapper">
-      <ul class="layout layout--grid">
-        {
-          Object.keys(tagsByFirstCharWithCounts).sort().map(letter =>
-            <li class="letter-box card surface3">
+          <h3 class="letter surface2">
+            <span>{letter}</span>
+          </h3>
 
-              <h2 class="heading--reduce letter surface2">
-                <span>{letter}</span>
-              </h2>
+          <ul class="btns">
+            {
+              Object.keys(tagsByFirstCharWithCounts[letter]).sort().map((tag) =>
+                <li>
+                  <a 
+                    class="btn custom-scrollbar surface4" 
+                    href={`/tags/${tag}`}
+                    title={`View all posts tagged with #${tag}`}
+                  >
+                    #{tag}
+                    <span>
+                      ({tagsByFirstCharWithCounts[letter][tag]})
+                    </span>
+                  </a>
+                </li>
+              )
+            }
+          </ul>
+          
+        </li>
+      )
+    }
+  </ul>
+</PostCollectionLayout>
 
-              <ul class="btns">
-                {
-                  Object.keys(tagsByFirstCharWithCounts[letter]).sort().map((tag) =>
-                    <li>
-                      <a 
-                        class="btn custom-scrollbar surface4" 
-                        href={`/tags/${tag}`}
-                        title={`View all posts tagged with #${tag}`}
-                      >
-                        #{tag}
-                        <span>
-                          ({tagsByFirstCharWithCounts[letter][tag]})
-                        </span>
-                      </a>
-                    </li>
-                  )
-                }
-              </ul>
-              
-            </li>
-          )
-        }
-      </ul>
-    </div>
-
-  </section>
-</BaseLayout>
 
 <style>
-  ul {
-    list-style: none;
-    width: 100%;
-  }
-
   .letter-box {
     align-items: flex-start;
     display: flex;
@@ -111,7 +103,10 @@ allTags.forEach((tag) => {
     transform: translate(-50%, -50%);
   }
 
-  .btns { flex-direction: column; }
+  .btns {
+    flex-direction: column;
+    width: 100%;
+  }
   .btns li { max-width: 100%; }
   .btn {
     --_bar-size: 0.25rem;

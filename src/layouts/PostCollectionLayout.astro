@@ -1,67 +1,31 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
-import ExpandedPreviewCard from '@components/PostPreviewCard/ExpandedPreviewCard.astro';
-const { title, posts, layout='grid' } = Astro.props;
+const { title, numPosts=0 } = Astro.props;
 ---
 <BaseLayout {...Astro.props}>
-
   <section>
-    <div class="wrapper">
 
+    <div class="wrapper">
       <h1>{title}</h1>
-      
-      <slot />  {/* Collection Info */}
-      
+      <div class="info"><slot name="info" /></div>  {/* Collection Info */}
       {
-        posts && posts.length > 0 &&
+        numPosts > 0 &&
         <h2 class="heading--diminished">
-          {posts.length}
-          Post{posts.length === 0 || posts.length > 1 ? "s" : ""}
+          {numPosts}
+          Entr{numPosts === 0 || numPosts > 1 ? "ies" : "y"}
         </h2>
       }
-      
     </div>
+
     <div class="wrapper card shadow-sm surface0">
-
-      <ul class={`layout layout--${layout}`}>
-        {
-          posts && posts.length > 0 
-          ? posts.map((post, i) => 
-            <li>
-              {
-                layout==="grid" &&
-                <CompactPreviewCard post={post} />
-              }
-              {
-                layout==="list" &&
-                <ExpandedPreviewCard
-                  post={post}
-                  reverse={i%2!==0}
-                />
-              }
-            </li>
-          )
-          : <li>
-              <article class="card content-section surface3">
-                <h2>Nothing Here Yet!</h2>
-                <p>
-                  Looks like there isn't any content on this page yet!
-                  Check back at a later date.
-                </p>
-              </article>
-            </li>
-        }
-      </ul>
-
+      <slot name="content" />  {/* Collection Content */}
     </div>
+
   </section>
-  
 </BaseLayout>
 
 
 <style>
-  li {
-    overflow: auto;
-  }
+  .info { margin-bottom: 1rem; }
+  .info:empty { display: none; }
 </style>

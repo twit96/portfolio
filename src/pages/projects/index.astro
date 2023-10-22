@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
+import ExpandedPreviewCard from '@components/PostPreviewCard/ExpandedPreviewCard.astro';
+import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
 
 let publishedProjects = (await getCollection('posts')).filter(post => (
   !post.data.draft &&
@@ -17,7 +19,25 @@ publishedProjects.sort(function(a, b) {
 <PostCollectionLayout
 	title="Projects"
   description="Tyler Wittig's Projects"
-	posts={publishedProjects}
-  layout="list"
+	numPosts={publishedProjects.length}
 >
+  <ul
+    slot="content"
+    class="layout layout--list"
+  >
+    {
+      publishedProjects && publishedProjects.length > 0 
+      ? publishedProjects.map((post, i) => 
+        <li>
+          <ExpandedPreviewCard
+            post={post}
+            reverse={i%2!==0}
+          />
+        </li>
+      )
+      : <li>
+          <NothingHereCard />
+        </li>
+    }
+  </ul>
 </PostCollectionLayout>

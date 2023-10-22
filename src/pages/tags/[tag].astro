@@ -1,6 +1,8 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { getCollection } from 'astro:content';
 import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
+import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
+import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
 
 export async function getStaticPaths() {
 
@@ -57,17 +59,34 @@ publishedPosts.sort(function(a, b) {
   hasBreadcrumbs="true"
 	title={`#${tag}`}
   description="Tyler Wittig's Blog Posts"
-	posts={publishedPosts}
+	numPosts={publishedPosts.length}
 >
-{
-  Content &&
-  <div class="collection-info content-section">
-    <Content />
-  </div>
-}
+
+  {
+    Content &&
+    <div
+      slot="info"
+      class="collection-info content-section"
+    >
+      <Content />
+    </div>
+  }
+
+  <ul
+    slot="content"
+    class="layout layout--grid"
+  >
+    {
+      publishedPosts && publishedPosts.length > 0 
+      ? publishedPosts.map((post, i) => 
+        <li>
+          <CompactPreviewCard post={post} />
+        </li>
+      )
+      : <li>
+          <NothingHereCard />
+        </li>
+    }
+  </ul>
+
 </PostCollectionLayout>
-
-
-<style>
-  .collection-info { margin-bottom: 1rem; }
-</style>
