@@ -1,6 +1,8 @@
 ---
-import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
 import { getCollection } from 'astro:content';
+import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
+import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
+import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
 
 let posts = (await getCollection('posts')).filter(post => post.data.draft===true);
 posts.sort(function(a, b) {
@@ -14,6 +16,24 @@ posts.sort(function(a, b) {
 <PostCollectionLayout
   hasBreadcrumbs="true"
 	title="Post Drafts"
-	posts={posts}
+	numPosts={posts.length}
 >
+
+  <ul
+    slot="content"
+    class="layout layout--grid"
+  >
+    {
+      posts && posts.length > 0 
+      ? posts.map((post, i) => 
+        <li>
+          <CompactPreviewCard post={post} />
+        </li>
+      )
+      : <li>
+          <NothingHereCard />
+        </li>
+    }
+  </ul>
+
 </PostCollectionLayout>
