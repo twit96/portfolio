@@ -212,7 +212,13 @@ flex (wrap) layout
 .layout--flex-scroll__inner {
   display: flex;
   gap: var(--_gap);
+  list-style: none;
   padding-bottom: 0.5rem;
+}
+.layout--flex-scroll__inner > * {
+  flex-basis: var(--_base-size);
+  flex-grow: 1;
+  flex-shrink: 0;
 }
 
 
