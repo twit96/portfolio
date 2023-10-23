@@ -2,38 +2,38 @@
 const { image, title, href } = Astro.props;
 ---
 
-<div class="card">
-  {
-    image && title && href &&
-      <a 
-        aria-label={title}
-        href={href}
-        title={`Read more about "${title}"`}
-      >
-        <img 
-          alt={title}
-          loading="lazy"
-          src={image} 
-        />
-      </a>
-  }
-</div>
+{
+  title && href &&
+  <a 
+    aria-label={title}
+    class="card"
+    href={href}
+    title={`Read more about "${title}"`}
+  >
+    {
+      image &&
+      <img 
+        alt={title}
+        loading="lazy"
+        src={image} 
+      />
+    }
+  </a>
+}
 
 
 <style>
-  div {
+  a {
     aspect-ratio: 2 / 1;
     background: linear-gradient(var(--surface4), var(--surface2));
-    overflow: hidden;
+    padding: 0;
     position: relative;
-  }
-  a {
-    inset: 0;
-    position: absolute;
+    display: block;
   }
   img {
-    height: 100%;
     object-fit: cover;
+    position: absolute;
+    height: 100%;
     width: 100%;
   }
 </style>

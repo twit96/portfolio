@@ -18,11 +18,13 @@ const { post, reverse=false } = Astro.props;
     style={`--_base-size:24rem; ${reverse ? "flex-direction:row-reverse;" : ""}`}
   >
 
-    <ImageLink
-      image={post.data.heroImage}
-      title={post.data.title}
-      href={`/${post.data.category}/${post.slug}`}
-    />
+    <div class="left">
+      <ImageLink
+        image={post.data.heroImage}
+        title={post.data.title}
+        href={`/${post.data.category}/${post.slug}`}
+      />
+    </div>
 
     <div class="content-section right">
       <div class="tag-wrap">
