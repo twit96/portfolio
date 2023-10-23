@@ -188,7 +188,10 @@ main { flex: 1; }
 }
 
 /* list layout */
-.layout--list { display: grid; }
+.layout--list {
+  display: flex;
+  flex-direction: column;
+}
 
 /* flex (fill) layout */
 .layout--flex-fill {
