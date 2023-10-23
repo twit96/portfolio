@@ -8,6 +8,14 @@ import CardFooter from './components/CardFooter.astro';
 import PostBlurb from './components/PostBlurb.astro';
 import PostDate from './components/PostDate.astro';
 
+/**
+ * In its small screen layout,
+ * ExpandedPreviewCard looks identical to CompactPreviewCard.
+ * However, when enough room is available,
+ * ExpandedPreviewCard breaks into two columns,
+ * whereas CompactPreviewCard continues to stretch horizontally.
+*/
+
 const { post, reverse=false } = Astro.props;
 ---
 
