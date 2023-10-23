@@ -22,21 +22,46 @@ publishedBlogPosts.sort(function(a, b) {
 	numPosts={publishedBlogPosts.length}
 >
 
-  <ul
+  <div
     slot="content"
-    class="layout layout--grid"
+    class="content-section"
   >
+
+    {/* No Posts - Nothing Here Card */}
     {
-      publishedBlogPosts && publishedBlogPosts.length > 0 
-      ? publishedBlogPosts.map((post) => 
+      (publishedBlogPosts.length === 0) &&
+      <ul class="layout layout--list">
         <li>
-          <ExpandedPreviewCard post={post} />
-        </li>
-      )
-      : <li>
           <NothingHereCard />
         </li>
+      </ul>
     }
-  </ul>
+
+    {/* Most Recent Post - Large Card */}
+    {
+      publishedBlogPosts.length > 0 &&
+      <ul class="layout layout--list">
+        <li>
+          <ExpandedPreviewCard post={publishedBlogPosts[0]} />
+        </li>
+      </ul>
+    }
+    
+    {/* Posts 2+ - Medium Card */}
+    {
+      publishedBlogPosts.length > 1 &&
+      <ul class="layout layout--grid">
+        {
+          publishedBlogPosts.map((post, i) => (
+            i>0 && 
+            <li>
+              <ExpandedPreviewCard post={post} />
+            </li>
+          ))
+        }
+      </ul>
+    }
+
+  </div>
 
 </PostCollectionLayout>
