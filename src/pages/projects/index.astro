@@ -4,9 +4,9 @@ import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
 import ExpandedPreviewCard from '@components/PostPreviewCard/ExpandedPreviewCard.astro';
 import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
 
-let publishedProjects = (await getCollection('posts')).filter(post => (
-  !post.data.draft &&
-  post.data.category==="projects"
+let publishedProjects = (await getCollection('posts')).filter(project => (
+  !project.data.draft &&
+  project.data.category==="projects"
 ));
 publishedProjects.sort(function(a, b) {
 	let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);
