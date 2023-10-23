@@ -27,7 +27,7 @@ html { box-sizing: border-box; }
 
 /* ---------- Defaults ---------- */
 a {
-  color: var(--text1) !important;
+  color: var(--link);
   font-weight: 600;
 }
 @media (hover: hover) {
