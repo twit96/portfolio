@@ -40,11 +40,7 @@ publishedBlogPosts.sort(function(a, b) {
     {/* Most Recent Post - Large Card */}
     {
       publishedBlogPosts.length > 0 &&
-      <ul class="layout layout--list">
-        <li>
-          <ExpandedPreviewCard post={publishedBlogPosts[0]} />
-        </li>
-      </ul>
+      <ExpandedPreviewCard post={publishedBlogPosts[0]} />
     }
     
     {/* Posts 2+ - Medium Card */}
