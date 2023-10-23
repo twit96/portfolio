@@ -59,7 +59,7 @@ const page_title = title ? `${title} | ${author ? author : SITE_AUTHOR}` : SITE_
 	 * Reset local storage if refactor has occured.
 	 */ 
 	function handleStorageChanges() {
-		const lrs = "202310051426";  // Last Refactored Storage Date
+		const lrs = "202310231438";  // Last Refactored Storage Date
 		let stored_lrs = localStorage.getItem("lrs");
 		if (stored_lrs!==lrs) {
 			localStorage.clear();
@@ -77,7 +77,7 @@ const page_title = title ? `${title} | ${author ? author : SITE_AUTHOR}` : SITE_
 		const defaults = {
 			mode: "light",
 			color: "blue",
-			scheme: "analogous"
+			scheme: "monochromatic"
 		};
 
 		let html = document.documentElement;
