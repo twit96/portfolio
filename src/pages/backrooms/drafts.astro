@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
-import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
+import ExpandedPreviewCard from '@components/PostPreviewCard/ExpandedPreviewCard.astro';
 import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
 
 let posts = (await getCollection('posts')).filter(post => post.data.draft===true);
@@ -27,7 +27,7 @@ posts.sort(function(a, b) {
       posts && posts.length > 0 
       ? posts.map((post, i) => 
         <li>
-          <CompactPreviewCard post={post} />
+          <ExpandedPreviewCard post={post} />
         </li>
       )
       : <li>

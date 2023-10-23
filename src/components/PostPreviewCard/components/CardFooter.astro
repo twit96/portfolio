@@ -1,4 +1,7 @@
-<div><slot /></div>
+---
+const { classes } = Astro.props;
+---
+<div class={classes}><slot /></div>
 
 
 <style>
@@ -7,4 +10,5 @@
     line-height: 1.3em;
     display: grid;
   }
+  div:empty { display: none; }
 </style>

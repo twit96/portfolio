@@ -18,18 +18,17 @@ const { post, reverse=false } = Astro.props;
     style={`--_base-size:24rem; ${reverse ? "flex-direction:row-reverse;" : ""}`}
   >
 
-    <div class="left">
-      <ImageLink
-        image={post.data.heroImage}
-        title={post.data.title}
-        href={`/${post.data.category}/${post.slug}`}
-      />
-    </div>
+    <ImageLink
+      image={post.data.heroImage}
+      title={post.data.title}
+      href={`/${post.data.category}/${post.slug}`}
+    />
 
     <div class="content-section right">
       <div class="tag-wrap">
-        <PostTags 
+        <PostTags
           tags={post.data.tags}
+          noWrap={true}
         />
       </div>
       <TitleLink
@@ -37,14 +36,12 @@ const { post, reverse=false } = Astro.props;
         href={`/${post.data.category}/${post.slug}`}
       />
       <PostDescription description={post.data.description} />
-      <CardFooter>
-        <div class="card surface2">
-          <PostBlurb blurb={post.data.blurb} />
-          <PostDate
-            datePublished={post.data.datePublished}
-            dateUpdated={post.data.dateUpdated}
-          />
-        </div>
+      <CardFooter classes="card surface2">
+        <PostBlurb blurb={post.data.blurb} />
+        <PostDate
+          datePublished={post.data.datePublished}
+          dateUpdated={post.data.dateUpdated}
+        />
       </CardFooter>
     </div>
 
@@ -55,4 +52,5 @@ const { post, reverse=false } = Astro.props;
 
 <style>
   .tag-wrap { display: grid; }  /* prevents tags from overflowing */
+  .tag-wrap:empty { display: none; }
 </style>
