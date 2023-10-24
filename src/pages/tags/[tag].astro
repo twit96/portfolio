@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
-import ExpandedPreviewCard from '@components/PostPreviewCard/ExpandedPreviewCard.astro';
+import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
 import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
 
 export async function getStaticPaths() {
@@ -80,7 +80,7 @@ publishedPosts.sort(function(a, b) {
       publishedPosts && publishedPosts.length > 0 
       ? publishedPosts.map((post, i) => 
         <li>
-          <ExpandedPreviewCard post={post} />
+          <CompactPreviewCard post={post} />
         </li>
       )
       : <li>
