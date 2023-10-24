@@ -1,115 +1,122 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import BaseLayout from "@layouts/BaseLayout.astro";
+import BaseLayout from '@layouts/BaseLayout.astro';
 import PostTags from '@components/PostTags.astro';
-import RelatedPosts from "@components/RelatedPosts.astro";
+import RelatedPosts from '@components/RelatedPosts.astro';
 type Props = CollectionEntry<'posts'>['data'];
 const post = Astro.props;
 ---
 
 <BaseLayout hasBreadcrumbs="true" {...Astro.props}>
-  
-  <section
-    class="card content-section surface0 shadow-sm wrapper"
-    id="post-wrap"
+
+
+  {/* Post Header Area */}
+  <div
+    class="layout layout--flex-fill wrapper"
+    id="post-overview"
+    style="--_base-size:27rem;"
   >
 
-      {/* Main Info */}
+    {/* Left */}
+    <div
+      class="content-section"
+      style="--_content-gap:0.5rem;"
+    >
+      {
+        post.title &&
+        <h1>{post.title}</h1>
+      } 
+      {
+        post.description &&
+        <p>{post.description}</p>
+      }
+      {/* blurb area */}
       <div
-        class="card content-section surface1"
-        id="post-info"
-      >    
-
-        <div id="post-info-left">
-          {
-            post.heroImage &&
-            post.title &&
-            <img
-              alt={post.title}
-              src={post.heroImage}
-            />
-          }
-          {
-            post.blurb &&
-            <em>{post.blurb}</em>
-          }
-        </div>
-
-        <div id="post-info-right" class="content-section">
-          <div>
-            {
-              post.title &&
-              <h1>{post.title}</h1>
-            }
-            {
-              post.datePublished &&
-              <em class="post-info-date">
-                {post.datePublished}
-              </em>
-            }
-            {
-              post.dateUpdated &&
-              <em class="post-info-date">
-                (Updated {post.dateUpdated})
-              </em>
-            }
-          </div>
-          {
-            post.description &&
-            <p>{post.description}</p>
-          }
+        class="card content-section surface3"
+        id="post-blurb-area"
+        style="--_content-gap:0.5rem;"
+      >
+        {
+          post.blurb &&
+          <p>{post.blurb}</p>
+        }
+        <p>
           {
             post.author &&
-            <p>Written by: {post.author}</p>
+            <span>Written by {post.author} on</span>
           }
-          
-        </div>
-
+          {
+            post.datePublished &&
+            <span>{post.datePublished}</span>
+          }
+          {
+            post.dateUpdated &&
+            <em>(Updated {post.dateUpdated})</em>
+          }
+        </p>
       </div>
+    </div>
 
-
-      {/* Links */}
+    {/* Right */}
+    <div id="hero-image-wrap">
       {
-        post.links && (
-          <div 
-            class="card content-section surface3"
-            style="--_content-gap:0.5rem;"
-          >
-            <h2 class="heading--reduce">Links</h2>
-            <ul>
-              {
-                post.links &&
-                post.links.map(({ text, href }) => 
-                  <li>
-                    <a 
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >{text}</a>
-                  </li>
-                )
-              }
-            </ul>
-          </div>
-        )
+        post.heroImage &&
+        post.title &&
+        <img
+          alt={post.title}
+          src={post.heroImage}
+        />
       }
+    </div>
 
+  </div>
+  
 
-      {/* Post Content */}
-      <slot />
+  {/* Post Content Area */}
+  <section class="card content-section surface0 shadow-sm wrapper">
 
-
-      {/* Post Tags */}
-      {
-        post.tags && 
-        <div
-          class="card content-section surface1"
-          style="--_content-gap:1rem;"
+    {/* Links */}
+    {
+      post.links && (
+        <div 
+          class="card content-section surface2"
+          style="--_content-gap:0.5rem;"
         >
-          <h2 class="heading--reduce">Tags</h2>
-          <PostTags tags={post.tags} />
+          <h2 class="heading--reduce">Links</h2>
+          <ul>
+            {
+              post.links &&
+              post.links.map(({ text, href }) => 
+                <li>
+                  <a 
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >{text}</a>
+                </li>
+              )
+            }
+          </ul>
         </div>
-      }
+      )
+    }
+
+
+    {/* Post Content */}
+    <slot />
+
+
+    {/* Post Tags */}
+    {
+      post.tags && 
+      <div
+        class="card content-section surface1"
+        style="--_content-gap:1rem;"
+      >
+        <h2 class="heading--reduce">Tags</h2>
+        <PostTags tags={post.tags} />
+      </div>
+    }
 
   </section>
   
@@ -124,18 +131,14 @@ const post = Astro.props;
 </BaseLayout>
 
 <style>
-  #post-wrap { margin-top: 1rem; }
-
-  #post-info {
-    display: grid;
-    grid-template-columns: repeat( auto-fill, minmax( min(40ch, 100%), 1fr) );
+  #post-overview { flex-wrap: wrap-reverse; }
+  #post-blurb-area {
+    line-height: 1.3;
+    margin-top: auto;
   }
-  #post-info-left > * { display: block; }
-  #post-info-left img { width: 100%; }
-  #post-info-left em {
-    font-size: 0.9rem;
-    text-align: center;
+  #post-blurb-area p > * {
+    display: inline-block;
+    margin-right: 0.5ch;
   }
-  .post-info-date { display: inline-block; }
-  .post-info-date:first-of-type { margin-right: 0.5ch; }
+  #hero-image-wrap { line-height: 0; }
 </style>
