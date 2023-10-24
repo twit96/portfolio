@@ -11,7 +11,7 @@ import PostDate from './components/PostDate.astro';
 const { post } = Astro.props;
 ---
 
-<CardWrap classes="surface3">
+<CardWrap classes="surface1">
 
   <ImageLink
     image={post.data.heroImage}
@@ -30,7 +30,7 @@ const { post } = Astro.props;
   />
   <PostDescription description={post.data.description} />
   
-  <CardFooter classes="card surface2">
+  <CardFooter classes="card surface3">
     <PostBlurb blurb={post.data.blurb} />
     <PostDate
       datePublished={post.data.datePublished}

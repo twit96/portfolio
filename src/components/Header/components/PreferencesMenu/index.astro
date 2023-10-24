@@ -9,7 +9,7 @@ import PreferencesBackground from "./components/PreferencesBackground.astro";
   <summary>
     <span style="display:none;">Theme Preferences</span>
     <span 
-      class="svg-wrap btn surface1"
+      class="svg-wrap btn surface2"
       title="Theme Preferences" 
     >
       <svg
@@ -30,7 +30,7 @@ import PreferencesBackground from "./components/PreferencesBackground.astro";
     </span>
   </summary>
 
-  <div class="modal card custom-scrollbar surface3 shadow-sm">
+  <div class="modal card custom-scrollbar surface1 shadow-sm">
     <PreferenceFormModes />
     <hr />
     <PreferenceFormColors />
@@ -97,7 +97,7 @@ import PreferencesBackground from "./components/PreferencesBackground.astro";
   Used by deferred scripts in FormColors, FormModes, and FormSchemes components.
   */}
   function updateMetaThemeColor() {
-    const theme_color = getComputedStyle(document.documentElement).getPropertyValue("--surface3");
+    const theme_color = getComputedStyle(document.documentElement).getPropertyValue("--surface1");
     const meta_theme_color = document.querySelector("meta[name=\"theme-color\"]");
     meta_theme_color.setAttribute("content", theme_color);
   }

@@ -88,7 +88,7 @@
               <g>
                 <path
                   d="M0 0.5C8 0.5 8 7.5 16 7.5C24 7.5 24 0.5 32 0.5"
-                  stroke="var(--surface1)"
+                  stroke="var(--surface2)"
                   stroke-linecap="square"
                 ></path>
               </g>
@@ -127,7 +127,7 @@
 
             <div class="card content-section shadow-sm surface0 wrapper">
 
-              <div class="card content-section surface1">
+              <div class="card content-section surface2">
                 <h2><xsl:value-of select="/rss/channel/title"/></h2>
                 <p><xsl:value-of select="/rss/channel/description"/></p>
                 <a style="align-self:flex-start;">
@@ -145,7 +145,7 @@
                 style="--_content-gap:0.5rem;"
               >
                 <xsl:for-each select="/rss/channel/item[5 &gt;= position()]">
-                  <article class="card surface3">
+                  <article class="card surface1">
                     <h3>
                       <a>
                         <xsl:attribute name="href">

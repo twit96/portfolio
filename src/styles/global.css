@@ -86,7 +86,7 @@ h6 { --_font-size: 0.9rem; }
 
 
 hr {
-  --_color: var(--surface1);
+  --_color: var(--surface2);
   --_style: solid;
   --_width: 0.0625rem;
   border: calc(var(--_width) / 2) var(--_style) var(--_color);
@@ -274,7 +274,7 @@ flex (wrap) layout
 }
 .surface1 {
   background-color: var(--surface1);
-  color: var(--text2);
+  color: var(--text1);
 }
 .surface2 {
   background-color: var(--surface2);
@@ -282,7 +282,7 @@ flex (wrap) layout
 }
 .surface3 {
   background-color: var(--surface3);
-  color: var(--text1);
+  color: var(--text2);
 }
 .surface4 {
   background-color: var(--surface4);

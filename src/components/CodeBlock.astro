@@ -1,12 +1,12 @@
 ---
 const {title} = Astro.props;
 ---
-<div class="code-block-area card surface1">
+<div class="code-block-area card surface2">
   {
     title &&
     <b>{title}</b>
   }
-  <div class="code-block-wrap card surface3"><slot /></div>
+  <div class="code-block-wrap card surface1"><slot /></div>
 </div>
 
 <style>
@@ -18,7 +18,7 @@ const {title} = Astro.props;
     line-height: 1.5em;
     overflow-x: auto;
     white-space: pre;
-    scrollbar-color: var(--text2) var(--surface3);
+    scrollbar-color: var(--text2) var(--surface1);
     scrollbar-width: thin;
   }
   .code-block-wrap::-webkit-scrollbar { height: 0.75rem; }

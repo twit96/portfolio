@@ -138,38 +138,38 @@ html {
 }
 /* Schemes Set Surfaces */
 [data-scheme="monochromatic"] {
-  --surface1: hsl(var(--monochromatic-s1-hue) var(--s1-saturation) var(--s1-lightness));
-  --surface2: hsl(var(--monochromatic-s2-hue) var(--s2-saturation) var(--s2-lightness));
-  --surface3: hsl(var(--monochromatic-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface1: hsl(var(--monochromatic-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface2: hsl(var(--monochromatic-s1-hue) var(--s1-saturation) var(--s1-lightness));
+  --surface3: hsl(var(--monochromatic-s2-hue) var(--s2-saturation) var(--s2-lightness));
   --surface4: hsl(var(--monochromatic-s4-hue) var(--s4-saturation) var(--s4-lightness));
 }
 [data-scheme="analogous"] {
-  --surface1: hsl(var(--analogous-s1-hue) var(--s1-saturation) var(--s1-lightness));
-  --surface2: hsl(var(--analogous-s2-hue) var(--s2-saturation) var(--s2-lightness));
-  --surface3: hsl(var(--analogous-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface1: hsl(var(--analogous-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface2: hsl(var(--analogous-s1-hue) var(--s1-saturation) var(--s1-lightness));
+  --surface3: hsl(var(--analogous-s2-hue) var(--s2-saturation) var(--s2-lightness));
   --surface4: hsl(var(--analogous-s4-hue) var(--s4-saturation) var(--s4-lightness));
 }
 [data-scheme="complementary"] {
-  --surface1: hsl(var(--complementary-s1-hue) var(--s1-saturation) var(--s1-lightness));
-  --surface2: hsl(var(--complementary-s2-hue) var(--s2-saturation) var(--s2-lightness));
-  --surface3: hsl(var(--complementary-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface1: hsl(var(--complementary-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface2: hsl(var(--complementary-s1-hue) var(--s1-saturation) var(--s1-lightness));
+  --surface3: hsl(var(--complementary-s2-hue) var(--s2-saturation) var(--s2-lightness));
   --surface4: hsl(var(--complementary-s4-hue) var(--s4-saturation) var(--s4-lightness));
 }
 [data-scheme="triadic"] {
-  --surface1: hsl(var(--triadic-s1-hue) var(--s1-saturation) var(--s1-lightness));
-  --surface2: hsl(var(--triadic-s2-hue) var(--s2-saturation) var(--s2-lightness));
-  --surface3: hsl(var(--triadic-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface1: hsl(var(--triadic-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface2: hsl(var(--triadic-s1-hue) var(--s1-saturation) var(--s1-lightness));
+  --surface3: hsl(var(--triadic-s2-hue) var(--s2-saturation) var(--s2-lightness));
   --surface4: hsl(var(--triadic-s4-hue) var(--s4-saturation) var(--s4-lightness));
 }
 [data-scheme="split-complementary"] {
-  --surface1: hsl(var(--split-complementary-s1-hue) var(--s1-saturation) var(--s1-lightness));
-  --surface2: hsl(var(--split-complementary-s2-hue) var(--s2-saturation) var(--s2-lightness));
-  --surface3: hsl(var(--split-complementary-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface1: hsl(var(--split-complementary-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface2: hsl(var(--split-complementary-s1-hue) var(--s1-saturation) var(--s1-lightness));
+  --surface3: hsl(var(--split-complementary-s2-hue) var(--s2-saturation) var(--s2-lightness));
   --surface4: hsl(var(--split-complementary-s4-hue) var(--s4-saturation) var(--s4-lightness));
 }
 [data-scheme="tetradic"] {
-  --surface1: hsl(var(--tetradic-s1-hue) var(--s1-saturation) var(--s1-lightness));
-  --surface2: hsl(var(--tetradic-s2-hue) var(--s2-saturation) var(--s2-lightness));
-  --surface3: hsl(var(--tetradic-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface1: hsl(var(--tetradic-s3-hue) var(--s3-saturation) var(--s3-lightness));
+  --surface2: hsl(var(--tetradic-s1-hue) var(--s1-saturation) var(--s1-lightness));
+  --surface3: hsl(var(--tetradic-s2-hue) var(--s2-saturation) var(--s2-lightness));
   --surface4: hsl(var(--tetradic-s4-hue) var(--s4-saturation) var(--s4-lightness));
 }

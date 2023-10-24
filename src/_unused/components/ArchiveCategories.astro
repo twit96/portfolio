@@ -7,14 +7,14 @@ const allCategories = publishedPosts.map(post => post.data.category);
 const uniqueCategories = [...new Set(allCategories)];
 ---
 
-<nav class="card content-section surface1">
+<nav class="card content-section surface2">
   <h2>Filter By Category</h2>
   <ul class="chips">
     {
       uniqueCategories.map(category => (
         <li>
           <a
-            class="chip chip--lg btn surface3" 
+            class="chip chip--lg btn surface1" 
             href={`/archive/${category}/`}
             title={`View all posts categorized by "${category}"`}
           >&colon;{category}</a>

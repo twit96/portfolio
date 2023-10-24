@@ -35,7 +35,7 @@ function Search({ searchList }) {
             Having trouble finding something? Try your luck here!
           </p>
         </div>
-        <div className={styles.bar+" card"+(results && results.length>0 ? " surface4" : " surface1" )}>
+        <div className={styles.bar+" card"+(results && results.length>0 ? " surface4" : " surface2" )}>
           <svg
             height="1.5em"
             viewBox="0 0 512 512"
@@ -66,10 +66,10 @@ function Search({ searchList }) {
             <ul className={styles.results}>
               {
                 results.map((result, i) => (
-                  <li key={i} className={styles.result+" card surface3"}>
+                  <li key={i} className={styles.result+" card surface1"}>
 
                     <div className={styles.resultScore}>
-                      <b className="surface2">
+                      <b className="surface3">
                         {Math.round((1-result.score)*100)}% Match
                       </b>
                     </div>
