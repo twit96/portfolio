@@ -2,6 +2,7 @@
 import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
 import { getCollection } from 'astro:content';
 import ExpandedPreviewCard from '@components/PostPreviewCard/ExpandedPreviewCard.astro';
+import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
 import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
 
 let publishedBlogPosts = (await getCollection('posts')).filter(post => (
@@ -30,11 +31,7 @@ publishedBlogPosts.sort(function(a, b) {
     {/* No Posts - Nothing Here Card */}
     {
       (publishedBlogPosts.length === 0) &&
-      <ul class="layout layout--list">
-        <li>
-          <NothingHereCard />
-        </li>
-      </ul>
+      <NothingHereCard />
     }
 
     {/* Most Recent Post - Large Card */}
@@ -51,7 +48,7 @@ publishedBlogPosts.sort(function(a, b) {
           publishedBlogPosts.map((post, i) => (
             i>0 && 
             <li>
-              <ExpandedPreviewCard post={post} />
+              <CompactPreviewCard post={post} />
             </li>
           ))
         }
