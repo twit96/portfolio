@@ -59,9 +59,9 @@ html {
 
   /* Surface Saturation/Lightness Presets */
   --light-s1-saturation: 20%; --light-s1-lightness: 96%;
-  --light-s2-saturation: 50%; --light-s2-lightness: 88%;
-  --light-s3-saturation: 40%; --light-s3-lightness: 88%;
-  --light-s4-saturation: 60%; --light-s4-lightness: 81%;
+  --light-s2-saturation: 50%; --light-s2-lightness: 87%;
+  --light-s3-saturation: 40%; --light-s3-lightness: 90%;
+  --light-s4-saturation: 70%; --light-s4-lightness: 78%;
 
   --dark-s1-saturation: 10%;  --dark-s1-lightness: 20%;
   --dark-s2-saturation: 20%;  --dark-s2-lightness: 15%;
