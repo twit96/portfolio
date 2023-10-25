@@ -1,0 +1,109 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  hasBreadcrumbs="true"
+  title="Theme"
+  description="Tyler Wittig's Site Theme Testing"
+>
+  
+  <section>
+    <div class="wrapper">
+      <h1>Theme Testing</h1>
+    </div>
+    <div class="card content-section surface0 wrapper">
+
+
+      <div class="color-wrap">
+        <h2>--brand</h2>
+        <div class="theme-color card" style="background:var(--brand);"></div>
+      </div>
+      
+
+      <div
+        class="custom-scrollbar layout layout--flex-scroll"
+        style="--_base-size:12rem; --_track-margin: var(--radius-lg);"
+      >
+        <div class="layout--flex-scroll__inner">
+
+          <div class="color-wrap">
+            <h2>--surface0</h2>
+            <div class="theme-color card" style="background:var(--surface0);">
+              <div class="theme-sub-color btn" style="background:var(--text1);"></div>
+            </div>
+          </div>
+          
+          <div class="color-wrap">
+            <h2>--surface1</h2>
+            <div class="theme-color card" style="background:var(--surface1);">
+              <div class="theme-sub-color btn" style="background:var(--text1);"></div>
+            </div>
+          </div>
+          
+          <div class="color-wrap">
+            <h2>--surface2</h2>
+            <div class="theme-color card" style="background:var(--surface2);">
+              <div class="theme-sub-color btn" style="background:var(--text2);"></div>
+            </div>
+          </div>
+
+          <div class="color-wrap">
+            <h2>--surface3</h2>
+            <div class="theme-color card" style="background:var(--surface3);">
+              <div class="theme-sub-color btn" style="background:var(--text2);"></div>
+            </div>
+          </div>
+          
+          <div class="color-wrap">
+            <h2>--surface4</h2>
+            <div class="theme-color card" style="background:var(--surface4);">
+              <div class="theme-sub-color btn" style="background:var(--text1);"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div
+        class="custom-scrollbar layout layout--flex-scroll"
+        style="--_track-margin: var(--radius-lg);"
+      >
+        <div class="layout--flex-scroll__inner">
+
+          <div class="color-wrap">
+            <h2>--text1</h2>
+            <div class="theme-color card" style="background:var(--text1);"></div>
+          </div>
+
+          <div class="color-wrap">
+            <h2>--text2</h2>
+            <div class="theme-color card" style="background:var(--text2);"></div>
+          </div>
+
+          <div class="color-wrap">
+            <h2>--link</h2>
+            <div class="theme-color card" style="background:var(--link);"></div>
+          </div>
+
+        </div>
+      </div>
+
+      
+      <div class="color-wrap">
+        <h2>--surface-shadow</h2>
+        <div class="theme-color card" style="background:oklch(var(--surface-shadow));"></div>
+      </div>
+
+      
+    </div>
+  </section>
+
+</BaseLayout>
+
+
+<style>
+  .theme-color { height: 12ch; }
+  .theme-sub-color { height: 1.5ch; }
+</style>
