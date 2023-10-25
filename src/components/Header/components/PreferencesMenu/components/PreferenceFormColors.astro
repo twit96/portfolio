@@ -31,7 +31,7 @@ import PreferenceOptionTitle from  "./PreferenceOptionTitle.astro";
               <span
                 slot="preview"
                 class="preview--color"
-                style={`background: hsl( var(--${color}-h) var(--${color}-s) var(--${color}-l) )`}
+                style={`background: oklch( var(--${color}-l) var(--${color}-c) var(--${color}-h) )`}
               ></span>
               <PreferenceOptionTitle slot="title">{color}</PreferenceOptionTitle>
             </PreferenceOption>

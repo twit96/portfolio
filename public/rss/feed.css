@@ -1,14 +1,14 @@
 /* ---------- Variables ---------- */
 
 html {
-  --brand: hsl(16, 88%, 54%);
+  --brand: oklch(65.98% 0.197 38.31);
   --surface0: #ffffff;
-  --surface2: hsl(16, 30%, 88%);
-  --surface1: hsl(16, 20%, 96%);
-  --link: hsl(16, 88%, 30%);
-  --text1: hsl(16, 88%, 10%);
-  --text2: hsl(16, 30%, 30%);
-  --surface-shadow: 16 10% 20%;
+  --surface1: oklch(96.87% 0.004 41.28);
+  --surface2: oklch(90.43% 0.016 41.17);
+  --link: oklch(44.29% 0.14 37.48);
+  --text1: oklch(21.97% 0.058 41.75);
+  --text2: oklch(41.33% 0.051 40.79);
+  --surface-shadow: 31.87% 0.012 41.06;
   --shadow-strength: 0.02;
 }
 
@@ -89,8 +89,8 @@ a {
 
 .shadow-sm {
   box-shadow:
-    0 0 2.8px 2.2px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .03)),
-    0 0 6.7px 5.3px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .01));
+    0 0 2.8px 2.2px oklch(var(--surface-shadow) / calc(var(--shadow-strength) + .03)),
+    0 0 6.7px 5.3px oklch(var(--surface-shadow) / calc(var(--shadow-strength) + .01));
 }
 
 .surface0 {
