@@ -79,13 +79,13 @@ html {
   --triadic-s3-hue: calc(var(--brand-hue) + 120);
   --triadic-s4-hue: calc(var(--brand-hue) + 240);
 
-  --split-complementary-s1-hue: calc(var(--brand-hue) + 180);
-  --split-complementary-s2-hue: var(--brand-hue);
+  --split-complementary-s1-hue: var(--brand-hue);
+  --split-complementary-s2-hue: calc(var(--brand-hue) + 180);
   --split-complementary-s3-hue: calc(var(--brand-hue) + 40);
   --split-complementary-s4-hue: calc(var(--brand-hue) + 220);
 
-  --tetradic-s1-hue: calc(var(--brand-hue) + 180);
-  --tetradic-s2-hue: var(--brand-hue);
+  --tetradic-s1-hue: var(--brand-hue);
+  --tetradic-s2-hue: calc(var(--brand-hue) + 180);
   --tetradic-s3-hue: calc(var(--brand-hue) + 280);
   --tetradic-s4-hue: calc(var(--brand-hue) + 100);
 }
