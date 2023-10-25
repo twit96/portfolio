@@ -15,18 +15,18 @@ import PreferenceOptionTitle from  "./PreferenceOptionTitle.astro";
       <div class="layout--flex-scroll__inner">
         {
           [
-            "red", 
             "pink", 
             "purple", 
             "blue", 
             "green", 
             "yellow", 
-            "orange"
+            "orange",
+            "red"
           ].map((color) => (
             <PreferenceOption
               name="color"
               value={color}
-              title={color}
+              title={`Set theme color to ${color}`}
             >
               <span
                 slot="preview"

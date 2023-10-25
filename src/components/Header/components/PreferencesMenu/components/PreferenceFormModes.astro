@@ -8,7 +8,12 @@ import PreferencesFieldset from "./PreferencesFieldset.astro";
     <b>Dark Theme</b>
     <label class="dark-toggle">
       <span style="display:none;">Toggle Dark Theme</span>
-      <input type="checkbox" name="mode" id="dark-toggle-input" />
+      <input
+        id="dark-toggle-input"
+        name="mode"
+        title="Toggle dark theme"
+        type="checkbox"
+      />
       <span class="slider"></span>
     </label>
   </PreferencesFieldset>
@@ -43,6 +48,7 @@ import PreferencesFieldset from "./PreferencesFieldset.astro";
     inset: 0;
     opacity: 0;
     position: absolute;
+    z-index: 1;
   }
 
   /* slider */
