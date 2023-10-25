@@ -32,7 +32,7 @@ a {
   font-weight: 600;
 }
 @media (hover: hover) {
-  a:not(.btn):hover { background-color: Canvas; }
+  a:not(.btn):hover { background-color: var(--surface0); }
   a:hover,
   button:hover { filter: var(--hover-filter); }
 }
@@ -269,7 +269,7 @@ flex (wrap) layout
 
 
 .surface0 {
-  background-color: Canvas;
+  background-color: var(--surface0);
   color: var(--text1);
 }
 .surface1 {

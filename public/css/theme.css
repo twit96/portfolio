@@ -46,11 +46,13 @@ html {
 
 
   /* Surface Lightness/Chroma Presets */
-  --light-s1-lightness: 97%;  --light-s1-chroma: 0.004;
-  --light-s2-lightness: 89%;  --light-s2-chroma: 0.03;
-  --light-s3-lightness: 92%;  --light-s3-chroma: 0.018;
-  --light-s4-lightness: 83%;  --light-s4-chroma: 0.064;
+  --light-s0-lightness: 100%;  --light-s0-chroma: 0.005;
+  --light-s1-lightness: 97%;  --light-s1-chroma: 0.01;
+  --light-s2-lightness: 92%;  --light-s2-chroma: 0.02;
+  --light-s3-lightness: 92%;  --light-s3-chroma: 0.03;
+  --light-s4-lightness: 83%;  --light-s4-chroma: 0.09;
 
+  --dark-s0-lightness: 18%;  --dark-s0-chroma: 0.006;
   --dark-s1-lightness: 32%;  --dark-s1-chroma: 0.012;
   --dark-s2-lightness: 26.5%;  --dark-s2-chroma: 0.018;
   --dark-s3-lightness: 36.34%;  --dark-s3-chroma: 0.028;
@@ -98,14 +100,16 @@ html {
   --text2: var(--light-text2);
   --link: var(--light-link);
 
-  --s1-chroma: var(--light-s1-chroma);
+  --s0-lightness: var(--light-s0-lightness);
+  --s0-chroma: var(--light-s0-chroma);
   --s1-lightness: var(--light-s1-lightness);
-  --s2-chroma: var(--light-s2-chroma);
+  --s1-chroma: var(--light-s1-chroma);
   --s2-lightness: var(--light-s2-lightness);
-  --s3-chroma: var(--light-s3-chroma);
+  --s2-chroma: var(--light-s2-chroma);
   --s3-lightness: var(--light-s3-lightness);
-  --s4-chroma: var(--light-s4-chroma);
+  --s3-chroma: var(--light-s3-chroma);
   --s4-lightness: var(--light-s4-lightness);
+  --s4-chroma: var(--light-s4-chroma);
 
   --surface-shadow: var(--light-surface-shadow);
   --shadow-strength: var(--light-shadow-strength);
@@ -119,14 +123,16 @@ html {
   --text2: var(--dark-text2);
   --link: var(--dark-link);
 
-  --s1-chroma: var(--dark-s1-chroma);
+  --s0-lightness: var(--dark-s0-lightness);
+  --s0-chroma: var(--dark-s0-chroma);
   --s1-lightness: var(--dark-s1-lightness);
-  --s2-chroma: var(--dark-s2-chroma);
+  --s1-chroma: var(--dark-s1-chroma);
   --s2-lightness: var(--dark-s2-lightness);
-  --s3-chroma: var(--dark-s3-chroma);
+  --s2-chroma: var(--dark-s2-chroma);
   --s3-lightness: var(--dark-s3-lightness);
-  --s4-chroma: var(--dark-s4-chroma);
+  --s3-chroma: var(--dark-s3-chroma);
   --s4-lightness: var(--dark-s4-lightness);
+  --s4-chroma: var(--dark-s4-chroma);
 
   --surface-shadow: var(--dark-surface-shadow);
   --shadow-strength: var(--dark-shadow-strength);
@@ -138,6 +144,7 @@ html {
 /* ---------- Resulting HSL Values ---------- */
 html {
   --brand: oklch(var(--brand-lightness) var(--brand-chroma) var(--brand-hue));
+  --surface0: oklch(var(--s0-lightness) var(--s0-chroma) var(--brand-hue));
 }
 /* Schemes Set Surfaces */
 [data-scheme="monochromatic"] {
