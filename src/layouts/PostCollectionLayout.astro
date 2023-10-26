@@ -5,12 +5,15 @@ const { title, numPosts=0 } = Astro.props;
 <BaseLayout {...Astro.props}>
   <section>
 
-    <div class="wrapper">
+    <div
+      class="content-section wrapper"
+      style="--_content-gap:0.5rem;"
+    >
       <h1>{title}</h1>
       <div class="info"><slot name="info" /></div>  {/* Collection Info */}
       {
         numPosts > 0 &&
-        <h2 class="heading--diminished">
+        <h2 class="heading--reduce">
           {numPosts}
           Entr{numPosts === 0 || numPosts > 1 ? "ies" : "y"}
         </h2>
@@ -26,6 +29,6 @@ const { title, numPosts=0 } = Astro.props;
 
 
 <style>
-  .info { margin-block: 1rem; }
+  .info { margin-bottom: 1rem; }
   .info:empty { display: none; }
 </style>
