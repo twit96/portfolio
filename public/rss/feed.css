@@ -81,10 +81,10 @@ a {
 }
 
 .content-section {
-  --_content-gap: 1em;
+  --_gap: 1em;
   display: flex;
   flex-direction: column;
-  gap: var(--_content-gap);
+  gap: var(--_gap);
 }
 
 .shadow-sm {

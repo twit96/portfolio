@@ -20,7 +20,7 @@ const post = Astro.props;
     {/* Left */}
     <div
       class="content-section"
-      style="--_content-gap:1rem;"
+      style="--_gap:1rem;"
     >
       {
         post.title &&
@@ -34,7 +34,7 @@ const post = Astro.props;
       <div
         class="card content-section surface3"
         id="post-blurb-area"
-        style="--_content-gap:0.5rem;"
+        style="--_gap:0.5rem;"
       >
         {
           post.blurb &&
@@ -80,7 +80,7 @@ const post = Astro.props;
       post.links && (
         <div 
           class="card content-section surface2"
-          style="--_content-gap:0.5rem;"
+          style="--_gap:0.5rem;"
         >
           <h2 class="heading--reduce">Links</h2>
           <ul>
@@ -111,7 +111,7 @@ const post = Astro.props;
       post.tags && 
       <div
         class="card content-section surface1"
-        style="--_content-gap:1rem;"
+        style="--_gap:1rem;"
       >
         <h2 class="heading--reduce">Tags</h2>
         <PostTags tags={post.tags} />

@@ -142,7 +142,7 @@
 
               <div
                 class="content-section"
-                style="--_content-gap:0.5rem;"
+                style="--_gap:0.5rem;"
               >
                 <xsl:for-each select="/rss/channel/item[5 &gt;= position()]">
                   <article class="card surface1">
