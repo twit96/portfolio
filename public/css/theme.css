@@ -38,7 +38,7 @@ html {
   /* Text Color Presets */
   --light-text1: oklch(20% 0.05 var(--brand-hue));
   --light-text2: oklch(40% 0.05 var(--brand-hue));
-  --light-link: oklch(50% 0.15 var(--brand-hue));
+  --light-link: oklch(40% 0.15 var(--brand-hue));
 
   --dark-text1: oklch(88% 0.01 var(--brand-hue));
   --dark-text2: oklch(72% 0.008 var(--brand-hue));
