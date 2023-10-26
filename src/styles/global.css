@@ -74,10 +74,9 @@ h6 { --_font-size: 0.9rem; }
 /* used in some instances to balance heading text size */
 .heading--reduce { font-size: calc(var(--_font-size) * 0.75); }
 
-/* Make a heading look like normal text */
+/* Make a heading look like normal sized bolded text */
 .heading--diminished {
   --_font-size: 1rem;
-  font-weight: 500;
   line-height: 1.6;
 }
 
