@@ -45,8 +45,8 @@ a.underline-on-hover { text-decoration: none; }
 
 body {
   font-family: 'Nunito Variable', sans-serif;
-  line-height: 1.6;
   font-weight: 500;
+  line-height: 1.6;
 }
 
 button { border-color: transparent; }
