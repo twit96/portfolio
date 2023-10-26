@@ -64,10 +64,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.25;
   text-wrap: balance;
 }
-h1 {
-  --_font-size: 2.5rem;
-  padding-bottom: 0.25rem;
-}
+h1 { --_font-size: 2.5rem; }
 h2 { --_font-size: 2rem; }
 h3 { --_font-size: 1.5rem; }
 h4 { --_font-size: 1.25rem; }
