@@ -55,7 +55,7 @@ function Search({ searchList }) {
         </div>
         {query.length > 0 && (
           <p>
-            Found {results.length} {results.length === 1 ? "result" : "results"} for "{query}"
+            Found {results.length} {results.length === 1 ? "result" : "results"} for &ldquo;{query}&rdquo;
           </p>
         )}
       </div>
