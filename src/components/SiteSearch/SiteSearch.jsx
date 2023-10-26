@@ -62,7 +62,7 @@ function Search({ searchList }) {
 
       {
         query.length > 0 && results && results.length > 0 && (
-          <div className="surface0 card wrapper">
+          <div className="card shadow-sm surface0 wrapper">
             <ul className={styles.results}>
               {
                 results.map((result, i) => (
