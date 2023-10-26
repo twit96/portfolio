@@ -48,8 +48,8 @@ html {
   /* Surface Lightness/Chroma Presets */
   --light-s0-lightness: 100%;  --light-s0-chroma: 0.005;
   --light-s1-lightness: 97%;  --light-s1-chroma: 0.01;
-  --light-s2-lightness: 93%;  --light-s2-chroma: 0.02;
-  --light-s3-lightness: 90%;  --light-s3-chroma: 0.04;
+  --light-s2-lightness: 90%;  --light-s2-chroma: 0.04;
+  --light-s3-lightness: 93%;  --light-s3-chroma: 0.02;
   --light-s4-lightness: 83%;  --light-s4-chroma: 0.09;
 
   --dark-s0-lightness: 18%;  --dark-s0-chroma: 0.006;
