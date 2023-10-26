@@ -5,7 +5,7 @@ const { title, numPosts=0 } = Astro.props;
 <BaseLayout {...Astro.props}>
   <section>
 
-    <div class="content-section wrapper">
+    <div class="wrapper">
       <h1>{title}</h1>
       <div class="info"><slot name="info" /></div>  {/* Collection Info */}
       {
@@ -26,5 +26,6 @@ const { title, numPosts=0 } = Astro.props;
 
 
 <style>
+  .info { margin-block: 1rem; }
   .info:empty { display: none; }
 </style>
