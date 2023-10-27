@@ -15,7 +15,6 @@ import MetadataTags from './components/MetadataTags.astro';
 import OpenGraphTags from './components/OpenGraphTags.astro';
 import TwitterTags from './components/TwitterTags.astro';
 import RushUserPreferences from './components/RushUserPreferences.astro';
-import GlobalJavaScript from './components/GlobalJavaScript.astro';
 
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -49,4 +48,3 @@ const page_title = title ? `${title} | ${author ? author : SITE_AUTHOR}` : SITE_
 />
 
 <RushUserPreferences />
-<GlobalJavaScript />

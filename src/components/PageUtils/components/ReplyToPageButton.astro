@@ -70,6 +70,28 @@ import { CONTACT_EMAIL } from '@consts';
     }
     updateBtn();
 
+    /**
+     * Throttle:
+     * Fire a function once every set number of milliseconds
+     * during a burst of calls.
+     * 
+     * (Fires at the end of each timeout period instead of the beginning
+     * to ensure bursts shorter than the timeout delay will trigger a fire).
+    */
+    const throttle = (func, delay) => {
+      let inProgress = false;
+      return (...args) => {
+        if (inProgress) {
+          return;
+        }
+        inProgress = true;
+        setTimeout(() => {
+          func(...args);
+          inProgress = false;
+        }, delay);
+      }
+    };
+
     // Manage Scroll Top Btn State
     window.addEventListener('scroll', throttle(() => {
       updateBtn();

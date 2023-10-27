@@ -132,6 +132,28 @@ import NavigationLinks from '@components/NavigationLinks.astro';
     const header = document.querySelector('header');
     if (!header) return false;
 
+    /**
+     * Throttle:
+     * Fire a function once every set number of milliseconds
+     * during a burst of calls.
+     * 
+     * (Fires at the end of each timeout period instead of the beginning
+     * to ensure bursts shorter than the timeout delay will trigger a fire).
+    */
+    const throttle = (func, delay) => {
+      let inProgress = false;
+      return (...args) => {
+        if (inProgress) {
+          return;
+        }
+        inProgress = true;
+        setTimeout(() => {
+          func(...args);
+          inProgress = false;
+        }, delay);
+      }
+    };
+
     // add header shadow when user scrolls down and remove it when they scroll back to the top
     window.addEventListener('scroll', throttle(() => {
       
