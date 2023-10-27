@@ -16,7 +16,10 @@ import PageUtils from '@components/PageUtils/index.astro';
 >
   <Head {...Astro.props} />
 
-  <body class="surface1">
+  <body
+    class="custom-scrollbar surface1"
+    style="--_scrollbar--size:1rem; --_scrollbar--track-color:var(--surface2); --_scrollbar--track-radius:0;"
+  >
     <SVGDefinitions />
     <Header />
     <main>
