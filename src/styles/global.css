@@ -234,9 +234,7 @@ flex (wrap) layout
   display: none;
   filter: var(--_modal-bg-filter);
   inset: 0;
-  min-height: 100vh;  /* fallback for lvh on next line */
   min-height: 100lvh;
-  min-width: 100vw;  /* fallback for lvw on next line */
   min-width: 100lvw;
   opacity: 0.75;
   position: fixed;
