@@ -18,7 +18,7 @@ import PageUtils from '@components/PageUtils/index.astro';
 
   <body
     class="custom-scrollbar surface1"
-    style="--_scrollbar--size:1rem; --_scrollbar--track-color:var(--surface2); --_scrollbar--track-radius:0;"
+    style="--_scrollbar--size:1rem; --_scrollbar--track-radius:0;"
   >
     <SVGDefinitions />
     <Header />
@@ -38,6 +38,11 @@ import PageUtils from '@components/PageUtils/index.astro';
 </html>
 
 <style>
+  body::-webkit-scrollbar-track {
+    box-shadow:
+      0 0 2.8px 2.2px oklch(var(--surface-shadow) / calc(var(--shadow-strength) + .03)) inset,
+      0 0 6.7px 5.3px oklch(var(--surface-shadow) / calc(var(--shadow-strength) + .01)) inset;
+  }
   .wrapper {
     width: var(--page-width);
     max-width: 100%;
