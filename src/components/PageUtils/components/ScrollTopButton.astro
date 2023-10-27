@@ -49,29 +49,20 @@
     }
 
     /**
-     * Throttle:
-     * Fire a function once every set number of milliseconds
-     * during a burst of calls.
-     * 
-     * (Fires at the end of each timeout period instead of the beginning
-     * to ensure bursts shorter than the timeout delay will trigger a fire).
+     * Debounce:
+     * Fire a function exactly once after a set delay (in milliseconds)
+     * at the end of a burst of calls.
     */
-    const throttle = (func, delay) => {
-      let inProgress = false;
+    const debounce = (func, delay) => {
+      let timerId;
       return (...args) => {
-        if (inProgress) {
-          return;
-        }
-        inProgress = true;
-        setTimeout(() => {
-          func(...args);
-          inProgress = false;
-        }, delay);
-      }
+        clearTimeout(timerId);
+        timerId = setTimeout(func, delay, [...args]);
+      };
     };
 
     // Manage Scroll Top Btn State
-    window.addEventListener('scroll', throttle(() => {
+    window.addEventListener('scroll', debounce(() => {
       if (scrollTopBtn) {
 
         const scroll_top_trigger_height = document.documentElement.clientHeight * 0.75;
