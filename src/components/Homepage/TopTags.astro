@@ -84,14 +84,14 @@ if (tagsByCountArray.length > 5) tagsByCountArray.length = 5;
   <h2>Top Tags</h2>
   <ul
     class="btns layout layout--list"
-    style="--_gap:0.125rem;"
+    style="--_layout--gap:0.125rem;"
   >
     {
       tagsByCountArray.map(([count, tags]) => (
         <li>
           <ul
             class="btns layout layout--list"
-            style="--_gap: 0.125rem;--_base-size:15rem;"
+            style="--_layout--gap: 0.125rem;--_layout--base-size:15rem;"
           >
             {
               tags.map(tag => (

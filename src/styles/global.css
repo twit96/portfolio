@@ -133,10 +133,10 @@ main { flex: 1; }
 
 
 .content-section {
-  --_gap: 1em;
+  --_content--gap: 1em;
   display: flex;
   flex-direction: column;
-  gap: var(--_gap);
+  gap: var(--_content--gap);
 }
 
 
@@ -178,16 +178,16 @@ main { flex: 1; }
 
 /* Layout Containers */
 .layout {
-  --_base-size: 18rem;
-  --_gap: 1rem;
-  gap: var(--_gap);
+  --_layout--base-size: 18rem;
+  --_layout--gap: 1rem;
+  gap: var(--_layout--gap);
   list-style: none;
 }
 
 /* grid layout */
 .layout--grid {
   display: grid;
-  grid-template-columns: repeat( auto-fill, minmax( min(var(--_base-size), 100%), 1fr) );
+  grid-template-columns: repeat( auto-fill, minmax( min(var(--_layout--base-size), 100%), 1fr) );
 }
 
 /* list layout */
@@ -202,12 +202,12 @@ main { flex: 1; }
   flex-wrap: wrap;
 }
 .layout--flex-fill > * {
-  flex-basis: var(--_base-size);
+  flex-basis: var(--_layout--base-size);
   flex-grow: 1;
   min-width: 0;
 }
 /* .layout--flex-fill > *:nth-of-type(6n) {
-  flex-basis: calc(var(--_base-size) * 2);
+  flex-basis: calc(var(--_layout--base-size) * 2);
 } */
 
 /*
@@ -217,12 +217,12 @@ flex (wrap) layout
 .layout--flex-scroll.custom-scrollbar { overflow-x: auto; }
 .layout--flex-scroll__inner {
   display: flex;
-  gap: var(--_gap);
+  gap: var(--_layout--gap);
   list-style: none;
   padding-bottom: 0.5rem;
 }
 .layout--flex-scroll__inner > * {
-  flex-basis: var(--_base-size);
+  flex-basis: var(--_layout--base-size);
   flex-grow: 1;
   flex-shrink: 0;
 }
