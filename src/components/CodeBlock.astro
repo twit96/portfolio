@@ -6,7 +6,10 @@ const {title} = Astro.props;
     title &&
     <b>{title}</b>
   }
-  <div class="code-block-wrap card surface1"><slot /></div>
+  <div
+    class="code-block-wrap card custom-scrollbar surface1"
+    style="--_scrollbar--track-margin:var(--radius-lg);"
+  ><slot /></div>
 </div>
 
 <style>
@@ -18,16 +21,5 @@ const {title} = Astro.props;
     line-height: 1.5em;
     overflow-x: auto;
     white-space: pre;
-    scrollbar-color: var(--text2) var(--surface1);
-    scrollbar-width: thin;
-  }
-  .code-block-wrap::-webkit-scrollbar { height: 0.75rem; }
-  .code-block-wrap::-webkit-scrollbar-track { margin-inline: var(--radius-lg); }
-  .code-block-wrap::-webkit-scrollbar-thumb {
-    background: var(--text2);
-    border-radius: 0.75rem;
-  }
-  @media (hover: hover) {
-    .code-block-wrap::-webkit-scrollbar-thumb:hover { background: var(--brand); }
   }
 </style>

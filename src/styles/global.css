@@ -147,32 +147,32 @@ main { flex: 1; }
 
 
 .custom-scrollbar {
-  --_bar-size: 0.5rem;
-  --_bar-size-firefox: thin;
-  --_track-radius: var(--_bar-size);
-  --_thumb-radius: var(--_bar-size);
-  --_track-color: transparent;
-  --_track-margin: 0;
-  --_thumb-color: var(--text2);
-  --_thumb-hover-color: var(--link);
-  scrollbar-color: var(--_thumb-color) var(--_track-color);
-  scrollbar-width: var(--_bar-size-firefox);
+  --_scrollbar--size: 0.75rem;
+  --_scrollbar--size-firefox: thin;
+  --_scrollbar--track-radius: var(--_scrollbar--size);
+  --_scrollbar--thumb-radius: var(--_scrollbar--size);
+  --_scrollbar--track-color: transparent;
+  --_scrollbar--track-margin: 0;
+  --_scrollbar--thumb-color: var(--link);
+  --_scrollbar--thumb-hover-color: var(--text2);
+  scrollbar-color: var(--_scrollbar--thumb-color) var(--_scrollbar--track-color);
+  scrollbar-width: var(--_scrollbar--size-firefox);
 }
 .custom-scrollbar::-webkit-scrollbar {
-  height: var(--_bar-size);
-  width: var(--_bar-size);
+  height: var(--_scrollbar--size);
+  width: var(--_scrollbar--size);
 }
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: var(--_track-color);
-  border-radius: var(--_track-radius);
-  margin: var(--_track-margin);
+  background: var(--_scrollbar--track-color);
+  border-radius: var(--_scrollbar--track-radius);
+  margin: var(--_scrollbar--track-margin);
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--_thumb-color);
-  border-radius: var(--_thumb-radius);
+  background: var(--_scrollbar--thumb-color);
+  border-radius: var(--_scrollbar--thumb-radius);
 }
 @media (hover: hover) {
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--_thumb-hover-color); }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--_scrollbar--thumb-hover-color); }
 }
 
 
