@@ -15,6 +15,7 @@
   </svg>
 </button>
 
+
 <style>
   button {
     background: var(--link);
@@ -32,9 +33,10 @@
   }
 </style>
 
-<script>
 
+<script>
   function configScrollTopBtn() {
+
     let scrollTopBtn = document.getElementById("scroll-top");
     if (!scrollTopBtn) return false;
 
@@ -45,20 +47,6 @@
         behavior: 'smooth'
       });
     }
-
-    const throttle = (func, delay) => {
-      let inProgress = false;
-      return (...args) => {
-        if (inProgress) {
-          return;
-        }
-        inProgress = true;
-        setTimeout(() => {
-          func(...args);
-          inProgress = false;
-        }, delay);
-      }
-    };
 
     // Manage Scroll Top Btn State
     window.addEventListener('scroll', throttle(() => {
@@ -79,8 +67,7 @@
 
       }
     }, 100), false);
+
   }
   configScrollTopBtn();
-
-  
 </script>

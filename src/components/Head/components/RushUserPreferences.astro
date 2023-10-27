@@ -1,0 +1,51 @@
+---
+// Set User Preferences before page load to prevent flash.
+---
+<link rel="stylesheet" href="/css/theme.css" />
+<script is:inline>
+
+	/**
+	 * Reset local storage if refactor has occured.
+	 */
+	function handleStorageChanges() {
+		const lrs = "202310231438";  // Last Refactored Storage Date
+		let stored_lrs = localStorage.getItem("lrs");
+		if (stored_lrs!==lrs) {
+			localStorage.clear();
+			localStorage.setItem("lrs", lrs);
+		}
+	}
+	handleStorageChanges();
+
+
+	/**
+	 * Set user preferences.
+	 */
+	function rushUserPreferences() {
+		
+		const defaults = {
+			mode: "light",
+			color: "blue",
+			scheme: "monochromatic"
+		};
+
+		let html = document.documentElement;
+
+		// html data attributes
+		Object.keys(defaults).forEach(k => {
+			let stored_key = localStorage.getItem(k);
+			if (!stored_key) {
+				localStorage.setItem(k, defaults[k]);
+				stored_key = defaults[k];
+			}
+			html.dataset[k] = stored_key;
+		});
+
+		// meta theme color
+		const theme_color = getComputedStyle(html).getPropertyValue("--surface1");
+		const meta_theme_color = document.querySelector("meta[name=\"theme-color\"]");
+		meta_theme_color.setAttribute("content", theme_color);
+	}
+	rushUserPreferences();
+
+</script>

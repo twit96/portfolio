@@ -1,0 +1,24 @@
+---
+const {
+  canonicalURL,
+  page_title,
+  description,
+  author
+} = Astro.props;
+---
+
+{/* Global Metadata */}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" href="/img/favicon.png" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="generator" content={Astro.generator} />
+
+{/* Canonical URL */}
+<link rel="canonical" href={canonicalURL} />
+
+{/* Primary Meta Tags */}
+<title>{page_title}</title>
+<meta name="title" content={page_title} />
+<meta name="description" content={description} />
+<meta name="author" content={author}>

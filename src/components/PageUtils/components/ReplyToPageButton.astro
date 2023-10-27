@@ -43,32 +43,10 @@ import { CONTACT_EMAIL } from '@consts';
 
 
 <script>
-
   function configReplyToPageBtn() {
+
     let replyBtn = document.getElementById("reply-to-page-btn");
     if (!replyBtn) return false;
-
-    replyBtn.onclick = function() {
-      window.scroll({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      });
-    }
-
-    const throttle = (func, delay) => {
-      let inProgress = false;
-      return (...args) => {
-        if (inProgress) {
-          return;
-        }
-        inProgress = true;
-        setTimeout(() => {
-          func(...args);
-          inProgress = false;
-        }, delay);
-      }
-    };
 
     function updateBtn() {
       if (replyBtn) {
@@ -96,7 +74,7 @@ import { CONTACT_EMAIL } from '@consts';
     window.addEventListener('scroll', throttle(() => {
       updateBtn();
     }, 100), false);
+
   }
   configReplyToPageBtn();
-  
 </script>
