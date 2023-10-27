@@ -4,7 +4,7 @@ import SVGDefinitions from '@components/SVGDefinitions.astro';
 import Header from '@components/Header/index.astro';
 import Breadcrumbs from "@components/Breadcrumbs.astro";
 import Footer from '@components/Footer.astro';
-import ScrollTopButton from '@components/ScrollTopButton.astro';
+import PageUtils from '@components/PageUtils/index.astro';
 ---
 
 <!DOCTYPE html>
@@ -21,13 +21,15 @@ import ScrollTopButton from '@components/ScrollTopButton.astro';
     <Header />
     <main>
       {
-        Astro.props.hasBreadcrumbs==="true" &&
+        Astro.props.hasBreadcrumbs===true &&
         <Breadcrumbs />
       }
       <slot />
     </main>
     <Footer />
-    <ScrollTopButton />
+    <PageUtils
+      hasReplyToPageButton={Astro.props.hasReplyToPageButton || false}
+    />
   </body>
 
 </html>

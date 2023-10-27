@@ -1,0 +1,27 @@
+---
+import ReplyToPageButton from "./components/ReplyToPageButton.astro";
+import ScrollTopButton from "./components/ScrollTopButton.astro";
+
+const { hasReplyToPageButton } = Astro.props;
+---
+
+<div
+  class="layout layout--list"
+  style="--_gap:0.5rem;"
+>
+  <ScrollTopButton />
+  {
+    hasReplyToPageButton===true &&
+    <ReplyToPageButton />
+  }
+</div>
+
+
+<style>
+  div {
+    position: fixed;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    place-items: end;
+  }
+</style>

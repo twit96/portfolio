@@ -7,7 +7,11 @@ type Props = CollectionEntry<'posts'>['data'];
 const post = Astro.props;
 ---
 
-<BaseLayout hasBreadcrumbs="true" {...Astro.props}>
+<BaseLayout
+  hasBreadcrumbs={true}
+  hasReplyToPageButton={post.category==="blog"}
+  {...Astro.props}
+>
 
 
   {/* Post Header Area */}
