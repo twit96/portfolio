@@ -54,4 +54,4 @@ const page_title = title ? `${title} | ${author ? author : SITE_AUTHOR}` : SITE_
 
 <RushUserPreferences />
 
-{ server_is_production && <GoogleAnalytics /> }
+{ server_is_production===true && <GoogleAnalytics /> }
