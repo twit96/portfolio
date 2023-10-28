@@ -9,7 +9,10 @@ import '@fontsource-variable/nunito';
 import '@fontsource/pacifico';
 
 
-import { SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE, SITE_AUTHOR } from '@consts.js';
+import {
+  PRODUCTION_HOST,
+  SITE_TITLE, SITE_DESCRIPTION, SITE_IMAGE, SITE_AUTHOR
+} from '@consts.js';
 
 import MetadataTags from './components/MetadataTags.astro';
 import OpenGraphTags from './components/OpenGraphTags.astro';
@@ -50,4 +53,7 @@ const page_title = title ? `${title} | ${author ? author : SITE_AUTHOR}` : SITE_
 
 <RushUserPreferences />
 
-<GoogleAnalytics />
+{
+  Astro.url.host === PRODUCTION_HOST &&
+  <GoogleAnalytics />
+}
