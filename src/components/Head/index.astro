@@ -20,7 +20,6 @@ import TwitterTags from './components/TwitterTags.astro';
 import RushUserPreferences from './components/RushUserPreferences.astro';
 import GoogleAnalytics from './components/GoogleAnalytics.astro';
 
-const isProd = import.meta.env.PROD;  // only add Google Analytics in production environment
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const {
@@ -53,4 +52,4 @@ const page_title = title ? `${title} | ${author ? author : SITE_AUTHOR}` : SITE_
 
 <RushUserPreferences />
 
-{ isProd && <GoogleAnalytics /> }
+<GoogleAnalytics />
