@@ -22,6 +22,10 @@ import PageUtils from '@components/PageUtils/index.astro';
   >
     <SVGDefinitions />
     <Header />
+    <PageUtils
+      hasTableOfContents={Astro.props.hasTableOfContents || false}
+      hasReplyToPageButton={Astro.props.hasReplyToPageButton || false}
+    />
     <main>
       {
         Astro.props.hasBreadcrumbs===true &&
@@ -30,10 +34,6 @@ import PageUtils from '@components/PageUtils/index.astro';
       <slot />
     </main>
     <Footer />
-    <PageUtils
-      hasTableOfContents={Astro.props.hasTableOfContents || false}
-      hasReplyToPageButton={Astro.props.hasReplyToPageButton || false}
-    />
   </body>
 
 </html>
