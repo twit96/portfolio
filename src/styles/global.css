@@ -299,6 +299,10 @@ flex (wrap) layout
   background-color: var(--surface4);
   color: var(--text1);
 }
+.surfaceAction {
+  background-color: var(--link);
+  color: var(--surface0);
+}
 
 
 .wrapper {

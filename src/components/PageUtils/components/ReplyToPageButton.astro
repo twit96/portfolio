@@ -2,7 +2,7 @@
 import { CONTACT_EMAIL } from '@consts';
 ---
 <a
-  class="btn shadow-sm"
+  class="btn shadow-sm surfaceAction"
   href={`mailto:${CONTACT_EMAIL}?subject=Re: ${Astro.url.href}`}
   id="reply-to-page-btn"
   target="_blank"
@@ -24,8 +24,6 @@ import { CONTACT_EMAIL } from '@consts';
 
 <style>
   a {
-    background: var(--link);
-    color: var(--surface0);
     display: none;
     font-size: 0.9rem;
     align-items: center;

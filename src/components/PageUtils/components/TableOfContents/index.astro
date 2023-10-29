@@ -11,7 +11,7 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
   <summary>
     <span style="display:none;">Table of Contents</span>
     <span 
-      class="svg-wrap btn"
+      class="svg-wrap btn surfaceAction"
       title="Table of Contents"
     >
       <svg
@@ -57,7 +57,6 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
   }
 
   .svg-wrap {
-    background: var(--link);
     display: block;
     padding: 0.5em;
     position: relative;
@@ -69,7 +68,7 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
   .svg-wrap svg {
     --size: 2.5rem;
     height: var(--size);
-    fill: var(--surface0);
+    fill: currentColor;
     width: var(--size);
   }
   .svg-wrap > :last-child { display: none; }
