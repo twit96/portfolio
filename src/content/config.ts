@@ -12,6 +12,7 @@ const posts = defineCollection({
 		description: z.string(),
 		draft: z.boolean().optional(),
 		featuredRank: z.number().optional(),
+		hasTableOfContents: z.boolean().optional(),
 		heroImage: z.string().optional(),
 		links: z.array(
 			z.object({

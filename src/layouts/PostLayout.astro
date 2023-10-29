@@ -9,6 +9,7 @@ const post = Astro.props;
 
 <BaseLayout
   hasBreadcrumbs={true}
+  hasTableOfContents={post.hasTableOfContents || false}
   hasReplyToPageButton={post.category==="blog"}
   {...Astro.props}
 >
@@ -107,7 +108,7 @@ const post = Astro.props;
 
 
     {/* Post Content */}
-    <slot />
+    <article id="post-content"><slot /></article>
 
 
     {/* Post Tags */}
@@ -145,4 +146,6 @@ const post = Astro.props;
     margin-right: 0.5ch;
   }
   #hero-image-wrap { line-height: 0; }
+
+  #post-content:empty { display: none; }
 </style>

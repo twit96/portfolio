@@ -31,6 +31,7 @@ import PageUtils from '@components/PageUtils/index.astro';
     </main>
     <Footer />
     <PageUtils
+      hasTableOfContents={Astro.props.hasTableOfContents || false}
       hasReplyToPageButton={Astro.props.hasReplyToPageButton || false}
     />
   </body>

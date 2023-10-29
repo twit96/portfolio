@@ -1,0 +1,22 @@
+<button 
+  aria-label="Close Table of Contents"
+  class="modal-bg"
+  id="toc-bg"
+  title="Close Table of Contents"
+></button>
+
+
+<style>
+  #toc-bg { z-index: 5; }
+</style>
+
+
+<script defer>
+  // Background Element can close menu
+  const toc = document.getElementById("toc");
+  const tocBg = document.getElementById("toc-bg");
+  toc.addEventListener("toggle", function() {
+    tocBg.classList.toggle("active");
+  });
+  tocBg.onclick = () => { toc.removeAttribute("open"); } 
+</script>

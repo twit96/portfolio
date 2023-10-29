@@ -30,7 +30,7 @@ import PreferencesBackground from "./components/PreferencesBackground.astro";
     </span>
   </summary>
 
-  <div class="modal card custom-scrollbar surface1 shadow-sm">
+  <div class="modal card custom-scrollbar layout layout--list surface1 shadow-sm">
     <PreferenceFormModes />
     <hr />
     <PreferenceFormColors />
@@ -72,21 +72,7 @@ import PreferencesBackground from "./components/PreferencesBackground.astro";
   
 
   /* Content Modal */
-  .modal {
-    --_scrollbar--track-margin: var(--radius-lg);
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    left: 50%;
-    max-height: calc(100svh - 7rem);
-    max-width: 25em;
-    overflow: auto;
-    position: fixed;
-    top: 4em;
-    transform: translateX(-50%);
-    width: calc(100vw - 4rem);
-    z-index: 11;
-  }
+  .modal { z-index: 11; }
 
 </style>
 

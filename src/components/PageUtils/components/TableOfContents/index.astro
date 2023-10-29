@@ -1,0 +1,166 @@
+---
+import DecorativeLine from '@components/DecorativeLine/index.astro';
+import TableOfContentsBackground from "./components/TableOfContentsBackground.astro";
+---
+<details
+  class="btns layout layout--list shadow-sm"
+  id="toc"
+  style="--_layout--gap:0.125rem;"
+>
+
+  <summary>
+    <span style="display:none;">Table of Contents</span>
+    <span 
+      class="svg-wrap btn"
+      title="Table of Contents"
+    >
+      <svg
+        width="2.5rem"
+        height="2.5rem"
+        viewBox="0 0 24 24"
+        stroke-width="0"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2Z"/>
+      </svg>
+      <svg
+        height="2.5rem"
+        viewBox="0 0 384 512"
+        width="2.5rem"
+        xmlns="http://www.w3.org/2000/svg" 
+      >
+        <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+        <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+      </svg>
+    </span>
+  </summary>
+
+  <div
+    class="modal card custom-scrollbar surface1 shadow-sm"
+    id="toc-content"
+  >
+    <h2>Table of Contents</h2>
+    <DecorativeLine />
+  </div>
+
+  <!-- toc nav auto-generated here -->
+
+</details>
+<TableOfContentsBackground />
+
+
+<style>
+
+  summary {
+    line-height: 0;
+    list-style: none;
+  }
+
+  .svg-wrap {
+    background: var(--link);
+    display: block;
+    padding: 0.5em;
+    position: relative;
+    z-index: 6;
+  }
+  @media (hover: hover) {
+    .svg-wrap:hover { filter: var(--hover-filter); }
+  }
+  .svg-wrap svg {
+    --size: 2.5rem;
+    height: var(--size);
+    fill: var(--surface0);
+    width: var(--size);
+  }
+  .svg-wrap > :last-child { display: none; }
+  details[open] .svg-wrap > :first-child { display: none; }
+  details[open] .svg-wrap > :last-child { display: initial; }
+  
+  .modal {
+    top: 4.75rem;
+    max-width: 60ch;
+    max-height: calc(100svh - 11.75rem);
+    z-index: 6;
+  }
+  @media (orientation: landscape) {
+    .modal { max-height: calc(100svh - 7.75rem); }
+  }
+</style>
+
+
+<script>
+
+  function configTOC() {
+
+    const toc = document.getElementById("toc-content");
+    if (!toc) return false;
+
+
+    // Identify all headings in the article
+    let article_text = document.getElementsByTagName("article")[0];
+    if (!article_text) return false;
+
+    for (let i=2; i<=6; i++) {
+      let headings = article_text.getElementsByTagName('h'+i);
+      for (let j=0; j<headings.length; j++) {
+        headings[j].className = 'h';
+      }
+    }
+    let headings = document.getElementsByClassName('h');
+
+    
+    // Build TOC
+    // nav
+    let toc_nav = document.createElement("nav");
+    toc_nav.setAttribute('aria-label', 'Page Table of Contents');
+    toc_nav.classList.add("custom-scrollbar", "surface1");
+    toc.appendChild(toc_nav);
+    // ul
+    let toc_nav_ul = document.createElement("ul");
+    toc_nav_ul.classList.add("layout", "layout--list");
+    toc_nav_ul.style.setProperty("--_layout--gap", "0.5rem");
+    toc_nav.appendChild(toc_nav_ul);
+
+    let unique_ids = {};
+    for (let i=0; i<headings.length; i++) {
+      
+      // config heading id
+      let h = headings[i];
+      let h_id = h.innerHTML.split(' ').join('_').replace(/[`~!@#$%^&*()|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+      unique_ids[h_id] = (unique_ids[h_id] + 1 || 0);
+      (unique_ids[h_id]==0) ? (h.id=h_id) : (h.id=h_id+"_"+unique_ids[h_id]);
+
+      // build anchor link
+      let h_link = document.createElement('a');
+      h_link.href = '#' + h.id;
+      h_link.onclick = () => { document.getElementById("toc")?.removeAttribute("open"); };
+      h_link.innerHTML = h.innerHTML;
+
+      // Style anchor link
+      let h_level = parseInt(h.tagName.replace("H", "")) ;
+      // prefix
+      let h_link_prefix = Array(h_level - 1).join("-") + " ";
+      let prefix = document.createElement("span");
+      prefix.innerHTML = h_link_prefix;
+      // font size
+      const font_multiplier = (6 - h_level + 2) / 4;
+
+      // add link to table of contents
+      let li = document.createElement("li");
+      li.style.marginLeft = `${h_level - 2}rem`;
+      li.style.fontSize = `calc(1rem * ${font_multiplier})`;
+      li.appendChild(prefix);
+      li.appendChild(h_link);
+      toc_nav_ul.appendChild(li);
+    }
+
+    // remove identifying class from headings
+    while (headings.length > 0) {
+      let h = headings[0];
+      h.className = h.className.replace('h', '');
+    }
+
+  }
+  configTOC();
+
+</script>
