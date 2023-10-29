@@ -8,15 +8,6 @@ const {
   hasReplyToPageButton=false
 } = Astro.props;
 ---
-<div
-  class="layout layout--list util-container"
-  id="util-container-left"
->
-  {
-    hasTableOfContents===true &&
-    <TableOfContents />
-  }
-</div>
 
 <div
   class="layout layout--list util-container"
@@ -29,6 +20,16 @@ const {
   }
 </div>
 
+<div
+  class="layout layout--list util-container"
+  id="util-container-left"
+>
+  {
+    hasTableOfContents===true &&
+    <TableOfContents />
+  }
+</div>
+
 
 <style>
   .util-container {
@@ -36,6 +37,7 @@ const {
     --_margin: 0.5rem;
     position: fixed;
     bottom: var(--_margin);
+    z-index: 100;
   }
   #util-container-left {
     align-items: flex-start;
