@@ -137,7 +137,8 @@ html {
   --surface-shadow: var(--dark-surface-shadow);
   --shadow-strength: var(--dark-shadow-strength);
 }
-[data-mode="dark"] img { filter: var(--dark-mode-filter); }
+[data-mode="dark"] img,
+[data-mode="dark"] video { filter: var(--dark-mode-filter); }
 
 
 
