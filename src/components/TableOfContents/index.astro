@@ -6,6 +6,7 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
 <details
   class="btns shadow-sm"
   id="toc"
+  open
 >
 
   <summary>
@@ -49,6 +50,13 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
 
 <style>
 
+  details {
+    position: fixed;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    z-index: 500;
+  }
+
   summary {
     line-height: 0;
     list-style: none;
@@ -58,7 +66,7 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
     display: block;
     padding: 0.5em;
     position: relative;
-    z-index: 1;
+    z-index: 501;
   }
   @media (hover: hover) {
     .svg-wrap:hover { filter: var(--hover-filter); }
@@ -78,7 +86,7 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
     padding: 0.5rem;
     top: 4.75rem;
     width: 60ch;
-    z-index: 1;
+    z-index: 501;
   }
   @media (orientation: landscape) {
     .modal {

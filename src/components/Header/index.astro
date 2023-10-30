@@ -67,7 +67,7 @@ import NavigationLinks from '@components/NavigationLinks.astro';
   header {
     position: sticky;
     top: 0;
-    z-index: 500;
+    z-index: 1000;
   }
   header .wrapper {
     display: flex;
@@ -111,7 +111,7 @@ import NavigationLinks from '@components/NavigationLinks.astro';
 
   header:not(.active) nav { display: none; } 
 
-  #mobile-nav-bg { z-index: 499; }
+  #mobile-nav-bg { z-index: 999; }
 
   @media (min-width: 80ch) {
     header .wrapper {

@@ -1,18 +1,11 @@
 ---
-import TableOfContents from "./components/TableOfContents/index.astro";
 import ReplyToPageButton from "./components/ReplyToPageButton.astro";
 import ScrollTopButton from "./components/ScrollTopButton.astro";
 
-const {
-  hasTableOfContents=false,
-  hasReplyToPageButton=false
-} = Astro.props;
+const { hasReplyToPageButton=false } = Astro.props;
 ---
 
-<div
-  class="layout layout--list util-container"
-  id="util-container-right"
->
+<div class="layout layout--list util-container">
   <ScrollTopButton />
   {
     hasReplyToPageButton===true &&
@@ -20,31 +13,15 @@ const {
   }
 </div>
 
-<div
-  class="layout layout--list util-container"
-  id="util-container-left"
->
-  {
-    hasTableOfContents===true &&
-    <TableOfContents />
-  }
-</div>
-
 
 <style>
-  .util-container {
+  div {
     --_layout--gap:0.5rem;
     --_margin: 0.5rem;
-    position: fixed;
-    bottom: var(--_margin);
-    z-index: 100;
-  }
-  #util-container-left {
-    align-items: flex-start;
-    left: var(--_margin);
-  }
-  #util-container-right {
     align-items: flex-end;
+    bottom: var(--_margin);
+    position: fixed;
     right: var(--_margin);
+    z-index: 100;
   }
 </style>
