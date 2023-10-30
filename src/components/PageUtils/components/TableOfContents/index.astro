@@ -1,11 +1,11 @@
 ---
-import DecorativeLine from '@components/DecorativeLine/index.astro';
+import '@styles/toc.css';
+
 import TableOfContentsBackground from "./components/TableOfContentsBackground.astro";
 ---
 <details
-  class="btns layout layout--list shadow-sm"
+  class="btns shadow-sm"
   id="toc"
-  style="--_layout--gap:0.125rem;"
 >
 
   <summary>
@@ -36,14 +36,13 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
   </summary>
 
   <div
-    class="modal card custom-scrollbar surface1 shadow-sm"
+    class="card custom-scrollbar layout layout--list modal shadow-sm surface1"
     id="toc-content"
+    style="--_layout--gap:0.5rem;"
   >
     <h2>Table of Contents</h2>
-    <DecorativeLine />
+    {/* toc nav auto-generated and injected here by page script */}
   </div>
-
-  <!-- toc nav auto-generated here -->
 
 </details>
 <TableOfContentsBackground />
@@ -67,8 +66,8 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
   }
   .svg-wrap svg {
     --size: 2.5rem;
-    height: var(--size);
     fill: currentColor;
+    height: var(--size);
     width: var(--size);
   }
   .svg-wrap > :last-child { display: none; }
@@ -76,14 +75,22 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
   details[open] .svg-wrap > :last-child { display: initial; }
   
   .modal {
+    max-height: calc(100svh - 10.25rem);
+    max-width: calc(100svw - 3rem);
+    padding: 0.5rem;
     top: 4.75rem;
-    max-width: 60ch;
-    max-height: calc(100svh - 11.75rem);
+    width: 60ch;
     z-index: 1;
   }
   @media (orientation: landscape) {
-    .modal { max-height: calc(100svh - 7.75rem); }
+    .modal {
+      max-height: calc(100svh - 6.75rem);
+      max-width: calc(100svw - 10rem);
+    }
   }
+
+  h2 { text-align: center; }
+
 </style>
 
 
@@ -95,62 +102,92 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
     if (!toc) return false;
 
 
-    // Identify all headings in the article
-    let article_text = document.getElementsByTagName("article")[0];
-    if (!article_text) return false;
+    function identifyHeadings() {
+      // Identify all headings in the article
+      let article_text = document.getElementsByTagName("article")[0];
+      if (!article_text) return false;
 
-    for (let i=2; i<=6; i++) {
-      let headings = article_text.getElementsByTagName('h'+i);
-      for (let j=0; j<headings.length; j++) {
-        headings[j].className = 'h';
+      for (let i=2; i<=6; i++) {
+        let headings = article_text.getElementsByTagName('h'+i);
+        for (let j=0; j<headings.length; j++) {
+          headings[j].className = 'h';
+        }
       }
     }
+    identifyHeadings();
+    
+
     let headings = document.getElementsByClassName('h');
+    if (!headings) return false;
 
     
-    // Build TOC
-    // nav
-    let toc_nav = document.createElement("nav");
-    toc_nav.setAttribute('aria-label', 'Page Table of Contents');
-    toc_nav.classList.add("custom-scrollbar", "surface1");
-    toc.appendChild(toc_nav);
-    // ul
-    let toc_nav_ul = document.createElement("ul");
-    toc_nav_ul.classList.add("layout", "layout--list");
-    toc_nav_ul.style.setProperty("--_layout--gap", "0.5rem");
-    toc_nav.appendChild(toc_nav_ul);
+    function buildTocWrap(toc: Element) {
+      // nav
+      let toc_nav = document.createElement("nav");
+      toc_nav.setAttribute('aria-label', 'Page Table of Contents');
+      toc_nav.classList.add("card", "custom-scrollbar", "shadow-sm", "surface0");
+      toc_nav.id = "toc-nav";
+      toc.appendChild(toc_nav);
+      // ul
+      let toc_nav_ul = document.createElement("ul");
+      toc_nav_ul.classList.add("layout", "layout--list");
+      toc_nav_ul.id = "toc-nav-ul";
+      toc_nav_ul.style.setProperty("--_layout--gap", "0.5rem");
+      toc_nav.appendChild(toc_nav_ul);
+    }
+    buildTocWrap(toc);
 
-    let unique_ids = {};
-    for (let i=0; i<headings.length; i++) {
-      
-      // config heading id
-      let h = headings[i];
-      let h_id = h.innerHTML.split(' ').join('_').replace(/[`~!@#$%^&*()|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
-      unique_ids[h_id] = (unique_ids[h_id] + 1 || 0);
-      (unique_ids[h_id]==0) ? (h.id=h_id) : (h.id=h_id+"_"+unique_ids[h_id]);
 
-      // build anchor link
+    function createLink(h: Element) {
       let h_link = document.createElement('a');
       h_link.href = '#' + h.id;
       h_link.onclick = () => { document.getElementById("toc")?.removeAttribute("open"); };
       h_link.innerHTML = h.innerHTML;
+      return h_link;
+    }
 
-      // Style anchor link
-      let h_level = parseInt(h.tagName.replace("H", "")) ;
-      // prefix
-      let h_link_prefix = Array(h_level - 1).join("-") + " ";
-      let prefix = document.createElement("span");
-      prefix.innerHTML = h_link_prefix;
-      // font size
-      const font_multiplier = (6 - h_level + 2) / 4;
+
+    function parseInnerHtml(in_html: String) {
+      let return_str = '';
+
+      // remove html tag data if it exists
+      let skip = 0;
+      for (const char of in_html) {
+        if (char === "<") skip++;
+        else if (char === ">" && skip > 0) skip--;
+        else if (skip===0) return_str += char;
+      }
+      
+      // regex remove disallowed URI characters
+      return_str = return_str.replace(/[`~!@#$%^&*()|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '')
+
+      // replace spaces with underscores and format output
+      return_str = return_str.split(' ').join('_').toLowerCase();
+
+      return return_str;
+    }
+
+    
+    let unique_ids = {};
+    function addUniqueHeadingId(h: Element) {
+      let h_id = parseInnerHtml(h.innerHTML);
+      unique_ids[h_id] = (unique_ids[h_id] + 1 || 0);
+      (unique_ids[h_id]==0) ? (h.id=h_id) : (h.id=h_id+"_"+unique_ids[h_id]);
+      return h;
+    }
+    
+
+    for (let i=0; i<headings.length; i++) {
+      let h = headings[i];
+      
+      h = addUniqueHeadingId(h);  // config heading id
+      let h_link = createLink(h);  // build anchor link
 
       // add link to table of contents
       let li = document.createElement("li");
-      li.style.marginLeft = `${h_level - 2}rem`;
-      li.style.fontSize = `calc(1rem * ${font_multiplier})`;
-      li.appendChild(prefix);
+      li.classList.add("toc-link-wrap", `toc-link-wrap--${h.tagName.replace("H", "h")}`);
       li.appendChild(h_link);
-      toc_nav_ul.appendChild(li);
+      document.getElementById("toc-nav-ul")?.appendChild(li);
     }
 
     // remove identifying class from headings

@@ -1,0 +1,27 @@
+/*
+Used in TableOfContents Component.
+
+TableOfContents component's script auto-generates a TOC on the fly
+based on a page's h2 through h6 tags (h1 is reserved for the page title area).
+It outputs a nav containing an unordered list of anchor links,
+and the list item elements are assigned the following class names accordingly.
+*/
+.toc-link-wrap {
+  align-items: center;
+  display: flex;
+}
+.toc-link-wrap::before {
+  background: var(--surface3);
+  content: '';
+  display: block;
+  height: 0.125rem;
+  margin-right: 1ch;
+  width: calc(1rem * (var(--_heading-level) - 2));
+}
+.toc-link-wrap--h2::before { display: none; }
+
+.toc-link-wrap--h2 { --_heading-level: 2; }
+.toc-link-wrap--h3 { --_heading-level: 3; }
+.toc-link-wrap--h4 { --_heading-level: 4; }
+.toc-link-wrap--h5 { --_heading-level: 5; }
+.toc-link-wrap--h6 { --_heading-level: 6; }
