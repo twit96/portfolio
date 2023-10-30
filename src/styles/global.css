@@ -236,7 +236,7 @@ flex (wrap) layout
 .modal {
   --_scrollbar--track-margin: var(--radius-lg);
   left: 50%;
-  max-height: calc(100dvh - 7rem);
+  max-height: calc(100svh - 7rem);
   max-width: 25em;
   overflow: auto;
   position: fixed;
