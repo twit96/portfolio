@@ -3,7 +3,7 @@ html {
   /* Constants */
   --page-width: 70rem;
   --hover-filter: brightness(0.85);
-  --dark-mode-filter: brightness(0.75);
+  --dark-mode-filter: brightness(0.7);
   --radius-sm: 0.25rem;
   --radius-lg: 1.25rem;
 }
