@@ -40,7 +40,19 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
     style="--_layout--gap:0.5rem;"
   >
     <h2>Table of Contents</h2>
-    {/* toc nav auto-generated and injected here by page script */}
+    <nav
+      aria-label="Page Table of Contents"
+      class="card custom-scrollbar shadow-sm surface0"
+      id="toc-nav"
+    >
+      <ul
+        class="layout layout--list"
+        id="toc-nav-ul"
+        style="--_layout--gap:0.5rem"
+      >
+        {/* list items auto-generated and injected here by page script */}
+      </ul>
+    </nav>
   </div>
 
 </details>
@@ -124,24 +136,6 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
 
     let headings = document.getElementsByClassName('h');
     if (!headings) return false;
-
-    
-    function buildTocWrap(toc: Element) {
-      // nav
-      let toc_nav = document.createElement("nav");
-      toc_nav.setAttribute('aria-label', 'Page Table of Contents');
-      toc_nav.classList.add("card", "custom-scrollbar", "shadow-sm", "surface0");
-      toc_nav.id = "toc-nav";
-      toc.appendChild(toc_nav);
-      // ul
-      let toc_nav_ul = document.createElement("ul");
-      toc_nav_ul.classList.add("layout", "layout--list");
-      toc_nav_ul.id = "toc-nav-ul";
-      toc_nav_ul.style.setProperty("--_layout--gap", "0.5rem");
-      toc_nav.appendChild(toc_nav_ul);
-    }
-    buildTocWrap(toc);
-
 
     function createLink(h: Element) {
       let h_link = document.createElement('a');
