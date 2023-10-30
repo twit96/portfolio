@@ -55,8 +55,8 @@ html {
   --dark-s0-lightness: 18%;  --dark-s0-chroma: 0.006;
   --dark-s1-lightness: 32%;  --dark-s1-chroma: 0.012;
   --dark-s2-lightness: 27%;  --dark-s2-chroma: 0.018;
-  --dark-s3-lightness: 37%;  --dark-s3-chroma: 0.028;
-  --dark-s4-lightness: 41%;  --dark-s4-chroma: 0.033;
+  --dark-s3-lightness: 37%;  --dark-s3-chroma: 0.04;
+  --dark-s4-lightness: 41%;  --dark-s4-chroma: 0.06;
 
   /* Surface Hue Presets */
   --monochromatic-s1-hue: var(--brand-hue);
