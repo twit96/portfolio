@@ -19,9 +19,10 @@ and the list item elements are assigned the following class names accordingly.
   margin-right: 1ch;
   width: calc(1rem * (var(--_heading-level) - 2));
 }
-.toc-link-wrap--h2::before { display: none; }
 
-.toc-link-wrap--h2 { --_heading-level: 2; }
+.toc-link-wrap--h2::before { display: none; }
+/* .toc-link-wrap--h2 { --_heading-level: 2; } */
+
 .toc-link-wrap--h3 { --_heading-level: 3; }
 .toc-link-wrap--h4 { --_heading-level: 4; }
 .toc-link-wrap--h5 { --_heading-level: 5; }
