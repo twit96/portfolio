@@ -6,12 +6,13 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
 <details
   class="btns shadow-sm"
   id="toc"
+  open
 >
 
   <summary>
     <span style="display:none;">Table of Contents</span>
     <span 
-      class="svg-wrap btn surfaceAction"
+      class="btn surfaceAction svg-wrap"
       title="Table of Contents"
     >
       <svg
@@ -35,7 +36,7 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
   </summary>
 
   <div
-    class="card custom-scrollbar layout layout--list modal shadow-sm surface1"
+    class="card layout layout--list modal shadow-sm surface1"
     id="toc-content"
     style="--_layout--gap:0.5rem;"
   >
@@ -44,6 +45,7 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
       aria-label="Page Table of Contents"
       class="card custom-scrollbar shadow-sm surface0"
       id="toc-nav"
+      style="--_scrollbar--track-margin: var(--radius-lg);"
     >
       <ul
         class="layout layout--list"
@@ -62,9 +64,9 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
 <style>
 
   details {
-    position: fixed;
     bottom: 0.5rem;
     left: 0.5rem;
+    position: fixed;
     z-index: 500;
   }
 
@@ -92,16 +94,21 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
   details[open] .svg-wrap > :last-child { display: initial; }
   
   .modal {
-    max-height: calc(100svh - 10.25rem);
+    bottom: 4.75rem;
+    display: flex;
+    flex-direction: column;
     max-width: calc(100svw - 3rem);
+    max-height: calc(100svh - 10.25rem);
     padding: 0.5rem;
-    top: 4.75rem;
+    top: auto;
     width: 60ch;
     z-index: 501;
   }
+  #toc-nav { overflow: auto; }
   @media (orientation: landscape) {
     .modal {
-      max-height: calc(100svh - 6.75rem);
+      bottom: 0.5rem;
+      max-height: calc(100svh - 6.25rem);
       max-width: calc(100svw - 10rem);
     }
   }
