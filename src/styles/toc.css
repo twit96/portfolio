@@ -9,6 +9,7 @@ and the list item elements are assigned the following class names accordingly.
 .toc-link-wrap {
   align-items: center;
   display: flex;
+  text-wrap: balance;
 }
 .toc-link-wrap::before {
   background: var(--surface3);
