@@ -199,7 +199,7 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
     // remove identifying class from headings
     while (headings.length > 0) {
       let h = headings[0];
-      h.className = h.className.replace('h', '');
+      h.classList.remove('h');
     }
 
   }
