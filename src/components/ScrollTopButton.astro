@@ -18,10 +18,14 @@
 
 <style>
   button {
+    bottom: 0.5rem;
     border-radius: 50%;
     display: none;
     line-height: 0;
     padding: 0.5rem;
+    position: fixed;
+    right: max(0.5rem, calc(var(--fixed-to-side) - 3.75rem));
+    z-index: 100;
   }
   button[data-state="displayed"] { display: block; }
   svg {

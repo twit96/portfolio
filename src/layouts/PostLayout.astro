@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import TableOfContents from '@components/TableOfContents/index.astro';
 import PostTags from '@components/PostTags.astro';
+import ReplyToPageLink from '@components/ReplyToPageLink.astro';
 import RelatedPosts from '@components/RelatedPosts.astro';
 type Props = CollectionEntry<'posts'>['data'];
 const post = Astro.props;
@@ -10,8 +11,6 @@ const post = Astro.props;
 
 <BaseLayout
   hasBreadcrumbs={true}
-  hasTableOfContents={post.hasTableOfContents || false}
-  hasReplyToPageButton={post.category==="blog"}
   {...Astro.props}
 >
 
@@ -85,13 +84,12 @@ const post = Astro.props;
     {
       post.links && (
         <div 
-          class="card content-section surface2"
+          class="card content-section surfaceAction"
           style="--_content--gap:0.5rem;"
         >
           <h2 class="heading--reduce">Links</h2>
           <ul>
             {
-              post.links &&
               post.links.map(({ text, href }) => 
                 <li>
                   <a 
@@ -107,9 +105,11 @@ const post = Astro.props;
       )
     }
 
+
+    {/* Table of Contents */}
     {
       post.hasTableOfContents &&
-        <TableOfContents />
+      <TableOfContents />
     }
 
 
@@ -129,7 +129,12 @@ const post = Astro.props;
       </div>
     }
 
+
+    {/* Reply Button */}
+    <ReplyToPageLink />
+
   </section>
+  
   
   {/* Associated Posts */}
   {

@@ -4,7 +4,7 @@ import SVGDefinitions from '@components/SVGDefinitions.astro';
 import Header from '@components/Header/index.astro';
 import Breadcrumbs from "@components/Breadcrumbs.astro";
 import Footer from '@components/Footer.astro';
-import PageUtils from '@components/PageUtils/index.astro';
+import ScrollTopButton from '@components/ScrollTopButton.astro';
 ---
 
 <!DOCTYPE html>
@@ -29,7 +29,7 @@ import PageUtils from '@components/PageUtils/index.astro';
       }
       <slot />
     </main>
-    <PageUtils hasReplyToPageButton={Astro.props.hasReplyToPageButton || false} />
+    <ScrollTopButton />
     <Footer />
   </body>
 
