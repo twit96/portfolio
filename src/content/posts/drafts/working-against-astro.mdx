@@ -1,0 +1,39 @@
+---
+category: "blog"
+datePublished: "2023-10-31"
+description: "The story of how abusing a framework for short-term gains eventually led to growing pains."
+draft: true
+heroImage: "/blog/drafts/working-against-astro/title-card.png"
+hasTableOfContents: true
+links: [
+  { text: "Astro Framework", href: "https://astro.build/", },
+]
+relatedPosts:
+- portfolio-2023
+tags:
+- dev-log
+- astro
+title: "Working Against Astro"
+---
+
+import PostSection from '@components/PostSection/index.astro';
+import PostSectionContent from '@components/PostSection/components/PostSectionContent.astro';
+import PostSectionSidebar from '@components/PostSection/components/PostSectionSidebar.astro';
+
+<PostSection>
+  <PostSectionContent slot="content">
+
+  ## My Original Question Before Refactoring
+
+  I rebuilt my portfolio with Astro earlier this year, and ran into the issue that each of my posts has 1 associated image (a hero image). In my opinion, this image (or any asset that is specific to that blog post and referenced nowhere else) should be in the same location as its post file. This would make it so that if you need to edit a blog post, the post and all of its files are in a single directory. However, the examples I've found in the Astro docs split the post content from the post images into two separate directories (the images are put in "public" or "src/assets" and the post content is put into "src/pages" or "src/content"). This makes it so that to edit a single blog post, you have to navigate between multiple directories.
+
+  Thus, I previously ended up abusing my project's "pages/blog" directory, making each blog post its own sub-directory, which contained an "index.astro" file (instead of a .md or .mdx file) alongside any assets that were associated with only that post. It worked, but upon updating the project to the newest version of Astro, I'm now running into issues having image files in the "pages" directory. Thus I'm going to refactor everything to work with Astro rather than against it.
+
+  Is there any way to structure the "src" directory such that a blog post's files - markdown, images, etc. - are located in the same directory? Or will I be forced to split each post's files across two directories? I've been reading the docs and Googling and not finding what I'm looking for, so I assume that I must split the files. It is probably a better long-term practice to store these blog post images in a CDN or elsewhere outside of the project, and that is likely why I am not finding the directory structure that I have been trying to achieve in the docs. I'm willing to accept that, but was hoping that it would still be possible for a smaller project.
+
+  Also, if they must be split, is there a way to import image files from "src/assets/" into a markdown's frontmatter, or will I be forced to keep the images in "public"? Attempting an import in the markdown frontmatter throws an error with my collection schema, so I assume I'll have to do something else.
+
+  Thanks in advance for any input!
+  
+  </PostSectionContent>
+</PostSection>
