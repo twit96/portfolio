@@ -9,27 +9,26 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
 
   <summary
     aria-label="Table of Contents"
+    class="btn surfaceAction"
     title="Table of Contents"
   >
-    <span class="btn surfaceAction svg-wrap">
-      <svg
-        height="2.5rem"
-        viewBox="0 0 24 24"
-        width="2.5rem"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path fill="currentColor" d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z" />
-      </svg>
-      <svg
-        height="2.5rem"
-        viewBox="0 0 384 512"
-        width="2.5rem"
-        xmlns="http://www.w3.org/2000/svg" 
-      >
-        <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-        <path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
-      </svg>
-    </span>
+    <svg
+      height="2.5rem"
+      viewBox="0 0 24 24"
+      width="2.5rem"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path fill="currentColor" d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z" />
+    </svg>
+    <svg
+      height="2.5rem"
+      viewBox="0 0 384 512"
+      width="2.5rem"
+      xmlns="http://www.w3.org/2000/svg" 
+    >
+      <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+      <path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
   </summary>
 
   <div
@@ -70,25 +69,21 @@ import TableOfContentsBackground from "./components/TableOfContentsBackground.as
   summary {
     line-height: 0;
     list-style: none;
-  }
-
-  .svg-wrap {
-    display: block;
     padding: 0.5em;
     position: relative;
-    z-index: 501;
   }
+  summary::marker { display: none; }
   @media (hover: hover) {
-    .svg-wrap:hover { filter: var(--hover-filter); }
+    summary:hover { filter: var(--hover-filter); }
   }
-  .svg-wrap svg {
+  summary svg {
     --size: 2.5rem;
     height: var(--size);
     width: var(--size);
   }
-  .svg-wrap > :last-child { display: none; }
-  details[open] .svg-wrap > :first-child { display: none; }
-  details[open] .svg-wrap > :last-child { display: initial; }
+  summary > :last-child { display: none; }
+  details[open] summary > :first-child { display: none; }
+  details[open] summary > :last-child { display: initial; }
   
   .modal#toc-content {
     --_height_ratio: 1.3;
