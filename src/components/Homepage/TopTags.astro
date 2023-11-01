@@ -97,7 +97,7 @@ if (tagsByCountArray.length > 5) tagsByCountArray.length = 5;
               tags.map(tag => (
                 <li>
                   <a
-                    class="btn surface4"
+                    class="btn surface4 underline-on-hover"
                     href={`/tags/${tag}`}
                   >
                     #{tag} ({count})
@@ -120,8 +120,5 @@ if (tagsByCountArray.length > 5) tagsByCountArray.length = 5;
   h2,
   p { text-align: center; }
   p { margin: auto; }
-  .btn {
-    display: block;
-    text-decoration: none;
-  }
+  .btn { display: block; }
 </style>
