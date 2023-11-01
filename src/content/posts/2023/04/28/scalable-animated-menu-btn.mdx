@@ -23,6 +23,7 @@ import PostSectionSidebar from '@components/PostSection/components/PostSectionSi
 
 import CodeInline from "@components/CodeInline.astro";
 import CodeBlock from "@components/CodeBlock.astro";
+import Link from '@components/Link.astro';
 
 
 <PostSection>
@@ -280,20 +281,17 @@ menu_btn.onclick = toggleMenuBtn;
     </PostSectionContent>
     <PostSectionSidebar slot="sidebar">
       
-      Read more about  
-      <a 
+      Read more about
+      <Link
         href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations"
-        target="_blank"
-        rel="noopener noreferrer"
-      >CSS Animations</a>.
+        isExternal={true}
+      >CSS Animations</Link>.
     
-    
-      Read more about the   
-      <a 
+      Read more about the
+      <Link
         href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function"
-        target="_blank"
-        rel="noopener noreferrer"
-      >CSS animation timing function property</a>.
+        isExternal={true}
+      >CSS animation timing function property</Link>.
       
     </PostSectionSidebar>
 
@@ -851,11 +849,10 @@ menu_btn.onclick = toggleMenuBtn;
     <PostSectionSidebar slot="sidebar">
       
       Read more about HTML data attributes 
-      <a
+      <Link
         href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes"
-        target="_blank"
-        rel="noopener noreferrer"
-      >here</a>.
+        isExternal={true}
+      >here</Link>.
       
     </PostSectionSidebar>
   </PostSection>
@@ -899,11 +896,10 @@ menu_btn.onclick = toggleMenuBtn;
   <PostSectionSidebar slot="sidebar">
       
     View all of the code in the codepen
-    <a
+    <Link
       href="https://codepen.io/twit96/pen/poxPzyQ"
-      target="_blank"
-      rel="noopener noreferrer"
-    >here</a>.
+      isExternal={true}
+    >here</Link>.
     
   </PostSectionSidebar>
 </PostSection>

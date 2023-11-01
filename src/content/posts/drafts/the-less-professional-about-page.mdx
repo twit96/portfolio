@@ -17,6 +17,8 @@ import PostSectionContent from '@components/PostSection/components/PostSectionCo
 import PostSectionSidebar from '@components/PostSection/components/PostSectionSidebar.astro';
 
 import Figure from "@components/Figure.astro";
+import Link from '@components/Link.astro';
+
 
 <PostSection>
   <PostSectionContent slot="content">
@@ -42,11 +44,11 @@ import Figure from "@components/Figure.astro";
   </PostSectionContent>
   <PostSectionSidebar slot="sidebar">
 
-    <a 
+    Read more about
+    <Link
       href="https://en.wikipedia.org/wiki/Newgulf,_Texas"
-      target="_blank"
-      rel="noopener noreferrer"
-    >Read more about Newgulf, Texas here.</a>
+      isExternal={true}
+    >Newgulf, Texas</Link>.
 
   </PostSectionSidebar>
 </PostSection>
