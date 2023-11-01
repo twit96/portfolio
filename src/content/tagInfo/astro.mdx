@@ -1,9 +1,10 @@
 ---
 slug: astro
 ---
-<a 
+import Link from '@components/Link.astro';
+
+<Link
   href="https://astro.build/"
-  target="_blank"
-  rel="noopener noreferrer"
->Astro</a>
+  isExternal={true}
+>Astro</Link>
 is a web framework designed for speed and interoperability with other web frameworks.
