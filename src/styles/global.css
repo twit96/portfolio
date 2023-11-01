@@ -38,8 +38,8 @@ a {
   button:hover { filter: var(--hover-filter); }
 }
 
+a.underline-on-hover { text-decoration: none; }
 @media (hover: hover) {
-  a.underline-on-hover { text-decoration: none; }
   a.underline-on-hover:hover { text-decoration: underline; }
 }
 
