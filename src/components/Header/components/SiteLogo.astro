@@ -1,6 +1,6 @@
 <a
   aria-label="Navigate to the Homepage"
-  class="btn cursive surface2 underline-on-hover"
+  class="btn cursive surface2"
   href="/"
   title="Navigate to the Homepage"
 >
@@ -15,7 +15,11 @@
     display: grid;
     height: var(--size);
     place-content: center;
+    text-decoration: none;
     width: var(--size);
+  }
+  @media (hover: hover) {
+    a:hover { text-decoration: underline; }
   }
   span { font-size: calc(var(--size) / 3); }
 </style>
