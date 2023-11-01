@@ -2,6 +2,7 @@
 html {
   /* Constants */
   --page-width: 70rem;
+  --fixed-to-side: calc((100svw - var(--page-width)) / 2);
   --hover-filter: brightness(0.85);
   --dark-mode-filter: brightness(0.7);
   --radius-sm: 0.25rem;
