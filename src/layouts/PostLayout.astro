@@ -1,6 +1,8 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
+import Link from '@components/Link.astro';
+
 import TableOfContents from '@components/TableOfContents/index.astro';
 import PostTags from '@components/PostTags.astro';
 import ReplyToPageLink from '@components/ReplyToPageLink.astro';
@@ -92,11 +94,10 @@ const post = Astro.props;
             {
               post.links.map(({ text, href }) => 
                 <li>
-                  <a 
+                  <Link
                     href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >{text}</a>
+                    isExternal={true}
+                  >{text}</Link>
                 </li>
               )
             }
@@ -131,7 +132,9 @@ const post = Astro.props;
 
 
     {/* Reply Button */}
-    <ReplyToPageLink />
+    <div id="reply-wrap" class="card surface2">
+      <ReplyToPageLink />
+    </div>
 
   </section>
   
@@ -159,4 +162,6 @@ const post = Astro.props;
   #hero-image-wrap { line-height: 0; }
 
   #post-content:empty { display: none; }
+
+  #reply-wrap { display: grid; }
 </style>
