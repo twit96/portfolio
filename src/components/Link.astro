@@ -9,14 +9,15 @@ const externalAttrs = isExternal ? {
   rel: "noopener noreferrer",
   target: "_blank"
 } : {};
+
+let mergedAttrs = {...attrs, ...externalAttrs};
 ---
 
 {
   href &&
   <a
     href={href}
-    {...externalAttrs}
-    {...attrs}
+    {...mergedAttrs}
   >
     <slot />
     {
