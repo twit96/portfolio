@@ -9,7 +9,6 @@ let links = [
 // add accessibility attributes
 links.forEach((link) => {
   link['aria-current'] = Astro.url.pathname===link.href ? "page" : "false";
-  link['title'] = `Visit the ${link.text} page`;
 });
 ---
 
