@@ -304,7 +304,12 @@ flex (wrap) layout
   background-color: var(--link);
   color: var(--surface0);
 }
-.surfaceAction a:not(:hover) { color: currentColor; }
+@media (hover: none) {
+  .surfaceAction a { color: currentColor; }
+}
+@media (hover: hover) {
+  .surfaceAction a:not(:hover) { color: currentColor; }
+}
 
 
 .wrapper {
