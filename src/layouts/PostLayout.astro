@@ -1,5 +1,4 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Link from '@components/Link.astro';
 
@@ -7,8 +6,11 @@ import TableOfContents from '@components/TableOfContents/index.astro';
 import PostTags from '@components/PostTags.astro';
 import ReplyToPageLink from '@components/ReplyToPageLink.astro';
 import RelatedPosts from '@components/RelatedPosts.astro';
-type Props = CollectionEntry<'posts'>['data'];
-const post = Astro.props;
+
+const {
+  hasReplyButton=true,
+  ...post
+} = Astro.props;
 ---
 
 <BaseLayout
@@ -38,30 +40,36 @@ const post = Astro.props;
         <p>{post.description}</p>
       }
       {/* blurb area */}
-      <div
-        class="card content-section surface3"
-        id="post-blurb-area"
-        style="--_content--gap:0.5rem;"
-      >
-        {
-          post.blurb &&
-          <p>{post.blurb}</p>
-        }
-        <p>
+      {
+        (post.blurb || post.author || post.datePublished || post.dateUpdated) &&
+        <div
+          class="card content-section surface3"
+          id="post-blurb-area"
+          style="--_content--gap:0.5rem;"
+        >
           {
-            post.author &&
-            <span>Written by {post.author} on</span>
+            post.blurb &&
+            <p>{post.blurb}</p>
           }
           {
-            post.datePublished &&
-            <span>{post.datePublished}</span>
+            (post.author || post.datePublished || post.dateUpdated) &&
+            <p>
+              {
+                post.author &&
+                <span>Written by {post.author} on</span>
+              }
+              {
+                post.datePublished &&
+                <span>{post.datePublished}</span>
+              }
+              {
+                post.dateUpdated &&
+                <em>(Updated {post.dateUpdated})</em>
+              }
+            </p>
           }
-          {
-            post.dateUpdated &&
-            <em>(Updated {post.dateUpdated})</em>
-          }
-        </p>
-      </div>
+        </div>
+      }
     </div>
 
     {/* Right */}
@@ -132,9 +140,12 @@ const post = Astro.props;
 
 
     {/* Reply Button */}
-    <div class="card surface2">
-      <ReplyToPageLink />
-    </div>
+    {
+      hasReplyButton &&
+      <div class="card surface2">
+        <ReplyToPageLink />
+      </div>
+    }
 
   </section>
   
