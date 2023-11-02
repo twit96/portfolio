@@ -15,7 +15,7 @@ links.forEach((link) => {
 <ul class="btns">
   {links.map(({text, ...attrs}) =>
     <li>
-      <a {...attrs} class="btn surface2">
+      <a {...attrs} class="btn surface2 underline-on-hover">
         {text}
       </a>
     </li>
@@ -30,10 +30,8 @@ links.forEach((link) => {
   a {
     display: block;
     text-align: center;
-    text-decoration: none;
     color: var(--text1);
   }
-  a:hover,
   a[aria-current="page"] { text-decoration: underline; }
 
   @media (min-width: 80ch) {

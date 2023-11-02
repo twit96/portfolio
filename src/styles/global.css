@@ -38,6 +38,11 @@ a {
   button:hover { filter: var(--hover-filter); }
 }
 
+a.underline-on-hover { text-decoration: none; }
+@media (hover: hover) {
+  a.underline-on-hover:hover { text-decoration: underline; }
+}
+
 
 body {
   font-family: 'Nunito Variable', sans-serif;
