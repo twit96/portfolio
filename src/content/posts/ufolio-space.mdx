@@ -25,7 +25,7 @@ title: "Ufolio.Space"
 import PostSection from '@components/PostSection/index.astro';
 import PostSectionContent from '@components/PostSection/components/PostSectionContent.astro';
 import PostSectionSidebar from '@components/PostSection/components/PostSectionSidebar.astro';
-import Link from '@components/Link.astro';
+import ExternalLink from '@components/ExternalLink.astro';
 
 
 <PostSection>
@@ -34,10 +34,10 @@ import Link from '@components/Link.astro';
     ## Development Notes
     
     Ufolio.Space is built with a PHP framework called 
-    <Link
+    <ExternalLink
       href="https://laravel.com/"
       isExternal={true}
-    >Laravel</Link>.
+    >Laravel</ExternalLink>.
     Laravel is flexible in that it allows you to either create a "monolith" application 
     (in which the frontend and backend are all part of the same code base),
     or to create a REST API as a standalone backend codebase,
@@ -56,10 +56,10 @@ import Link from '@components/Link.astro';
     ## Planned Refactoring
     
     After doing a bit of research, I want to split Ufolio.Space into a Laravel REST API with a 
-    <Link
+    <ExternalLink
       href="https://flutter.dev/"
       isExternal={true}
-    >Flutter</Link>
+    >Flutter</ExternalLink>
     frontend.
     Flutter is promising because it allows you to create a single frontend codebase,
     which can be deployed to the web, iOS, Android, MacOS, Linux, and Windows.
@@ -82,10 +82,10 @@ import Link from '@components/Link.astro';
     
     
       I even programmed around this (now fixed) Android Google Chrome bug on
-      <Link
+      <ExternalLink
         href="https://gagcombos.info/"
         isExternal={true}
-      >Gag Combos Info</Link>,
+      >Gag Combos Info</ExternalLink>,
       in which previously the &lt;body&gt; tag would not scroll, 
       but instead there was a page-wide wrapper which scrolled, 
       preventing Android's "elastic overscroll" effect from triggering.
@@ -112,10 +112,10 @@ import Link from '@components/Link.astro';
   
   
     Nonetheless, feel free to check out 
-    <Link
+    <ExternalLink
       href="https://ufolio.space/"
       isExternal={true}
-    >Ufolio.Space</Link>
+    >Ufolio.Space</ExternalLink>
     as it currently stands, and feel free to contact me with any feedback!
     
   </PostSectionContent>

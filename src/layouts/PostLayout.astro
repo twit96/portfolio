@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import Link from '@components/Link.astro';
+import ExternalLink from '@components/ExternalLink.astro';
 
 import TableOfContents from '@components/TableOfContents/index.astro';
 import PostTags from '@components/PostTags.astro';
@@ -102,10 +102,10 @@ const {
             {
               post.links.map(({ text, href }) => 
                 <li>
-                  <Link
+                  <ExternalLink
                     href={href}
                     isExternal={true}
-                  >{text}</Link>
+                  >{text}</ExternalLink>
                 </li>
               )
             }

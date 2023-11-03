@@ -1,5 +1,5 @@
 ---
-import Link from '@components/Link.astro';
+import ExternalLink from '@components/ExternalLink.astro';
 
 const links = [
   {
@@ -81,7 +81,7 @@ const links = [
 >
   {links.map((link) => 
     <li>
-      <Link
+      <ExternalLink
         class="btn surface2 underline-on-hover"
         href={link.href}
         isExternal={link.isExternal}
@@ -97,7 +97,7 @@ const links = [
           <path d={link.svg.pathd}></path>
         </svg>
         <span>{link.text}</span>
-      </Link>
+      </ExternalLink>
     </li>
   )}
 </ul>

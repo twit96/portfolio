@@ -23,7 +23,7 @@ import PostSectionSidebar from '@components/PostSection/components/PostSectionSi
 
 import CodeInline from "@components/CodeInline.astro";
 import CodeBlock from "@components/CodeBlock.astro";
-import Link from '@components/Link.astro';
+import ExternalLink from '@components/ExternalLink.astro';
 
 
 <PostSection>
@@ -282,16 +282,16 @@ menu_btn.onclick = toggleMenuBtn;
     <PostSectionSidebar slot="sidebar">
       
       Read more about
-      <Link
+      <ExternalLink
         href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations"
         isExternal={true}
-      >CSS Animations</Link>.
+      >CSS Animations</ExternalLink>.
     
       Read more about the
-      <Link
+      <ExternalLink
         href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function"
         isExternal={true}
-      >CSS animation timing function property</Link>.
+      >CSS animation timing function property</ExternalLink>.
       
     </PostSectionSidebar>
 
@@ -849,10 +849,10 @@ menu_btn.onclick = toggleMenuBtn;
     <PostSectionSidebar slot="sidebar">
       
       Read more about HTML data attributes 
-      <Link
+      <ExternalLink
         href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes"
         isExternal={true}
-      >here</Link>.
+      >here</ExternalLink>.
       
     </PostSectionSidebar>
   </PostSection>
@@ -896,10 +896,10 @@ menu_btn.onclick = toggleMenuBtn;
   <PostSectionSidebar slot="sidebar">
       
     View all of the code in the codepen
-    <Link
+    <ExternalLink
       href="https://codepen.io/twit96/pen/poxPzyQ"
       isExternal={true}
-    >here</Link>.
+    >here</ExternalLink>.
     
   </PostSectionSidebar>
 </PostSection>
