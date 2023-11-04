@@ -32,7 +32,7 @@ html {
   --light-shadow-strength: 0.02;
 
   --dark-surface-shadow: 13% 0.013 var(--brand-hue);
-  --dark-shadow-strength: 0.4;
+  --dark-shadow-strength: 0.25;
 
 
   /* Text Color Presets */
