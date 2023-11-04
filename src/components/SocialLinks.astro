@@ -81,23 +81,50 @@ const links = [
 >
   {links.map((link) => 
     <li>
-      <ExternalLink
-        class="btn surface2 underline-on-hover"
-        href={link.href}
-        isExternal={link.isExternal}
-      >
-        <svg
-          fill="currentColor"
-          height="2em"
-          viewBox={link.svg.viewBox}
-          width="2em"
-          xmlns="http://www.w3.org/2000/svg" 
+
+      {/* internal link doesn't use ExternalLink component */}
+      {
+        !link.isExternal &&
+        <a
+          class="btn surface2 underline-on-hover"
+          href={link.href}
         >
-          <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-          <path d={link.svg.pathd}></path>
-        </svg>
-        <span>{link.text}</span>
-      </ExternalLink>
+          <svg
+            fill="currentColor"
+            height="2em"
+            viewBox={link.svg.viewBox}
+            width="2em"
+            xmlns="http://www.w3.org/2000/svg" 
+          >
+            <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <path d={link.svg.pathd}></path>
+          </svg>
+          <span>{link.text}</span>
+        </a>
+      }
+
+      {/* external link has same format as internal link, but uses ExternalLink component */}
+      {
+        link.isExternal &&
+        <ExternalLink
+          class="btn surface2 underline-on-hover"
+          href={link.href}
+          isExternal={link.isExternal}
+        >
+          <svg
+            fill="currentColor"
+            height="2em"
+            viewBox={link.svg.viewBox}
+            width="2em"
+            xmlns="http://www.w3.org/2000/svg" 
+          >
+            <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <path d={link.svg.pathd}></path>
+          </svg>
+          <span>{link.text}</span>
+        </ExternalLink>
+      }
+      
     </li>
   )}
 </ul>
