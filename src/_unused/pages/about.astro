@@ -1,13 +1,20 @@
 ---
 import PostLayout from "@layouts/PostLayout.astro";
 
+import PostSection from '@components/PostSection/index.astro';
+import PostSectionContent from '@components/PostSection/components/PostSectionContent.astro';
+import PostSectionSidebar from '@components/PostSection/components/PostSectionSidebar.astro';
+
 const postData = {
   // author: "",
   blurb: "Tyler Wittig, without a mustache.",
   // category: "",
   // datePublished: "",
   // dateUpdated: "",
-  description: "I am a farm boy turned percussionist who studied mathematics in college and now develops websites. An obvious and natural progressison.",
+
+  // description: "I am a farm boy turned percussionist who studied mathematics in college and now develops websites. An obvious and natural progressison.",
+  description: "I am a full-stack web developer with a background in mathematics and a passion for CSS.",
+
   // draft: false,
   // featuredRank: 0,
   hasTableOfContents: true,
@@ -15,7 +22,7 @@ const postData = {
   links: [
     { text: "Listen to my Favorite Songs", href: "https://music.youtube.com/playlist?list=PLhC2DPeXuXXUhFfTeZQM0gz4VrT-q2mqU&feature=share", },
     { text: "View my Favorite Project", href: "https://gagcombos.info/", },
-    { text: "Important Disclaimer", href: "https://www.youtube.com/watch?v=uHgt8giw1LY", },
+    // { text: "Important Disclaimer", href: "https://www.youtube.com/watch?v=uHgt8giw1LY", },
   ],
   // relatedPosts: [],
   // tags: [],
@@ -28,7 +35,77 @@ const postData = {
   {...postData}
 >
 
-  <h2>Heading</h2>
+  <PostSection>
+
+    <PostSectionContent slot="content">
+      <h2>About Me</h2>
+      <p>
+        I am a farm boy turned percussionist who studied mathematics in college and now develops websites. An obvious and natural progressison.
+      </p>
+    </PostSectionContent>
+
+    <PostSection slot="sub-section">
+      <PostSectionContent slot="content">
+        <h3>Farming</h3>
+        <p>
+          I was born in the 90's in a small town in South Texas and grew up on a sod farm, 
+          where I helped my dad during my teenage years.
+          I learned how to maintain and operate the tractors, irrigation systems, and other equipment,
+          and especially how to ignore the feeling of many hours in the 108&deg; sun and sweating through your pants.
+          I helped my dad, but knew it wasn't what I wanted to do for a living.
+        </p>
+      </PostSectionContent>
+    </PostSection>
+
+    <PostSection slot="sub-section">
+      <PostSectionContent slot="content">
+        <h3>Percussion</h3>
+        <p>
+          When I was a kid, my grandma would take me to high school football games, where I became obsessed with the drumline.
+          In my teenage years, I was heavily involved in band, and became the high school drumline captain and even the band president.
+          My dream was to pursue a career as a percussion director, but after many negotiations with my dad,
+          I began studying Mathematics in college. Nevertheless, music still holds a place near and dear to my heart.
+        </p>
+      </PostSectionContent>
+    </PostSection>
+
+    <PostSection slot="sub-section">
+      <PostSectionContent slot="content">
+        <h3>Mathematics</h3>
+        <p>
+        </p>
+      </PostSectionContent>
+    </PostSection>
+
+    <PostSection slot="sub-section">
+      <PostSectionContent slot="content">
+        <h3>Web Development</h3>
+        <p>
+          During college, I was required to take an intro to programming class for my degree plan.
+          I was instantly hooked, and added a computer science certificate to my degree.
+          As part of the certificate, I chose to take a Game Development course,
+          where I got to develop a
+          <a href="/projects/tank-fighter">web minigame</a>
+          and a semester-long group project
+          <a href="/projects/pharaohs-phury">2D platformer web game</a>
+          using the
+          <a href="/tags/phaser">Phaser</a>
+          framework.
+        </p>
+        <p>
+          After the semester completed, I decided I wanted to host the projects so my friends and family could play them.
+          I learned how to use GitHub Pages to host them directly from their repositories,
+          but then decided I wanted a black background around the game window,
+          and this was the start of a long obsession with CSS, springboarding me into web development.
+        </p>
+      </PostSectionContent>
+    </PostSection>
+
+  </PostSection>
+
+  
+
+  <!-- <h2>Heading</h2>
   <p>
     Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
     Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
@@ -62,6 +139,6 @@ const postData = {
     Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
     Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
     Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle Leedle
-  </p>
+  </p> -->
 
 </PostLayout>
