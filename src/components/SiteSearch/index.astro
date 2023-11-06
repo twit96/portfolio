@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import SiteSearch from './SiteSearch';
 
-let publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft);
+let publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft && !post.data.archived);
 ---
 
 <SiteSearch client:load searchList={publishedPosts} />

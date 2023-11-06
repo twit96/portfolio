@@ -6,6 +6,7 @@ import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
 
 let publishedProjects = (await getCollection('posts')).filter(project => (
   !project.data.draft &&
+  !project.data.archived &&
   project.data.category==="projects"
 ));
 publishedProjects.sort(function(a, b) {

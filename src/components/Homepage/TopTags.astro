@@ -4,7 +4,7 @@ import DecorativeLine from '@components/DecorativeLine/index.astro';
 
 
 // Get All Published Post Tags
-const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft);
+const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft && !post.data.archived);
 const allTags = publishedPosts.map((post) => post.data.tags).flat().sort();
 
 

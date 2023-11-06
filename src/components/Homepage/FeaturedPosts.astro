@@ -3,9 +3,10 @@ import { getCollection } from 'astro:content';
 import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
 import DecorativeLine from '@components/DecorativeLine/index.astro';
 
-// Remove Drafts and Non-Featured Posts
+// Remove Drafts, Archived, and Non-Featured Posts
 let featuredPosts = (await getCollection('posts')).filter(post => (
-  !post.data.draft &&
+  !post.data.draft && 
+  !post.data.archived &&
   typeof post.data.featuredRank !== 'undefined'
 ));
 // Sort by Featured Rank Ascending

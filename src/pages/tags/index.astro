@@ -5,7 +5,7 @@ import ExpandedPreviewCard from '@components/PostPreviewCard/ExpandedPreviewCard
 import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
 
 
-const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft);
+const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft && !post.data.archived);
 
 const allTags = publishedPosts.map((post) => post.data.tags).flat().sort();
 const numTags = [...new Set(allTags)].length;

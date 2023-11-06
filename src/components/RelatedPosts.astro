@@ -4,25 +4,28 @@ import MinimalPreviewCard from './PostPreviewCard/MinimalPreviewCard.astro';
 import DecorativeLine from '@components/DecorativeLine/index.astro';
 
 const slugs = Astro.props.slugs;
-const relatedPosts = await getEntries(slugs);
+const relatedPosts = (await getEntries(slugs)).filter(post => !post.data.draft && !post.data.archived);
 ---
-<div class="content-section">
-  <h2>Related Posts</h2>
-  <ul
-    class="btns layout layout--list"
-    style="--_layout--gap: 0.25rem;"
-  >
-    {
-      relatedPosts &&
-      relatedPosts.map(post => 
-        <li>
-          <MinimalPreviewCard post={post} />
-        </li>
-      )
-    }
-  </ul>
-  <DecorativeLine />
-</div>
+{
+  relatedPosts &&
+  relatedPosts.length > 0 &&
+  <div class="content-section">
+    <h2>Related Posts</h2>
+    <ul
+      class="btns layout layout--list"
+      style="--_layout--gap: 0.25rem;"
+    >
+      {
+        relatedPosts.map(post => 
+          <li>
+            <MinimalPreviewCard post={post} />
+          </li>
+        )
+      }
+    </ul>
+    <DecorativeLine />
+  </div>
+}
 
 <style>
   h2 { text-align: center; }

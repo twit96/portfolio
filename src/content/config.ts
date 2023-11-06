@@ -4,6 +4,7 @@ const posts = defineCollection({
 	type: 'content',
 	// Type-check frontmatter using a schema
 	schema: z.object({
+		archived: z.boolean().optional(),
 		author: z.string().optional(),
 		blurb: z.string().optional(),
 		category: z.string(),
