@@ -75,13 +75,7 @@ import PreferenceOptionTitle from  "./PreferenceOptionTitle.astro";
   }
 
   function configSchemeInputs() {
-    const default_scheme = "monochromatic";
-    let val = localStorage.getItem("scheme");
-    // Configure Local Storage
-    if (!val) {
-      localStorage.setItem("scheme", default_scheme);
-      val = localStorage.getItem("scheme");
-    }
+    let val = document.documentElement.dataset["scheme"];
     // Configure Scheme Radio Buttons
     for (const radio of scheme_radios) {
       if (val === radio.value) radio.checked = true;

@@ -73,13 +73,7 @@ import PreferenceOptionTitle from  "./PreferenceOptionTitle.astro";
   }
 
   function configColorInputs() {
-    const default_color = "blue";
-    let val = localStorage.getItem("color");
-    // Config Local Storage
-    if (!val) {
-      localStorage.setItem("color", default_color);
-      val = localStorage.getItem("color");
-    }
+    let val = document.documentElement.dataset["color"];
     // Configure Color Radio Buttons
     for (const radio of color_radios) {
       if (val === radio.value) radio.checked = true;
