@@ -75,7 +75,7 @@ import PreferenceOptionTitle from  "./PreferenceOptionTitle.astro";
   }
 
   function configSchemeInputs() {
-    let val = document.documentElement.dataset["scheme"];
+    const val = document.documentElement.dataset["scheme"];
     // Configure Scheme Radio Buttons
     for (const radio of scheme_radios) {
       if (val === radio.value) radio.checked = true;

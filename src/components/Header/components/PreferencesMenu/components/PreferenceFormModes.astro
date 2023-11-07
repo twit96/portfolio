@@ -100,7 +100,7 @@ import PreferencesFieldset from "./PreferencesFieldset.astro";
   dark_toggle_input.onclick = toggleDark;
 
   function configModeInput() {
-    let val = document.documentElement.dataset["mode"];
+    const val = document.documentElement.dataset["mode"];
     // Config Input
     if (val === "dark") dark_toggle_input.checked = true;
   }

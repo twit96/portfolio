@@ -73,7 +73,7 @@ import PreferenceOptionTitle from  "./PreferenceOptionTitle.astro";
   }
 
   function configColorInputs() {
-    let val = document.documentElement.dataset["color"];
+    const val = document.documentElement.dataset["color"];
     // Configure Color Radio Buttons
     for (const radio of color_radios) {
       if (val === radio.value) radio.checked = true;
