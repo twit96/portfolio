@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import SocialLinks from '@components/SocialLinks.astro';
+import ContactLinks from '@components/ContactLinks.astro';
 import HomepageImage from '@components/Homepage/HomepageImage.astro';
 import FeaturedPosts from '@components/Homepage/FeaturedPosts.astro';
 import RecentPosts from '@components/RecentPosts.astro';
@@ -23,7 +23,7 @@ import TopTags from '@components/Homepage/TopTags.astro';
             This is my website. It is on the web.  
           </p>
           <div id="intro-socials-wrap">
-            <SocialLinks />
+            <ContactLinks links={["Codepen", "GitHub", "LinkedIn", "RSS"]} />
           </div>
         </div>
 

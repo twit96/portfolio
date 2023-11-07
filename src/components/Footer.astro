@@ -1,5 +1,5 @@
 ---
-import SocialLinks from '@components/SocialLinks.astro';
+import ContactLinks from '@components/ContactLinks.astro';
 import NavigationLinks from '@components/NavigationLinks.astro';
 ---
 <footer>
@@ -14,7 +14,7 @@ import NavigationLinks from '@components/NavigationLinks.astro';
     
     <div>
       <nav aria-label="Contact Links" class="socials">
-        <SocialLinks />
+        <ContactLinks links={["Codepen", "GitHub", "LinkedIn", "RSS"]} />
       </nav>
       <span class="copyright">
         &copy; {new Date().getFullYear()} Tyler Wittig
