@@ -11,5 +11,5 @@ export const CONTACT_INFO = {
   'LinkedIn': 'https://www.linkedin.com/in/tylerwittig/',
   'Resume':   '/resume-tylerwittig-20230424.pdf',
   'RSS':      '/rss.xml',
-  'Twitter':  'https://twitter.com/tyler_wittig'
+  // 'Twitter':  'https://twitter.com/tyler_wittig'
 };
