@@ -1,7 +1,6 @@
 ---
 import { SITE_TITLE, SITE_AUTHOR } from '@consts.js';
 import ContactLinks from '@components/ContactLinks.astro';
-import DecorativeLine from '@components/DecorativeLine/index.astro';
 ---
 
 <footer class="layout layout--list wrapper">
@@ -11,8 +10,6 @@ import DecorativeLine from '@components/DecorativeLine/index.astro';
   <nav aria-label="Contact Links">
     <ContactLinks />
   </nav>
-
-  <DecorativeLine />
 
   <p class="copyright">
     &copy; {`${new Date().getFullYear()} ${SITE_AUTHOR}`}
