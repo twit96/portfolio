@@ -28,7 +28,7 @@ html {
 
 
   /* Shadow Presets */
-  --light-surface-shadow:  10% 0.08 var(--brand-hue);
+  --light-surface-shadow:  10% 0.08  var(--brand-hue);
   --light-shadow-strength: 0.02;
 
   --dark-surface-shadow:   13% 0.013 var(--brand-hue);
@@ -137,7 +137,7 @@ html {
 /* ---------- Resulting HSL Values ---------- */
 html {
   --brand:    oklch( var(--brand-lightness) var(--brand-chroma) var(--brand-hue) );
-  --surface0: oklch( var(--s0-lightness) var(--s0-chroma) var(--brand-hue) );
+  --surface0: oklch( var(--s0-lightness)    var(--s0-chroma)    var(--brand-hue) );
 }
 /* Schemes Set Surfaces */
 [data-scheme="monochromatic"] {
