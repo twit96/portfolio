@@ -101,6 +101,7 @@ const {
             <a
               class="btn surface2 underline-on-hover"
               href={linkData[link].href}
+              title={linkData[link].title}
             >
               <svg
                 fill="currentColor"
@@ -123,6 +124,7 @@ const {
               class="btn surface2 underline-on-hover"
               href={linkData[link].href}
               isExternal={linkData[link].isExternal}
+              title={linkData[link].title}
             >
               <svg
                 fill="currentColor"
@@ -156,9 +158,7 @@ const {
     text-align: center;
   }
   svg {
-    --size: 2em;
     display: block;
-    height: var(--size);
     margin-bottom: 0.5em;
     margin-inline: auto;
     width: auto;
