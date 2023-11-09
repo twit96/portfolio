@@ -1,0 +1,160 @@
+---
+import DecorativeLine from '@components/DecorativeLine/index.astro';
+
+
+const { page, baseUrl } = Astro.props;
+
+
+// Build Pagination Buttons Array
+let pageBtns: Number[] = [];
+
+if (page.lastPage-1 < 5) {
+  for (let i=1; i<=page.lastPage; i++) pageBtns.push(i);
+  
+} else {
+  pageBtns.push(page.currentPage);  // init with current page
+
+  let adder=1;
+  let multiplier=1;
+
+  while (pageBtns.length<5) {
+    multiplier*=-1;
+
+    const curr = page.currentPage + (adder * multiplier);
+    if (1 <= curr && curr <= page.lastPage) {
+
+      if (1 <= curr && curr < page.currentPage) pageBtns = [curr].concat(pageBtns)
+      else if (page.currentPage < curr && curr <= page.lastPage) pageBtns.push(curr);
+
+    }
+    if (multiplier>0) adder++;
+  }
+}
+
+console.log(pageBtns)
+---
+
+{
+  page.lastPage>1 &&
+  <DecorativeLine />
+  <nav aria-label="Pagination Navigation">
+
+
+    {/* Left Buttons */}
+    <ul
+      class="btns layout layout--flex-fill"
+      style="--_layout--base-size:auto; --_layout--gap:0.125rem;"
+    >
+
+      {/* first */}
+      {
+        (page.currentPage > 3) &&
+        <li style="flex-basis:auto;">
+          <a
+            class="btn surfaceAction"
+            href={`${baseUrl}/1`}
+            title="Navigate to first page"
+          >1</a>
+        </li>
+      }
+
+      {/* previous */}
+      <li style="flex-grow:100;">
+        {
+          page.url.prev
+          ? <a
+              class="btn surfaceAction"
+              href={page.url.prev}
+              title="Navigate to previous page"
+            >Previous</a>
+          : <span
+              class="btn surfaceAction"
+              style="opacity:0.5;"
+            >Previous</span>
+        }
+      </li>
+
+    </ul>
+
+
+    {/* Nearby Pages Buttons */}
+    <ul
+      class="btns layout layout--flex-fill"
+      style="--_layout--base-size:auto; --_layout--gap:0.125rem;"
+    >
+      {
+        pageBtns.map((p) =>
+        (p === page.currentPage)
+        ? <li class="btn surface1">{page.currentPage}</li>
+        : <li>
+            <a
+              class="btn surface2"
+              href={`${baseUrl}/${p}`}
+              title={`Navigate to page ${p}`}
+            >{p}</a>
+          </li>
+        )
+      }
+    </ul>
+
+    {/* Right Buttons */}
+    <ul
+      class="btns layout layout--flex-fill"
+      style="--_layout--base-size:auto; --_layout--gap:0.125rem;"
+    >
+
+      {/* next */}
+      <li style="flex-grow:100;">
+        {
+          page.url.next
+          ? <a
+              class="btn surfaceAction"
+              href={page.url.next}
+              title="Navigate to next page"
+            >Next</a>
+          : <span
+              class="btn surfaceAction"
+              style="opacity:0.5;"
+            >Next</span>
+        }
+      </li>
+
+      {/* last */}
+      {
+        (page.currentPage < page.lastPage-2) &&
+        <li style="flex-basis:auto;">
+          <a
+            class="btn surfaceAction"
+            href={`${baseUrl}/${page.lastPage}`}
+            title="Navigate to last page"
+          >{page.lastPage}</a>
+        </li>
+      }
+
+    </ul>
+
+  </nav>
+}
+
+
+<style>
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  nav li > * { display: block; }
+
+  @media (min-width: 90ch) {
+    nav {
+      flex-direction: row;
+      gap: 1rem;
+    }
+    nav > * { flex: 1; }
+    nav > *:nth-of-type(2) { flex-grow: 2; }
+  }
+
+  nav span { cursor: not-allowed; }
+
+</style>

@@ -13,3 +13,5 @@ export const CONTACT_INFO = {
   'RSS':      '/rss.xml',
   'X':        'https://x.com/tyler_wittig',
 };
+
+export const POSTS_PER_PAGE = 9;
