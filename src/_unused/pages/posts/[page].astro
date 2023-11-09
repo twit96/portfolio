@@ -1,0 +1,151 @@
+---
+import { type Collection, getCollection } from 'astro:content';
+import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
+import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
+import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
+import DecorativeLine from '@components/DecorativeLine/index.astro';
+
+
+export async function getStaticPaths({ paginate }) {
+  
+  // Get All Posts
+  let publishedPosts = (await getCollection('posts')).filter(post => (
+    !post.data.draft &&
+    !post.data.archived
+  ));
+  publishedPosts.sort(function(a, b) {
+    let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);
+    let b_date = Date.parse(b.data.dateUpdated || b.data.datePublished);
+    if (b_date > a_date) return 1;
+    if (a_date > b_date) return -1;
+    return 0;
+  });
+
+  // Generate pages from our array of posts, with a set number to a page
+  return paginate(publishedPosts, { pageSize: 11 });
+}
+// All paginated data is passed on the "page" prop
+type Props = Collection<'posts'>;
+const { page } = Astro.props;
+
+
+// Get Post Categories
+const publishedPosts = (await getCollection('posts')).filter(post => (
+  !post.data.draft &&
+  !post.data.archived
+));
+const allCategories = publishedPosts.map((post) => post.data.category).flat().sort();
+const uniqueCategories = [...new Set(allCategories)];
+const categoryLinks = uniqueCategories.map(
+  (category => {
+    return {
+      'text': category,
+      'href': `/${category.toLowerCase()}/`
+    }
+  }
+  )
+);
+---
+
+<PostCollectionLayout
+	title="Posts"
+  description="Tyler Wittig's Posts"
+  numPosts={page.total}
+>
+
+
+  <div
+    class="card content-section surface3"
+    id="category-btn-area"
+    style="--_content--gap:0.5rem;"
+    slot="info"
+  >
+    <h2 class="heading--diminished">Filter by Category</h2>
+    <ul
+      class="btns layout layout--flex-fill"
+      id="category-btns"
+      style="--_layout--base-size:auto; --_layout--gap:0.125rem;"
+    >
+      {categoryLinks.map(({text, ...attrs}) =>
+        <li>
+          <a {...attrs} class="btn surface4 underline-on-hover" style="display:block;">
+            {text}
+          </a>
+        </li>
+      )}
+    </ul>
+  </div>
+
+
+  <div
+    slot="content"
+    class="content-section"
+  >
+
+    {/* No Posts - Nothing Here Card */}
+    {
+      (page.data.length === 0) &&
+      <NothingHereCard />
+    }
+    
+    {/* Posts - Uniform Grid */}
+    {
+      page.data.length > 0 &&
+      <ul class="layout layout--grid">
+        {
+          page.data.map((post, i) => (
+            <li>
+              <CompactPreviewCard post={post} />
+            </li>
+          ))
+        }
+      </ul>
+    }
+    
+    {/* Pagination Buttons */}
+    {
+      (page.url.prev || page.url.next) &&
+      <DecorativeLine />
+      <nav
+        aria-label="Pagination Navigation"
+        class="content-section"
+        style="--_content--gap:0.5rem;"
+      >
+        <b>Page {page.currentPage} of {page.lastPage}</b>
+        <ul
+          class="btns layout layout--flex-fill"
+          style="--_layout--base-size:auto; --_layout--gap:0.125rem;"
+          id="pagination-btns"
+        >
+          {page.url.prev ? <li><a class="btn surfaceAction" href={page.url.prev}>Previous Page</a></li> : null}
+          {page.url.next ? <li><a class="btn surfaceAction" href={page.url.next}>Next Page</a></li> : null}
+        </ul>
+      </nav>
+    }
+
+  </div>
+
+</PostCollectionLayout>
+
+
+<style>
+  #category-btn-area {
+    align-items: center;
+    text-align: center;
+  }
+  #category-btns {
+    width: 40ch;
+    max-width: 100%;
+  }
+
+  nav[aria-label="Pagination Navigation"] {
+    text-align: center;
+  }
+  nav[aria-label="Pagination Navigation"] ul {
+    max-width: 100%;
+    margin: auto;
+    width: 40ch;
+  }
+  nav[aria-label="Pagination Navigation"] a { display: block; }
+</style>
+
