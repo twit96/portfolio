@@ -1,0 +1,46 @@
+---
+blurb: "Dynamic Portfolio Website"
+category: "Projects"
+datePublished: "2022-01-16"
+description: "Serving as a playground for CSS animations, vanilla PHP, and NGINX as I learned more about full-stack web development, this dynamic portfolio website underwent numerous design changes and a few code architecture refactors in its time active."
+heroImage: "https://storage.googleapis.com/tylerwittig.com/projects/portfolio-2022/title-card.png"
+links: [
+  { text: "View GitHub Repository (Archived)", href: "https://github.com/twit96/portfolio-2022", },
+]
+relatedPosts:
+- blog/2023/04/28/scalable-animated-menu-btn
+- projects/portfolio-2023
+- projects/portfolio-2020
+tags:
+- php
+- css
+- javascript
+- html
+- nginx
+- mysql
+- digital-ocean
+- squarespace-domains
+- sql
+title: "My Second Portfolio"
+---
+
+import PostSection from '@components/PostSection/index.astro';
+import PostSectionContent from '@components/PostSection/components/PostSectionContent.astro';
+import PostSectionSidebar from '@components/PostSection/components/PostSectionSidebar.astro';
+
+<PostSection>
+  <PostSectionContent slot="content">
+
+    ## Demo Video
+
+    Since there is no longer a live URL for this project,
+    the demo video demonstrates the main functionality of the website.
+    
+    <video width="1920" height="1080" controls>
+      <source src="https://storage.googleapis.com/tylerwittig.com/projects/portfolio-2022/demo-portfolio2022.mp4" type="video/mp4" />
+      Download the 
+      <a href="https://storage.googleapis.com/tylerwittig.com/projects/portfolio-2022/demo-portfolio2022.mp4">MP4</a>
+    </video>
+    
+  </PostSectionContent>
+</PostSection>

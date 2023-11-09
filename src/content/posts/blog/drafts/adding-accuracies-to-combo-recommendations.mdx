@@ -1,0 +1,67 @@
+---
+category: "Blog"
+datePublished: ""
+description: "Adding combo recommendation accuracies to the recommendation tool proved to be an interesting challenge."
+draft: true
+heroImage: "https://storage.googleapis.com/tylerwittig.com/projects/gag-combos-info/title-card_dev-log.png"
+relatedPosts:
+- projects/gag-combos-info
+tags:
+- dev-log
+- react.js
+- javascript
+- css
+title: "Adding Accuracies to Gag Combos Info Recommendations"
+---
+
+import PostSection from '@components/PostSection/index.astro';
+import PostSectionContent from '@components/PostSection/components/PostSectionContent.astro';
+import PostSectionSidebar from '@components/PostSection/components/PostSectionSidebar.astro';
+
+<PostSection>
+  <PostSectionContent slot="content">
+    <h2>Gag Combos Info's Recommendation Algorithm</h2>
+    <p>
+      Until now, Gag Combos Info has based its combo recommendations solely on combo damage.
+      This was the easiest approach when the web app was early in its development
+      and the various parts of the tool's core were still being created.
+    </p>
+    <p>
+      However, some gag combos have worse accuracy than others and I knew that
+      it was somewhat misleading to recommend combos based only on their damage.
+      I had even partially acknowledged this, hardcoding a check for "Drop-Only" combos
+      in the user interface that would color these combos' info buttons and gag accuracy values red.
+      I knew this wasn't something I wanted to keep in the codebase,
+      since there were surely other low-accuracy combos that weren't accounted for.
+    </p>
+    <p>
+      I continued refining what I had, 
+      and eventually moved focus to other projects and the combo accuracy idea was left on the shelf.
+      My mother was diagnosed with breast cancer earlier this year,
+      so even these other projects got shelved for the forseeable future 
+      while I helped take care of her.
+    </p>
+    <h2>Clearing the Dust</h2>
+    <p>
+      After the first few chemo treatments, my mother seemed to regain her footing and started having more energy.
+      I happened to check the Gag Combos Info GitHub repository one evening to see a three-week old issue opened,
+      which requested "Lure+Sound" combos be added to the combo recommendations.
+      Since I had the free time, I went ahead and implemented the change.
+    </p>
+    <p>
+      As usually happens while I'm programming, I was hooked once the ball was rolling again.
+      I made some refinements to the user interface, 
+      updated the app from the outdated CRA to the new standard of Vite, 
+      then tweaked the behavior of the app's service worker,
+      before finally landing again on the combo accuracy idea. 
+      I've personally never given much thought to accuracy while playing Toontown,
+      apart from ensuring Drop has stuns before it,
+      and so when I read up on the details of Gag accuracy, 
+      I realized a lot more went into it than what I had thought.
+      I also knew that in Gag Combos Info's current state, 
+      I would have to make some assumptions within the calculations.
+      Nonetheless, I started tackling the new feature.
+    </p>
+    <h2>How Accuracy is Calculated</h2>
+  </PostSectionContent>
+</PostSection>

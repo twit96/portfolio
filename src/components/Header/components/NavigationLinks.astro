@@ -1,11 +1,28 @@
 ---
-// define main navigation links
+import { getCollection } from 'astro:content';
+
+// Get Category Links
+const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft && !post.data.archived);
+const allCategories = publishedPosts.map((post) => post.data.category).flat().sort();
+const uniqueCategories = [...new Set(allCategories)];
+const categoryLinks = uniqueCategories.map(
+  (category => {
+    return {
+      'text': category,
+      'href': `/${category.toLowerCase()}/`
+    }
+  }
+  )
+);
+
+
+// Define Main Navigation Links
 let links = [
   { 'text': "Home", 'href': "/", },
-  { 'text': "Blog", 'href': "/blog/", },
-  { 'text': "Projects", 'href': "/projects/", },
-  { 'text': "Tags" , 'href': "/tags/", },
+  ...categoryLinks,
+  { 'text': "Tags", 'href': "/tags/", }
 ];
+
 // add accessibility attributes
 links.forEach((link) => {
   link['aria-current'] = Astro.url.pathname===link.href ? "page" : "false";

@@ -1,0 +1,78 @@
+---
+import { getCollection } from 'astro:content';
+import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
+import { SITE_AUTHOR } from '@consts';
+import ExpandedPreviewCard from '@components/PostPreviewCard/ExpandedPreviewCard.astro';
+import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
+import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
+
+
+export async function getStaticPaths() {
+	const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft && !post.data.archived);
+
+  const allCategories = publishedPosts.map((post) => post.data.category).flat().sort();
+  const uniqueCategories = [...new Set(allCategories)];
+  
+	return uniqueCategories.map((uc) => ({
+		params: { category: uc.toLowerCase() },
+    props: { formattedCategory: uc },
+	}));
+}
+
+const { category } = Astro.params;
+const { formattedCategory } = Astro.props;
+
+// Remove Drafts
+let publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft && !post.data.archived);
+let categorizedPosts = publishedPosts.filter(post => post.data.category.toLowerCase()===category);
+
+// Sort by Date Descending
+categorizedPosts.sort(function(a, b) {
+	let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);
+  let b_date = Date.parse(b.data.dateUpdated || b.data.datePublished);
+  if (b_date > a_date) return 1;
+  if (a_date > b_date) return -1;
+  return 0;
+});
+
+---
+
+<PostCollectionLayout
+	title={formattedCategory}
+  description={`${SITE_AUTHOR}'s ${category}`}
+	numPosts={categorizedPosts.length}
+>
+  <div
+    slot="content"
+    class="content-section"
+  >
+
+    {/* No Posts - Nothing Here Card */}
+    {
+      (categorizedPosts.length === 0) &&
+      <NothingHereCard />
+    }
+
+    {/* Most Recent Post - Large Card */}
+    {
+      categorizedPosts.length > 0 &&
+      <ExpandedPreviewCard post={categorizedPosts[0]} />
+    }
+    
+    {/* Posts 2+ - Medium Card */}
+    {
+      categorizedPosts.length > 1 &&
+      <ul class="layout layout--grid">
+        {
+          categorizedPosts.map((post, i) => (
+            i>0 && 
+            <li>
+              <CompactPreviewCard post={post} />
+            </li>
+          ))
+        }
+      </ul>
+    }
+
+  </div>
+</PostCollectionLayout>

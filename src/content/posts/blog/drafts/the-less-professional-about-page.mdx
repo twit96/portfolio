@@ -1,0 +1,54 @@
+---
+category: "Blog"
+datePublished: ""
+description: "I am a farm boy turned percussionist who studied mathematics in college and now designs websites. An obvious and natural progressison."
+draft: true
+heroImage: "https://storage.googleapis.com/tylerwittig.com/blog/drafts/the-less-professional-about-page/2019.jpg"
+links: [
+  { text: "Listen to my Favorite Songs", href: "https://music.youtube.com/playlist?list=PLhC2DPeXuXXUhFfTeZQM0gz4VrT-q2mqU&feature=share", },
+  { text: "View my Favorite Project", href: "https://gagcombos.info/", },
+  { text: "Important Disclaimer", href: "https://www.youtube.com/watch?v=uHgt8giw1LY", },
+]
+title: "The Less Professional About Me Page"
+---
+
+import PostSection from '@components/PostSection/index.astro';
+import PostSectionContent from '@components/PostSection/components/PostSectionContent.astro';
+import PostSectionSidebar from '@components/PostSection/components/PostSectionSidebar.astro';
+
+import Figure from "@components/Figure.astro";
+import ExternalLink from '@components/ExternalLink.astro';
+
+
+<PostSection>
+  <PostSectionContent slot="content">
+
+    ## My Roots
+    
+    In the early 1900s, the town I lived nearest to was considered the largest sulfur deposit in the world,
+    and the local economy was based around this sulfur production through the Texas Gulf Sulphur Company.
+    I used to work tirelessly in the mines from early to late in order to provide for my wife and many children.
+    At only two years old, they would have me shimmy into the slimmest gaps in the rocks
+    to harvest only the most remote and high quality sulfur. I carried the industry and my large family quite literally on my back at times.
+    It wasn't easy, but it was honest work.
+    
+    <Figure
+      caption="My first shower after 79 days in the mines, circa 1937" 
+      image={{ url: "https://storage.googleapis.com/tylerwittig.com/blog/drafts/the-less-professional-about-page/2018.jpeg", alt: "Bygone Days"}}
+    ></Figure>
+    
+      After World War II: Electric Boogaloo came to an end, the Texas Gulf Sulphur Company declined and eventually closed down,
+      and with it the town was slowly abandoned. I spent many a year contemplating what my new direction should be,
+      and so in 2001, I decided to enroll in preschool to begin my formal education.
+    
+  </PostSectionContent>
+  <PostSectionSidebar slot="sidebar">
+
+    Read more about
+    <ExternalLink
+      href="https://en.wikipedia.org/wiki/Newgulf,_Texas"
+      isExternal={true}
+    >Newgulf, Texas</ExternalLink>.
+
+  </PostSectionSidebar>
+</PostSection>

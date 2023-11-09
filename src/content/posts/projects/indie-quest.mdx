@@ -1,0 +1,42 @@
+---
+blurb: "Dynamic Website Project"
+category: "Projects"
+datePublished: "2020-12-07"
+description: "IndieQuest is a dynamic blog website that sends users on a quest to read all of its articles - powered by PHP, SQL, JavaScript, and CSS."
+heroImage: "https://storage.googleapis.com/tylerwittig.com/projects/indie-quest/title-card.png"
+links: [
+  { text: "View GitHub Repository (Archived)", href: "https://github.com/twit96/IndieQuest", },
+]
+tags:
+- php
+- mysql
+- sql
+- css
+- javascript
+- html
+- jquery
+- digital-ocean
+- nginx
+title: "IndieQuest"
+---
+
+import PostSection from '@components/PostSection/index.astro';
+import PostSectionContent from '@components/PostSection/components/PostSectionContent.astro';
+import PostSectionSidebar from '@components/PostSection/components/PostSectionSidebar.astro';
+
+<PostSection>
+  <PostSectionContent slot="content">
+
+    ## Demo Video
+
+    Since there is no longer a live URL for this project,
+    the demo video demonstrates the main functionality of the website.
+    
+    <video width="1920" height="1080" controls>
+      <source src="https://storage.googleapis.com/tylerwittig.com/projects/indie-quest/demo-indiequest.mp4" type="video/mp4" />
+      Download the 
+      <a href="https://storage.googleapis.com/tylerwittig.com/projects/indie-quest/demo-indiequest.mp4">MP4</a>
+    </video>
+    
+  </PostSectionContent>
+</PostSection>
