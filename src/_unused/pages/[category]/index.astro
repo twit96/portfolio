@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+	const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft && !post.data.archived);
+
+  const allCategories: String[] = publishedPosts.map((post) => post.data.category.toLowerCase()).flat().sort();
+  const uniqueCategories = [...new Set(allCategories)];
+  
+	return uniqueCategories.map((category) => ({
+		params: { category }
+	}));
+}
+
+const { category } = Astro.params;
+return Astro.redirect(`/${category}/1`);
+---

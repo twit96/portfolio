@@ -1,0 +1,259 @@
+---
+import { getCollection } from 'astro:content';
+import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
+import { SITE_AUTHOR } from '@consts';
+import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
+import ExpandedPreviewCard from '@components/PostPreviewCard/ExpandedPreviewCard.astro';
+import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
+import DecorativeLine from '@components/DecorativeLine/index.astro';
+
+
+
+export async function getStaticPaths({ paginate }) {
+	let publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft && !post.data.archived);
+  // Sort by Date Descending
+  publishedPosts.sort(function(a, b) {
+    let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);
+    let b_date = Date.parse(b.data.dateUpdated || b.data.datePublished);
+    if (b_date > a_date) return 1;
+    if (a_date > b_date) return -1;
+    return 0;
+  });
+
+  const allCategories: String[] = publishedPosts.map((post) => post.data.category).flat().sort();
+  const uniqueCategories = [...new Set(allCategories)];
+  
+  return uniqueCategories.flatMap((uc) => {
+
+    let categorizedPosts = publishedPosts.filter(post => post.data.category===uc);
+
+    const category = uc.toLowerCase();
+    const formattedCategory = uc;
+
+    return paginate(categorizedPosts, {
+      params: { category },
+      props: { formattedCategory },
+      pageSize: 9
+    });
+  });
+}
+
+const category = Astro.params.category;
+const formattedCategory = Astro.props.formattedCategory;
+const page = Astro.props.page;
+const categorizedPosts = Astro.props.page.data;
+---
+
+<PostCollectionLayout
+	title={formattedCategory}
+  description={`${SITE_AUTHOR}'s ${category}`}
+	numPosts={categorizedPosts.length}
+>
+  <div
+    slot="content"
+    class="content-section"
+  >
+
+
+    {/* No Posts - Nothing Here Card */}
+    {
+      (categorizedPosts.length === 0) &&
+      <NothingHereCard />
+    }
+
+
+    {/* Most Recent Post - Large Card */}
+    {
+      categorizedPosts.length > 0 &&
+      <ExpandedPreviewCard post={categorizedPosts[0]} />
+    }
+    
+
+    {/* Posts 2+ - Medium Card */}
+    {
+      categorizedPosts.length > 1 &&
+      <ul class="layout layout--grid">
+        {
+          categorizedPosts.map((post, i) => (
+            i>0 && 
+            <li>
+              <CompactPreviewCard post={post} />
+            </li>
+          ))
+        }
+      </ul>
+    }
+
+
+    {
+      page.lastPage>1 &&
+      <DecorativeLine />
+      <nav aria-label="Pagination Navigation">
+
+
+        {/* Left Buttons */}
+        <div>
+          <ul
+            class="btns layout layout--flex-fill"
+            style="--_layout--base-size:auto; --_layout--gap:0.125rem;"
+          >
+
+            {/* first */}
+            {
+              (page.currentPage > 3) &&
+              <li style="flex-basis:auto;">
+                <a
+                  class="btn surface2"
+                  href={`/${category}/1`}
+                  title="Navigate to first page"
+                >1</a>
+              </li>
+            }
+
+            {/* previous */}
+            <li style="flex-grow:100;">
+              {
+                page.url.prev
+                ? <a
+                    class="btn surfaceAction"
+                    href={page.url.prev}
+                    title="Navigate to previous page"
+                  >Previous</a>
+                : <span
+                    class="btn surfaceAction"
+                    style="opacity:0.5;"
+                  >Previous</span>
+              }
+            </li>
+
+          </ul>
+        </div>
+
+
+        {/* Nearby Pages Buttons */}
+        <div>
+          <ul
+            class="btns layout layout--flex-fill"
+            style="--_layout--base-size:auto; --_layout--gap:0.125rem;"
+          >
+          
+
+            {/* -2 */}
+            {
+              (page.currentPage-2 > 0) &&
+              <li>
+                <a
+                  class="btn surface2"
+                  href={`/${category}/${page.currentPage-2}`}
+                  title={`Navigate to page ${page.currentPage-2}`}
+                >{page.currentPage-2}</a>
+              </li>
+            }
+
+            {/* -1 */}
+            {
+              (page.currentPage-1 > 0) &&
+              <li>
+                <a
+                  class="btn surface2"
+                  href={`/${category}/${page.currentPage-1}`}
+                  title={`Navigate to page ${page.currentPage-1}`}
+                >{page.currentPage-1}</a>
+              </li>
+            }
+
+            {/* current */}
+            <li class="btn surface1">{page.currentPage}</li>
+
+            {/* +1 */}
+            {
+              (page.currentPage+1 < page.lastPage+1) &&
+              <li>
+                <a
+                  class="btn surface2"
+                  href={`/${category}/${page.currentPage+1}`}
+                  title={`Navigate to page ${page.currentPage+1}`}
+                >{page.currentPage+1}</a>
+              </li>
+            }
+
+            {/* +2 */}
+            {
+              (page.currentPage+2 < page.lastPage+1) && 
+              <li>
+                <a
+                  class="btn surface2"
+                  href={`/${category}/${page.currentPage+2}`}
+                  title={`Navigate to page ${page.currentPage+2}`}
+                >{page.currentPage+2}</a>
+              </li>
+            }
+
+          </ul>
+        </div>
+
+        {/* Right Buttons */}
+        <div>
+          <ul
+            class="btns layout layout--flex-fill"
+            style="--_layout--base-size:auto; --_layout--gap:0.125rem;"
+          >
+
+            {/* next */}
+            <li style="flex-grow:100;">
+              {
+                page.url.next
+                ? <a
+                    class="btn surfaceAction"
+                    href={page.url.next}
+                    title="Navigate to next page"
+                  >Next</a>
+                : <span
+                    class="btn surfaceAction"
+                    style="opacity:0.5;"
+                  >Next</span>
+              }
+            </li>
+
+            {/* last */}
+            {
+              (page.currentPage < page.lastPage-2) &&
+              <li style="flex-basis:auto;">
+                <a
+                  class="btn surface2"
+                  href={`/${category}/${page.lastPage}`}
+                  title="Navigate to last page"
+                >{page.lastPage}</a>
+              </li>
+            }
+
+          </ul>
+        </div>
+
+      </nav>
+    }
+
+
+  </div>
+</PostCollectionLayout>
+
+
+<style>
+  nav[aria-label="Pagination Navigation"] {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  nav[aria-label="Pagination Navigation"] li > *:not(ul) { display: block; }
+
+  @media (min-width: 90ch) {
+    nav[aria-label="Pagination Navigation"] { flex-direction: row; }
+    nav[aria-label="Pagination Navigation"] > * {
+      flex-grow: 1;
+    }
+  }
+
+  nav[aria-label="Pagination Navigation"] span { cursor: not-allowed; }
+
+</style>
