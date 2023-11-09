@@ -43,7 +43,9 @@
     let scrollTopBtn = document.getElementById("scroll-top");
     if (!scrollTopBtn) return false;
 
+    let siteLogo = document.getElementById("site-logo");
     scrollTopBtn.onclick = function() {
+      if (siteLogo) siteLogo.focus();
       window.scroll({
         top: 0,
         left: 0,
