@@ -5,10 +5,27 @@ import DecorativeLine from '@components/DecorativeLine/index.astro';
 const { page, baseUrl } = Astro.props;
 
 
+// Buttons Array Presets
+/*
+How many numbered buttons are visible.
+Should be odd so current page indicator is centered,
+but also because last page button will not display when current page number = page.lastPage+1-outerBtnThreshold.
+This will not break anything, but is not intended behavior.
+Thus, a check is run below to force an odd number on the value.
+*/
+let pageBtnsLength = 5;
+if (pageBtnsLength%2===0) pageBtnsLength++;
+/*
+The number of pages away from the first or last page 
+required for the first page button and last page button to be visible
+*/
+const outerBtnThreshold = Math.ceil( (pageBtnsLength+1)/2 );
+
+
 // Build Pagination Buttons Array
 let pageBtns: Number[] = [];
 
-if (page.lastPage-1 < 5) {
+if (page.lastPage-1 < pageBtnsLength) {
   for (let i=1; i<=page.lastPage; i++) pageBtns.push(i);
   
 } else {
@@ -17,7 +34,7 @@ if (page.lastPage-1 < 5) {
   let adder=1;
   let multiplier=1;
 
-  while (pageBtns.length<5) {
+  while (pageBtns.length<pageBtnsLength) {
     multiplier*=-1;
 
     const curr = page.currentPage + (adder * multiplier);
@@ -30,8 +47,6 @@ if (page.lastPage-1 < 5) {
     if (multiplier>0) adder++;
   }
 }
-
-console.log(pageBtns)
 ---
 
 {
@@ -48,7 +63,8 @@ console.log(pageBtns)
 
       {/* first */}
       {
-        (page.currentPage > 3) &&
+        (page.lastPage > pageBtnsLength) &&
+        (page.currentPage > outerBtnThreshold) &&
         <li style="flex-basis:auto;">
           <a
             class="btn surfaceAction"
@@ -121,7 +137,8 @@ console.log(pageBtns)
 
       {/* last */}
       {
-        (page.currentPage < page.lastPage-2) &&
+        (page.lastPage > pageBtnsLength) &&
+        (page.currentPage < page.lastPage+1-outerBtnThreshold) &&
         <li style="flex-basis:auto;">
           <a
             class="btn surfaceAction"
