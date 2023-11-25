@@ -111,7 +111,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  min-height: 100vh;
+  min-height: 100svh;
 }
 main { flex: 1; }
 
