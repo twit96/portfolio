@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
-import DecorativeLine from '@components/DecorativeLine/index.astro';
 
 // Remove Drafts, Archived, and Non-Featured Posts
 let featuredPosts = (await getCollection('posts')).filter(post => (
@@ -31,7 +30,6 @@ featuredPosts.sort(function(a, b) {
         </li>
       )}
     </ul>
-    <DecorativeLine />
   </div>
 }
 

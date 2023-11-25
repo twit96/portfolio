@@ -1,6 +1,5 @@
 ---
 import { getCollection } from 'astro:content';
-import DecorativeLine from '@components/DecorativeLine/index.astro';
 
 
 // Get All Published Post Tags
@@ -80,7 +79,6 @@ if (tagsByCountArray.length > 5) tagsByCountArray.length = 5;
 
 {
   (tagsByCountArray && tagsByCountArray.length>0) &&
-  <DecorativeLine />
   <h2>Top Tags</h2>
   <ul
     class="btns layout layout--list"

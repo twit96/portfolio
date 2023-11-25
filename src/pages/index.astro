@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import HomepageHero from '@components/Homepage/HomepageHero.astro';
+import DecorativeLine from '@components/DecorativeLine/index.astro';
 import FeaturedPosts from '@components/Homepage/FeaturedPosts.astro';
 import RecentPosts from '@components/RecentPosts.astro';
 import TopTags from '@components/Homepage/TopTags.astro';
@@ -26,7 +27,9 @@ import TopTags from '@components/Homepage/TopTags.astro';
       <div class="card content-section shadow-sm surface0 wrapper">
 
         <FeaturedPosts />
+        <DecorativeLine />
         <RecentPosts />
+        <DecorativeLine />
         <TopTags />
 
       </div>
