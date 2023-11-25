@@ -26,7 +26,7 @@ const { image, title, href } = Astro.props;
   a {
     --_bg: var(--text2);
     aspect-ratio: 2 / 1;
-    background: var(--_bg);
+    background: var(--text2);
     display: block;
     padding: 0;
     position: relative;
@@ -38,8 +38,5 @@ const { image, title, href } = Astro.props;
     object-fit: cover;
     position: absolute;
     width: 100%;
-    mix-blend-mode: screen;
   }
-  /* html[data-mode="dark"] a { --_bg: var(--surface0); } */
-  html[data-mode="dark"] img { mix-blend-mode: overlay; }
 </style>
