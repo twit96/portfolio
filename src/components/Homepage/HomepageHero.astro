@@ -90,7 +90,8 @@ import ContactLinks from '@components/ContactLinks.astro';
       <path d="M799.031 734.944C796.211 714.101 784.851 665.681 822.357 655.85C859.863 646.019 874.058 694.31 881.169 713.652C888.28 732.994 898.798 782.211 857.843 792.747C816.888 803.282 801.851 755.788 799.031 734.944Z" fill="var(--_fill)" fill-opacity="0.25"/>
       <path fill-rule="evenodd" clip-rule="evenodd" d="M830.111 655.392C829.58 655.541 829.27 656.094 829.42 656.625L834.597 675.011C832.526 676.075 831.419 678.483 832.075 680.811L836.141 695.25C836.796 697.578 838.997 699.055 841.319 698.882L846.496 717.267C846.646 717.799 847.198 718.108 847.729 717.959C848.261 717.809 848.571 717.257 848.421 716.725L843.244 698.34C845.315 697.276 846.422 694.868 845.766 692.539L841.701 678.101C841.045 675.772 838.844 674.296 836.522 674.468L831.345 656.083C831.195 655.552 830.643 655.242 830.111 655.392Z" fill="var(--_fill)" fill-opacity="0.5"/>
       <rect x="833.187" y="677.382" width="6" height="21" rx="3" transform="rotate(-15.7265 833.187 677.382)" fill="var(--_fill)" fill-opacity="0.75"/>
-      <path d="M11.3407 22.0863C10.0509 14.4584 15.9295 7.5022 23.6657 7.5022H976.355C984.087 7.5022 989.965 14.4507 988.682 22.0754L902.91 532.075C901.897 538.094 896.686 542.502 890.583 542.502H109.902C103.803 542.502 98.5939 538.1 97.577 532.086L11.3407 22.0863Z" stroke="var(--_fill)" stroke-width="15"/>
+      <path d="M351.914 544.376C352.243 539.106 356.614 535 361.895 535H637.722C642.955 535 647.303 539.034 647.694 544.252L649.194 564.252C649.629 570.053 645.039 575 639.222 575H360.645C354.876 575 350.304 570.133 350.664 564.376L351.914 544.376Z" fill="var(--_fill)" fill-opacity="0.75"/>
+      <path d="M23.6657 7.5022H976.355C984.087 7.5022 989.965 14.4507 988.682 22.0754L902.91 532.075C901.897 538.094 896.686 542.502 890.583 542.502H109.902C103.803 542.502 98.5939 538.1 97.577 532.086L11.3407 22.0863C10.0509 14.4584 15.9295 7.5022 23.6657 7.5022Z" stroke="var(--_fill)" stroke-width="15"/>
       <path d="M505 15.0022H985L896.2 535.002H505V15.0022Z" fill="var(--_fill)" fill-opacity="0.25"/>
       <rect x="665" y="106.002" width="278" height="10" rx="5" fill="var(--_fill)" fill-opacity="0.25"/>
       <rect x="689" y="126.002" width="251" height="10" rx="5" fill="var(--_fill)" fill-opacity="0.25"/>
@@ -172,17 +173,29 @@ import ContactLinks from '@components/ContactLinks.astro';
     flex-direction: column;
     text-align: center;
   }
-  #hero-img-wrap { flex-basis: 35%; }
-  #hero-content-wrap { flex-basis: 65%; }
+  #hero-img-wrap { flex-basis: 40%; }
+  #hero-content-wrap { flex-basis: 60%; }
 
 
   #hero-img-wrap {
-    --_rotation: 2deg;
+    --_rotation: -2deg;
     padding: 1rem;
-    transform: rotate( calc(-1 * var(--_rotation)) );
+    position: relative;
+    transform: rotate( var(--_rotation) );
+  }
+  #hero-img-wrap::before {
+    background: linear-gradient( var(--surface3), var(--surface4) );
+    border-radius: 50%;
+    content: '';
+    inset: 50% 0 0 0;
+    opacity: 0.5;
+    position: absolute;
+    z-index: -1;
   }
   svg {
     --_fill: var(--text2);
+    display: block;
+    margin: auto;
     max-width: 40ch;
     width: 100%;
   }
@@ -195,13 +208,9 @@ import ContactLinks from '@components/ContactLinks.astro';
     line-height: 1.75em;
   }
   p {
-    border-left: 0.125rem solid currentColor;
     font-size: 1.25rem;
     line-height: 1.5em;
     max-width: 40ch;
-    padding-left: 1ch;
-    position: relative;
-    text-align: left;
     text-wrap: balance;
   }
   nav { margin: auto; }
@@ -216,7 +225,7 @@ import ContactLinks from '@components/ContactLinks.astro';
       text-align: left;
     }
     
-    #hero-img-wrap { transform: rotate( var(--_rotation) ); }
+    #hero-img-wrap { --_rotation: 2deg; }
 
     #hero-content-wrap.content-section { --_content--gap: 2rem; }
     p { font-size: 1.5rem; }
