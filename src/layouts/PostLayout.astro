@@ -179,7 +179,7 @@ const {
   #hero-image-wrap {
     align-self: flex-end;
     aspect-ratio: 2 / 1;
-    background: linear-gradient(var(--surface4), var(--surface3));
+    background: var(--text2);
     line-height: 0;
     padding: 0;
     position: relative;
@@ -190,7 +190,10 @@ const {
     object-fit: cover;
     position: absolute;
     width: 100%;
+    mix-blend-mode: screen;
   }
+  /* html[data-mode="dark"] #hero-image-wrap { background: var(--surface0); } */
+  html[data-mode="dark"] #hero-image-wrap img { mix-blend-mode: overlay; }
 
   #post-content:empty { display: none; }
 </style>

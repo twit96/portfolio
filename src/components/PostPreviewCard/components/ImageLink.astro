@@ -24,17 +24,22 @@ const { image, title, href } = Astro.props;
 
 <style>
   a {
+    --_bg: var(--text2);
     aspect-ratio: 2 / 1;
-    background: linear-gradient(var(--surface4), var(--surface3));
+    background: var(--_bg);
     display: block;
     padding: 0;
     position: relative;
   }
+  a:hover { background: var(--_bg); }
   img {
     height: 100%;
     inset: 0;
     object-fit: cover;
     position: absolute;
     width: 100%;
+    mix-blend-mode: screen;
   }
+  /* html[data-mode="dark"] a { --_bg: var(--surface0); } */
+  html[data-mode="dark"] img { mix-blend-mode: overlay; }
 </style>
