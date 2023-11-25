@@ -15,7 +15,7 @@ import HomepageImage from './HomepageImage.astro';
   >
     <h1 class="cursive">Tyler Wittig</h1>
     <p>
-      My name is Tyler and I am a full-stack web developer.
+      Hello! My name is Tyler and I am a full-stack web developer.
       This is my website. It is on the web.  
     </p>
     <nav aria-label="Social Links">
@@ -47,7 +47,7 @@ import HomepageImage from './HomepageImage.astro';
   p {
     font-size: 1.25rem;
     line-height: 1.5em;
-    max-width: 40ch;
+    max-width: 46ch;
     text-wrap: balance;
   }
   nav { margin: auto; }
@@ -65,7 +65,10 @@ import HomepageImage from './HomepageImage.astro';
     #hero-img-wrap { --_rotation: 2deg; }
 
     #hero-content-wrap.content-section { --_content--gap: 2rem; }
-    p { font-size: 1.5rem; }
+    p {
+      font-size: 1.5rem;
+      text-wrap: wrap;
+    }
     nav { margin-left: 0; }
   }
 </style>
