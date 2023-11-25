@@ -8,7 +8,7 @@
 	 * Reset local storage if refactor has occured.
 	 */
 	function handleStorageChanges() {
-		const lrs = "202310231438";  // Last Refactored Storage Date
+		const lrs = "202311251340";  // Last Refactored Storage Date
 		let stored_lrs = localStorage.getItem("lrs");
 		if (stored_lrs!==lrs) {
 			localStorage.clear();
@@ -26,7 +26,7 @@
 		const defaults = {
 			mode: "light",
 			color: "blue",
-			scheme: "monochromatic"
+			scheme: "split-complementary"
 		};
 
 		let html = document.documentElement;
