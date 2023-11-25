@@ -190,7 +190,10 @@ const {
     object-fit: cover;
     position: absolute;
     width: 100%;
+    mix-blend-mode: screen;
   }
+  /* html[data-mode="dark"] #hero-image-wrap { background: var(--surface0); } */
+  html[data-mode="dark"] #hero-image-wrap img { mix-blend-mode: overlay; }
 
   #post-content:empty { display: none; }
 </style>
