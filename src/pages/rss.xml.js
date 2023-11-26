@@ -29,7 +29,7 @@ export async function GET(context) {
       customData: `<media:content
           type="image/${post.data.heroImage.split('.').pop()}"
           medium="image"
-          url="${context.site}${post.data.heroImage.slice(1)}" />
+          url="${post.data.heroImage}" />
       `,
 		})),
 	});
