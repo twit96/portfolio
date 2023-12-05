@@ -5,6 +5,9 @@ TableOfContents component's script auto-generates a TOC on the fly
 based on a page's h2 through h6 tags (h1 is reserved for the page title area).
 It outputs a nav containing an unordered list of anchor links,
 and the list item elements are assigned the following class names accordingly.
+
+(Since the CSS class names don't appear in the TableOfContents.astro file's HTML,
+they are not bundled by Astro, and thus must be imported via this external stylesheet.)
 */
 .toc-link-wrap {
   align-items: center;
