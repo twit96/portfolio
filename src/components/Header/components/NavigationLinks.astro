@@ -1,33 +1,29 @@
 ---
-import { getCollection } from 'astro:content';
-
-// Get Category Links
-const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft && !post.data.archived);
-const allCategories = publishedPosts.map((post) => post.data.category).flat().sort();
-const uniqueCategories = [...new Set(allCategories)];
-const categoryLinks = uniqueCategories.map(
-  (category => {
-    return {
-      'text': category,
-      'href': `/${category.toLowerCase()}/`
-    }
-  }
-  )
-);
-
-
 // Define Main Navigation Links
 let links = [
-  { 'text': "Home", 'href': "/", },
-  ...categoryLinks,
-  { 'text': "Tags", 'href': "/tags/", }
+  { 'text': "Home",    'href': "/",        },
+  { 'text': "Archive", 'href': "/archive/" },
+  { 'text': "Tags",    'href': "/tags/",   }
 ];
 
-// add accessibility attributes
+
+// Add Current Page Accessibility Attribute
+const urlPieces = Astro.url.pathname.split("/").filter(Boolean);
+
 links.forEach((link) => {
-  link['aria-current'] = Astro.url.pathname===link.href ? "page" : "false";
+  let isActive = false;
+
+  if (link.href===Astro.url.pathname) {
+    isActive = true;
+  } else {
+    const hrefPieces = link.href.split("/").filter(Boolean);
+    isActive = hrefPieces.filter(value => urlPieces.includes(value)).length > 0;
+  }
+
+  link['aria-current'] = isActive ? "page" : "false";
 });
 ---
+
 
 <ul class="btns">
   {links.map(({text, ...attrs}) =>
@@ -38,6 +34,7 @@ links.forEach((link) => {
     </li>
   )}
 </ul>
+
 
 <style>
   .btns {

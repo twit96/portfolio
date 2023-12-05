@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+
+// Get Post Categories
+const publishedPosts = (await getCollection('posts')).filter(post => (
+  !post.data.draft &&
+  !post.data.archived
+));
+const allCategories = publishedPosts.map((post) => post.data.category).flat().sort();
+const uniqueCategories = [...new Set(allCategories)];
+let categoryLinks = [
+  {'text': "All", 'href': "/archive/" }
+];
+uniqueCategories.forEach((category) => {
+  categoryLinks.push({
+    'text': category,
+    'href': `/${category.toLowerCase()}/`
+  });
+});
+
+// add accessibility attributes
+categoryLinks.forEach((link) => {
+  link['aria-current'] = Astro.url.pathname.includes(link.href) ? "page" : "false";
+});
+---
+
+<nav class="btns">
+  <h2 class="btn surface3 heading--diminished">Filter Posts by Category</h2>
+  <ul
+    class="layout layout--flex-fill"
+    style="--_layout--base-size:auto; --_layout--gap:0.125rem;"
+  >
+    {categoryLinks.map(({text, ...attrs}) =>
+      <li>
+        <a class={`btn ${attrs['aria-current']==="page" ? "surfaceAction" : "surface2"}`} {...attrs}>
+          {text}
+        </a>
+      </li>
+    )}
+  </ul>
+</nav>
+
+
+<style>
+  nav {
+    align-items: flex-start;
+    margin-block: 0.5rem 1rem;
+    margin-inline: auto;
+    text-align: center;
+    width: fit-content;
+  }
+  nav > * { flex-grow: 1; }
+  a {
+    display: block;
+    text-decoration: none;
+  }
+  a[aria-current="page"] { text-decoration: underline; }
+</style>

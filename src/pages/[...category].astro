@@ -38,9 +38,10 @@ categorizedPosts.sort(function(a, b) {
 ---
 
 <PostCollectionLayout
-	title={formattedCategory}
+  title={formattedCategory}
   description={`${SITE_AUTHOR}'s ${category}`}
-	numPosts={categorizedPosts.length}
+  hasCategoriesNav={true}
+  numPosts={categorizedPosts.length}
 >
   <div
     slot="content"

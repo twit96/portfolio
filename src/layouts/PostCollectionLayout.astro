@@ -1,15 +1,17 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import PostCategories from '@components/PostCategories.astro';
 const { title, numPosts=0 } = Astro.props;
 ---
 <BaseLayout {...Astro.props}>
   <section>
 
     <div
-      class="content-section wrapper"
+      class={`content-section wrapper${Astro.props.hasCategoriesNav ? " center-info-area" : ""}`}
       style="--_content--gap:0.5rem;"
     >
       <h1>{title}</h1>
+      { Astro.props.hasCategoriesNav && <PostCategories /> }
       <div class="info"><slot name="info" /></div>  {/* Collection Info */}
       {
         numPosts > 0 &&
@@ -29,6 +31,10 @@ const { title, numPosts=0 } = Astro.props;
 
 
 <style>
+  .center-info-area h1 { font-size: clamp(var(--_font-size), 8vw, calc(var(--_font-size) * 1.5) ); }
+  .center-info-area h1,
+  .center-info-area h2 { text-align: center; }
+
   .info { margin-bottom: 1rem; }
   .info:empty { display: none; }
 </style>

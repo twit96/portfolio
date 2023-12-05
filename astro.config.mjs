@@ -7,6 +7,7 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://tylerwittig.com',
+  redirects: { '/projects/': '/archive/', },
   markdown: {
     /*
     To replace 'syntaxHighlight: false' with custom syntax highlighting, see:

@@ -53,55 +53,30 @@ if (page.lastPage-1 < pageBtnsLength) {
   page.lastPage>1 &&
   <DecorativeLine />
   <nav aria-label="Pagination Navigation">
-
-
-    {/* Left Buttons */}
     <ul
       class="btns layout layout--flex-fill"
       style="--_layout--base-size:auto; --_layout--gap:0.125rem;"
     >
 
-      {/* first */}
+      {/* First Page Button */}
       {
         (page.lastPage > pageBtnsLength) &&
         (page.currentPage > outerBtnThreshold) &&
-        <li style="flex-basis:auto;">
+        <li>
           <a
-            class="btn surfaceAction"
+            class="btn surface2"
             href={`${baseUrl}/1`}
             title="Navigate to first page"
           >1</a>
         </li>
+        <li><span class="btn surface1">...</span></li>
       }
 
-      {/* previous */}
-      <li style="flex-grow:100;">
-        {
-          page.url.prev
-          ? <a
-              class="btn surfaceAction"
-              href={page.url.prev}
-              title="Navigate to previous page"
-            >Previous</a>
-          : <span
-              class="btn surfaceAction"
-              style="opacity:0.5;"
-            >Previous</span>
-        }
-      </li>
-
-    </ul>
-
-
-    {/* Nearby Pages Buttons */}
-    <ul
-      class="btns layout layout--flex-fill"
-      style="--_layout--base-size:auto; --_layout--gap:0.125rem;"
-    >
+      {/* Nearby Pages Buttons */}
       {
         pageBtns.map((p) =>
         (p === page.currentPage)
-        ? <li class="btn surface1">{page.currentPage}</li>
+        ? <li class="btn surfaceAction"><span>{page.currentPage}</span></li>
         : <li>
             <a
               class="btn surface2"
@@ -111,37 +86,15 @@ if (page.lastPage-1 < pageBtnsLength) {
           </li>
         )
       }
-    </ul>
 
-    {/* Right Buttons */}
-    <ul
-      class="btns layout layout--flex-fill"
-      style="--_layout--base-size:auto; --_layout--gap:0.125rem;"
-    >
-
-      {/* next */}
-      <li style="flex-grow:100;">
-        {
-          page.url.next
-          ? <a
-              class="btn surfaceAction"
-              href={page.url.next}
-              title="Navigate to next page"
-            >Next</a>
-          : <span
-              class="btn surfaceAction"
-              style="opacity:0.5;"
-            >Next</span>
-        }
-      </li>
-
-      {/* last */}
+      {/* Last Page Button */}
       {
         (page.lastPage > pageBtnsLength) &&
         (page.currentPage < page.lastPage+1-outerBtnThreshold) &&
-        <li style="flex-basis:auto;">
+        <li><span class="btn surface1">...</span></li>
+        <li>
           <a
-            class="btn surfaceAction"
+            class="btn surface2"
             href={`${baseUrl}/${page.lastPage}`}
             title="Navigate to last page"
           >{page.lastPage}</a>
@@ -149,7 +102,6 @@ if (page.lastPage-1 < pageBtnsLength) {
       }
 
     </ul>
-
   </nav>
 }
 
@@ -159,6 +111,8 @@ if (page.lastPage-1 < pageBtnsLength) {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    max-width: 80ch;
+    margin: auto;
     text-align: center;
   }
   nav li > * { display: block; }
@@ -169,9 +123,5 @@ if (page.lastPage-1 < pageBtnsLength) {
       gap: 1rem;
     }
     nav > * { flex: 1; }
-    nav > *:nth-of-type(2) { flex-grow: 2; }
   }
-
-  nav span { cursor: not-allowed; }
-
 </style>
