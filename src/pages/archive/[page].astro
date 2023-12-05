@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
 import { POSTS_PER_PAGE } from '@consts';
-import PostCategories from '@components/PostCategories.astro';
 import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
 import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
 import PaginationButtons from '@components/PaginationButtons.astro';
@@ -62,7 +61,7 @@ const { page } = Astro.props;
     
     <PaginationButtons
       page={page}
-      baseUrl={Astro.url.pathname.split('/').slice(0,-1).join('/')}
+      baseUrl={Astro.url.pathname.split('/').filter(Boolean).slice(0,-1).join('/')}
     />
 
   </div>

@@ -18,9 +18,21 @@ uniqueCategories.forEach((category) => {
   });
 });
 
-// add accessibility attributes
+
+// Add Current Page Accessibility Attribute
+const urlPieces = Astro.url.pathname.split("/").filter(Boolean);
+
 categoryLinks.forEach((link) => {
-  link['aria-current'] = Astro.url.pathname.includes(link.href) ? "page" : "false";
+  let isActive = false;
+
+  if (link.href===Astro.url.pathname) {
+    isActive = true;
+  } else {
+    const hrefPieces = link.href.split("/").filter(Boolean);
+    isActive = hrefPieces.filter(value => urlPieces.includes(value)).length > 0;
+  }
+
+  link['aria-current'] = isActive ? "page" : "false";
 });
 ---
 

@@ -65,7 +65,7 @@ if (page.lastPage-1 < pageBtnsLength) {
         <li>
           <a
             class="btn surface2"
-            href={`${baseUrl}/1`}
+            href={`/${baseUrl}/1/`}
             title="Navigate to first page"
           >1</a>
         </li>
@@ -80,7 +80,7 @@ if (page.lastPage-1 < pageBtnsLength) {
         : <li>
             <a
               class="btn surface2"
-              href={`${baseUrl}/${p}`}
+              href={`/${baseUrl}/${p}/`}
               title={`Navigate to page ${p}`}
             >{p}</a>
           </li>
@@ -95,7 +95,7 @@ if (page.lastPage-1 < pageBtnsLength) {
         <li>
           <a
             class="btn surface2"
-            href={`${baseUrl}/${page.lastPage}`}
+            href={`/${baseUrl}/${page.lastPage}/`}
             title="Navigate to last page"
           >{page.lastPage}</a>
         </li>
