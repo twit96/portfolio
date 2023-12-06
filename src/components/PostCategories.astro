@@ -9,18 +9,17 @@ const publishedPosts = (await getCollection('posts')).filter(post => (
 const allCategories = publishedPosts.map((post) => post.data.category).flat().sort();
 const uniqueCategories = [...new Set(allCategories)];
 let categoryLinks = [
-  {'text': "All", 'href': "/archive/" }
+  {'text': "All", 'href': "/archive/1/" }
 ];
 uniqueCategories.forEach((category) => {
   categoryLinks.push({
     'text': category,
-    'href': `/${category.toLowerCase()}/`
+    'href': `/${category.toLowerCase()}/1/`
   });
 });
 
-
 // Add Current Page Accessibility Attribute
-const urlPieces = Astro.url.pathname.split("/").filter(Boolean);
+const urlPieces = Astro.url.pathname.split("/").filter(Boolean).slice(0,-1);
 
 categoryLinks.forEach((link) => {
   let isActive = false;
