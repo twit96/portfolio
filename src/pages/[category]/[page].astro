@@ -1,0 +1,108 @@
+---
+import { getCollection } from 'astro:content';
+import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
+import { SITE_AUTHOR, POSTS_PER_PAGE } from '@consts';
+import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
+import ExpandedPreviewCard from '@components/PostPreviewCard/ExpandedPreviewCard.astro';
+import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
+import PaginationButtons from '@components/PaginationButtons.astro';
+
+
+export async function getStaticPaths({ paginate }) {
+
+  // Get All Posts
+	const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft && !post.data.archived);
+  
+  // Sort by Date Descending
+  publishedPosts.sort(function(a, b) {
+    let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);
+    let b_date = Date.parse(b.data.dateUpdated || b.data.datePublished);
+    if (b_date > a_date) return 1;
+    if (a_date > b_date) return -1;
+    return 0;
+  });
+
+
+  // Get Categories
+  const allCategories: String[] = publishedPosts.map(post => post.data.category).flat().sort();
+  const uniqueCategories = [
+    "Archive",                 // "Archive" category will show all posts
+    ...new Set(allCategories)  // exclude duplicates from all categories
+  ];
+
+
+  // Return Paginated Category Pages
+  // for each unique category...
+  return uniqueCategories.flatMap(uc => {
+
+    // ...get all corresponding posts...
+    const categorizedPosts = 
+      (uc==="Archive") 
+        ? publishedPosts
+        : publishedPosts.filter(post => post.data.category===uc);
+
+    // ...and paginate them.
+    return paginate(categorizedPosts, {
+      params: { category: uc.toLowerCase() },
+      props: { formattedCategory: uc },
+      pageSize: POSTS_PER_PAGE
+    });
+
+  });
+
+}
+
+
+const { category } = Astro.params;
+const { formattedCategory, page } = Astro.props;
+---
+
+<PostCollectionLayout
+  title={formattedCategory}
+  description={`${SITE_AUTHOR}'s ${formattedCategory}`}
+  hasCategoriesNav={true}
+  numPosts={page.total}
+>
+  <div
+    slot="content"
+    class="content-section"
+  >
+
+    {/* No Posts - Nothing Here Card */}
+    {
+      (page.data.length === 0) &&
+      <NothingHereCard />
+    }
+
+    {/* Most Recent Post - Large Card */}
+    {
+      page.data.length > 0 &&  // if there are any posts
+      page.currentPage===1 &&  // first page only
+      <ExpandedPreviewCard post={page.data[0]} />
+    }
+    
+    {/* Posts 2+ - Medium Card */}
+    {
+      page.data.length > 1 &&
+      <ul class="layout layout--grid">
+        {
+          page.data.map((post, i) => (
+            (
+              page.currentPage>1 ||  // matches all posts on pages 2+
+              i>0                    // matches posts 2+ only page 1
+            ) && 
+            <li>
+              <CompactPreviewCard post={post} />
+            </li>
+          ))
+        }
+      </ul>
+    }
+
+    <PaginationButtons
+      page={page}
+      baseUrl={Astro.url.pathname.split('/').filter(Boolean).slice(0,-1).join('/')}
+    />
+
+  </div>
+</PostCollectionLayout>

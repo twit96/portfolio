@@ -1,8 +1,0 @@
----
-let requestURL = Astro.url.pathname;
-const lastChar = requestURL.charAt(requestURL.length-1);
-
-const redirectURL = requestURL + (lastChar==='/' ? '1/' : '/1/');
-
-return Astro.redirect(redirectURL);
----

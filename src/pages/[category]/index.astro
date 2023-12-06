@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+	const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft && !post.data.archived);
+
+  // Get Categories
+  const allCategories: String[] = publishedPosts.map(
+    post => post.data.category.toLowerCase()
+  ).flat().sort();
+  // unique
+  const uniqueCategories = [
+    "Archive",                 // "Archive" category will show all posts
+    ...new Set(allCategories)  // exclude duplicates from all categories
+  ];
+  // lowercase for URL strings
+  const categoryUrls = uniqueCategories.map(c => c.toLowerCase());
+
+	return categoryUrls.map(
+    cu => ({ params: { category: cu } })
+  );
+}
+
+
+const { category } = Astro.params;
+return Astro.redirect(`/${category}/1/`);
+---
