@@ -33,7 +33,9 @@
     fill: currentColor;
     transition: 0.5s transform ease;
   }
-  button:not([disabled]):hover svg {transform: rotate(360deg); }
+  @media (hover: hover) {
+    button:not([disabled]):hover svg {transform: rotate(360deg); }
+  }
 </style>
 
 

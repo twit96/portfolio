@@ -30,7 +30,9 @@
     25% { transform: rotate(10deg); }
     75% { transform: rotate(-10deg); }
   }
-  button:hover svg { animation: 0.25s wobble linear 3; }
+  @media (hover: hover) {
+    button:hover svg { animation: 0.25s wobble linear 3; }
+  }
 </style>
 
 
