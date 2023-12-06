@@ -3,6 +3,7 @@
   id="theme-reset-btn"
   title="Reset Theme"
   type="button"
+  disabled
 >
   <svg
     height="1.25rem"
@@ -19,20 +20,25 @@
 <style>
   button {
     --_size: 1.5rem;
-    flex: 0 0 var(--size);
+    flex-grow: 1;
     height: var(--_size);
     line-height: 0;
     width: var(--_size);
+  }
+  button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.15;
   }
   svg {
     fill: currentColor;
     transition: 0.5s transform ease;
   }
-  button:hover svg {transform: rotate(360deg); }
+  button:not([disabled]):hover svg {transform: rotate(360deg); }
 </style>
 
 
 <script defer>
+
   let theme_reset_btn = document.getElementById("theme-reset-btn");
 
   function resetTheme() {
@@ -50,6 +56,7 @@
     configModeInput();
     configColorInputs();
     configSchemeInputs();
+    updateMetaThemeColor();
   }
   theme_reset_btn.onclick = resetTheme;
 

@@ -31,20 +31,16 @@ import PreferencesBackground from "./components/PreferencesBackground.astro";
 
   <div class="modal card custom-scrollbar layout layout--list surface0 shadow-sm">
 
-    
-
-    <div class="title-area">
-      <b>Theme Preferences</b>
-      <div class="btns">
-        <PreferenceReset />
-        <PreferenceRandomizer />
-      </div>
+    <b>Theme Preferences</b>
+    <div class="btns">
+      <PreferenceReset />
+      <PreferenceRandomizer />
     </div>
     
-    <hr>
     <PreferenceFormModes />
     <PreferenceFormColors />
     <PreferenceFormSchemes />
+
   </div>
 
 </details>
@@ -79,23 +75,41 @@ import PreferencesBackground from "./components/PreferencesBackground.astro";
 
   /* Content Modal */
   .modal {
+  --_layout--gap: 0.5rem;
     max-width: 28em;
     z-index: 1001;
   }
   
   /* title */
-  .title-area {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: space-between;
+  b {
+    font-size: 1.25rem;
+    text-align: center;
   }
-  b { font-size: 1.25rem; }
+  /* reset/randomize buttons */
+  .btns { flex-shrink: 0; }
 
 </style>
 
 
 <script is:inline>
+
+  function configResetButton() {
+    let theme_reset_btn = document.getElementById("theme-reset-btn");
+		let html = document.documentElement;
+		const defaults = JSON.parse(localStorage.getItem("defaults"));
+
+    if (
+      defaults.mode === html.dataset.mode &&
+      defaults.color === html.dataset.color &&
+      defaults.scheme === html.dataset.scheme
+    ) {
+      theme_reset_btn.setAttribute('disabled', true)
+    } else {
+      theme_reset_btn.disabled = false;
+    }
+  }
+  configResetButton();
+
   {/*
   Used by deferred scripts in FormColors, FormModes, and FormSchemes components.
   */}
@@ -103,5 +117,7 @@ import PreferencesBackground from "./components/PreferencesBackground.astro";
     const theme_color = getComputedStyle(document.documentElement).getPropertyValue("--surface1");
     const meta_theme_color = document.querySelector("meta[name=\"theme-color\"]");
     meta_theme_color.setAttribute("content", theme_color);
+    configResetButton();
   }
+  
 </script>

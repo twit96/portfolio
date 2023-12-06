@@ -5,3 +5,8 @@ const { ...attrs } = Astro.props;
 <form {...attrs} class="card surface1">
   <slot />
 </form>
+
+
+<style>
+  form { flex-grow: 1; }
+</style>

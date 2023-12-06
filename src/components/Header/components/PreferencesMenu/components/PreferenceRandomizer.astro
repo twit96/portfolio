@@ -18,7 +18,7 @@
 <style>
   button {
     --_size: 1.5rem;
-    flex: 0 0 var(--size);
+    flex-grow: 1;
     height: var(--_size);
     line-height: 0;
     width: var(--_size);
@@ -35,6 +35,7 @@
 
 
 <script defer>
+  
   let theme_randomizer_btn = document.getElementById("theme-randomizer-btn");
 
   function randomIntFromInterval(min, max) {
