@@ -5,7 +5,7 @@
 <script is:inline>
 
 	/**
-	 * Reset local storage if refactor has occured.
+	 * Reset local storage if major refactor has occured.
 	 */
 	function handleStorageChanges() {
 		const lrs = "202310231438";  // Last Refactored Storage Date
@@ -19,17 +19,32 @@
 
 
 	/**
-	 * Set user preferences.
+	 * Store theme defaults and update them if needed.
 	 */
-	function rushUserPreferences() {
-		
-		const defaults = {
+	function updateThemeDefaults() {
+
+		const defaults = JSON.stringify({
 			mode: "light",
 			color: "blue",
 			scheme: "monochromatic"
-		};
+		});
+
+		let stored_defaults = localStorage.getItem("defaults");
+		if (stored_defaults!==defaults) {
+			localStorage.setItem("defaults", defaults);
+		}
+		
+	}
+	updateThemeDefaults()
+
+
+	/**
+	 * Set user preferences.
+	 */
+	function rushUserPreferences() {
 
 		let html = document.documentElement;
+		const defaults = JSON.parse(localStorage.getItem("defaults"));
 
 		// html data attributes
 		Object.keys(defaults).forEach(k => {

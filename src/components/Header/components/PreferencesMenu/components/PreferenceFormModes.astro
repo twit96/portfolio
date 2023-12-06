@@ -1,8 +1,9 @@
 ---
+import PreferenceForm from "./PreferenceForm.astro";
 import PreferencesFieldset from "./PreferencesFieldset.astro";
 ---
 
-<form id="mode-form">
+<PreferenceForm id="mode-form">
   <PreferencesFieldset class="mode-fieldset">
     <legend style="display: none;">Dark Theme</legend>
     <b>Dark Theme</b>
@@ -17,7 +18,7 @@ import PreferencesFieldset from "./PreferencesFieldset.astro";
       <span class="slider"></span>
     </label>
   </PreferencesFieldset>
-</form>
+</PreferenceForm>
 
 
 <style>
@@ -102,7 +103,7 @@ import PreferencesFieldset from "./PreferencesFieldset.astro";
   function configModeInput() {
     const val = document.documentElement.dataset["mode"];
     // Config Input
-    if (val === "dark") dark_toggle_input.checked = true;
+    dark_toggle_input.checked = (val === "dark");
   }
   configModeInput();
 </script>

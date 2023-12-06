@@ -1,12 +1,13 @@
 ---
+import PreferenceForm from "./PreferenceForm.astro";
 import PreferencesFieldset from "./PreferencesFieldset.astro";
 import PreferencesLegend from "./PreferencesLegend.astro";
 import PreferenceOption from "./PreferenceOption.astro";
 import PreferenceOptionTitle from  "./PreferenceOptionTitle.astro";
 ---
 
-<form id="color-form" name="colorForm">
-  <PreferencesFieldset layout="column">
+<PreferenceForm id="color-form" name="colorForm">
+  <PreferencesFieldset>
     <PreferencesLegend>Theme Color</PreferencesLegend>
     <div
       class="custom-scrollbar layout layout--flex-scroll"
@@ -40,7 +41,7 @@ import PreferenceOptionTitle from  "./PreferenceOptionTitle.astro";
       </div>
     </div>
   </PreferencesFieldset>
-</form>
+</PreferenceForm>
 
 
 <style>

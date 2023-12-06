@@ -1,0 +1,70 @@
+<button
+  class="btn surfaceAction"
+  id="theme-randomizer-btn"
+  title="Randomize Theme"
+  type="button"
+>
+  <svg
+    height="1.25rem"  
+    viewBox="0 0 960 959"
+    width="1.25rem"  
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M832 959H128q-53 0-90.5-37.5T0 831V127q0-53 37.5-90T128 0h704q53 0 90.5 37t37.5 90v704q0 53-37.5 90.5T832 959zM224 127q-40 0-68 28.5t-28 68t28 67.5t68 28t68-28t28-67.5t-28-68t-68-28.5zm0 512q-40 0-68 28t-28 68t28 68t68 28t68-28t28-68t-28-68t-68-28zm256-256q-40 0-68 28.5t-28 68t28 67.5t68 28t68-28t28-67.5t-28-68t-68-28.5zm256-256q-40 0-68 28.5t-28 68t28 67.5t68 28t68-28t28-67.5t-28-68t-68-28.5zm0 512q-40 0-68 28t-28 68t28 68t68 28t68-28t28-68t-28-68t-68-28z" />
+  </svg>
+</button>
+
+
+<style>
+  button {
+    --_size: 1.5rem;
+    flex: 0 0 var(--size);
+    height: var(--_size);
+    line-height: 0;
+    width: var(--_size);
+  }
+  svg { fill: currentColor; }
+
+  @keyframes wobble {
+    0%, 50%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+  }
+  button:hover svg { animation: 0.25s wobble linear 3; }
+</style>
+
+
+<script defer>
+  let theme_randomizer_btn = document.getElementById("theme-randomizer-btn");
+
+  function randomIntFromInterval(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+
+  function randomizeMode() {
+    if (Math.random() < 0.5) {
+      toggleDark();
+      configModeInput();
+    }
+  }
+  function randomizeColor() {
+    const randColorIndex = randomIntFromInterval(0, document.colorForm.color.length-1);
+    const randColor = document.colorForm.color[randColorIndex].value;
+    changeColor(randColor);
+    configColorInputs();
+  }
+  function randomizeScheme() {
+    const randSchemeIndex = randomIntFromInterval(0, document.schemeForm.scheme.length-1);
+    const randScheme = document.schemeForm.scheme[randSchemeIndex].value;
+    changeScheme(randScheme);
+    configSchemeInputs();
+  }
+
+  function randomizeTheme() {
+    randomizeMode();
+    randomizeColor();
+    randomizeScheme();
+  }
+  theme_randomizer_btn.onclick = randomizeTheme;
+
+</script>
