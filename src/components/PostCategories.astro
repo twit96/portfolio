@@ -6,12 +6,12 @@ const publishedPosts = (await getCollection('posts')).filter(post => !post.data.
 const allCategories = publishedPosts.map((post) => post.data.category).flat().sort();
 const uniqueCategories = [...new Set(allCategories)];
 let categoryLinks = [
-  {'text': "All", 'href': "/archive/1/" }
+  {'text': "All", 'href': "/archive/" }
 ];
 uniqueCategories.forEach((category) => {
   categoryLinks.push({
     'text': category,
-    'href': `/${category.toLowerCase()}/1/`
+    'href': `/${category.toLowerCase()}/`
   });
 });
 
