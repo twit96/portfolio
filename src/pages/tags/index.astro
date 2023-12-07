@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
-import ExpandedPreviewCard from '@components/PostPreviewCard/ExpandedPreviewCard.astro';
 import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
 
 
@@ -45,41 +44,53 @@ allTags.forEach((tag) => {
   description="Tyler Wittig's Post Tags"
   numPosts={numTags}
 >
-  <ul
-    slot="content"
-    class="layout layout--grid"
-  >
-    {
-      Object.keys(tagsByFirstCharWithCounts).sort().map(letter =>
-        <li class="letter-box card surface1">
 
-          <h3 class="letter surface3">
-            <span>{letter}</span>
-          </h3>
+  {/* If No Tags */}
+  {
+    Object.keys(tagsByFirstCharWithCounts).length===0 &&
+    <NothingHereCard slot="content" />
+  }
 
-          <ul class="btns">
-            {
-              Object.keys(tagsByFirstCharWithCounts[letter]).sort().map((tag) =>
-                <li>
-                  <a
-                    class="btn custom-scrollbar surface4 underline-on-hover" 
-                    href={`/tags/${tag}/`}
-                    title={`View all posts tagged with #${tag}`}
-                  >
-                    #{tag}
-                    <span>
-                      ({tagsByFirstCharWithCounts[letter][tag]})
-                    </span>
-                  </a>
-                </li>
-              )
-            }
-          </ul>
-          
-        </li>
-      )
-    }
-  </ul>
+  {/* Else Display Tags */}
+  {
+    Object.keys(tagsByFirstCharWithCounts).length > 0 &&
+    <ul
+      slot="content"
+      class="layout layout--grid"
+    >
+      {
+        Object.keys(tagsByFirstCharWithCounts).sort().map(letter =>
+          <li class="letter-box card surface1">
+
+            <h3 class="letter surface3">
+              <span>{letter}</span>
+            </h3>
+
+            <ul class="btns">
+              {
+                Object.keys(tagsByFirstCharWithCounts[letter]).sort().map((tag) =>
+                  <li>
+                    <a
+                      class="btn custom-scrollbar surface4 underline-on-hover" 
+                      href={`/tags/${tag}/`}
+                      title={`View all posts tagged with #${tag}`}
+                    >
+                      #{tag}
+                      <span>
+                        ({tagsByFirstCharWithCounts[letter][tag]})
+                      </span>
+                    </a>
+                  </li>
+                )
+              }
+            </ul>
+            
+          </li>
+        )
+      }
+    </ul>
+  }
+
 </PostCollectionLayout>
 
 
