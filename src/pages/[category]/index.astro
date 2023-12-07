@@ -64,10 +64,11 @@ categorizedPosts.sort(function(a, b) {
   return 0;
 });
 
-// build fake page object for PaginationButtons component
+// build fake page object for numPosts parameter and PaginationButtons component
 let page = {
   currentPage: 1,
   lastPage: Math.ceil(categorizedPosts.length / POSTS_PER_PAGE),
+  total: categorizedPosts.length,
 };
 
 // truncate posts to first page results length
@@ -78,7 +79,7 @@ if (categorizedPosts.length > POSTS_PER_PAGE) categorizedPosts.length = POSTS_PE
   title={formattedCategory}
   description={`${SITE_AUTHOR}'s ${category}`}
   hasCategoriesNav={true}
-  numPosts={categorizedPosts.length}
+  numPosts={page.total}
 >
   <div
     slot="content"
