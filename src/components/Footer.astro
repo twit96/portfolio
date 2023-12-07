@@ -7,6 +7,12 @@ import ContactLinks from '@components/ContactLinks.astro';
 
   <p class="cursive">{SITE_TITLE}</p>
 
+  <p class="reasons">
+    Whether you are in need of a web developer,
+    looking to connect, or have any questions,
+    <b>feel free to get in touch with me</b>!
+  </p>
+
   <nav aria-label="Contact Links">
     <ContactLinks />
   </nav>
@@ -23,6 +29,10 @@ import ContactLinks from '@components/ContactLinks.astro';
     align-items: center;
     margin-top: 1rem;
     text-align: center;
+  }
+  .reasons {
+    font-size: 0.9em;
+    text-wrap: balance;
   }
   .copyright { font-size: 0.75em; }
 </style>
