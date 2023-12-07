@@ -55,9 +55,6 @@ export async function getStaticPaths({ paginate }) {
 
 const { category } = Astro.params;
 const { formattedCategory, page } = Astro.props;
-
-// we redirect the first page to the unpaginated URL
-if (page.currentPage===1) return Astro.redirect(`/${category}/`);
 ---
 
 <PostCollectionLayout
