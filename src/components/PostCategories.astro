@@ -32,10 +32,13 @@ categoryLinks.forEach((link) => {
 });
 ---
 
-<nav class="btns">
-  <h2 class="btn surface3 heading--diminished">Filter Posts by Category</h2>
+<nav
+  class="content-section"
+  style="--_content-gap:0.5rem;"
+>
+  <h2 class="heading--diminished">Filter Posts by Category</h2>
   <ul
-    class="layout layout--flex-fill"
+    class="btns layout layout--flex-fill"
     style="--_layout--base-size:auto; --_layout--gap:0.125rem;"
   >
     {categoryLinks.map(({text, ...attrs}) =>
@@ -51,13 +54,10 @@ categoryLinks.forEach((link) => {
 
 <style>
   nav {
-    align-items: flex-start;
     margin-block: 0.5rem 1rem;
     margin-inline: auto;
     text-align: center;
-    width: fit-content;
   }
-  nav > * { flex-grow: 1; }
   a {
     display: block;
     text-decoration: none;
