@@ -44,22 +44,43 @@
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
-  function randomizeColor() {
+  function getRandomColor() {
     const randColorIndex = randomIntFromInterval(0, document.colorForm.color.length-1);
     const randColor = document.colorForm.color[randColorIndex].value;
+    return randColor;
+  }
+  function getRandomScheme() {
+    const randSchemeIndex = randomIntFromInterval(0, document.schemeForm.scheme.length-1);
+    const randScheme = document.schemeForm.scheme[randSchemeIndex].value;
+    return randScheme;
+  }
+
+  function setRandomColor(randColor) {
     changeColor(randColor);
     configColorInputs();
   }
-  function randomizeScheme() {
-    const randSchemeIndex = randomIntFromInterval(0, document.schemeForm.scheme.length-1);
-    const randScheme = document.schemeForm.scheme[randSchemeIndex].value;
+  function setRandomScheme(randScheme) {
     changeScheme(randScheme);
     configSchemeInputs();
   }
 
   function randomizeTheme() {
-    randomizeColor();
-    randomizeScheme();
+    let html = document.documentElement;
+
+    // ensure randomly generated theme isn't the same as the current theme 
+    let newColor;
+    let newScheme;
+    do {
+      newColor = getRandomColor();
+      newScheme = getRandomScheme();
+    } while (
+      newColor === html.dataset.color &&
+      newScheme === html.dataset.scheme
+    );
+
+    // set new random theme
+    setRandomColor(newColor);
+    setRandomScheme(newScheme);
   }
   theme_randomizer_btn.onclick = randomizeTheme;
 
