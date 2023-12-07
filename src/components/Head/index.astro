@@ -22,16 +22,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const server_is_production = import.meta.env.SERVER_IS_PRODUCTION || false;
 
 const {
-	title,
-	description = SITE_DESCRIPTION,
-	image = SITE_IMAGE,
-	author = SITE_AUTHOR
+  noIndex,
+  title,
+  description = SITE_DESCRIPTION,
+  image = SITE_IMAGE,
+  author = SITE_AUTHOR
 } = Astro.props;
 
 const page_title = title ? `${title} | ${author ? author : SITE_AUTHOR}` : SITE_TITLE;
 ---
 
 <MetadataTags
+  noIndex={noIndex}
   canonicalURL={canonicalURL}
   page_title={page_title}
   description={description}

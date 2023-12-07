@@ -1,5 +1,6 @@
 ---
 const {
+  noIndex=false,
   canonicalURL,
   page_title,
   description,
@@ -9,6 +10,7 @@ const {
 
 {/* Global Metadata */}
 <meta charset="utf-8" />
+{ noIndex && <meta name="robots" content="noindex"> }
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" href="/img/favicon.png" />
 <meta name="theme-color" content="#ffffff" />

@@ -56,8 +56,13 @@ export async function getStaticPaths({ paginate }) {
 const { category } = Astro.params;
 const { formattedCategory, page } = Astro.props;
 ---
-
+{/*
+Note PostCollectionLayout's noIndex Parameter:
+- We hide /[category]/1/ from crawlers because /[category]/ serves the same content
+  and we let crawlers index that page.
+*/}
 <PostCollectionLayout
+  noIndex={page.currentPage===1}
   title={formattedCategory}
   description={`${SITE_AUTHOR}'s ${formattedCategory}`}
   hasCategoriesNav={true}
