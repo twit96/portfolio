@@ -1,0 +1,103 @@
+---
+import { getCollection } from 'astro:content';
+import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
+import { SITE_AUTHOR, POSTS_PER_PAGE } from '@consts';
+import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
+import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
+import PaginationButtons from '@components/PaginationButtons.astro';
+
+
+export async function getStaticPaths({ paginate }) {
+
+  // Get All Posts
+	const publishedPosts = (await getCollection('posts')).filter(post => !post.data.hidden);
+  
+  // Sort by Date Descending
+  publishedPosts.sort(function(a, b) {
+    let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);
+    let b_date = Date.parse(b.data.dateUpdated || b.data.datePublished);
+    if (b_date > a_date) return 1;
+    if (a_date > b_date) return -1;
+    return 0;
+  });
+
+  // Get All Unique Post Tags
+  const uniqueTags = [...new Set(publishedPosts.map(post => post.data.tags).flat())];
+
+  // Return Paginated Tag Pages
+  const allTagInfo = await getCollection('tagInfo');
+  // for each unique tag...
+  return uniqueTags.flatMap(ut => {
+
+    // ...get tag info if it exists...
+    const tagInfo = allTagInfo.filter(ti => { return ti.slug===ut })[0] || {};  // 0th index since return is array
+
+    // ...then get all corresponding posts...
+    const taggedPosts = publishedPosts.filter(post => (
+      post.data.tags && post.data.tags.includes(ut)
+    ));
+
+    // ...and paginate the posts.
+    return paginate(taggedPosts, {
+      params: { tag: ut },
+      props: { tagInfo: tagInfo },
+      pageSize: POSTS_PER_PAGE
+    });
+
+  });
+}
+
+
+const tag = Astro.params.tag;
+const { tagInfo, page } = Astro.props;
+
+// Get Tag Info if it Exists
+const { Content } = (Object.keys(tagInfo).length > 0) 
+  ? await tagInfo.render()  // render tag info if it exists
+  : { Content: null };      // default to null value when no tag info exists
+---
+
+<PostCollectionLayout
+  noIndex={page.currentPage===1}
+  hasBreadcrumbs={true}
+	title={`#${tag}`}
+  description={`${SITE_AUTHOR}'s posts tagged with #${tag}`}
+	numPosts={page.total}
+>
+
+  {
+    Content &&
+    <div
+      slot="info"
+      class="collection-info content-section"
+    >
+      <Content />
+    </div>
+  }
+
+  <div
+    slot="content"
+    class="content-section"
+  >
+
+    <ul class="layout layout--grid">
+      {
+        page.data.length > 0 
+        ? page.data.map((post, i) => 
+          <li>
+            <CompactPreviewCard post={post} />
+          </li>
+        )
+        : <li>
+            <NothingHereCard />
+          </li>
+      }
+    </ul>
+
+    <PaginationButtons
+      page={page}
+      baseUrl={Astro.url.pathname.split('/').filter(Boolean).slice(0,-1).join('/')}
+    />
+
+  </div>
+</PostCollectionLayout>
