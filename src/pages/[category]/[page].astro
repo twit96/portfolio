@@ -24,7 +24,7 @@ export async function getStaticPaths({ paginate }) {
 
 
   // Get Categories
-  const allCategories: String[] = publishedPosts.map(post => post.data.category).flat().sort();
+  const allCategories = publishedPosts.map(post => post.data.category).flat().sort();
   const uniqueCategories = [
     "Archive",                 // "Archive" category will show all posts
     ...new Set(allCategories)  // exclude duplicates from all categories

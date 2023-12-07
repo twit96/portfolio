@@ -28,22 +28,24 @@ export async function getStaticPaths({ paginate }) {
   const allTagInfo = await getCollection('tagInfo');
   // for each unique tag...
   return uniqueTags.flatMap(ut => {
+    if (ut) {
 
-    // ...get tag info if it exists...
-    const tagInfo = allTagInfo.filter(ti => { return ti.slug===ut })[0] || {};  // 0th index since return is array
+      // ...get tag info if it exists...
+      const tagInfo = allTagInfo.filter(ti => { return ti.slug===ut })[0] || {};  // 0th index since return is array
 
-    // ...then get all corresponding posts...
-    const taggedPosts = publishedPosts.filter(post => (
-      post.data.tags && post.data.tags.includes(ut)
-    ));
+      // ...then get all corresponding posts...
+      const taggedPosts = publishedPosts.filter(post => (
+        post.data.tags && post.data.tags.includes(ut)
+      ));
 
-    // ...and paginate the posts.
-    return paginate(taggedPosts, {
-      params: { tag: ut },
-      props: { tagInfo: tagInfo },
-      pageSize: POSTS_PER_PAGE
-    });
+      // ...and paginate the posts.
+      return paginate(taggedPosts, {
+        params: { tag: ut },
+        props: { tagInfo: tagInfo },
+        pageSize: POSTS_PER_PAGE
+      });
 
+    }
   });
 }
 

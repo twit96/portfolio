@@ -44,7 +44,7 @@ export async function getStaticPaths() {
 }
 
 
-const tag = Astro.params.tag;
+const tag:string = Astro.params.tag!;
 const { tagInfo } = Astro.props;
 
 // Get Tagged Posts
