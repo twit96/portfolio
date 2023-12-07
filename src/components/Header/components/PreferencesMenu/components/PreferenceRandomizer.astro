@@ -44,12 +44,6 @@
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
-  function randomizeMode() {
-    if (Math.random() < 0.5) {
-      toggleDark();
-      configModeInput();
-    }
-  }
   function randomizeColor() {
     const randColorIndex = randomIntFromInterval(0, document.colorForm.color.length-1);
     const randColor = document.colorForm.color[randColorIndex].value;
@@ -64,7 +58,6 @@
   }
 
   function randomizeTheme() {
-    randomizeMode();
     randomizeColor();
     randomizeScheme();
   }

@@ -32,12 +32,14 @@ import PreferencesBackground from "./components/PreferencesBackground.astro";
   <div class="modal card custom-scrollbar layout layout--list surface0 shadow-sm">
 
     <b>Theme Preferences</b>
+
+    <PreferenceFormModes />
+    
     <div class="btns">
       <PreferenceReset />
       <PreferenceRandomizer />
     </div>
     
-    <PreferenceFormModes />
     <PreferenceFormColors />
     <PreferenceFormSchemes />
 
@@ -99,7 +101,6 @@ import PreferencesBackground from "./components/PreferencesBackground.astro";
 		const defaults = JSON.parse(localStorage.getItem("defaults"));
 
     if (
-      defaults.mode === html.dataset.mode &&
       defaults.color === html.dataset.color &&
       defaults.scheme === html.dataset.scheme
     ) {
