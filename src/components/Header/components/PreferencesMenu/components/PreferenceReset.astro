@@ -50,12 +50,14 @@
     if (!defaults) throw new Error('Theme defaults not found.');
 
     Object.keys(defaults).forEach(k => {
-      localStorage.setItem(k, defaults[k]);
-      stored_key = defaults[k];
-			html.dataset[k] = stored_key;
+      // user keeps their dark mode preference
+      if (k!=="mode") {
+        localStorage.setItem(k, defaults[k]);
+        stored_key = defaults[k];
+        html.dataset[k] = stored_key;
+      }
 		});
 
-    configModeInput();
     configColorInputs();
     configSchemeInputs();
     updateMetaThemeColor();
