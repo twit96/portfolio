@@ -4,9 +4,8 @@ import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.a
 
 // Remove Drafts, Archived, and Non-Featured Posts
 let featuredPosts = (await getCollection('posts')).filter(post => (
-  !post.data.draft && 
-  !post.data.archived &&
-  typeof post.data.featuredRank !== 'undefined'
+  !post.data.hidden && 
+  post.data.featuredRank
 ));
 // Sort by Featured Rank Ascending
 featuredPosts.sort(function(a, b) {

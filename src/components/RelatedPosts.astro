@@ -4,7 +4,7 @@ import MinimalPreviewCard from './PostPreviewCard/MinimalPreviewCard.astro';
 import DecorativeLine from '@components/DecorativeLine/index.astro';
 
 const slugs = Astro.props.slugs;
-const relatedPosts = (await getEntries(slugs)).filter(post => !post.data.draft && !post.data.archived);
+const relatedPosts = (await getEntries(slugs)).filter(post => !post.data.hidden);
 ---
 {
   relatedPosts &&

@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 
 
 // Get All Published Post Tags
-const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft && !post.data.archived);
+const publishedPosts = (await getCollection('posts')).filter(post => !post.data.hidden);
 const allTags = publishedPosts.map((post) => post.data.tags).flat().sort();
 
 

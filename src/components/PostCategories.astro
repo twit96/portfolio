@@ -2,10 +2,7 @@
 import { getCollection } from 'astro:content';
 
 // Get Post Categories
-const publishedPosts = (await getCollection('posts')).filter(post => (
-  !post.data.draft &&
-  !post.data.archived
-));
+const publishedPosts = (await getCollection('posts')).filter(post => !post.data.hidden);
 const allCategories = publishedPosts.map((post) => post.data.category).flat().sort();
 const uniqueCategories = [...new Set(allCategories)];
 let categoryLinks = [

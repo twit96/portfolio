@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import MinimalPreviewCard from '@components/PostPreviewCard/MinimalPreviewCard.astro';
 
 // Remove Drafts and Archived
-let publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft && !post.data.archived);
+let publishedPosts = (await getCollection('posts')).filter(post => !post.data.hidden);
 // Sort by Date Descending
 publishedPosts.sort(function(a, b) {
 	let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);

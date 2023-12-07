@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-	const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft && !post.data.archived);
+	const publishedPosts = (await getCollection('posts')).filter(post => !post.data.hidden);
 
   // Get Categories
   const allCategories: String[] = publishedPosts.map(

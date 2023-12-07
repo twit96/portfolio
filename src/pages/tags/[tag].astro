@@ -7,7 +7,7 @@ import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
 export async function getStaticPaths() {
 
   // Get All Unique Post Tags
-  const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft && !post.data.archived);
+  const publishedPosts = (await getCollection('posts')).filter(post => !post.data.hidden);
   publishedPosts.sort(function(a, b) {
     let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);
     let b_date = Date.parse(b.data.dateUpdated || b.data.datePublished);
@@ -42,8 +42,7 @@ const { Content } = (Object.keys(tagInfo).length > 0)
 
 // Get All Published Posts Corresponding to the Tag
 const publishedPosts = (await getCollection('posts')).filter(post => (
-  !post.data.draft &&
-  !post.data.archived &&
+  !post.data.hidden &&
   post.data.tags && post.data.tags.includes(tag)
 ));
 // Sort Posts by Date Descending

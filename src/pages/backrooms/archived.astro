@@ -4,7 +4,7 @@ import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
 import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
 import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
 
-let posts = (await getCollection('posts')).filter(post => post.data.archived===true);
+let posts = (await getCollection('posts')).filter(post => post.data.hidden==="Archived");
 posts.sort(function(a, b) {
 	let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);
   let b_date = Date.parse(b.data.dateUpdated || b.data.datePublished);

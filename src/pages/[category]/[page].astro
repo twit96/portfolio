@@ -11,7 +11,7 @@ import PaginationButtons from '@components/PaginationButtons.astro';
 export async function getStaticPaths({ paginate }) {
 
   // Get All Posts
-	const publishedPosts = (await getCollection('posts')).filter(post => !post.data.draft && !post.data.archived);
+	const publishedPosts = (await getCollection('posts')).filter(post => !post.data.hidden);
   
   // Sort by Date Descending
   publishedPosts.sort(function(a, b) {
