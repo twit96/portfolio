@@ -69,6 +69,10 @@ let page = {
   total: taggedPosts.length,
 };
 
+// truncate posts to first page results length
+if (taggedPosts.length > POSTS_PER_PAGE) taggedPosts.length = POSTS_PER_PAGE;
+
+
 // Get Tag Info if it Exists
 const { Content } = (Object.keys(tagInfo).length > 0) 
   ? await tagInfo.render()  // render tag info if it exists
