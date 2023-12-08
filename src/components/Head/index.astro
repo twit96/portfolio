@@ -25,7 +25,7 @@ const {
   noIndex,
   title,
   description = SITE_DESCRIPTION,
-  image = SITE_IMAGE,
+  ogImage = new URL(SITE_IMAGE, Astro.url),
   author = SITE_AUTHOR
 } = Astro.props;
 
@@ -43,12 +43,12 @@ const page_title = title ? `${title} | ${author ? author : SITE_AUTHOR}` : SITE_
 <OpenGraphTags
   page_title={page_title}
   description={description}
-  image={image}
+  ogImage={ogImage}
 />
 <TwitterTags
   page_title={page_title}
   description={description}
-  image={image}
+  ogImage={ogImage}
 />
 
 <RushUserPreferences />

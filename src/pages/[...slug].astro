@@ -17,6 +17,7 @@ const { Content } = await post.render();
 
 <PostLayout
 	noIndex={post.data.hidden}
+	ogImage={post.data.heroImage}
 	{...post.data}
 >
 	<Content />

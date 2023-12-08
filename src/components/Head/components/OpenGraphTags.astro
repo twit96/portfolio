@@ -1,8 +1,8 @@
 ---
-const { page_title, description, image } = Astro.props;
+const { page_title, description, ogImage } = Astro.props;
 ---
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={page_title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={ogImage} />
