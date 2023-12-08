@@ -157,7 +157,10 @@ const {
   {/* Associated Posts */}
   {
     post.relatedPosts &&
-    <section class="wrapper">
+    <section
+      class="wrapper"
+      id="related-posts"
+    >
       <RelatedPosts slugs={post.relatedPosts} />
     </section>
   }
@@ -193,4 +196,6 @@ const {
   }
 
   #post-content:empty { display: none; }
+
+  #related-posts { padding-bottom: 0; }
 </style>
