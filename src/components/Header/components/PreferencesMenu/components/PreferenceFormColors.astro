@@ -8,7 +8,7 @@ import PreferenceOptionTitle from  "./PreferenceOptionTitle.astro";
 
 <PreferenceForm id="color-form" name="colorForm">
   <PreferencesFieldset>
-    <PreferencesLegend>Theme Color</PreferencesLegend>
+    <PreferencesLegend>Base Color</PreferencesLegend>
     <div
       class="custom-scrollbar layout layout--flex-scroll"
       style="--_scrollbar--size:0.5rem; --_layout--base-size:3rem; --_layout--gap:0.5rem;"
@@ -27,7 +27,7 @@ import PreferenceOptionTitle from  "./PreferenceOptionTitle.astro";
             <PreferenceOption
               name="color"
               value={color}
-              title={`Set theme color to ${color}`}
+              title={`Set base color to ${color}`}
             >
               <span
                 slot="preview"
