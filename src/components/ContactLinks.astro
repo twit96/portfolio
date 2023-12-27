@@ -7,7 +7,7 @@ const linkData = {
   
   "Codepen": {
     title: "Visit Tyler Wittig's Codepen",
-    href: CONTACT_INFO["Codepen"],
+    href: `${CONTACT_INFO["Codepen"][0]}${CONTACT_INFO["Codepen"][1]}`,
     isExternal: true,
     svg: {
       viewBox: "0 0 512 512",
@@ -16,8 +16,8 @@ const linkData = {
   },
 
   "Email": {
-    title: `Email Tyler Wittig (${CONTACT_INFO["Email"]})`,
-    href: `mailto:${CONTACT_INFO["Email"]}`,
+    title: `Email Tyler Wittig (${CONTACT_INFO["Email"][1]})`,
+    href: `${CONTACT_INFO["Email"][0]}${CONTACT_INFO["Email"][1]}`,
     isExternal: true,
     svg: {
       viewBox: "0 0 512 512",
@@ -27,7 +27,7 @@ const linkData = {
 
   "GitHub": {
     title: "Visit Tyler Wittig's GitHub",
-    href: CONTACT_INFO["GitHub"],
+    href: `${CONTACT_INFO["GitHub"][0]}${CONTACT_INFO["GitHub"][1]}`,
     isExternal: true,
     svg: {
       viewBox: "0 0 496 512",
@@ -37,7 +37,7 @@ const linkData = {
 
   "LinkedIn": {
     title: "Visit Tyler Wittig's LinkedIn",
-    href: CONTACT_INFO["LinkedIn"],
+    href: `${CONTACT_INFO["LinkedIn"][0]}${CONTACT_INFO["LinkedIn"][1]}`,
     isExternal: true,
     svg: {
       viewBox: "0 0 448 512",
@@ -47,7 +47,7 @@ const linkData = {
 
   // "Resume": {
   //   title: "Download Tyler Wittig's Resume",
-  //   href: CONTACT_INFO["Resume"],
+  //   href: `${CONTACT_INFO["Resume"][0]}${CONTACT_INFO["Resume"][1]}`,
   //   isExternal: false,
   //   svg: {
   //     viewBox: "0 0 384 512",
@@ -57,7 +57,7 @@ const linkData = {
 
   "RSS": {
     title: "Visit Tyler Wittig's RSS Feed",
-    href: CONTACT_INFO["RSS"],
+    href: `${CONTACT_INFO["RSS"][0]}${CONTACT_INFO["RSS"][1]}`,
     isExternal: false,
     svg: {
       viewBox: "0 0 448 512",
@@ -67,7 +67,7 @@ const linkData = {
 
   // "X": {
   //   title: "Visit Tyler Wittig's X",
-  //   href: CONTACT_INFO["X"],
+  //   href: `${CONTACT_INFO["X"][0]}${CONTACT_INFO["X"][1]}`,
   //   isExternal: true,
   //   svg: {
   //     viewBox: "0 0 16 16",

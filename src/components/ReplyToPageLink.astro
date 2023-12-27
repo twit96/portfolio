@@ -4,7 +4,7 @@ import ExternalLink from '@components/ExternalLink.astro';
 ---
 
 <ExternalLink
-  href={`mailto:${CONTACT_INFO["Email"]}?subject=Re: ${Astro.url.href}`}
+  href={`${CONTACT_INFO["Email"][0]}${CONTACT_INFO["Email"][1]}?subject=Re: ${Astro.url.href}`}
   isExternal={true}
   title={`Reply via Email to ${CONTACT_INFO["Email"]}`}
 >
