@@ -12,14 +12,14 @@ export const SITE_AUTHOR = 'Tyler Wittig';
  * 'Contact Link': [ 'URL', 'path' ]
 */
 export const CONTACT_INFO = {
-  'Codepen':  [ 'https://codepen.io/', 'twit96' ],
-  'Email':    [ 'mailto:', 'tylerwittig.work@gmail.com' ],
-  'GitHub':   [ 'https://github.com/', 'twit96' ],
-  'Issue':    [ 'https://github.com/twit96/portfolio/issues/new' ],
-  'LinkedIn': [ 'https://www.linkedin.com/in/', 'tylerwittig' ],
-  'Resume':   [ '/', 'resume-tylerwittig-20230424.pdf' ],
-  'RSS':      [ '/', 'rss.xml' ],
-  'X':        [ 'https://x.com/', 'tyler_wittig' ],
+  'Codepen':  'https://codepen.io/twit96',
+  'Email':    'mailto:tylerwittig.work@gmail.com',
+  'GitHub':   'https://github.com/twit96',
+  'Issue':    'https://github.com/twit96/portfolio/issues/new',
+  'LinkedIn': 'https://www.linkedin.com/in/tylerwittig',
+  'Resume':   '/resume-tylerwittig-20230424.pdf',
+  'RSS':      '/rss.xml',
+  'X':        'https://x.com/tyler_wittig',
 };
 
 export const POSTS_PER_PAGE = 9;
