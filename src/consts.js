@@ -15,6 +15,7 @@ export const CONTACT_INFO = {
   'Codepen':  [ 'https://codepen.io/', 'twit96' ],
   'Email':    [ 'mailto:', 'tylerwittig.work@gmail.com' ],
   'GitHub':   [ 'https://github.com/', 'twit96' ],
+  'Issue':    [ 'https://github.com/twit96/portfolio/issues/new' ],
   'LinkedIn': [ 'https://www.linkedin.com/in/', 'tylerwittig' ],
   'Resume':   [ '/', 'resume-tylerwittig-20230424.pdf' ],
   'RSS':      [ '/', 'rss.xml' ],

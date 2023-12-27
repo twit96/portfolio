@@ -1,6 +1,18 @@
 ---
-import { SITE_TITLE, SITE_AUTHOR } from '@consts.js';
+import { SITE_TITLE, SITE_AUTHOR, CONTACT_INFO } from '@consts.js';
 import ContactLinks from '@components/ContactLinks.astro';
+
+const links = [
+  { 'text': "Home",    'href': "/",         },
+  { 'text': "Archive", 'href': "/archive/", },
+  { 'text': "Tags",    'href': "/tags/",    },
+  {
+    'text': 'Report an issue',
+    'href': CONTACT_INFO['Issue'].join(''),
+    'target': '_blank',
+    'rel': 'noopener noreferrer'
+  },
+];
 ---
 
 <footer class="layout layout--list wrapper">
@@ -15,6 +27,18 @@ import ContactLinks from '@components/ContactLinks.astro';
 
   <nav aria-label="Contact Links">
     <ContactLinks />
+  </nav>
+
+  <nav aria-label="Site Navigation (Footer)">
+    <ul class="layout">
+      {
+        links.map(({text, ...attrs}) => (
+          <li>
+            <a {...attrs}>{text}</a>
+          </li>
+        ))
+      }
+    </ul>
   </nav>
 
   <p class="copyright">
@@ -32,4 +56,10 @@ import ContactLinks from '@components/ContactLinks.astro';
   }
   .reasons { text-wrap: balance; }
   .copyright { font-size: 0.75em; }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 </style>
