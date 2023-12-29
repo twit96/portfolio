@@ -4,13 +4,6 @@ export const SITE_DESCRIPTION = 'Full-Stack Web Developer in South Texas, specia
 export const SITE_IMAGE = '/img/og-image.png';
 export const SITE_AUTHOR = 'Tyler Wittig';
 
-/**
- * Each contact info entry is an array corresponding to its base URL [0] and its pathname [1].
- * This allows usernames to be referenced separately without needing to parse each string,
- * but requires concatenation of the parts to build the full href.
- * 
- * 'Contact Link': [ 'URL', 'path' ]
-*/
 export const CONTACT_INFO = {
   'Codepen':  'https://codepen.io/twit96',
   'Email':    'mailto:tylerwittig.work@gmail.com',
