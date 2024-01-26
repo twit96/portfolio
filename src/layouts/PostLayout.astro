@@ -106,10 +106,7 @@ const {
             {
               post.links.map(({ text, href }) => 
                 <li>
-                  <ExternalLink
-                    href={href}
-                    isExternal={true}
-                  >{text}</ExternalLink>
+                  <ExternalLink href={href}>{text}</ExternalLink>
                 </li>
               )
             }

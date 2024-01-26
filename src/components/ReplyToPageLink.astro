@@ -3,10 +3,7 @@ import { CONTACT_INFO } from '@consts';
 import ExternalLink from '@components/ExternalLink.astro';
 ---
 
-<ExternalLink
-  href={`${CONTACT_INFO["Email"]}?subject=Re: ${Astro.url.href}`}
-  isExternal={true}
->
+<ExternalLink href={`${CONTACT_INFO["Email"]}?subject=Re: ${Astro.url.href}`}>
   <svg
     fill="currentColor"
     height="1.5rem"
