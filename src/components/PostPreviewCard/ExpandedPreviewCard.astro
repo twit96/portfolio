@@ -30,7 +30,7 @@ const { post, reverse=false } = Astro.props;
       <ImageLink
         image={post.data.heroImage}
         title={post.data.title}
-        href={`/${post.slug}/`}
+        href={`/${post.id}/`}
       />
     </div>
 
@@ -43,7 +43,7 @@ const { post, reverse=false } = Astro.props;
       </div>
       <TitleLink
         title={post.data.title}
-        href={`/${post.slug}/`}
+        href={`/${post.id}/`}
       />
       <PostDescription description={post.data.description} />
       <CardFooter classes="card surface3">

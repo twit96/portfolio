@@ -10,23 +10,26 @@ and the list item elements are assigned the following class names accordingly.
 they are not bundled by Astro, and thus must be imported via this external stylesheet.)
 */
 .toc-link-wrap {
+  --_nest-level: 0;
   align-items: center;
   display: flex;
   text-wrap: balance;
 }
 .toc-link-wrap::before {
-  background: var(--surface3);
+  --_dash-unit: 1rem;  /* size of each dash and its trailing whitespace in the TOC */
   content: '';
   display: block;
+  flex-shrink: 0;
   height: 0.125rem;
   margin-right: 1ch;
-  width: calc(1rem * (var(--_heading-level) - 2));
+  /* add dashes indicating nesting depth */
+  width: calc(var(--_dash-unit) * var(--_nest-level));
+  background-size: var(--_dash-unit) 100%;
+  background-image: linear-gradient(to right, var(--surface3) 75%, transparent 75%);
 }
 
 .toc-link-wrap--h2::before { display: none; }
-/* .toc-link-wrap--h2 { --_heading-level: 2; } */
-
-.toc-link-wrap--h3 { --_heading-level: 3; }
-.toc-link-wrap--h4 { --_heading-level: 4; }
-.toc-link-wrap--h5 { --_heading-level: 5; }
-.toc-link-wrap--h6 { --_heading-level: 6; }
+.toc-link-wrap--h3 { --_nest-level: 1; }
+.toc-link-wrap--h4 { --_nest-level: 2; }
+.toc-link-wrap--h5 { --_nest-level: 3; }
+.toc-link-wrap--h6 { --_nest-level: 4; }

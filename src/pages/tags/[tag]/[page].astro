@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
 import { SITE_AUTHOR, POSTS_PER_PAGE } from '@consts';
 import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
@@ -31,7 +31,7 @@ export async function getStaticPaths({ paginate }) {
     if (ut) {
 
       // ...get tag info if it exists...
-      const tagInfo = allTagInfo.filter(ti => { return ti.slug===ut })[0] || {};  // 0th index since return is array
+      const tagInfo = allTagInfo.filter(ti => { return ti.id===ut })[0] || {};  // 0th index since return is array
 
       // ...then get all corresponding posts...
       const taggedPosts = publishedPosts.filter(post => (
@@ -54,9 +54,9 @@ const tag = Astro.params.tag;
 const { tagInfo, page } = Astro.props;
 
 // Get Tag Info if it Exists
-const { Content } = (Object.keys(tagInfo).length > 0) 
-  ? await tagInfo.render()  // render tag info if it exists
-  : { Content: null };      // default to null value when no tag info exists
+const { Content } = (Object.keys(tagInfo).length > 0)
+  ? await render(tagInfo)  // render tag info if it exists
+  : { Content: null };     // default to null value when no tag info exists
 ---
 
 <PostCollectionLayout

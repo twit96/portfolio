@@ -16,7 +16,7 @@ const { post } = Astro.props;
   <ImageLink
     image={post.data.heroImage}
     title={post.data.title}
-    href={`/${post.slug}/`}
+    href={`/${post.id}/`}
   />
   
   <PostTags
@@ -26,7 +26,7 @@ const { post } = Astro.props;
   
   <TitleLink
     title={post.data.title}
-    href={`/${post.slug}/`}
+    href={`/${post.id}/`}
   />
   <PostDescription description={post.data.description} />
   

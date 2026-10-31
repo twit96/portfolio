@@ -16,8 +16,7 @@ const { title, numPosts=0 } = Astro.props;
       {
         numPosts > 0 &&
         <h2 class="heading--diminished">
-          {numPosts}
-          Entr{numPosts === 0 || numPosts > 1 ? "ies" : "y"}
+          {numPosts} Entr{numPosts === 0 || numPosts > 1 ? "ies" : "y"}
         </h2>
       }
     </div>

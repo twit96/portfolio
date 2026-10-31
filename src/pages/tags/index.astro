@@ -75,10 +75,7 @@ allTags.forEach((tag) => {
                       href={`/tags/${tag}/`}
                       title={`View all posts tagged with #${tag}`}
                     >
-                      #{tag}
-                      <span>
-                        ({tagsByFirstCharWithCounts[letter][tag]})
-                      </span>
+                      #{tag} <span>({tagsByFirstCharWithCounts[letter][tag]})</span>
                     </a>
                   </li>
                 )

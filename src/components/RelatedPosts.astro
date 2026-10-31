@@ -3,12 +3,12 @@ import { getEntries } from 'astro:content';
 import MinimalPreviewCard from './PostPreviewCard/MinimalPreviewCard.astro';
 import DecorativeLine from '@components/DecorativeLine/index.astro';
 
-const slugs = Astro.props.slugs;
-const relatedPosts = (await getEntries(slugs)).filter(post => !post.data.hidden);
+const relatedPosts = Astro.props.relatedPosts;
+const posts = (await getEntries(relatedPosts)).filter(post => !post.data.hidden);
 ---
 {
-  relatedPosts &&
-  relatedPosts.length > 0 &&
+  posts &&
+  posts.length > 0 &&
   <div class="content-section">
     <h2>Related Posts</h2>
     <ul
@@ -16,7 +16,7 @@ const relatedPosts = (await getEntries(slugs)).filter(post => !post.data.hidden)
       style="--_layout--gap: 0.25rem;"
     >
       {
-        relatedPosts.map(post => 
+        posts.map(post =>
           <li>
             <MinimalPreviewCard post={post} />
           </li>
