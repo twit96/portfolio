@@ -16,3 +16,10 @@ export const CONTACT_INFO = {
 };
 
 export const POSTS_PER_PAGE = 9;
+
+// the unfiltered collection of all posts
+export const POSTS_ARCHIVE = {
+  slug: 'archive',
+  title: 'Posts',
+  navLabel: 'All',
+};

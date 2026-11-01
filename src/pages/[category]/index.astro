@@ -1,3 +1,4 @@
+
 ---
 /**
  * NOTE: This page is a duplicate of the content
@@ -5,78 +6,65 @@
  * The PaginationButtons component explicitly links to page 1,
  * whereas all other links link to the unpaginated URL.
  * The paginated page 1 is given a meta robots noindex tag.
-*/
-
+ */
 
 import { getCollection } from 'astro:content';
 import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
-import { SITE_AUTHOR, POSTS_PER_PAGE } from '@consts';
+import { SITE_AUTHOR, POSTS_PER_PAGE, POSTS_ARCHIVE } from '@consts';
 import { firstPage } from '@utils/pagination';
+import { getPostCategory, getCategoryLabel } from '@utils/categories';
 import ExpandedPreviewCard from '@components/PostPreviewCard/ExpandedPreviewCard.astro';
 import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
 import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
 import PaginationButtons from '@components/PaginationButtons.astro';
 
-
 export async function getStaticPaths() {
-	
-  // Get All Posts
-	const publishedPosts = (await getCollection('posts')).filter(post => !post.data.hidden);
-  
-  // Sort by Date Descending
-  publishedPosts.sort(function(a, b) {
-    let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);
-    let b_date = Date.parse(b.data.dateUpdated || b.data.datePublished);
-    if (b_date > a_date) return 1;
-    if (a_date > b_date) return -1;
-    return 0;
-  });
 
-  // Get Categories
-  const allCategories = publishedPosts.map(post => post.data.category).flat().sort();
-  const uniqueCategories = [
-    "Archive",                 // "Archive" category will show all posts
-    ...new Set(allCategories)  // exclude duplicates from all categories
+  // Get Published Posts, Sorted by Date Descending
+  const publishedPosts = (await getCollection('posts'))
+    .filter(post => !post.data.hidden)
+    .sort((a, b) =>
+      Date.parse(b.data.dateUpdated || b.data.datePublished) -
+      Date.parse(a.data.dateUpdated || a.data.datePublished)
+    );
+
+  // Get Categories (including Archive)
+  const categories = [
+    POSTS_ARCHIVE.slug,
+    ...new Set(publishedPosts.map(post => getPostCategory(post.id)).sort()),
   ];
-  
-  // Generate a page for each category
-	return uniqueCategories.flatMap(uc => ({
-		params: { category: uc.toLowerCase() },
-    props: { formattedCategory: uc },
-	}));
+
+  // Generate a Page for Each Category
+  return categories.map(category => {
+    const isArchive = category === POSTS_ARCHIVE.slug;
+
+    return {
+      params: { category },
+      props: {
+        formattedCategory: isArchive
+          ? POSTS_ARCHIVE.title
+          : getCategoryLabel(category),
+        categorizedPosts: isArchive
+          ? publishedPosts
+          : publishedPosts.filter(post => getPostCategory(post.id) === category),
+      },
+    };
+  });
 }
 
+// Get Page Properties
+const { formattedCategory, categorizedPosts } = Astro.props;
 
-const { category } = Astro.params;
-const { formattedCategory } = Astro.props;
+// Build First Page Pagination
+const page = firstPage(categorizedPosts, POSTS_PER_PAGE);
+const visiblePosts = categorizedPosts.slice(0, POSTS_PER_PAGE);
 
-// Get Categorized Posts
-let publishedPosts = (await getCollection('posts')).filter(post => !post.data.hidden);
-let categorizedPosts = 
-  (category==="archive") 
-    ? publishedPosts 
-    : publishedPosts.filter(post => post.data.category.toLowerCase()===category);
-
-// Sort by Date Descending
-categorizedPosts.sort(function(a, b) {
-	let a_date = Date.parse(a.data.dateUpdated || a.data.datePublished);
-  let b_date = Date.parse(b.data.dateUpdated || b.data.datePublished);
-  if (b_date > a_date) return 1;
-  if (a_date > b_date) return -1;
-  return 0;
-});
-
-// build fake page object for numPosts parameter and PaginationButtons component
-let page = firstPage(categorizedPosts, POSTS_PER_PAGE);
-
-// truncate posts to first page results length
-if (categorizedPosts.length > POSTS_PER_PAGE) categorizedPosts.length = POSTS_PER_PAGE;
-
-const cardHeadingLevel = "h2";
+const cardHeadingLevel = 'h2';
 ---
+
 <PostCollectionLayout
   title={formattedCategory}
-  description={`${SITE_AUTHOR}'s ${category}`}
+  description={`${SITE_AUTHOR}'s ${formattedCategory}`}
   hasCategoriesNav={true}
   collection={page}
 >
@@ -84,26 +72,25 @@ const cardHeadingLevel = "h2";
     slot="content"
     class="content-section"
   >
-    
+
     {/* No Posts - Nothing Here Card */}
     {
-      (categorizedPosts.length === 0) &&
+      visiblePosts.length === 0 &&
       <NothingHereCard />
     }
 
     {/* Most Recent Post - Large Card */}
     {
-      categorizedPosts.length > 0 &&  // if there are any posts
-      <ExpandedPreviewCard post={categorizedPosts[0]} headingLevel={cardHeadingLevel} />
+      visiblePosts.length > 0 &&
+      <ExpandedPreviewCard post={visiblePosts[0]} headingLevel={cardHeadingLevel} />
     }
-    
+
     {/* Posts 2+ - Medium Card */}
     {
-      categorizedPosts.length > 1 &&
+      visiblePosts.length > 1 &&
       <ul class="layout layout--grid">
         {
-          categorizedPosts.map((post, i) => (
-            i>0 && 
+          visiblePosts.slice(1).map(post => (
             <li>
               <CompactPreviewCard post={post} headingLevel={cardHeadingLevel} />
             </li>
@@ -117,5 +104,4 @@ const cardHeadingLevel = "h2";
       baseUrl={Astro.url.pathname.split('/').filter(Boolean).join('/')}
     />
   </div>
-
 </PostCollectionLayout>

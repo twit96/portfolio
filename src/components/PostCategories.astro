@@ -1,35 +1,28 @@
 ---
 import { getCollection } from 'astro:content';
+import { POSTS_ARCHIVE } from '@consts';
+import { getPostCategory, getCategoryLabel } from '../utils/categories';
 
-// Get Post Categories
+// Get Published Categories
 const publishedPosts = (await getCollection('posts')).filter(post => !post.data.hidden);
-const allCategories = publishedPosts.map((post) => post.data.category).flat().sort();
-const uniqueCategories = [...new Set(allCategories)];
-let categoryLinks = [
-  {'text': "All", 'href': "/archive/" }
+const categories = [...new Set(publishedPosts.map(post => getPostCategory(post.id)))].sort();
+
+// Get Current Category
+const currentCategory = Astro.url.pathname.split('/').filter(Boolean)[0];
+
+// Build Category Navigation
+const categoryLinks = [
+  {
+    text: POSTS_ARCHIVE.navLabel,
+    href: `/${POSTS_ARCHIVE.slug}/`,
+    isActive: currentCategory === POSTS_ARCHIVE.slug,
+  },
+  ...categories.map(category => ({
+    text: getCategoryLabel(category),
+    href: `/${category}/`,
+    isActive: category === currentCategory,
+  })),
 ];
-uniqueCategories.forEach((category) => {
-  categoryLinks.push({
-    'text': category,
-    'href': `/${category.toLowerCase()}/`
-  });
-});
-
-// Add Current Page Accessibility Attribute
-const urlPieces = Astro.url.pathname.split("/").filter(Boolean).slice(0,-1);
-
-categoryLinks.forEach((link) => {
-  let isActive = false;
-
-  if (link.href===Astro.url.pathname) {
-    isActive = true;
-  } else {
-    const hrefPieces = link.href.split("/").filter(Boolean);
-    isActive = hrefPieces.filter(value => urlPieces.includes(value)).length > 0;
-  }
-
-  link['aria-current'] = isActive ? "page" : "false";
-});
 ---
 
 <nav
@@ -41,16 +34,19 @@ categoryLinks.forEach((link) => {
     class="btns layout layout--flex-fill"
     style="--_layout--base-size:auto; --_layout--gap:0.125rem;"
   >
-    {categoryLinks.map(({text, ...attrs}) =>
+    {categoryLinks.map(({ text, href, isActive }) =>
       <li>
-        <a class={`btn ${attrs['aria-current']==="page" ? "surfaceAction" : "surface2"}`} {...attrs}>
+        <a
+          href={href}
+          aria-current={isActive ? 'true' : undefined}
+          class={`btn ${isActive ? 'surfaceAction' : 'surface2'}`}
+        >
           {text}
         </a>
       </li>
     )}
   </ul>
 </nav>
-
 
 <style>
   nav {
@@ -62,5 +58,5 @@ categoryLinks.forEach((link) => {
     display: block;
     text-decoration: none;
   }
-  a[aria-current="page"] { text-decoration: underline; }
+  a[aria-current] { text-decoration: underline; }
 </style>

@@ -12,12 +12,11 @@ const posts = defineCollection({
   schema: z.object({
     author: z.string().optional(),
     blurb: z.string().optional(),
-    category: z.string(),
     datePublished: z.string(),
     dateUpdated: z.string().optional(),
     description: z.string(),
     featuredRank: z.number().optional(),
-    hasTableOfContents: z.boolean().optional(),
+    hasTableOfContents: z.boolean().default(false),
     hidden: z.string().optional(),
     heroImage: z.string().optional(),
     links: z.array(
@@ -29,6 +28,7 @@ const posts = defineCollection({
     relatedPosts: z.array(reference('posts')).optional(),
     tags: z.array(z.string()).optional(),
     title: z.string(),
+    type: z.enum(['project', 'article']),
   }),
 });
 

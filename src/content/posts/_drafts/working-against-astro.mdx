@@ -1,5 +1,4 @@
 ---
-category: "Blog"
 datePublished: "2023-10-31"
 description: "The story of how abusing a framework for short-term gains eventually led to growing pains."
 heroImage: "https://storage.googleapis.com/tylerwittig.com/blog/drafts/working-against-astro/title-card.png"
@@ -9,19 +8,17 @@ links: [
   { text: "Astro Framework", href: "https://astro.build/", },
 ]
 relatedPosts:
-- websites/portfolio-2023
+- web/portfolio-2023
 tags:
 - dev-log
 - astro
 title: "Working Against Astro"
+type: article
 ---
 
-import PostSection from '@components/PostSection/index.astro';
-import PostSectionContent from '@components/PostSection/components/PostSectionContent.astro';
-import PostSectionSidebar from '@components/PostSection/components/PostSectionSidebar.astro';
+import { PostSection, PostSectionSidebar } from '@components/PostSection';
 
 <PostSection>
-  <PostSectionContent slot="content">
 
   ## My Original Question Before Refactoring
 
@@ -35,5 +32,4 @@ import PostSectionSidebar from '@components/PostSection/components/PostSectionSi
 
   Thanks in advance for any input!
   
-  </PostSectionContent>
 </PostSection>

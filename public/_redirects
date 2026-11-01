@@ -1,0 +1,7 @@
+# 2023-12: Migrated "Projects" page to "Archive"
+/projects/  /archive/  301
+
+# 2026-11: Combined "Websites" and one "Blog" post into "Web"
+/websites/  /web/  301
+/websites/*  /web/:splat  301
+/blog/2023/04/28/scalable-animated-menu-btn/  /web/scalable-animated-menu-btn/  301
