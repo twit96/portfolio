@@ -12,7 +12,7 @@ import PostDate from './components/PostDate.astro';
  * In its small screen layout,
  * ExpandedPreviewCard looks identical to CompactPreviewCard.
  * However, when enough room is available,
- * ExpandedPreviewCard breaks into two columns,
+ * ExpandedPreviewCard breaks into two columns (only if it has a heroImage),
  * whereas CompactPreviewCard continues to stretch horizontally.
 */
 
@@ -22,7 +22,7 @@ const { post, headingLevel='h3', reverse=false } = Astro.props;
 <CardWrap classes="surface1">
 
   <div
-    class="layout layout--flex-fill"
+    class={`${post.data.heroImage && "layout layout--flex-fill"}`}   {/* apply two-column layout only if there is a hero image */}
     style={`--_layout--base-size:24rem; ${reverse ? "flex-direction:row-reverse;" : ""}`}
   >
 

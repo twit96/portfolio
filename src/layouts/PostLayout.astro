@@ -74,19 +74,19 @@ const {
     </div>
 
     {/* Right */}
-    <div
-      class="card"
-      id="hero-image-wrap"
-    >
-      {
-        post.heroImage &&
-        post.title &&
+    {
+      post.heroImage &&
+      <div
+        class="card"
+        id="hero-image-wrap"
+      >
+      
         <img
           alt={post.title}
           src={post.heroImage}
         />
-      }
-    </div>
+      </div>
+    }
 
   </div>
   
