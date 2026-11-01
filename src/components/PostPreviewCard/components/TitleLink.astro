@@ -1,10 +1,21 @@
 ---
-const { title, href } = Astro.props;
+interface Props {
+  headingLevel?: 'h2' | 'h3';
+  href: string;
+}
+
+const { headingLevel='h3', href } = Astro.props;
+const Heading = headingLevel;
 ---
 {
-  title && href && (
-    <h3>
-      <a href={href}>{title}</a>
-    </h3>
+  href && (
+    <Heading class="card-title">
+      <a href={href}><slot /></a>
+    </Heading>
   )
 }
+
+<style>
+  /* force h3 font-size from global styles */
+  .card-title { --_font-size: 1.5rem; }
+</style>

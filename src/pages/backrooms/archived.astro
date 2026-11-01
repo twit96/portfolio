@@ -17,7 +17,7 @@ posts.sort(function(a, b) {
   noIndex={true}
   hasBreadcrumbs={true}
 	title="Archived Posts"
-	numPosts={posts.length}
+	collection={{ total: posts.length }}
 >
 
   <ul
@@ -28,7 +28,7 @@ posts.sort(function(a, b) {
       posts && posts.length > 0 
       ? posts.map((post, i) => 
         <li>
-          <CompactPreviewCard post={post} />
+          <CompactPreviewCard post={post} headingLevel="h2" />
         </li>
       )
       : <li>

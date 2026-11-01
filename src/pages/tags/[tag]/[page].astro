@@ -64,7 +64,7 @@ const { Content } = (Object.keys(tagInfo).length > 0)
   hasBreadcrumbs={true}
 	title={`#${tag}`}
   description={`${SITE_AUTHOR}'s posts tagged with #${tag}`}
-	numPosts={page.total}
+	collection={page}
 >
 
   {
@@ -87,7 +87,7 @@ const { Content } = (Object.keys(tagInfo).length > 0)
         page.data.length > 0 
         ? page.data.map((post, i) => 
           <li>
-            <CompactPreviewCard post={post} />
+            <CompactPreviewCard post={post} headingLevel="h2" />
           </li>
         )
         : <li>

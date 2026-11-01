@@ -8,7 +8,7 @@ import CardFooter from './components/CardFooter.astro';
 import PostBlurb from './components/PostBlurb.astro';
 import PostDate from './components/PostDate.astro';
 
-const { post } = Astro.props;
+const { post, headingLevel='h3' } = Astro.props;
 ---
 
 <CardWrap classes="surface1">
@@ -25,9 +25,11 @@ const { post } = Astro.props;
   />
   
   <TitleLink
-    title={post.data.title}
     href={`/${post.id}/`}
-  />
+    headingLevel={headingLevel}
+  >
+    {post.data.title}
+  </TitleLink>
   <PostDescription description={post.data.description} />
   
   <CardFooter classes="card surface3">

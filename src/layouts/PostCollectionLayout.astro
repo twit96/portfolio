@@ -1,7 +1,16 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import PostCategories from '@components/PostCategories.astro';
-const { title, numPosts=0 } = Astro.props;
+
+interface CollectionInfo {
+  total: number;
+  start?: number;
+  end?: number;
+}
+
+const { title, collection } = Astro.props;
+const { total, start=0, end=total-1 } = collection;
+const isPartial = start>0 || end<total-1;
 ---
 <BaseLayout {...Astro.props}>
   <section>
@@ -14,10 +23,13 @@ const { title, numPosts=0 } = Astro.props;
       { Astro.props.hasCategoriesNav && <PostCategories /> }
       <div class="info"><slot name="info" /></div>  {/* Collection Info */}
       {
-        numPosts > 0 &&
-        <h2 class="heading--diminished">
-          {numPosts} Entr{numPosts === 0 || numPosts > 1 ? "ies" : "y"}
-        </h2>
+        total>0 &&
+        <p>
+          {isPartial
+            ? `Showing ${start + 1}-${end + 1} of ${total}`
+            : total
+          } {total === 1 ? 'Entry' : 'Entries'}
+        </p>
       }
     </div>
 
@@ -30,9 +42,18 @@ const { title, numPosts=0 } = Astro.props;
 
 
 <style>
-  .center-info-area h1 { font-size: clamp(var(--_font-size), 8vw, calc(var(--_font-size) * 1.5) ); }
+  .center-info-area h1 {
+    font-size: clamp(
+      var(--_font-size),
+      8vw,
+      calc(var(--_font-size) * 1.5)
+    );
+  }
   .center-info-area h1,
-  .center-info-area h2 { text-align: center; }
+  .center-info-area p {
+    margin-inline: auto;
+    text-align: center;
+  }
 
   .info { margin-bottom: 1rem; }
   .info:empty { display: none; }

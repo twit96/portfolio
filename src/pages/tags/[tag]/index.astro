@@ -11,6 +11,7 @@
 import { getCollection, render } from 'astro:content';
 import PostCollectionLayout from '@layouts/PostCollectionLayout.astro';
 import { SITE_AUTHOR, POSTS_PER_PAGE } from '@consts';
+import { firstPage } from '@utils/pagination';
 import NothingHereCard from '@components/PostPreviewCard/NothingHereCard.astro';
 import CompactPreviewCard from '@components/PostPreviewCard/CompactPreviewCard.astro';
 import PaginationButtons from '@components/PaginationButtons.astro';
@@ -43,7 +44,6 @@ export async function getStaticPaths() {
   }));
 }
 
-
 const tag:string = Astro.params.tag!;
 const { tagInfo } = Astro.props;
 
@@ -63,11 +63,7 @@ taggedPosts.sort(function(a, b) {
 });
 
 // build fake page object for numPosts parameter and PaginationButtons component
-let page = {
-  currentPage: 1,
-  lastPage: Math.ceil(taggedPosts.length / POSTS_PER_PAGE),
-  total: taggedPosts.length,
-};
+let page = firstPage(taggedPosts, POSTS_PER_PAGE);
 
 // truncate posts to first page results length
 if (taggedPosts.length > POSTS_PER_PAGE) taggedPosts.length = POSTS_PER_PAGE;
@@ -83,7 +79,7 @@ const { Content } = (Object.keys(tagInfo).length > 0)
   hasBreadcrumbs={true}
 	title={`#${tag}`}
   description={`${SITE_AUTHOR}'s posts tagged with #${tag}`}
-	numPosts={page.total}
+	collection={page}
 >
 
   {
@@ -106,7 +102,7 @@ const { Content } = (Object.keys(tagInfo).length > 0)
         taggedPosts.length > 0 
         ? taggedPosts.map((post, i) => 
           <li>
-            <CompactPreviewCard post={post} />
+            <CompactPreviewCard post={post} headingLevel="h2" />
           </li>
         )
         : <li>

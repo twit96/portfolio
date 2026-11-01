@@ -16,7 +16,7 @@ import PostDate from './components/PostDate.astro';
  * whereas CompactPreviewCard continues to stretch horizontally.
 */
 
-const { post, reverse=false } = Astro.props;
+const { post, headingLevel='h3', reverse=false } = Astro.props;
 ---
 
 <CardWrap classes="surface1">
@@ -42,9 +42,11 @@ const { post, reverse=false } = Astro.props;
         />
       </div>
       <TitleLink
-        title={post.data.title}
         href={`/${post.id}/`}
-      />
+        headingLevel={headingLevel}
+      >
+        {post.data.title}
+      </TitleLink>
       <PostDescription description={post.data.description} />
       <CardFooter classes="card surface3">
         <PostBlurb blurb={post.data.blurb} />

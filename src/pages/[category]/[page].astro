@@ -54,6 +54,8 @@ export async function getStaticPaths({ paginate }) {
 
 
 const { formattedCategory, page } = Astro.props;
+const cardHeadingLevel = "h2";
+
 ---
 {/*
 Note PostCollectionLayout's noIndex Parameter:
@@ -65,7 +67,7 @@ Note PostCollectionLayout's noIndex Parameter:
   title={formattedCategory}
   description={`${SITE_AUTHOR}'s ${formattedCategory}`}
   hasCategoriesNav={true}
-  numPosts={page.total}
+  collection={page}
 >
   <div
     slot="content"
@@ -82,7 +84,7 @@ Note PostCollectionLayout's noIndex Parameter:
     {
       page.currentPage === 1 &&  // first page only
       page.data.length > 0   &&  // if there are any posts
-      <ExpandedPreviewCard post={page.data[0]} />
+      <ExpandedPreviewCard post={page.data[0]} headingLevel={cardHeadingLevel} />
     }
     
     {/* Posts 2+ - Medium Card */}
@@ -99,7 +101,7 @@ Note PostCollectionLayout's noIndex Parameter:
               i > 0                    // matches posts 2+ only page 1
             ) && 
             <li>
-              <CompactPreviewCard post={post} />
+              <CompactPreviewCard post={post} headingLevel={cardHeadingLevel} />
             </li>
           ))
         }
