@@ -22,7 +22,7 @@ export async function getStaticPaths({ paginate }) {
   });
 
   // Get All Unique Post Tags
-  const uniqueTags = [...new Set(publishedPosts.map(post => post.data.tags).flat())];
+  const uniqueTags = [...new Set(publishedPosts.map(post => post.data.tags || []).flat())];
 
   // Return Paginated Tag Pages
   const allTagInfo = await getCollection('tagInfo');
