@@ -1,7 +1,8 @@
 ---
 blurb: "Dynamic Portfolio Website Builder"
 datePublished: "2023-03-24"
-description: "Ufolio.Space is a dynamic website that allows users to instantly create a portfolio website with a custom theme, which will automatically adapt based on the content they upload."
+dateUpdated: "2026-11-27"
+description: "Ufolio.Space is a multi-user platform allowing anyone to create a customized portfolio website that automatically adapts to the content they provide."
 featuredRank: 3
 hasTableOfContents: true
 heroImage: "https://storage.googleapis.com/tylerwittig.com/projects/ufolio-space/title-card.png"
@@ -28,73 +29,67 @@ import ExternalLink from '@components/ExternalLink.astro';
 
 <PostSection>
 
-  ## Development Notes
-  
-  Ufolio.Space is built with a PHP framework called 
-  <ExternalLink href="https://laravel.com/">Laravel</ExternalLink>.
-  Laravel is flexible in that it allows you to either create a "monolith" application 
-  (in which the frontend and backend are all part of the same code base),
-  or to create a REST API as a standalone backend codebase,
-  which you can plug a separate frontend codebase into.
-  Currently, Ufolio.Space is a monolith. 
-  Since it was my first project created with Laravel,
-  I wanted to focus in on the Laravel framework with no distractions as I programmed.
-  However, now that I am comfortable with Laravel, 
-  I think it would be beneficial to split the backend from the frontend for Ufolio.Space to scale.
+  ## Inspiration
+
+  Ufolio.Space was born from the evolution of my own portfolio website. I built my first portfolio in 2020 with HTML, CSS, JavaScript, and jQuery, before rebuilding it in 2022 with the LEMP stack (Linux, Nginx, MySQL, and PHP).
+
+  After refactoring that second iteration into a pseudo-MVC architecture, I realized that most portfolio websites could be distilled into a few common elements: contact info, projects, a resume, and skills.
+
+  Rather than continuing to develop my portfolio website, I wanted to generalize its functionality into a platform for everyone.
 
 </PostSection>
 <PostSection>
 
-  ## Planned Refactoring
-  
-  After doing a bit of research, I want to split Ufolio.Space into a Laravel REST API with a 
-  <ExternalLink href="https://flutter.dev/">Flutter</ExternalLink>
-  frontend.
-  Flutter is promising because it allows you to create a single frontend codebase,
-  which can be deployed to the web, iOS, Android, MacOS, Linux, and Windows.
-  If successful, splitting Ufolio.Space into a Laravel backend with a Flutter frontend 
-  would create a versatile, cross-platform application. 
-    
-  
-  <PostSection slot="sub-section">
+  ## Content-Adaptive Design
 
-    ### Flutter Tangent (Tl;dr: My phone can be laggy)
-    
-    I have noticed that the couple of Flutter applications that I have tested on my Pixel 6 Pro phone 
-    have some minor lag, notably on scrolling through content sections.
-    However, I also know that the Pixel 6 lineup with the Tensor G1 chipset had inherent issues at launch, 
-    even to the point that Google Chrome would cause noticeable GPU lag spikes on my personal phone 
-    whenever I hit the top of webpages that utilized JavaScript scroll event listeners 
-    (a major debugging nightmare for me on a couple of my past projects).
-  
-  
-    I even programmed around this (now fixed) Android Google Chrome bug on
-    <ExternalLink href="https://gagcombos.info/">Gag Combos Info</ExternalLink>,
-    in which previously the &lt;body&gt; tag would not scroll, 
-    but instead there was a page-wide wrapper which scrolled, 
-    preventing Android's "elastic overscroll" effect from triggering.
-    The Google Chrome issue has since been fixed on my Pixel 6 Pro
-    (and this workaround was remove from Gag Combos Info), 
-    and therefore I feel at worst hopeful, if not entirely confident 
-    that the minor lag I experienced on the Flutter apps I tried to be isolated to my specific chipset,
-    with a promising future outlook. At best, Flutter is going to make Ufolio.Space my best project to date.
-      
-  </PostSection>
+  The central goal of Ufolio.Space was to separate content management from website design. I wanted users to be able to add and remove their info without having to worry about broken links, empty sections, and placeholder content.
+
+  The application determines which sections to render based on the quantity and characteristics of the user's entered content. Users can curate and rank featured projects, while skill tags they assign to individual projects are automatically aggregated to generate skill rankings and categorized project listings.
+
+  This eliminated the need for users to maintain a separate list of skills while allowing visitors to explore the projects that demonstrate each skill.
 
 </PostSection>
-
 <PostSection>
 
-  ## Moving Forward
-  
-  All this considered, Ufolio.Space is currently in a bit of limbo.
-  I usually like to dedicate a single project to learning each new web framework.
-  Therefore, ideally I will create a standalone Flutter project 
-  before I dive into this major refactor of Ufolio.Space. 
+  ## Customization
 
+  Instead of having a fixed set of page templates, Ufolio.Space has a composable theming system.
 
-  Nonetheless, feel free to check out 
-  <ExternalLink href="https://ufolio.space/">Ufolio.Space</ExternalLink>
-  as it currently stands, and feel free to contact me with any feedback!
-    
+  Color palettes are stored as structured JSON in the database and translated into semantic CSS custom properties. Each palette includes both light and dark mode definitions, so components adapt to visitors' chosen mode.
+
+  Users can separately choose decorative CSS backgrounds for their portfolio too, allowing them to mix and match without changing the underlying portfolio structure.
+
+</PostSection>
+<PostSection>
+
+  ## Technical Architecture
+
+  Ufolio.Space was my first application built with Laravel. I intentionally developed it as a server-rendered monolithic application to focus on learning the framework.
+
+  The application utilizes Laravel's MVC architecture, Eloquent ORM, Blade templates, route model binding, authorization policies, and filesystem abstraction.
+
+  Each user receives a dedicated URL under the Ufolio.Space domain, with the ability to manage their personal info, projects, profile photos, resume, and theme preferences.
+
+  The application was deployed to a DigitalOcean server provisioned/managed through Laravel Forge. This simplified infrastructure management for me (including the PHP runtime upgrade in response to the October 2026 PHP2Shell vulnerabilities).
+
+</PostSection>
+<PostSection>
+
+  ## Retrospective
+
+  After deploying Ufolio.Space in March 2023, I shifted my focus toward React and the broader JavaScript ecosystem, later rebuilding my personal portfolio using Astro and React later that year.
+
+  Although development of Ufolio.Space did not continue as originally envisioned, the project remains a significant milestone in my progression as a developer, representing a transition from building individual websites to designing reusable, data-driven applications for multiple users.
+
+</PostSection>
+<PostSection>
+
+  ## Future Direction
+
+  Since developing Ufolio.Space, much of my development experience has shifted toward the Node.js ecosystem.
+
+  However, I'd like to someday revisit Ufolio.Space and transition it to a decoupled architecture, with a standalone backend exposing a REST API to support multiple frontend deployments (web, mobile, desktop, smart fridge, whatever).
+
+  Ultimately, I'd want to preserve the original intentions behind Ufolio.Space: allow users to focus on their work rather than website development and maintenance.
+
 </PostSection>
